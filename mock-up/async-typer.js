@@ -22,7 +22,7 @@ async function draw(el) {
     showField.textContent = showText;
     hideField.textContent = hideText;
     const { typeMin, typeMax } = el.dataset;
-    const amountOfTimeToWait = getRandomBetween(typeMin, 100);
+    const amountOfTimeToWait = getRandomBetween(typeMin, typeMax);
     await wait(amountOfTimeToWait);
   }
 }
