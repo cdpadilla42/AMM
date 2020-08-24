@@ -20,20 +20,26 @@ class TextBox extends Component {
     const textEl = this.textRef.current;
     draw(textEl, this.state.dialogue[0]);
   }
+  componentDidUpdate() {
+    const textEl = this.textRef.current;
+    console.log('updated');
+    draw(textEl, this.state.dialogue[this.state.currentDialoguePosition]);
+  }
 
   nextDialogue = () => {
-    const textEl = this.textRef.current;
     const nextPosition = this.state.currentDialoguePosition + 1;
     if (nextPosition > this.state.dialogue.length - 1) return;
     this.setState({
       currentDialoguePosition: nextPosition,
     });
-    draw(textEl, this.state.dialogue[nextPosition]);
   };
 
-  drawText = () => {
-    const textEl = this.textRef.current;
-    draw(textEl);
+  prevDialogue = () => {
+    const nextPosition = this.state.currentDialoguePosition - 1;
+    if (nextPosition < 0) return;
+    this.setState({
+      currentDialoguePosition: nextPosition,
+    });
   };
 
   render() {
@@ -41,12 +47,10 @@ class TextBox extends Component {
       <div class="text_box">
         <div class="text_box__name">Gato</div>
         <div class="text_box__main">
-          <p
-            class="text_box__text"
-            ref={this.textRef}
-            data-text={this.state.dialogue[this.state.currentDialoguePosition]}
-          ></p>
-          <button class="text_box__left_arrow">Back</button>
+          <p class="text_box__text" ref={this.textRef}></p>
+          <button class="text_box__left_arrow" onClick={this.prevDialogue}>
+            Back
+          </button>
           <button class="text_box__right_arrow" onClick={this.nextDialogue}>
             Next
           </button>
