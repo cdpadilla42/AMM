@@ -10,6 +10,7 @@ class TextBox extends Component {
       'This is the first sentence!',
       'This is the second! WOW!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!',
       'This is the third sentence!',
+      'This is the Fourth sentence!',
     ],
   };
 
