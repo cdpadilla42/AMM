@@ -7,10 +7,13 @@ class TextBox extends Component {
   state = {
     currentDialoguePosition: 0,
     dialogue: [
-      'This is the first sentence!',
-      'This is the second! WOW!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!',
-      'This is the third sentence!',
-      'This is the Fourth sentence!',
+      ['This is the first sentence!', 'angry'],
+      [
+        'This is the second! WOW!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!',
+        'sad',
+      ],
+      ['This is the third sentence!', 'laughing'],
+      ['This is the Fourth sentence!', 'sleepy'],
     ],
   };
 
