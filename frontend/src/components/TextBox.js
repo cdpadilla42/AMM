@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import draw from '../lib/async-typer';
+import emote from '../lib/emote';
 
 import React, { Component } from 'react';
 
@@ -22,11 +23,13 @@ class TextBox extends Component {
   componentDidMount() {
     const textEl = this.textRef.current;
     draw(textEl, this.state.dialogue[0]);
+    emote(this.state.dialogue[0][1]);
   }
   componentDidUpdate() {
     const textEl = this.textRef.current;
     console.log('updated');
     draw(textEl, this.state.dialogue[this.state.currentDialoguePosition]);
+    emote(this.state.dialogue[this.state.currentDialoguePosition][1]);
   }
 
   nextDialogue = () => {
