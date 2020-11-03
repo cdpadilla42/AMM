@@ -13,7 +13,7 @@ const initialState = {
   ],
 };
 
-const nextDialogue = createAction('NEXT_DIALOGUE');
+export const nextDialogue = createAction('NEXT_DIALOGUE');
 
 function dialogueReducer(state = initialState, action) {
   switch (action.type) {

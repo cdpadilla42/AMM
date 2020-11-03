@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { nextDialogue } from '../store/dialogue/reducer';
 import styled from 'styled-components';
 import draw from '../lib/async-typer';
 import emote from '../lib/emote';
@@ -18,6 +20,10 @@ class TextBox extends Component {
     ],
   };
 
+  // emotion = useSelector(
+  //   (state) => state.dialogue[state.currentDialoguePosition][1]
+  // );
+
   textRef = React.createRef();
 
   componentDidMount() {
@@ -32,11 +38,12 @@ class TextBox extends Component {
   }
 
   nextDialogue = () => {
-    const nextPosition = this.state.currentDialoguePosition + 1;
-    if (nextPosition > this.state.dialogue.length - 1) return;
-    this.setState({
-      currentDialoguePosition: nextPosition,
-    });
+    // const nextPosition = this.state.currentDialoguePosition + 1;
+    // if (nextPosition > this.state.dialogue.length - 1) return;
+    // this.setState({
+    //   currentDialoguePosition: nextPosition,
+    // });
+    this.props.nextDialogue();
   };
 
   prevDialogue = () => {
@@ -65,4 +72,8 @@ class TextBox extends Component {
   }
 }
 
-export default TextBox;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ nextDialogue }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(TextBox);

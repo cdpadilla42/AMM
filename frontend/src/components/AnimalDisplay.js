@@ -3,9 +3,11 @@ import { useSelector } from 'react-redux';
 import normal from '../imgs/normal.png';
 
 const AnimalDisplay = () => {
-  const textFromRedux = useSelector((state) => state.text);
+  const emotion = useSelector(
+    (state) => state.dialogue[state.currentDialoguePosition][1]
+  );
 
-  console.log(textFromRedux);
+  console.log(emotion);
 
   return (
     <div className="game_container__animal">
