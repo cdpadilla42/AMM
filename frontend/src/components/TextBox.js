@@ -27,7 +27,6 @@ class TextBox extends Component {
   }
   componentDidUpdate() {
     const textEl = this.textRef.current;
-    console.log('updated');
     draw(textEl, this.state.dialogue[this.state.currentDialoguePosition]);
     emote(this.state.dialogue[this.state.currentDialoguePosition][1]);
   }

@@ -4,6 +4,7 @@ import Nav from '../components/Nav';
 import '../styles/testimony.css';
 
 import React, { Component } from 'react';
+import AnimalDisplay from '../components/AnimalDisplay';
 
 class Testimony extends Component {
   render() {
@@ -11,13 +12,7 @@ class Testimony extends Component {
       <div className="container">
         <Nav />
         <div class="game_container">
-          <div class="game_container__animal">
-            <img
-              src="https://purepng.com/public/uploads/medium/big-chungus-z7y.png"
-              alt=""
-              class="game_container__animal_image"
-            />
-          </div>
+          <AnimalDisplay />
           <TextBox />
         </div>
       </div>
