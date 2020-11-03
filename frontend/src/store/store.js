@@ -1,18 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
+import dialogueReducer from './dialogue/reducer';
 
-const rootReducer = () => 'cat';
-
-const reducer = function (state, action) {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
-
-const preloadedState = {
-  text: ['hey'],
-};
-
-const store = configureStore({ reducer: reducer, preloadedState });
+const store = configureStore({ reducer: dialogueReducer });
 
 export default store;
