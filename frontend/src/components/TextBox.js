@@ -7,18 +7,18 @@ import draw from '../lib/async-typer';
 import emote from '../lib/emote';
 
 class TextBox extends Component {
-  state = {
-    currentDialoguePosition: 0,
-    dialogue: [
-      ['This is the first sentence!', 'angry'],
-      [
-        'This is the second! WOW!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!',
-        'sad',
-      ],
-      ['This is the third sentence!', 'laughing'],
-      ['This is the Fourth sentence!', 'sleepy'],
-    ],
-  };
+  // state = {
+  //   currentDialoguePosition: 0,
+  //   dialogue: [
+  //     ['This is the first sentence!', 'angry'],
+  //     [
+  //       'This is the second! WOW!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!',
+  //       'sad',
+  //     ],
+  //     ['This is the third sentence!', 'laughing'],
+  //     ['This is the Fourth sentence!', 'sleepy'],
+  //   ],
+  // };
 
   // emotion = useSelector(
   //   (state) => state.dialogue[state.currentDialoguePosition][1]
@@ -28,13 +28,13 @@ class TextBox extends Component {
 
   componentDidMount() {
     const textEl = this.textRef.current;
-    draw(textEl, this.state.dialogue[0]);
-    emote(this.state.dialogue[0][1]);
+    draw(textEl, this.props.dialogue[0]);
+    // emote(this.props.dialogue[0][1]);
   }
   componentDidUpdate() {
     const textEl = this.textRef.current;
-    draw(textEl, this.state.dialogue[this.state.currentDialoguePosition]);
-    emote(this.state.dialogue[this.state.currentDialoguePosition][1]);
+    draw(textEl, this.props.dialogue[this.props.currentDialoguePosition]);
+    // emote(this.state.dialogue[this.state.currentDialoguePosition][1]);
   }
 
   nextDialogue = () => {
@@ -72,8 +72,13 @@ class TextBox extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  const { dialogue, currentDialoguePosition } = state;
+  return { dialogue, currentDialoguePosition };
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ nextDialogue }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(TextBox);
+export default connect(mapStateToProps, mapDispatchToProps)(TextBox);

@@ -3,13 +3,10 @@ import { createAction } from '@reduxjs/toolkit';
 const initialState = {
   currentDialoguePosition: 0,
   dialogue: [
-    ['This is the first sentence!', 'mad'],
-    [
-      'This is the second! WOW!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!! !!!!!!',
-      'sad',
-    ],
-    ['This is the third sentence!', 'laugh'],
-    ['This is the Fourth sentence!', 'sleep'],
+    ['Im mad!', 'mad'],
+    ['I am sad!! !!!!!!!!!!!!!!!!!!!! !!!!!!', 'sad'],
+    ['HAHAHAHA!', 'laugh'],
+    ['Goodnight....', 'sleep'],
   ],
 };
 
