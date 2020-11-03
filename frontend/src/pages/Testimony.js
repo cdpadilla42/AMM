@@ -11,7 +11,7 @@ class Testimony extends Component {
     return (
       <div className="container">
         <Nav />
-        <div class="game_container">
+        <div className="game_container">
           <AnimalDisplay />
           <TextBox />
         </div>

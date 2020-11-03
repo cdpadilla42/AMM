@@ -1,8 +1,8 @@
+import React, { Component } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import draw from '../lib/async-typer';
 import emote from '../lib/emote';
-
-import React, { Component } from 'react';
 
 class TextBox extends Component {
   state = {
@@ -49,14 +49,14 @@ class TextBox extends Component {
 
   render() {
     return (
-      <div class="text_box">
-        <div class="text_box__name">Gato</div>
-        <div class="text_box__main">
-          <p class="text_box__text" ref={this.textRef}></p>
-          <button class="text_box__left_arrow" onClick={this.prevDialogue}>
+      <div className="text_box">
+        <div className="text_box__name">Gato</div>
+        <div className="text_box__main">
+          <p className="text_box__text" ref={this.textRef}></p>
+          <button className="text_box__left_arrow" onClick={this.prevDialogue}>
             Back
           </button>
-          <button class="text_box__right_arrow" onClick={this.nextDialogue}>
+          <button className="text_box__right_arrow" onClick={this.nextDialogue}>
             Next
           </button>
         </div>
