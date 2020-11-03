@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import draw from '../lib/async-typer';
 import emote from '../lib/emote';
 
+import sanityClient from '../client';
+
 class TextBox extends Component {
   // state = {
   //   currentDialoguePosition: 0,
@@ -30,6 +32,15 @@ class TextBox extends Component {
     const textEl = this.textRef.current;
     draw(textEl, this.props.dialogue[0]);
     // emote(this.props.dialogue[0][1]);
+
+    sanityClient
+      .fetch(
+        `*[_type == "testimony"]{
+          dialogue,
+  }`
+      )
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
   }
   componentDidUpdate() {
     const textEl = this.textRef.current;
