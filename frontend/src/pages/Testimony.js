@@ -1,13 +1,10 @@
-import styled from 'styled-components';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import AnimalDisplay from '../components/AnimalDisplay';
+import { getDialogue } from '../store/dialogue/reducer';
 import TextBox from '../components/TextBox';
 import Nav from '../components/Nav';
 import '../styles/testimony.css';
-
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import sanityClient from '../client';
-import AnimalDisplay from '../components/AnimalDisplay';
-import { getDialogue } from '../store/dialogue/reducer';
 
 const Testimony = () => {
   const dispatch = useDispatch();

@@ -31,11 +31,15 @@ function dialogueReducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case nextDialogue.toString():
+      if (state.currentDialoguePosition === state.dialogue.length - 1)
+        return state;
+
       return {
         ...state,
         currentDialoguePosition: state.currentDialoguePosition + 1,
       };
     case prevDialogue.toString():
+      if (state.currentDialoguePosition === 0) return state;
       return {
         ...state,
         currentDialoguePosition: state.currentDialoguePosition - 1,
