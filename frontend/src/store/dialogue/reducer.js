@@ -14,6 +14,7 @@ const initialState = {
 
 // Actions
 export const nextDialogue = createAction('NEXT_DIALOGUE');
+export const prevDialogue = createAction('PREV_DIALOGUE');
 
 export const getDialogue = createAsyncThunk('GET_DIALOGUE', async () => {
   const response = await sanityClient.fetch(
@@ -50,7 +51,12 @@ function dialogueReducer(state = initialState, action) {
         ...state,
         currentDialoguePosition: state.currentDialoguePosition + 1,
       };
-      break;
+    case prevDialogue.toString():
+      return {
+        ...state,
+        currentDialoguePosition: state.currentDialoguePosition - 1,
+      };
+
     case 'GET_DIALOGUE/fulfilled':
       return {
         ...state,

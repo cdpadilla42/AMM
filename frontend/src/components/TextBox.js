@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { nextDialogue } from '../store/dialogue/reducer';
+import { nextDialogue, prevDialogue } from '../store/dialogue/reducer';
 import styled from 'styled-components';
 import draw from '../lib/async-typer';
 import emote from '../lib/emote';
@@ -48,11 +48,12 @@ class TextBox extends Component {
   };
 
   prevDialogue = () => {
-    const nextPosition = this.state.currentDialoguePosition - 1;
-    if (nextPosition < 0) return;
-    this.setState({
-      currentDialoguePosition: nextPosition,
-    });
+    // const nextPosition = this.state.currentDialoguePosition - 1;
+    // if (nextPosition < 0) return;
+    // this.setState({
+    //   currentDialoguePosition: nextPosition,
+    // });
+    this.props.prevDialogue();
   };
 
   render() {
@@ -79,7 +80,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ nextDialogue }, dispatch);
+  return bindActionCreators({ nextDialogue, prevDialogue }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TextBox);
