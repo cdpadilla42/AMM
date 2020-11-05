@@ -3,21 +3,36 @@ import TextBox from '../components/TextBox';
 import Nav from '../components/Nav';
 import '../styles/testimony.css';
 
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import sanityClient from '../client';
 import AnimalDisplay from '../components/AnimalDisplay';
+import { getDialogue } from '../store/dialogue/reducer';
 
-class Testimony extends Component {
-  render() {
-    return (
-      <div className="container">
-        <Nav />
-        <div className="game_container">
-          <AnimalDisplay />
-          <TextBox />
-        </div>
+const Testimony = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    //   sanityClient
+    //     .fetch(
+    //       `*[_type == "testimony"]{
+    //         dialogue,
+    // }`
+    //     )
+    //     .then((data) => console.log(data))
+    //     .catch((err) => console.log(err));
+    dispatch(getDialogue());
+  }, [dispatch]);
+
+  return (
+    <div className="container">
+      <Nav />
+      <div className="game_container">
+        <AnimalDisplay />
+        <TextBox />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Testimony;

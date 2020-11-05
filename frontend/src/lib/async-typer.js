@@ -6,8 +6,7 @@ function getRandomBetween(min = 10, max = 25, randomNumber = Math.random()) {
   return Math.floor(randomNumber * (max - min) + min);
 }
 
-async function draw(el, textArr) {
-  const text = textArr[0];
+async function draw(el, text) {
   console.log('Drawing!');
   // const text = el.dataset.text;
   const html = `

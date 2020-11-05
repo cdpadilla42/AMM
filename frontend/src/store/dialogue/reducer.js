@@ -1,4 +1,5 @@
-import { createAction } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import sanityClient from '../../client';
 
 const initialState = {
   currentDialoguePosition: 0,
@@ -8,16 +9,52 @@ const initialState = {
     ['HAHAHAHA!', 'laugh'],
     ['Goodnight....', 'sleep'],
   ],
+  dialogueFromSanity: 'apples',
 };
 
+// Actions
 export const nextDialogue = createAction('NEXT_DIALOGUE');
 
+export const getDialogue = createAsyncThunk('GET_DIALOGUE', async () => {
+  const response = await sanityClient.fetch(
+    `*[_type == "testimony"]{
+              dialogue,
+      }`
+  );
+  return response;
+});
+
+// export function getDialogue() {
+//   return async function (dispatch) {
+//     const dialogue = await sanityClient.fetch(
+//       `*[_type == "testimony"]{
+//           dialogue,
+//   }`
+//     );
+//     // .catch((err) => console.log(err));
+
+//     return dispatch({
+//       type: 'GET_DIALOGUE',
+//       data: 'potato',
+//     });
+//   };
+// }
+
+// Reducer
+
 function dialogueReducer(state = initialState, action) {
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
     case nextDialogue.toString():
       return {
         ...state,
         currentDialoguePosition: state.currentDialoguePosition + 1,
+      };
+      break;
+    case 'GET_DIALOGUE/fulfilled':
+      return {
+        ...state,
+        dialogue: payload[0]['dialogue'],
       };
     default:
       return state;

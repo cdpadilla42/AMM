@@ -30,22 +30,12 @@ class TextBox extends Component {
 
   componentDidMount() {
     const textEl = this.textRef.current;
-    draw(textEl, this.props.dialogue[0]);
+    draw(textEl, this.props.dialogue);
     // emote(this.props.dialogue[0][1]);
-
-    sanityClient
-      .fetch(
-        `*[_type == "testimony"]{
-          dialogue,
-  }`
-      )
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
   }
   componentDidUpdate() {
     const textEl = this.textRef.current;
     draw(textEl, this.props.dialogue[this.props.currentDialoguePosition]);
-    // emote(this.state.dialogue[this.state.currentDialoguePosition][1]);
   }
 
   nextDialogue = () => {
