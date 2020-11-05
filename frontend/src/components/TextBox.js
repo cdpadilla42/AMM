@@ -12,6 +12,14 @@ const TextBox = (props) => {
     draw(textEl, props.dialogue[props.currentDialoguePosition]);
   });
 
+  const handleNextClick = () => {
+    if (props.currentDialoguePosition === props.dialogue.length - 1) {
+      console.log('stopping');
+    } else {
+      props.nextDialogue();
+    }
+  };
+
   return (
     <div className="text_box">
       <div className="text_box__name">Gato</div>
@@ -20,7 +28,7 @@ const TextBox = (props) => {
         <button className="text_box__left_arrow" onClick={props.prevDialogue}>
           Back
         </button>
-        <button className="text_box__right_arrow" onClick={props.nextDialogue}>
+        <button className="text_box__right_arrow" onClick={handleNextClick}>
           Next
         </button>
       </div>
