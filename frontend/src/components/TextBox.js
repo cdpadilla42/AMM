@@ -1,44 +1,32 @@
-import React, { Component } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { nextDialogue, prevDialogue } from '../store/dialogue/reducer';
 import draw from '../lib/async-typer';
 
-class TextBox extends Component {
-  textRef = React.createRef();
+const TextBox = (props) => {
+  const textRef = useRef(null);
 
-  componentDidMount() {
-    const textEl = this.textRef.current;
-    draw(textEl, this.props.dialogue);
-  }
-  componentDidUpdate() {
-    const textEl = this.textRef.current;
-    draw(textEl, this.props.dialogue[this.props.currentDialoguePosition]);
-  }
+  useEffect(() => {
+    const textEl = textRef.current;
+    draw(textEl, props.dialogue[props.currentDialoguePosition]);
+  });
 
-  render() {
-    return (
-      <div className="text_box">
-        <div className="text_box__name">Gato</div>
-        <div className="text_box__main">
-          <p className="text_box__text" ref={this.textRef}></p>
-          <button
-            className="text_box__left_arrow"
-            onClick={this.props.prevDialogue}
-          >
-            Back
-          </button>
-          <button
-            className="text_box__right_arrow"
-            onClick={this.props.nextDialogue}
-          >
-            Next
-          </button>
-        </div>
+  return (
+    <div className="text_box">
+      <div className="text_box__name">Gato</div>
+      <div className="text_box__main">
+        <p className="text_box__text" ref={textRef}></p>
+        <button className="text_box__left_arrow" onClick={props.prevDialogue}>
+          Back
+        </button>
+        <button className="text_box__right_arrow" onClick={props.nextDialogue}>
+          Next
+        </button>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 function mapStateToProps(state) {
   const { dialogue, currentDialoguePosition } = state;
