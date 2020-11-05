@@ -20,12 +20,20 @@ const TextBox = (props) => {
     }
   };
 
+  const handlePrevClick = () => {
+    if (props.currentDialoguePosition === 0) {
+      console.log('stopping');
+    } else {
+      props.prevDialogue();
+    }
+  };
+
   return (
     <div className="text_box">
       <div className="text_box__name">Gato</div>
       <div className="text_box__main">
         <p className="text_box__text" ref={textRef}></p>
-        <button className="text_box__left_arrow" onClick={props.prevDialogue}>
+        <button className="text_box__left_arrow" onClick={handlePrevClick}>
           Back
         </button>
         <button className="text_box__right_arrow" onClick={handleNextClick}>
