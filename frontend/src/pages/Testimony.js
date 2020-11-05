@@ -13,14 +13,6 @@ const Testimony = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    //   sanityClient
-    //     .fetch(
-    //       `*[_type == "testimony"]{
-    //         dialogue,
-    // }`
-    //     )
-    //     .then((data) => console.log(data))
-    //     .catch((err) => console.log(err));
     dispatch(getDialogue());
   }, [dispatch]);
 

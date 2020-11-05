@@ -25,22 +25,6 @@ export const getDialogue = createAsyncThunk('GET_DIALOGUE', async () => {
   return response;
 });
 
-// export function getDialogue() {
-//   return async function (dispatch) {
-//     const dialogue = await sanityClient.fetch(
-//       `*[_type == "testimony"]{
-//           dialogue,
-//   }`
-//     );
-//     // .catch((err) => console.log(err));
-
-//     return dispatch({
-//       type: 'GET_DIALOGUE',
-//       data: 'potato',
-//     });
-//   };
-// }
-
 // Reducer
 
 function dialogueReducer(state = initialState, action) {
