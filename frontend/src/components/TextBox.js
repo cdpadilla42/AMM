@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { nextDialogue, prevDialogue } from '../store/dialogue/reducer';
+import { nextDialogue, prevDialogue } from '../store/dialogue';
 import draw from '../lib/async-typer';
 
 const TextBox = (props) => {
@@ -9,7 +9,7 @@ const TextBox = (props) => {
 
   useEffect(() => {
     const textEl = textRef.current;
-    draw(textEl, props.dialogue[props.currentDialoguePosition]);
+    // draw(textEl, props.dialogue[props.currentDialoguePosition]);
   });
 
   const handleNextClick = () => {

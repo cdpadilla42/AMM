@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import AnimalDisplay from '../components/AnimalDisplay';
-import { getDialogue } from '../store/dialogue/reducer';
+import { getDialogue } from '../store/dialogue';
 import TextBox from '../components/TextBox';
 import Nav from '../components/Nav';
 import '../styles/testimony.css';

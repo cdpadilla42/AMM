@@ -1,5 +1,5 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
-import sanityClient from '../../client';
+import sanityClient from '../client';
 
 const initialState = {
   currentDialoguePosition: 0,
@@ -18,8 +18,8 @@ export const prevDialogue = createAction('PREV_DIALOGUE');
 
 export const getDialogue = createAsyncThunk('GET_DIALOGUE', async () => {
   const response = await sanityClient.fetch(
-    `*[_type == "testimony"]{
-              dialogue,
+    `*[_type == "conversation"]{
+              name, dialogue
       }`
   );
   return response;
@@ -44,7 +44,7 @@ function dialogueReducer(state = initialState, action) {
     case 'GET_DIALOGUE/fulfilled':
       return {
         ...state,
-        dialogue: payload[0]['dialogue'],
+        dialogue: payload,
       };
     default:
       return state;
