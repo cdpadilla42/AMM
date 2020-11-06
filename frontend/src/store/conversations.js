@@ -1,4 +1,4 @@
-import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import sanityClient from '../client';
 
 const initialState = {
@@ -6,9 +6,6 @@ const initialState = {
 };
 
 // Actions
-export const nextDialogue = createAction('NEXT_DIALOGUE');
-export const prevDialogue = createAction('PREV_DIALOGUE');
-
 export const getConversations = createAsyncThunk(
   'GET_CONVERSATIONS',
   async () => {
