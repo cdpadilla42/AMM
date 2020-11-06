@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getConversations } from '../store/conversations';
 
 const SelectConversation = () => {
@@ -24,6 +25,7 @@ const SelectConversation = () => {
 
   return (
     <div>
+      <Link to="/testimony">To the testimony!</Link>
       <ul>{renderConversations()}</ul>
     </div>
   );

@@ -7,9 +7,10 @@ import sad from '../imgs/sad.png';
 import sleep from '../imgs/sleep.png';
 
 const AnimalDisplay = () => {
-  let emotion = useSelector(
-    (state) => state.dialogue[state.currentDialoguePosition][1]
-  );
+  let emotion = 'normal';
+  // useSelector(
+  //   (state) => state.dialogue[state.currentDialoguePosition][1]
+  // );
 
   const animalImages = {
     normal,
