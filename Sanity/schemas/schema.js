@@ -129,6 +129,11 @@ export default createSchema({
           name: 'name',
           type: 'string',
         },
+        {
+          title: 'Neutral Image',
+          name: 'normal',
+          type: 'image',
+        },
       ],
     },
   ]),
