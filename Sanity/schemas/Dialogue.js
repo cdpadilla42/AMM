@@ -36,7 +36,8 @@ export default {
             {
               title: 'Speaker',
               name: 'speaker',
-              type: 'string',
+              type: 'reference',
+              to: [{ type: 'animal' }],
             },
           ],
         },
@@ -66,6 +67,11 @@ export default {
           ],
         },
       ],
+    },
+    {
+      title: 'Prompt for Evidence?',
+      name: 'needEvidence',
+      type: 'boolean',
     },
   ],
 };

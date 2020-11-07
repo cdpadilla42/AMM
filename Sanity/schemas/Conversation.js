@@ -8,17 +8,17 @@ export default {
       name: 'name',
       type: 'string',
     },
-    {
-      title: 'Dialogue',
-      name: 'dialogue',
-      type: 'array',
-      of: [
-        {
-          // turn into refferences to dialogue
-          type: 'reference',
-          to: [{ type: 'dialogue' }],
-        },
-      ],
-    },
+    // {
+    //   title: 'Dialogue',
+    //   name: 'dialogue',
+    //   type: 'array',
+    //   of: [
+    //     {
+    //       // turn into refferences to dialogue
+    //       type: 'reference',
+    //       to: [{ type: 'dialogue' }],
+    //     },
+    //   ],
+    // },
   ],
 };
