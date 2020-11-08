@@ -16,7 +16,7 @@ const initialState = {
       ],
     },
   ],
-  responseBoxIsOpen: false,
+  responseBoxIsOpen: true,
   dialogueFromSanity: 'apples',
 };
 
