@@ -16,9 +16,9 @@ const TextBox = (props) => {
   const currentDialogueObj = dialogue.find(
     (dialogue) => dialogue.name === currentDialogueName
   );
-
   const phrases = currentDialogueObj && currentDialogueObj.phrase;
 
+  // On change effect
   useEffect(() => {
     const textEl = textRef.current;
 

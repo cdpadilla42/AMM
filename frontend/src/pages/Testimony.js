@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import AnimalDisplay from '../components/AnimalDisplay';
-import { getDialogue } from '../store/dialogue';
+import { getDialogue, resetDialoguePosition } from '../store/dialogue';
 import TextBox from '../components/TextBox';
 import Nav from '../components/Nav';
 import '../styles/testimony.css';
@@ -11,7 +11,9 @@ const Testimony = (props) => {
 
   useEffect(() => {
     dispatch(getDialogue(props.match.params.id));
-  }, [dispatch]);
+    // set place to 0
+    dispatch(resetDialoguePosition());
+  }, []);
 
   return (
     <div className="container">

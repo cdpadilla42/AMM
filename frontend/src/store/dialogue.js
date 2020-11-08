@@ -21,6 +21,7 @@ const initialState = {
 // Actions
 export const nextDialogue = createAction('NEXT_DIALOGUE');
 export const prevDialogue = createAction('PREV_DIALOGUE');
+export const resetDialoguePosition = createAction('RESET_DIALOUGE_POSITION');
 
 export const getDialogue = createAsyncThunk(
   'GET_DIALOGUE',
@@ -52,7 +53,11 @@ function dialogueReducer(state = initialState, action) {
         ...state,
         currentDialoguePosition: state.currentDialoguePosition - 1,
       };
-
+    case resetDialoguePosition.toString():
+      return {
+        ...state,
+        currentDialoguePosition: 0,
+      };
     case 'GET_DIALOGUE/fulfilled':
       return {
         ...state,
