@@ -25,12 +25,13 @@ export const nextDialogue = createAction('NEXT_DIALOGUE');
 export const prevDialogue = createAction('PREV_DIALOGUE');
 export const resetDialoguePosition = createAction('RESET_DIALOUGE_POSITION');
 export const toggleResponseBox = createAction('TOGGLE_RESPONSE_BOX');
+export const switchConversation = createAction('SWITCH_CONVERSATION');
 
 export const getDialogue = createAsyncThunk(
   'GET_DIALOGUE',
   async (conversationID) => {
     const response = await sanityClient.fetch(
-      `*[_type == "dialogue" && conversation._ref == "664db36f-6324-4828-a8ad-35c78f5180f1"]{
+      `*[_type == "dialogue" && conversation._ref == "${conversationID}"]{
         name, responseOptions, needEvidence,
   			"phrase": phrase[]{
   				emotion->{emotion}, speaker->{name}, text	
@@ -74,6 +75,10 @@ function dialogueReducer(state = initialState, action) {
       return {
         ...state,
         responseBoxIsOpen: !state.responseBoxIsOpen,
+      };
+    case switchConversation.toString():
+      return {
+        ...state,
       };
     default:
       return state;
