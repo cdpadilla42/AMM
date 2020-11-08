@@ -3,14 +3,32 @@ import styled from 'styled-components';
 
 const StyledResponseBox = styled.div`
   width: 200px;
-  height: 200px;
   background-color: #fff;
   border: 1px solid green;
+  position: absolute;
+  right: 1rem;
+  bottom: 170px;
+  z-index: 2;
+  border-radius: 20px;
+  padding: 1rem;
+
+  &.hide {
+    display: none;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    padding: 0.3rem 0;
+  }
 `;
 
 const ResponseBox = () => {
   return (
-    <StyledResponseBox>
+    <StyledResponseBox className="hide">
       <ul>
         <li>Response 1</li>
         <li>Response 2</li>

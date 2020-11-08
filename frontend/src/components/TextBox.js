@@ -17,6 +17,7 @@ const TextBox = (props) => {
     (dialogue) => dialogue.name === currentDialogueName
   );
   const phrases = currentDialogueObj && currentDialogueObj.phrase;
+  const responseOptions = currentDialogueObj.responseOptions;
 
   // On change effect
   useEffect(() => {
@@ -37,7 +38,7 @@ const TextBox = (props) => {
 
     if (currentDialoguePosition === currentDialogueObj.phrase.length - 1) {
       console.log('here comes the question');
-      console.log(currentDialogueObj.responseOptions);
+      console.log(responseOptions);
     } else {
       props.nextDialogue();
     }
