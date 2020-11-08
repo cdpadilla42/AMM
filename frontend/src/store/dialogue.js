@@ -23,7 +23,7 @@ export const getDialogue = createAsyncThunk(
       `*[_type == "dialogue" && conversation._ref == "664db36f-6324-4828-a8ad-35c78f5180f1"]{
         name, responseOptions, needEvidence,
   			"phrase": phrase[]{
-  				emotion->{emotion}, speaker->{name}, text	
+  				emotion->{emotion}, speaker->{name}, text, _id
 				}
 }`
     );
