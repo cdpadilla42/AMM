@@ -21,16 +21,18 @@ const TextBox = (props) => {
   // On change effect
   useEffect(() => {
     const textEl = textRef.current;
-
-    if (phrases) draw(textEl, phrases[currentDialoguePosition].text);
+    const speaker = phrases[currentDialoguePosition].speaker.name;
+    const text = phrases[currentDialoguePosition].text;
+    console.log();
+    draw(textEl, `${speaker}: ${text}`);
   });
 
   const handleNextClick = () => {
-    if (props.currentDialoguePosition === props.dialogue.length - 1) {
-      console.log('stopping');
-    } else {
-      props.nextDialogue();
-    }
+    // if (props.currentDialoguePosition === props.dialogue.length - 1) {
+    //   console.log('stopping');
+    // } else {
+    props.nextDialogue();
+    // }
   };
 
   const handlePrevClick = () => {
@@ -57,13 +59,13 @@ const TextBox = (props) => {
   );
 };
 
-function mapStateToProps(state) {
-  const { dialogue, currentDialoguePosition } = state;
-  return { dialogue, currentDialoguePosition };
-}
+// function mapStateToProps(state) {
+//   const { dialogue, currentDialoguePosition } = state;
+//   return { dialogue, currentDialoguePosition };
+// }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ nextDialogue, prevDialogue }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TextBox);
+export default connect(null, mapDispatchToProps)(TextBox);

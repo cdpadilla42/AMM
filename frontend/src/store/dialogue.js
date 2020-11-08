@@ -11,6 +11,7 @@ const initialState = {
         {
           emotion: 'normal',
           text: '',
+          speaker: '',
         },
       ],
     },
