@@ -24,6 +24,7 @@ const initialState = {
 export const nextDialogue = createAction('NEXT_DIALOGUE');
 export const prevDialogue = createAction('PREV_DIALOGUE');
 export const resetDialoguePosition = createAction('RESET_DIALOUGE_POSITION');
+export const toggleResponseBox = createAction('TOGGLE_RESPONSE_BOX');
 
 export const getDialogue = createAsyncThunk(
   'GET_DIALOGUE',
@@ -64,6 +65,11 @@ function dialogueReducer(state = initialState, action) {
       return {
         ...state,
         dialogue: payload,
+      };
+    case toggleResponseBox.toString():
+      return {
+        ...state,
+        responseBoxIsOpen: !state.responseBoxIsOpen,
       };
     default:
       return state;

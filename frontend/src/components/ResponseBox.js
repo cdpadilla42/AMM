@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 const StyledResponseBox = styled.div`
   width: 200px;
@@ -27,8 +28,10 @@ const StyledResponseBox = styled.div`
 `;
 
 const ResponseBox = () => {
+  const { responseBoxIsOpen } = useSelector((state) => state.dialogue);
+
   return (
-    <StyledResponseBox className="hide">
+    <StyledResponseBox className={responseBoxIsOpen ? '' : 'hide'}>
       <ul>
         <li>Response 1</li>
         <li>Response 2</li>
