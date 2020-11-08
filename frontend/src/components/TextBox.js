@@ -26,7 +26,7 @@ const TextBox = (props) => {
     const text = phrases[currentDialoguePosition].text;
     console.log();
     draw(textEl, `${speaker}: ${text}`);
-  });
+  }, [dialogue, currentDialoguePosition, currentDialogueName]);
 
   const handleNextClick = () => {
     // if (props.currentDialoguePosition === props.dialogue.length - 1) {
