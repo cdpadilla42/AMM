@@ -1,15 +1,27 @@
 import React, { useRef, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { nextDialogue, prevDialogue } from '../store/dialogue';
 import draw from '../lib/async-typer';
 
 const TextBox = (props) => {
   const textRef = useRef(null);
+  const { dialogue, currentDialoguePosition } = useSelector(
+    (state) => state.dialogue
+  );
+  console.log(dialogue, currentDialoguePosition);
+  const currentDialogueName = 'Start';
+
+  const currentDialogueObj = dialogue.find(
+    (dialogue) => dialogue.name === currentDialogueName
+  );
+  const phrases = currentDialogueObj && currentDialogueObj.phrase;
+  console.log(currentDialogueObj);
 
   useEffect(() => {
     const textEl = textRef.current;
-    // draw(textEl, props.dialogue[props.currentDialoguePosition]);
+
+    if (phrases) draw(textEl, phrases[currentDialoguePosition].text);
   });
 
   const handleNextClick = () => {
