@@ -31,8 +31,16 @@ const TextBox = (props) => {
     // if (props.currentDialoguePosition === props.dialogue.length - 1) {
     //   console.log('stopping');
     // } else {
-    props.nextDialogue();
+
+    //
     // }
+
+    if (currentDialoguePosition === currentDialogueObj.phrase.length - 1) {
+      console.log('here comes the question');
+      console.log(currentDialogueObj.responseOptions);
+    } else {
+      props.nextDialogue();
+    }
   };
 
   const handlePrevClick = () => {
