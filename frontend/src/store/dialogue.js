@@ -16,14 +16,20 @@ const initialState = {
 export const nextDialogue = createAction('NEXT_DIALOGUE');
 export const prevDialogue = createAction('PREV_DIALOGUE');
 
-export const getDialogue = createAsyncThunk('GET_DIALOGUE', async () => {
-  const response = await sanityClient.fetch(
-    `*[_type == "conversation"]{
-              name, dialogue
-      }`
-  );
-  return response;
-});
+export const getDialogue = createAsyncThunk(
+  'GET_DIALOGUE',
+  async (conversationID) => {
+    const response = await sanityClient.fetch(
+      `*[_type == "dialogue" && conversation._ref == "664db36f-6324-4828-a8ad-35c78f5180f1"]{
+        name, responseOptions, needEvidence,
+  			"phrase": phrase[]{
+  				emotion->{emotion}, speaker->{name}, text	
+				}
+}`
+    );
+    return response;
+  }
+);
 
 // Reducer
 

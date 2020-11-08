@@ -6,11 +6,11 @@ import TextBox from '../components/TextBox';
 import Nav from '../components/Nav';
 import '../styles/testimony.css';
 
-const Testimony = () => {
+const Testimony = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getDialogue());
+    dispatch(getDialogue(props.match.params.id));
   }, [dispatch]);
 
   return (

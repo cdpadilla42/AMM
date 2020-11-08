@@ -10,9 +10,10 @@ function App() {
     <Provider store={store}>
       <Router>
         <Switch>
-          <Route path="/testimony">
-            <Testimony />
-          </Route>
+          <Route
+            path="/testimony/:id"
+            render={(props) => <Testimony match={props.match} />}
+          ></Route>
           <Route path="/">
             <SelectConversation />
           </Route>
