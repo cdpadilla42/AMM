@@ -41,10 +41,17 @@ const ResponseBox = () => {
     console.log(responseOptions);
 
     return responseOptions.map((optionObj) => (
-      <li>
-        <a href="">{optionObj.text}</a>
+      <li
+        onClick={handleClick}
+        followingDialogueID={optionObj.followingDialogue._id}
+      >
+        {optionObj.text}
       </li>
     ));
+  }
+
+  function handleClick(e) {
+    console.log(e.currentTarget);
   }
 
   return (
