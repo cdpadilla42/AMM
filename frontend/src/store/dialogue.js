@@ -3,11 +3,17 @@ import sanityClient from '../client';
 
 const initialState = {
   currentDialoguePosition: 0,
+  currentDialogueName: 'Start',
   dialogue: [
-    ['Im mad!', 'mad'],
-    ['I am sad!! !!!!!!!!!!!!!!!!!!!! !!!!!!', 'sad'],
-    ['HAHAHAHA!', 'laugh'],
-    ['Goodnight....', 'sleep'],
+    {
+      name: 'Start',
+      phrase: [
+        {
+          emotion: 'normal',
+          text: '',
+        },
+      ],
+    },
   ],
   dialogueFromSanity: 'apples',
 };
