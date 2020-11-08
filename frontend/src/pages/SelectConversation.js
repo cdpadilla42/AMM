@@ -18,7 +18,7 @@ const SelectConversation = () => {
 
     return conversations.map((convo) => (
       <li key={convo._id} id={convo._id}>
-        {convo.name}
+        <Link to={`/testimony/${convo._id}`}>{convo.name}</Link>
       </li>
     ));
   }
