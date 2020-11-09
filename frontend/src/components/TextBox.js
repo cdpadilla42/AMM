@@ -1,7 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { nextDialogue, prevDialogue } from '../store/dialogue';
+import {
+  nextDialogue,
+  prevDialogue,
+  toggleResponseBox,
+} from '../store/dialogue';
 import draw from '../lib/async-typer';
 
 const TextBox = (props) => {
@@ -52,7 +56,7 @@ const TextBox = (props) => {
 
     if (currentDialoguePosition === currentDialogueObj.phrase.length - 1) {
       console.log('here comes the question');
-      console.log(responseOptions);
+      props.toggleResponseBox();
     } else {
       props.nextDialogue();
     }
@@ -88,7 +92,10 @@ const TextBox = (props) => {
 // }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ nextDialogue, prevDialogue }, dispatch);
+  return bindActionCreators(
+    { nextDialogue, prevDialogue, toggleResponseBox },
+    dispatch
+  );
 }
 
 export default connect(null, mapDispatchToProps)(TextBox);

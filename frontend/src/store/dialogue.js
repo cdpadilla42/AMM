@@ -17,7 +17,7 @@ const initialState = {
       ],
     },
   ],
-  responseBoxIsOpen: true,
+  responseBoxIsOpen: false,
   dialogueFromSanity: 'apples',
 };
 
@@ -81,6 +81,7 @@ function dialogueReducer(state = initialState, action) {
       return {
         ...state,
         currentDialogueID: payload,
+        currentDialoguePosition: 0,
       };
     default:
       return state;
