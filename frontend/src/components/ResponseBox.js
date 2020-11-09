@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { switchConversation } from '../store/dialogue';
 
 const StyledResponseBox = styled.div`
   width: 200px;
@@ -31,6 +32,7 @@ const ResponseBox = () => {
   const { responseBoxIsOpen, currentDialogueName, dialogue } = useSelector(
     (state) => state.dialogue
   );
+  const dispatch = useDispatch();
 
   function renderResponseOptions() {
     const currentDialogue = dialogue.find(
@@ -41,17 +43,15 @@ const ResponseBox = () => {
     console.log(responseOptions);
 
     return responseOptions.map((optionObj) => (
-      <li
-        onClick={handleClick}
-        followingDialogueID={optionObj.followingDialogue._id}
-      >
+      <li onClick={() => handleClick(optionObj.followingDialogue._id)}>
         {optionObj.text}
       </li>
     ));
   }
 
-  function handleClick(e) {
-    console.log(e.currentTarget);
+  function handleClick(followingDialogueID) {
+    console.log(followingDialogueID);
+    dispatch(switchConversation(followingDialogueID));
   }
 
   return (

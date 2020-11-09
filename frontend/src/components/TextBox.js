@@ -10,14 +10,23 @@ const TextBox = (props) => {
     dialogue,
     currentDialoguePosition,
     currentDialogueName,
+    currentDialogueID,
   } = useSelector((state) => state.dialogue);
   console.log(dialogue, currentDialoguePosition);
 
-  const currentDialogueObj = dialogue.find(
-    (dialogue) => dialogue.name === currentDialogueName
-  );
+  let currentDialogueObj;
+
+  if (!currentDialogueID) {
+    currentDialogueObj = dialogue.find((dialogue) => dialogue.name === 'Start');
+  } else {
+    currentDialogueObj = dialogue.find(
+      (dialogue) => dialogue._id === currentDialogueID
+    );
+  }
   const phrases = currentDialogueObj && currentDialogueObj.phrase;
-  const responseOptions = currentDialogueObj.responseOptions;
+  const responseOptions = currentDialogueObj
+    ? currentDialogueObj.responseOptions
+    : null;
 
   // On change effect
   useEffect(() => {
@@ -26,7 +35,12 @@ const TextBox = (props) => {
     const text = phrases[currentDialoguePosition].text;
     console.log();
     draw(textEl, `${speaker}: ${text}`);
-  }, [dialogue, currentDialoguePosition, currentDialogueName]);
+  }, [
+    dialogue,
+    currentDialoguePosition,
+    currentDialogueName,
+    currentDialogueID,
+  ]);
 
   const handleNextClick = () => {
     // if (props.currentDialoguePosition === props.dialogue.length - 1) {

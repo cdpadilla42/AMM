@@ -4,6 +4,7 @@ import sanityClient from '../client';
 const initialState = {
   currentDialoguePosition: 0,
   currentDialogueName: 'Start',
+  currentDialogueID: null,
   dialogue: [
     {
       name: 'Start',
@@ -32,7 +33,7 @@ export const getDialogue = createAsyncThunk(
   async (conversationID) => {
     const response = await sanityClient.fetch(
       `*[_type == "dialogue" && conversation._ref == "${conversationID}"]{
-        name, responseOptions, needEvidence,
+        name, responseOptions, needEvidence, _id,
   			"phrase": phrase[]{
   				emotion->{emotion}, speaker->{name}, text	
 				},
@@ -79,6 +80,7 @@ function dialogueReducer(state = initialState, action) {
     case switchConversation.toString():
       return {
         ...state,
+        currentDialogueID: payload,
       };
     default:
       return state;
