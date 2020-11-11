@@ -82,6 +82,7 @@ function dialogueReducer(state = initialState, action) {
         ...state,
         currentDialogueID: payload,
         currentDialoguePosition: 0,
+        responseBoxIsOpen: false,
       };
     default:
       return state;
