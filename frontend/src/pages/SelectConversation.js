@@ -25,6 +25,7 @@ const SelectConversation = () => {
 
   return (
     <div>
+      <Link to="/inventory">Inventory</Link>
       <h1>UGLY SELECT SCREEN 🦝🏝</h1>
       <ul>{renderConversations()}</ul>
     </div>
