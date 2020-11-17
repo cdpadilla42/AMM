@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Testimony from './pages/Testimony';
 import SelectConversation from './pages/SelectConversation';
+import Inventory from './components/Inventory';
 import store from './store/store';
 
 function App() {
@@ -10,6 +11,9 @@ function App() {
     <Provider store={store}>
       <Router>
         <Switch>
+          <Route path="/inventory">
+            <Inventory />
+          </Route>
           <Route
             path="/testimony/:id"
             render={(props) => <Testimony match={props.match} />}
