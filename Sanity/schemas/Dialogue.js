@@ -73,5 +73,17 @@ export default {
       name: 'needEvidence',
       type: 'boolean',
     },
+    {
+      title: 'Required Evidence',
+      name: 'requiredEvidence',
+      type: 'reference',
+      to: [{ type: 'item' }],
+    },
+    // {
+    //   title: 'Following Dialogue',
+    //   name: 'followingDialogue',
+    //   type: 'reference',
+    //   to: [{ type: 'dialogue' }],
+    // },
   ],
 };
