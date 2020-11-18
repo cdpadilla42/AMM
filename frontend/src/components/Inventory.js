@@ -70,8 +70,39 @@ const Inventory = () => {
   );
 };
 
+const StyledItemDetailsDisplay = styled.div`
+  width: 540px;
+  height: 50%;
+  border: 1px solid black;
+  display: grid;
+  grid-gap: 1rem;
+  padding: 1rem;
+  grid-template-columns: 200px 1fr;
+  background-color: palegoldenrod;
+  border-radius: 5px;
+
+  img {
+    width: 200px;
+    height: 200px;
+  }
+
+  h4 {
+    margin: 0;
+    padding: 0;
+  }
+`;
+
 const ItemDetailsDisplay = () => {
-  return <div>It's a horse!</div>;
+  return (
+    <StyledItemDetailsDisplay>
+      <img src="https://f4.bcbits.com/img/a3261223391_2.jpg" alt="" />
+      <div className="written_details">
+        <h4>The Prophecy</h4>
+        <p>Good Music</p>
+        <button>Present</button>
+      </div>
+    </StyledItemDetailsDisplay>
+  );
 };
 
 export default Inventory;
