@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const StyledInventory = styled.div`
-  width: 540px;
+  position: absolute;
+  width: calc(100% - 4rem);
   height: 50%;
+  z-index: 6;
   border: 1px solid black;
   display: grid;
   grid-template-rows: repeat(2, 1fr);
@@ -74,18 +75,16 @@ const Inventory = () => {
         />
       ) : (
         <StyledInventory>{renderInventory()}</StyledInventory>
-      )}{' '}
-      <img
-        src="https://www.cheatcc.com/imageswii/phoenixwrightaceattorney_12a.jpg"
-        alt=""
-      />{' '}
+      )}
     </>
   );
 };
 
 const StyledItemDetailsDisplay = styled.div`
-  width: 540px;
+  position: absolute;
+  width: calc(100% - 4rem);
   height: 50%;
+  z-index: 6;
   border: 1px solid black;
   display: grid;
   grid-gap: 1rem;
@@ -112,13 +111,18 @@ const ItemDetailsDisplay = ({ selectedItem, inventory, setIsDetailsOpen }) => {
     setIsDetailsOpen(false);
   }
 
+  function presentItem() {
+    console.log(itemObj);
+    closeDetailsDisplay();
+  }
+
   return (
     <StyledItemDetailsDisplay>
       <img src={itemObj.image} alt="" />
       <div className="written_details">
         <h4>{itemObj.name}</h4>
         <p>{itemObj.description}</p>
-        <button>Present</button>
+        <button onClick={presentItem}>Present</button>
         <button onClick={closeDetailsDisplay}>Close</button>
       </div>
     </StyledItemDetailsDisplay>
