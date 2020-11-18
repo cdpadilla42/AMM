@@ -46,10 +46,15 @@ const Inventory = () => {
     (state) => state.dialogue
   );
 
-  const requiredEvidence = extractCurrentDialogueObj(
+  const currentDialogueObj = extractCurrentDialogueObj(
     currentDialogueID,
     dialogue
-  ).requiredEvidence.name;
+  );
+
+  const requiredEvidence = currentDialogueObj.requiredEvidence.name;
+  const nextResponseID =
+    currentDialogueObj.responseOptions[0].followingDialogue._id;
+  console.log(nextResponseID, 'nextResponse');
   console.log(requiredEvidence, 'Inventory');
 
   // const inventory = useSelector((store) => store.inventory);
@@ -91,6 +96,7 @@ const Inventory = () => {
           inventory={dummyInventory}
           setIsDetailsOpen={setIsDetailsOpen}
           requiredEvidence={requiredEvidence}
+          nextResponseID={nextResponseID}
         />
       ) : (
         <StyledInventory>{renderInventory()}</StyledInventory>
@@ -128,6 +134,7 @@ const ItemDetailsDisplay = ({
   inventory,
   setIsDetailsOpen,
   requiredEvidence,
+  nextResponseID,
 }) => {
   const itemObj = inventory.find((item) => item.name === selectedItem);
   const dispatch = useDispatch();
@@ -140,11 +147,13 @@ const ItemDetailsDisplay = ({
     console.log(itemObj);
     if (itemObj.name === requiredEvidence) {
       console.log('you did it!');
+      console.log('Next Dialogue:', nextResponseID);
+      closeDetailsDisplay();
+      dispatch(toggleInventory());
     } else {
       console.log('Soooorrry, wrong one');
+      closeDetailsDisplay();
     }
-    closeDetailsDisplay();
-    dispatch(toggleInventory());
   }
 
   return (
