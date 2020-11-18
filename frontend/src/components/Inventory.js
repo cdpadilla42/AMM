@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { toggleInventory } from '../store/dialogue';
+import extractCurrentDialogueObj from '../lib/extractCurrentDialogueObj';
 
 const StyledInventory = styled.div`
   position: absolute;
@@ -41,6 +42,16 @@ const StyledInventory = styled.div`
 const Inventory = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState('');
+  const { currentDialogueID, dialogue } = useSelector(
+    (state) => state.dialogue
+  );
+
+  const requiredEvidence = extractCurrentDialogueObj(
+    currentDialogueID,
+    dialogue
+  ).requiredEvidence.name;
+  console.log(requiredEvidence, 'Inventory');
+
   // const inventory = useSelector((store) => store.inventory);
   // console.log(inventory);
   const dummyInventory = new Array(6);
@@ -49,6 +60,11 @@ const Inventory = () => {
     image: 'https://f4.bcbits.com/img/a3261223391_2.jpg',
     description: 'What a noble steed.',
   });
+  dummyInventory[4] = {
+    name: 'The Prophecy',
+    image: 'https://f4.bcbits.com/img/a3261223391_2.jpg',
+    description: 'What a noble steed.',
+  };
 
   function displayItemDetails(e) {
     const itemName = e.currentTarget.dataset.name;
@@ -74,6 +90,7 @@ const Inventory = () => {
           selectedItem={selectedItem}
           inventory={dummyInventory}
           setIsDetailsOpen={setIsDetailsOpen}
+          requiredEvidence={requiredEvidence}
         />
       ) : (
         <StyledInventory>{renderInventory()}</StyledInventory>
@@ -106,7 +123,12 @@ const StyledItemDetailsDisplay = styled.div`
   }
 `;
 
-const ItemDetailsDisplay = ({ selectedItem, inventory, setIsDetailsOpen }) => {
+const ItemDetailsDisplay = ({
+  selectedItem,
+  inventory,
+  setIsDetailsOpen,
+  requiredEvidence,
+}) => {
   const itemObj = inventory.find((item) => item.name === selectedItem);
   const dispatch = useDispatch();
 
@@ -116,6 +138,11 @@ const ItemDetailsDisplay = ({ selectedItem, inventory, setIsDetailsOpen }) => {
 
   function presentItem() {
     console.log(itemObj);
+    if (itemObj.name === requiredEvidence) {
+      console.log('you did it!');
+    } else {
+      console.log('Soooorrry, wrong one');
+    }
     closeDetailsDisplay();
     dispatch(toggleInventory());
   }

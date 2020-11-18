@@ -8,6 +8,7 @@ import {
   toggleInventory,
 } from '../store/dialogue';
 import draw from '../lib/async-typer';
+import extractCurrentDialogueObj from '../lib/extractCurrentDialogueObj';
 
 const TextBox = (props) => {
   const textRef = useRef(null);
@@ -19,15 +20,19 @@ const TextBox = (props) => {
   } = useSelector((state) => state.dialogue);
   console.log(dialogue, currentDialoguePosition);
 
-  let currentDialogueObj;
+  let currentDialogueObj = extractCurrentDialogueObj(
+    currentDialogueID,
+    dialogue
+  );
 
-  if (!currentDialogueID) {
-    currentDialogueObj = dialogue.find((dialogue) => dialogue.name === 'Start');
-  } else {
-    currentDialogueObj = dialogue.find(
-      (dialogue) => dialogue._id === currentDialogueID
-    );
-  }
+  // if (!currentDialogueID) {
+  //   currentDialogueObj = dialogue.find((dialogue) => dialogue.name === 'Start');
+  // } else {
+  //   currentDialogueObj = dialogue.find(
+  //     (dialogue) => dialogue._id === currentDialogueID
+  //   );
+  // }
+
   const phrases = currentDialogueObj && currentDialogueObj.phrase;
   const responseOptions = currentDialogueObj
     ? currentDialogueObj.responseOptions
