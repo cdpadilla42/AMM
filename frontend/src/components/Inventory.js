@@ -37,18 +37,27 @@ const StyledInventory = styled.div`
 
 const Inventory = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState('');
   // const inventory = useSelector((store) => store.inventory);
   // console.log(inventory);
   const dummyInventory = new Array(6);
   dummyInventory.fill({
     name: 'horse',
     image: 'https://f4.bcbits.com/img/a3261223391_2.jpg',
+    description: 'What a noble steed.',
   });
+
+  function displayItemDetails(e) {
+    const itemName = e.currentTarget.dataset.name;
+    console.log(e.currentTarget.dataset.name);
+    setSelectedItem(itemName);
+    setIsDetailsOpen(true);
+  }
 
   function renderInventory() {
     return dummyInventory.map((item) => {
       return (
-        <div key={item.name}>
+        <div key={item.name} data-name={item.name} onClick={displayItemDetails}>
           <img src={item.image} alt="" />
           <span>{item.name}</span>
         </div>
@@ -58,7 +67,10 @@ const Inventory = () => {
   return (
     <>
       {isDetailsOpen ? (
-        <ItemDetailsDisplay />
+        <ItemDetailsDisplay
+          selectedItem={selectedItem}
+          inventory={dummyInventory}
+        />
       ) : (
         <StyledInventory>{renderInventory()}</StyledInventory>
       )}{' '}
@@ -92,13 +104,15 @@ const StyledItemDetailsDisplay = styled.div`
   }
 `;
 
-const ItemDetailsDisplay = () => {
+const ItemDetailsDisplay = ({ selectedItem, inventory }) => {
+  const itemObj = inventory.find((item) => item.name === selectedItem);
+
   return (
     <StyledItemDetailsDisplay>
-      <img src="https://f4.bcbits.com/img/a3261223391_2.jpg" alt="" />
+      <img src={itemObj.image} alt="" />
       <div className="written_details">
-        <h4>The Prophecy</h4>
-        <p>Good Music</p>
+        <h4>{itemObj.name}</h4>
+        <p>{itemObj.description}</p>
         <button>Present</button>
       </div>
     </StyledItemDetailsDisplay>
