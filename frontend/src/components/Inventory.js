@@ -70,6 +70,7 @@ const Inventory = () => {
         <ItemDetailsDisplay
           selectedItem={selectedItem}
           inventory={dummyInventory}
+          setIsDetailsOpen={setIsDetailsOpen}
         />
       ) : (
         <StyledInventory>{renderInventory()}</StyledInventory>
@@ -104,8 +105,12 @@ const StyledItemDetailsDisplay = styled.div`
   }
 `;
 
-const ItemDetailsDisplay = ({ selectedItem, inventory }) => {
+const ItemDetailsDisplay = ({ selectedItem, inventory, setIsDetailsOpen }) => {
   const itemObj = inventory.find((item) => item.name === selectedItem);
+
+  function closeDetailsDisplay() {
+    setIsDetailsOpen(false);
+  }
 
   return (
     <StyledItemDetailsDisplay>
@@ -114,6 +119,7 @@ const ItemDetailsDisplay = ({ selectedItem, inventory }) => {
         <h4>{itemObj.name}</h4>
         <p>{itemObj.description}</p>
         <button>Present</button>
+        <button onClick={closeDetailsDisplay}>Close</button>
       </div>
     </StyledItemDetailsDisplay>
   );
