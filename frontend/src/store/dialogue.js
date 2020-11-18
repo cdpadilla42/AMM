@@ -19,7 +19,7 @@ const initialState = {
   ],
   responseBoxIsOpen: false,
   dialogueFromSanity: 'apples',
-  isInventoryOpen: true,
+  isInventoryOpen: false,
 };
 
 // Actions

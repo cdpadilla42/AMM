@@ -5,6 +5,7 @@ import {
   nextDialogue,
   prevDialogue,
   toggleResponseBox,
+  toggleInventory,
 } from '../store/dialogue';
 import draw from '../lib/async-typer';
 
@@ -53,9 +54,12 @@ const TextBox = (props) => {
 
     //
     // }
+    const isEndOfDialogue =
+      currentDialoguePosition === currentDialogueObj.phrase.length - 1;
 
-    if (currentDialoguePosition === currentDialogueObj.phrase.length - 1) {
-      console.log('here comes the question');
+    if (isEndOfDialogue && currentDialogueObj.needEvidence) {
+      props.toggleInventory();
+    } else if (isEndOfDialogue) {
       props.toggleResponseBox();
     } else {
       props.nextDialogue();
@@ -93,7 +97,7 @@ const TextBox = (props) => {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { nextDialogue, prevDialogue, toggleResponseBox },
+    { nextDialogue, prevDialogue, toggleResponseBox, toggleInventory },
     dispatch
   );
 }
