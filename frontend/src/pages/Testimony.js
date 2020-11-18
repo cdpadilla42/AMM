@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AnimalDisplay from '../components/AnimalDisplay';
 import { getDialogue, resetDialoguePosition } from '../store/dialogue';
 import TextBox from '../components/TextBox';
@@ -10,6 +10,9 @@ import '../styles/testimony.css';
 
 const Testimony = (props) => {
   const dispatch = useDispatch();
+  const isInventoryOpen = useSelector(
+    (state) => state.dialogue.isInventoryOpen
+  );
 
   useEffect(() => {
     dispatch(getDialogue(props.match.params.id));
@@ -22,7 +25,7 @@ const Testimony = (props) => {
       <Nav />
       <div className="game_container">
         <AnimalDisplay />
-        <Inventory />
+        {isInventoryOpen ? <Inventory /> : ''}
         <ResponseBox />
         <TextBox />
       </div>

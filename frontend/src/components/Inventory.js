@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { toggleInventory } from '../store/dialogue';
 
 const StyledInventory = styled.div`
   position: absolute;
@@ -106,6 +108,7 @@ const StyledItemDetailsDisplay = styled.div`
 
 const ItemDetailsDisplay = ({ selectedItem, inventory, setIsDetailsOpen }) => {
   const itemObj = inventory.find((item) => item.name === selectedItem);
+  const dispatch = useDispatch();
 
   function closeDetailsDisplay() {
     setIsDetailsOpen(false);
@@ -114,6 +117,7 @@ const ItemDetailsDisplay = ({ selectedItem, inventory, setIsDetailsOpen }) => {
   function presentItem() {
     console.log(itemObj);
     closeDetailsDisplay();
+    dispatch(toggleInventory());
   }
 
   return (
