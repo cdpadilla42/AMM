@@ -7,7 +7,7 @@ import extractCurrentDialogueObj from '../lib/extractCurrentDialogueObj';
 const StyledInventory = styled.div`
   position: absolute;
   width: calc(100% - 4rem);
-  height: 50%;
+  height: 350px;
   z-index: 6;
   border: 1px solid black;
   padding: 1rem;
@@ -24,7 +24,7 @@ const StyledInventory = styled.div`
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 1rem;
-    height: 100%;
+    height: calc(100% - 2rem);
     width: 100%;
   }
 
@@ -39,8 +39,8 @@ const StyledInventory = styled.div`
   }
 
   img {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
   }
 
   span {
