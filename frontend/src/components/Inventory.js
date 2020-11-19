@@ -10,13 +10,23 @@ const StyledInventory = styled.div`
   height: 50%;
   z-index: 6;
   border: 1px solid black;
-  display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 1rem;
   padding: 1rem;
   background-color: palegoldenrod;
   border-radius: 5px;
+
+  .inventory_header {
+    width: 100%;
+    border: 1px solid black;
+  }
+
+  .inventory_grid {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1rem;
+    height: 100%;
+    width: 100%;
+  }
 
   div {
     border: 1px solid black;
@@ -99,7 +109,12 @@ const Inventory = () => {
           nextResponseID={nextResponseID}
         />
       ) : (
-        <StyledInventory>{renderInventory()}</StyledInventory>
+        <StyledInventory>
+          <div className="inventory_header">
+            <button>See People</button>
+          </div>
+          <div className="inventory_grid">{renderInventory()}</div>
+        </StyledInventory>
       )}
     </>
   );
@@ -146,9 +161,6 @@ const ItemDetailsDisplay = ({
   function presentItem() {
     console.log(itemObj);
     if (itemObj.name === requiredEvidence) {
-      // TODO Reroute dialogue
-      console.log('you did it!');
-      console.log('Next Dialogue:', nextResponseID);
       dispatch(switchConversation(nextResponseID));
       closeDetailsDisplay();
       dispatch(toggleInventory());
