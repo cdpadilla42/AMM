@@ -49,12 +49,52 @@ const StyledInventory = styled.div`
   }
 `;
 
+const dummyInventory = [
+  {
+    name: 'horse',
+    image: 'https://f4.bcbits.com/img/a3261223391_2.jpg',
+    description: 'What a noble steed.',
+  },
+  {
+    name: 'john',
+    image: 'https://f4.bcbits.com/img/a3261223391_2.jpg',
+    description: 'What a noble steed.',
+  },
+  {
+    name: 'The Prophecy',
+    image: 'https://f4.bcbits.com/img/a3261223391_2.jpg',
+    description: 'What a noble steed.',
+  },
+];
+
+const dummyAnimalNotes = [
+  {
+    name: 'Brian',
+    image: 'https://f4.bcbits.com/img/a0905339103_16.jpg',
+    description: 'What a noble steed.',
+  },
+  {
+    name: 'John',
+    image: 'https://f4.bcbits.com/img/a0905339103_16.jpg',
+    description: 'What a noble steed.',
+  },
+  {
+    name: 'Lucy',
+    image: 'https://f4.bcbits.com/img/a0905339103_16.jpg',
+    description: 'What a noble steed.',
+  },
+];
+
 const Inventory = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState('');
+  const [isShowingPeople, setIsShowingPeople] = useState(false);
+  // if isShowingPeople is on, show items. Else, show people.
+  const [items, setItems] = useState(dummyInventory);
   const { currentDialogueID, dialogue } = useSelector(
     (state) => state.dialogue
   );
+  console.log(items, 'items');
 
   const currentDialogueObj = extractCurrentDialogueObj(
     currentDialogueID,
@@ -69,24 +109,6 @@ const Inventory = () => {
 
   // const inventory = useSelector((store) => store.inventory);
   // console.log(inventory);
-  const dummyInventory = new Array(6);
-  dummyInventory.fill({
-    name: 'horse',
-    image: 'https://f4.bcbits.com/img/a3261223391_2.jpg',
-    description: 'What a noble steed.',
-  });
-  dummyInventory[4] = {
-    name: 'The Prophecy',
-    image: 'https://f4.bcbits.com/img/a3261223391_2.jpg',
-    description: 'What a noble steed.',
-  };
-
-  const dummyAnimalNotes = new Array(7);
-  dummyAnimalNotes.fill({
-    name: 'Brian',
-    image: 'https://f4.bcbits.com/img/a0905339103_16.jpg',
-    description: 'What a noble steed.',
-  });
 
   function displayItemDetails(e) {
     const itemName = e.currentTarget.dataset.name;
@@ -95,12 +117,13 @@ const Inventory = () => {
     setIsDetailsOpen(true);
   }
 
-  function renderInventory() {
-    let items = true ? dummyAnimalNotes : dummyInventory;
-    // if showing people, show people
+  function toggleShowingPeople() {
+    setItems(!isShowingPeople ? dummyAnimalNotes : dummyInventory);
+    setIsShowingPeople(!isShowingPeople);
+  }
 
-    // else
-    return items.map((item) => {
+  function renderInventory() {
+    const jsx = items.map((item) => {
       return (
         <div key={item.name} data-name={item.name} onClick={displayItemDetails}>
           <img src={item.image} alt="" />
@@ -108,13 +131,16 @@ const Inventory = () => {
         </div>
       );
     });
+
+    console.log(jsx);
+    return jsx;
   }
   return (
     <>
       {isDetailsOpen ? (
         <ItemDetailsDisplay
           selectedItem={selectedItem}
-          inventory={dummyInventory}
+          inventory={items}
           setIsDetailsOpen={setIsDetailsOpen}
           requiredEvidence={requiredEvidence}
           nextResponseID={nextResponseID}
@@ -122,7 +148,7 @@ const Inventory = () => {
       ) : (
         <StyledInventory>
           <div className="inventory_header">
-            <button>See People</button>
+            <button onClick={toggleShowingPeople}>See People</button>
           </div>
           <div className="inventory_grid">{renderInventory()}</div>
         </StyledInventory>
