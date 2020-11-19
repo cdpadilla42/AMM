@@ -81,6 +81,13 @@ const Inventory = () => {
     description: 'What a noble steed.',
   };
 
+  const dummyAnimalNotes = new Array(7);
+  dummyAnimalNotes.fill({
+    name: 'Brian',
+    image: 'https://f4.bcbits.com/img/a0905339103_16.jpg',
+    description: 'What a noble steed.',
+  });
+
   function displayItemDetails(e) {
     const itemName = e.currentTarget.dataset.name;
     console.log(e.currentTarget.dataset.name);
@@ -89,7 +96,11 @@ const Inventory = () => {
   }
 
   function renderInventory() {
-    return dummyInventory.map((item) => {
+    let items = true ? dummyAnimalNotes : dummyInventory;
+    // if showing people, show people
+
+    // else
+    return items.map((item) => {
       return (
         <div key={item.name} data-name={item.name} onClick={displayItemDetails}>
           <img src={item.image} alt="" />
