@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { toggleInventory } from '../store/dialogue';
+import { toggleInventory, switchConversation } from '../store/dialogue';
 import extractCurrentDialogueObj from '../lib/extractCurrentDialogueObj';
 
 const StyledInventory = styled.div`
@@ -146,8 +146,10 @@ const ItemDetailsDisplay = ({
   function presentItem() {
     console.log(itemObj);
     if (itemObj.name === requiredEvidence) {
+      // TODO Reroute dialogue
       console.log('you did it!');
       console.log('Next Dialogue:', nextResponseID);
+      dispatch(switchConversation(nextResponseID));
       closeDetailsDisplay();
       dispatch(toggleInventory());
     } else {

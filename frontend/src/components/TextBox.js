@@ -25,14 +25,6 @@ const TextBox = (props) => {
     dialogue
   );
 
-  // if (!currentDialogueID) {
-  //   currentDialogueObj = dialogue.find((dialogue) => dialogue.name === 'Start');
-  // } else {
-  //   currentDialogueObj = dialogue.find(
-  //     (dialogue) => dialogue._id === currentDialogueID
-  //   );
-  // }
-
   const phrases = currentDialogueObj && currentDialogueObj.phrase;
   const responseOptions = currentDialogueObj
     ? currentDialogueObj.responseOptions
