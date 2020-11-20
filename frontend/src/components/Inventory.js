@@ -95,7 +95,6 @@ const Inventory = () => {
     (state) => state.dialogue
   );
   const fullItemsInventory = useSelector((store) => store.inventory.items);
-
   const currentDialogueObj = extractCurrentDialogueObj(
     currentDialogueID,
     dialogue
@@ -128,16 +127,11 @@ const Inventory = () => {
     });
   }
 
-  console.log(
-    'selectUserItemsFromFullInventory',
-    selectUserItemsFromFullInventory()
-  );
-
   function renderInventory() {
-    const jsx = items.map((item) => {
+    const jsx = selectUserItemsFromFullInventory().map((item) => {
       return (
         <div key={item.name} data-name={item.name} onClick={displayItemDetails}>
-          <img src={item.image} alt="" />
+          <img src={item.imageUrl} alt="" />
           <span>{item.name}</span>
         </div>
       );
