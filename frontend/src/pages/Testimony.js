@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AnimalDisplay from '../components/AnimalDisplay';
 import { getDialogue, resetDialoguePosition } from '../store/dialogue';
+import { getInventoryItems } from '../store/inventory';
 import TextBox from '../components/TextBox';
 import Nav from '../components/Nav';
 import ResponseBox from '../components/ResponseBox';
@@ -18,6 +19,11 @@ const Testimony = (props) => {
     dispatch(getDialogue(props.match.params.id));
     // set place to 0
     dispatch(resetDialoguePosition());
+  }, []);
+
+  // Get items for inventory
+  useEffect(() => {
+    dispatch(getInventoryItems());
   }, []);
 
   // on load, set local storage
