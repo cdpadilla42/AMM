@@ -10,6 +10,7 @@ import Conversation from './Conversation';
 import Dialogue from './Dialogue';
 import Emotions from './Emotions';
 import Item from './Item';
+import AnimalNotes from './AnimalNotes';
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -24,5 +25,6 @@ export default createSchema({
     Emotions,
     Animal,
     Item,
+    AnimalNotes,
   ]),
 });

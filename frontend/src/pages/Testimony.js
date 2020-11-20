@@ -20,6 +20,16 @@ const Testimony = (props) => {
     dispatch(resetDialoguePosition());
   }, []);
 
+  // on load, set local storage
+  useEffect(() => {
+    const { localStorage } = window;
+    const itemsInInventory = {
+      items: ['The Prophecy'],
+      act: 2,
+    };
+    localStorage.setItem('itemsInInventory', JSON.stringify(itemsInInventory));
+  }, []);
+
   return (
     <div className="container">
       <Nav />
