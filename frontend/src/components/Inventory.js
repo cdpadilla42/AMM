@@ -94,7 +94,7 @@ const Inventory = () => {
   const { currentDialogueID, dialogue } = useSelector(
     (state) => state.dialogue
   );
-  console.log(items, 'items');
+  const fullItemsInventory = useSelector((store) => store.inventory.items);
 
   const currentDialogueObj = extractCurrentDialogueObj(
     currentDialogueID,
@@ -104,11 +104,6 @@ const Inventory = () => {
   const requiredEvidence = currentDialogueObj.requiredEvidence.name;
   const nextResponseID =
     currentDialogueObj.responseOptions[0].followingDialogue._id;
-  console.log(nextResponseID, 'nextResponse');
-  console.log(requiredEvidence, 'Inventory');
-
-  // const inventory = useSelector((store) => store.inventory);
-  // console.log(inventory);
 
   function displayItemDetails(e) {
     const itemName = e.currentTarget.dataset.name;
@@ -121,6 +116,22 @@ const Inventory = () => {
     setItems(!isShowingPeople ? dummyAnimalNotes : dummyInventory);
     setIsShowingPeople(!isShowingPeople);
   }
+
+  function selectUserItemsFromFullInventory() {
+    const userItemsInventory = JSON.parse(
+      window.localStorage.getItem('itemsInInventory')
+    ).items;
+    console.log('fullItemsInventory', fullItemsInventory);
+    console.log('userItemsInventory', userItemsInventory);
+    return fullItemsInventory.filter((item) => {
+      return userItemsInventory.includes(item.name);
+    });
+  }
+
+  console.log(
+    'selectUserItemsFromFullInventory',
+    selectUserItemsFromFullInventory()
+  );
 
   function renderInventory() {
     const jsx = items.map((item) => {

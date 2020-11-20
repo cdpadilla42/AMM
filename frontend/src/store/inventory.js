@@ -25,7 +25,8 @@ export const getInventoryItems = createAsyncThunk(
   async () => {
     const response = await sanityClient.fetch(
       `*[_type == "item"]{
-        name, description, image
+        name, description, 
+        "imageUrl": image.asset->url
  
 }`
     );
