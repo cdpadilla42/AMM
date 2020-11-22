@@ -86,11 +86,9 @@ const dummyAnimalNotes = [
 ];
 
 const Inventory = () => {
-  // TODO refactor to accomodate different inventories. Current inventory is too tightly coupled
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState('');
   const [isShowingPeople, setIsShowingPeople] = useState(false);
-  // if isShowingPeople is on, show items. Else, show people.
   const [items, setItems] = useState(dummyInventory);
   const { currentDialogueID, dialogue } = useSelector(
     (state) => state.dialogue
@@ -158,7 +156,9 @@ const Inventory = () => {
       ) : (
         <StyledInventory>
           <div className="inventory_header">
-            <button onClick={toggleShowingPeople}>See People</button>
+            <button onClick={toggleShowingPeople}>
+              {isShowingPeople ? 'Animals' : 'Items'}
+            </button>
           </div>
           <div className="inventory_grid">{renderInventory()}</div>
         </StyledInventory>
