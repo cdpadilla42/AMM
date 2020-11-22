@@ -70,22 +70,23 @@ const dummyInventory = [
 const dummyAnimalNotes = [
   {
     name: 'Brian',
-    image: 'https://f4.bcbits.com/img/a0905339103_16.jpg',
+    imageUrl: 'https://f4.bcbits.com/img/a0905339103_16.jpg',
     description: 'What a noble steed.',
   },
   {
     name: 'John',
-    image: 'https://f4.bcbits.com/img/a0905339103_16.jpg',
+    imageUrl: 'https://f4.bcbits.com/img/a0905339103_16.jpg',
     description: 'What a noble steed.',
   },
   {
     name: 'Lucy',
-    image: 'https://f4.bcbits.com/img/a0905339103_16.jpg',
+    imageUrl: 'https://f4.bcbits.com/img/a0905339103_16.jpg',
     description: 'What a noble steed.',
   },
 ];
 
 const Inventory = () => {
+  // TODO refactor to accomodate different inventories. Current inventory is too tightly coupled
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState('');
   const [isShowingPeople, setIsShowingPeople] = useState(false);
@@ -128,7 +129,11 @@ const Inventory = () => {
   }
 
   function renderInventory() {
-    const jsx = selectUserItemsFromFullInventory().map((item) => {
+    const selectedItems = isShowingPeople
+      ? dummyAnimalNotes
+      : selectUserItemsFromFullInventory();
+    const jsx = selectedItems.map((item) => {
+      // TODO Add sanity image url builder to import a smaller image size
       return (
         <div key={item.name} data-name={item.name} onClick={displayItemDetails}>
           <img src={item.imageUrl} alt="" />
