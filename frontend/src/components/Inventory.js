@@ -94,6 +94,7 @@ const Inventory = () => {
     (state) => state.dialogue
   );
   const fullItemsInventory = useSelector((store) => store.inventory.items);
+  const animalNotes = useSelector((store) => store.inventory.notes);
   const currentDialogueObj = extractCurrentDialogueObj(
     currentDialogueID,
     dialogue
@@ -128,7 +129,7 @@ const Inventory = () => {
 
   function renderInventory() {
     const selectedItems = isShowingPeople
-      ? dummyAnimalNotes
+      ? animalNotes
       : selectUserItemsFromFullInventory();
     const jsx = selectedItems.map((item) => {
       // TODO Add sanity image url builder to import a smaller image size
@@ -148,7 +149,9 @@ const Inventory = () => {
       {isDetailsOpen ? (
         <ItemDetailsDisplay
           selectedItem={selectedItem}
-          inventory={items}
+          inventory={
+            isShowingPeople ? animalNotes : selectUserItemsFromFullInventory()
+          }
           setIsDetailsOpen={setIsDetailsOpen}
           requiredEvidence={requiredEvidence}
           nextResponseID={nextResponseID}
@@ -157,7 +160,7 @@ const Inventory = () => {
         <StyledInventory>
           <div className="inventory_header">
             <button onClick={toggleShowingPeople}>
-              {isShowingPeople ? 'Animals' : 'Items'}
+              {isShowingPeople ? 'Items' : 'Animals'}
             </button>
           </div>
           <div className="inventory_grid">{renderInventory()}</div>
@@ -219,7 +222,7 @@ const ItemDetailsDisplay = ({
 
   return (
     <StyledItemDetailsDisplay>
-      <img src={itemObj.image} alt="" />
+      <img src={itemObj.imageUrl} alt="" />
       <div className="written_details">
         <h4>{itemObj.name}</h4>
         <p>{itemObj.description}</p>

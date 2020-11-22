@@ -34,6 +34,17 @@ export const getInventoryItems = createAsyncThunk(
   }
 );
 
+export const getAnimalNotes = createAsyncThunk('GET_ANIMAL_NOTES', async () => {
+  const response = await sanityClient.fetch(
+    `*[_type == "animalNotes"]{
+        name, description, 
+        "imageUrl": image.asset->url
+ 
+}`
+  );
+  return response;
+});
+
 export const addToInventory = createAction('ADD_TO_INVENTORY');
 
 // Reducer
@@ -43,6 +54,8 @@ function inventoryReducer(state = initialState, action) {
   switch (type) {
     case 'GET_INVENTORY_ITEMS/fulfilled':
       return { ...state, items: payload };
+    case 'GET_ANIMAL_NOTES/fulfilled':
+      return { ...state, notes: payload };
     case addToInventory.toString():
       return { ...state, payload };
     default:
