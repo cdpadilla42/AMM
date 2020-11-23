@@ -7,17 +7,22 @@ export default {
       title: 'Name',
       name: 'name',
       type: 'string',
+      description:
+        "Named either 'Start' or the response text from the previous dialogue",
     },
     {
       title: 'Conversation',
       name: 'conversation',
       type: 'reference',
+      description:
+        'Ex: Ankha Act 3. Should reference an already defined conversation',
       to: [{ type: 'conversation' }],
     },
     {
       title: 'Phrases',
       name: 'phrase',
       type: 'array',
+      description: 'Lines of dialogue',
       of: [
         {
           type: 'object',
@@ -47,6 +52,7 @@ export default {
       title: 'Response Options',
       name: 'responseOptions',
       type: 'array',
+      description: 'Possible answers user can give',
       of: [
         {
           title: 'Response',
@@ -63,6 +69,8 @@ export default {
               name: 'followingDialogue',
               type: 'reference',
               to: [{ type: 'dialogue' }],
+              description:
+                'Reference a dialogue to jump to after answering with this response',
             },
           ],
         },
@@ -72,17 +80,22 @@ export default {
       title: 'Prompt for Evidence?',
       name: 'needEvidence',
       type: 'boolean',
+      description: 'Switch on if you need to present someone or something',
     },
     {
       title: 'Required Evidence',
       name: 'requiredEvidence',
       type: 'reference',
       to: [{ type: 'item' }],
+      description:
+        'Only required if above is on. Must reference an item or animal note',
     },
     {
       title: 'Final dialogue of conversation??',
       name: 'isFinalDialogue',
       type: 'boolean',
+      description:
+        'Switch on if you want to leave this scene after this portion of dialouge.',
     },
     // {
     //   title: 'Following Dialogue',
