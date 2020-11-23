@@ -79,6 +79,11 @@ export default {
       type: 'reference',
       to: [{ type: 'item' }],
     },
+    {
+      title: 'Final dialogue of conversation??',
+      name: 'isFinalDialogue',
+      type: 'boolean',
+    },
     // {
     //   title: 'Following Dialogue',
     //   name: 'followingDialogue',

@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { useHistory } from 'react-router-dom';
 import {
   nextDialogue,
   prevDialogue,
@@ -12,13 +13,13 @@ import extractCurrentDialogueObj from '../lib/extractCurrentDialogueObj';
 
 const TextBox = (props) => {
   const textRef = useRef(null);
+  const history = useHistory();
   const {
     dialogue,
     currentDialoguePosition,
     currentDialogueName,
     currentDialogueID,
   } = useSelector((state) => state.dialogue);
-  console.log(dialogue, currentDialoguePosition);
 
   let currentDialogueObj = extractCurrentDialogueObj(
     currentDialogueID,
@@ -35,7 +36,6 @@ const TextBox = (props) => {
     const textEl = textRef.current;
     const speaker = phrases[currentDialoguePosition].speaker.name;
     const text = phrases[currentDialoguePosition].text;
-    console.log();
     draw(textEl, `${speaker}: ${text}`);
   }, [
     dialogue,
@@ -45,17 +45,13 @@ const TextBox = (props) => {
   ]);
 
   const handleNextClick = () => {
-    // if (props.currentDialoguePosition === props.dialogue.length - 1) {
-    //   console.log('stopping');
-    // } else {
-
-    //
-    // }
     const isEndOfDialogue =
       currentDialoguePosition === currentDialogueObj.phrase.length - 1;
 
     if (isEndOfDialogue && currentDialogueObj.needEvidence) {
       props.toggleInventory();
+    } else if (isEndOfDialogue && currentDialogueObj.isFinalDialogue) {
+      history.push('/');
     } else if (isEndOfDialogue) {
       props.toggleResponseBox();
     } else {
@@ -64,7 +60,7 @@ const TextBox = (props) => {
   };
 
   const handlePrevClick = () => {
-    if (props.currentDialoguePosition === 0) {
+    if (currentDialoguePosition === 0) {
       console.log('stopping');
     } else {
       props.prevDialogue();
