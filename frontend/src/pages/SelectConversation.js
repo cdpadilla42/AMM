@@ -26,7 +26,7 @@ const SelectConversation = () => {
   return (
     <div>
       <Link to="/inventory">Inventory</Link>
-      <Link to="/testimony">Blank Testimony</Link>
+      <Link to="/testimony/test">Blank Testimony</Link>
       <h1>UGLY SELECT SCREEN 🦝🏝</h1>
       <ul>{renderConversations()}</ul>
     </div>
