@@ -1,4 +1,10 @@
-const extractCurrentDialogueObj = (currentDialogueID, dialogueList) => {
+import { useSelector } from 'react-redux';
+
+const useCurrentDialogueObj = () => {
+  const { currentDialogueID, dialogue: dialogueList } = useSelector(
+    (state) => state.dialogue
+  );
+
   let currentDialogueObj;
 
   if (!currentDialogueID) {
@@ -14,4 +20,4 @@ const extractCurrentDialogueObj = (currentDialogueID, dialogueList) => {
   return currentDialogueObj;
 };
 
-export default extractCurrentDialogueObj;
+export default useCurrentDialogueObj;

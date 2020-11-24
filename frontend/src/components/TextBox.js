@@ -9,7 +9,7 @@ import {
   toggleInventory,
 } from '../store/dialogue';
 import draw from '../lib/async-typer';
-import extractCurrentDialogueObj from '../lib/extractCurrentDialogueObj';
+import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 
 const TextBox = (props) => {
   const textRef = useRef(null);
@@ -21,10 +21,7 @@ const TextBox = (props) => {
     currentDialogueID,
   } = useSelector((state) => state.dialogue);
 
-  let currentDialogueObj = extractCurrentDialogueObj(
-    currentDialogueID,
-    dialogue
-  );
+  let currentDialogueObj = useCurrentDialogueObj();
 
   const phrases = currentDialogueObj && currentDialogueObj.phrase;
   const responseOptions = currentDialogueObj
@@ -82,11 +79,6 @@ const TextBox = (props) => {
     </div>
   );
 };
-
-// function mapStateToProps(state) {
-//   const { dialogue, currentDialoguePosition } = state;
-//   return { dialogue, currentDialoguePosition };
-// }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(

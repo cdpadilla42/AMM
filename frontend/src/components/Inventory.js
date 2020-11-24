@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { toggleInventory, switchConversation } from '../store/dialogue';
-import extractCurrentDialogueObj from '../lib/extractCurrentDialogueObj';
+import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 
 const StyledInventory = styled.div`
   position: absolute;
@@ -90,15 +90,10 @@ const Inventory = () => {
   const [selectedItem, setSelectedItem] = useState('');
   const [isShowingPeople, setIsShowingPeople] = useState(false);
   const [items, setItems] = useState(dummyInventory);
-  const { currentDialogueID, dialogue } = useSelector(
-    (state) => state.dialogue
-  );
+
   const fullItemsInventory = useSelector((store) => store.inventory.items);
   const animalNotes = useSelector((store) => store.inventory.notes);
-  const currentDialogueObj = extractCurrentDialogueObj(
-    currentDialogueID,
-    dialogue
-  );
+  const currentDialogueObj = useCurrentDialogueObj();
 
   const requiredEvidence = currentDialogueObj.requiredEvidence.name;
   const nextResponseID =
