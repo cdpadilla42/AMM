@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { toggleInventory, switchConversation } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
+import urlFor from '../lib/imageUrlBuilder';
 
 const StyledInventory = styled.div`
   position: absolute;
@@ -130,7 +131,10 @@ const Inventory = () => {
       // TODO Add sanity image url builder to import a smaller image size
       return (
         <div key={item.name} data-name={item.name} onClick={displayItemDetails}>
-          <img src={item.imageUrl} alt="" />
+          <img
+            src={urlFor(item.imageUrl).width(200).height(200).url()}
+            alt=""
+          />
           <span>{item.name}</span>
         </div>
       );
