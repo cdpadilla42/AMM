@@ -11,6 +11,7 @@ import Dialogue from './Dialogue';
 import Emotions from './Emotions';
 import Item from './Item';
 import AnimalNotes from './AnimalNotes';
+import Background from './Background';
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -26,5 +27,6 @@ export default createSchema({
     Animal,
     Item,
     AnimalNotes,
+    Background,
   ]),
 });

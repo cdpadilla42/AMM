@@ -128,7 +128,6 @@ const Inventory = () => {
       ? animalNotes
       : selectUserItemsFromFullInventory();
     const jsx = selectedItems.map((item) => {
-      // TODO Add sanity image url builder to import a smaller image size
       return (
         <div key={item.name} data-name={item.name} onClick={displayItemDetails}>
           <img
