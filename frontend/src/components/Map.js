@@ -8,12 +8,25 @@ import urlFor from '../lib/imageUrlBuilder';
 const StyledMap = styled.div`
   position: absolute;
   width: calc(100% - 4rem);
-  height: 350px;
+  height: 466px; // originally 350px
   z-index: 6;
   border: 1px solid black;
-  padding: 1rem;
-  background-color: palegoldenrod;
+  background-image: url('https://i.etsystatic.com/10064703/r/il/ad984c/1688605000/il_1588xN.1688605000_7491.jpg');
+  background-size: cover;
+  background-position: center;
   border-radius: 5px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 2fr 1fr;
+
+  /* Use below for seeing click boxes */
+  /* & > * {
+    border: 1px solid green;
+  } */
+
+  .ocean {
+    grid-column-start: span 2;
+  }
 
   /* .inventory_header {
     width: 100%;
@@ -58,9 +71,16 @@ const Map = () => {
   // const nextResponseID =
   //   currentDialogueObj.responseOptions[0].followingDialogue._id;
 
+  function handleClick(e) {
+    console.log(e.target);
+  }
   return (
     <>
-      <StyledMap></StyledMap>
+      <StyledMap onClick={handleClick}>
+        <div className="night"></div>
+        <div className="day"></div>
+        <div className="ocean"></div>
+      </StyledMap>
     </>
   );
 };
