@@ -20,6 +20,7 @@ const initialState = {
   responseBoxIsOpen: false,
   dialogueFromSanity: 'apples',
   isInventoryOpen: false,
+  isMapOpen: false,
 };
 
 // Actions
@@ -28,6 +29,7 @@ export const prevDialogue = createAction('PREV_DIALOGUE');
 export const resetDialoguePosition = createAction('RESET_DIALOUGE_POSITION');
 export const toggleResponseBox = createAction('TOGGLE_RESPONSE_BOX');
 export const toggleInventory = createAction('TOGGLE_INVENTORY');
+export const toggleMap = createAction('TOGGLE_MAP');
 export const switchConversation = createAction('SWITCH_CONVERSATION');
 
 export const getDialogue = createAsyncThunk(
@@ -83,6 +85,12 @@ function dialogueReducer(state = initialState, action) {
       return {
         ...state,
         isInventoryOpen: !state.isInventoryOpen,
+      };
+    case toggleMap.toString():
+      return {
+        ...state,
+        isInventoryOpen: !state.isInventoryOpen,
+        isMapOpen: !state.isMapOpen,
       };
     case switchConversation.toString():
       return {

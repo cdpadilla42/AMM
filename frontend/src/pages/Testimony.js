@@ -10,12 +10,11 @@ import Inventory from '../components/Inventory';
 import '../styles/testimony.css';
 
 const Testimony = (props) => {
-  // TODO Add to Sanity boolean isFinalDialogue that will send user back to homepage when conversation ends
-
   const dispatch = useDispatch();
   const isInventoryOpen = useSelector(
     (state) => state.dialogue.isInventoryOpen
   );
+  // const isMapOpen = useSelector((state) => state.dialogue.isMapOpen);
 
   useEffect(() => {
     dispatch(getDialogue(props.match.params.id));
