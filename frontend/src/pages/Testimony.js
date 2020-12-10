@@ -7,6 +7,7 @@ import TextBox from '../components/TextBox';
 import Nav from '../components/Nav';
 import ResponseBox from '../components/ResponseBox';
 import Inventory from '../components/Inventory';
+import Map from '../components/Map';
 import '../styles/testimony.css';
 
 const Testimony = (props) => {
@@ -14,7 +15,7 @@ const Testimony = (props) => {
   const isInventoryOpen = useSelector(
     (state) => state.dialogue.isInventoryOpen
   );
-  // const isMapOpen = useSelector((state) => state.dialogue.isMapOpen);
+  const isMapOpen = useSelector((state) => state.dialogue.isMapOpen);
 
   useEffect(() => {
     dispatch(getDialogue(props.match.params.id));
@@ -44,6 +45,7 @@ const Testimony = (props) => {
       <div className="game_container">
         <AnimalDisplay />
         {isInventoryOpen ? <Inventory /> : ''}
+        {isMapOpen ? <Map /> : ''}
         <ResponseBox />
         <TextBox />
       </div>
