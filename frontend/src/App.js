@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Testimony from './pages/Testimony';
 import SelectConversation from './pages/SelectConversation';
-import Inventory from './components/Inventory';
+import Map from './components/Map';
 import store from './store/store';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/inventory">
-            <Inventory />
+            <Map />
           </Route>
           <Route
             path="/testimony/:id"
