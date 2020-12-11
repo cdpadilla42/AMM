@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { toggleInventory, switchConversation } from '../store/dialogue';
+import {
+  toggleInventory,
+  switchConversation,
+  toggleMap,
+} from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import urlFor from '../lib/imageUrlBuilder';
 
@@ -18,6 +22,7 @@ const StyledInventory = styled.div`
   .inventory_header {
     width: 100%;
     border: 1px solid black;
+    text-align: center;
   }
 
   .inventory_grid {
@@ -31,10 +36,10 @@ const StyledInventory = styled.div`
 
   div {
     border: 1px solid black;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; */
     padding: 0.4rem 0;
     background-color: #fff;
   }
@@ -47,6 +52,10 @@ const StyledInventory = styled.div`
   span {
     display: block;
     flex: 1;
+  }
+
+  button {
+    display: inline;
   }
 `;
 
@@ -160,6 +169,7 @@ const Inventory = () => {
             <button onClick={toggleShowingPeople}>
               {isShowingPeople ? 'Items' : 'Animals'}
             </button>
+            <button onClick={toggleMap}>Map</button>
           </div>
           <div className="inventory_grid">{renderInventory()}</div>
         </StyledInventory>
