@@ -89,7 +89,7 @@ function dialogueReducer(state = initialState, action) {
     case toggleMap.toString():
       return {
         ...state,
-        isInventoryOpen: !state.isInventoryOpen,
+        // isInventoryOpen: !state.isInventoryOpen,
         isMapOpen: !state.isMapOpen,
       };
     case switchConversation.toString():

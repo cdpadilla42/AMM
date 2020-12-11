@@ -44,8 +44,8 @@ const Testimony = (props) => {
       <Nav />
       <div className="game_container">
         <AnimalDisplay />
-        {isInventoryOpen ? <Inventory /> : ''}
-        {isMapOpen ? <Map /> : ''}
+        {isInventoryOpen && <Inventory />}
+        {/* {isMapOpen && <Map />} */}
         <ResponseBox />
         <TextBox />
       </div>

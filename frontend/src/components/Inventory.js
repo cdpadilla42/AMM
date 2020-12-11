@@ -8,6 +8,7 @@ import {
 } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import urlFor from '../lib/imageUrlBuilder';
+import Map from './Map';
 
 const StyledInventory = styled.div`
   position: absolute;
@@ -102,6 +103,7 @@ const Inventory = () => {
   const [items, setItems] = useState(dummyInventory);
   const dispatch = useDispatch();
 
+  const isMapOpen = useSelector((state) => state.dialogue.isMapOpen);
   const fullItemsInventory = useSelector((store) => store.inventory.items);
   const animalNotes = useSelector((store) => store.inventory.notes);
   const currentDialogueObj = useCurrentDialogueObj();
@@ -172,7 +174,11 @@ const Inventory = () => {
             </button>
             <button onClick={() => dispatch(toggleMap())}>Map</button>
           </div>
-          <div className="inventory_grid">{renderInventory()}</div>
+          {isMapOpen ? (
+            <Map />
+          ) : (
+            <div className="inventory_grid">{renderInventory()}</div>
+          )}
         </StyledInventory>
       )}
     </>

@@ -6,10 +6,10 @@ import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import urlFor from '../lib/imageUrlBuilder';
 
 const StyledMap = styled.div`
-  position: absolute;
-  width: calc(100% - 4rem);
+  /* position: absolute; */
+  width: 100%;
   height: 466px; // originally 350px
-  z-index: 6;
+  /* z-index: 6; */
   border: 1px solid black;
   background-image: url('https://i.etsystatic.com/10064703/r/il/ad984c/1688605000/il_1588xN.1688605000_7491.jpg');
   background-size: cover;
@@ -23,6 +23,11 @@ const StyledMap = styled.div`
   /* & > * {
     border: 1px solid green;
   } */
+
+  & > .click_box {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+  }
 
   .ocean {
     grid-column-start: span 2;
@@ -77,9 +82,9 @@ const Map = () => {
   return (
     <>
       <StyledMap onClick={handleClick}>
-        <div className="night"></div>
-        <div className="day"></div>
-        <div className="ocean"></div>
+        <div className="click_box night"></div>
+        <div className="click_box day"></div>
+        <div className="click_box ocean"></div>
       </StyledMap>
     </>
   );
