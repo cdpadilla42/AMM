@@ -71,20 +71,28 @@ const StyledMap = styled.div`
 const Map = () => {
   const [selectedItem, setSelectedItem] = useState('');
   const currentDialogueObj = useCurrentDialogueObj();
+  const dispatch = useDispatch();
 
   const requiredEvidence = currentDialogueObj.requiredEvidence?.name;
-  // const nextResponseID =
-  //   currentDialogueObj.responseOptions[0].followingDialogue._id;
+  const nextResponseID =
+    currentDialogueObj.responseOptions[0].followingDialogue._id;
 
-  function handleClick(e) {
-    console.log(e.target);
+  function presentLocation(e) {
+    const selectedRegion = e.target.dataset.region;
+    if (selectedRegion === requiredEvidence) {
+      dispatch(switchConversation(nextResponseID));
+      dispatch(toggleInventory());
+    } else {
+      console.log('Soooorrry, wrong one');
+    }
   }
+
   return (
     <>
-      <StyledMap onClick={handleClick}>
-        <div className="click_box night"></div>
-        <div className="click_box day"></div>
-        <div className="click_box ocean"></div>
+      <StyledMap onClick={presentLocation}>
+        <div className="click_box night" data-region="night"></div>
+        <div className="click_box day" data-region="day"></div>
+        <div className="click_box ocean" data-region="ocean"></div>
       </StyledMap>
     </>
   );
