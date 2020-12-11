@@ -100,6 +100,7 @@ const Inventory = () => {
   const [selectedItem, setSelectedItem] = useState('');
   const [isShowingPeople, setIsShowingPeople] = useState(false);
   const [items, setItems] = useState(dummyInventory);
+  const dispatch = useDispatch();
 
   const fullItemsInventory = useSelector((store) => store.inventory.items);
   const animalNotes = useSelector((store) => store.inventory.notes);
@@ -169,7 +170,7 @@ const Inventory = () => {
             <button onClick={toggleShowingPeople}>
               {isShowingPeople ? 'Items' : 'Animals'}
             </button>
-            <button onClick={toggleMap}>Map</button>
+            <button onClick={() => dispatch(toggleMap())}>Map</button>
           </div>
           <div className="inventory_grid">{renderInventory()}</div>
         </StyledInventory>
