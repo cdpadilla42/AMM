@@ -60,47 +60,10 @@ const StyledInventory = styled.div`
   }
 `;
 
-const dummyInventory = [
-  {
-    name: 'horse',
-    image: 'https://f4.bcbits.com/img/a3261223391_2.jpg',
-    description: 'What a noble steed.',
-  },
-  {
-    name: 'john',
-    image: 'https://f4.bcbits.com/img/a3261223391_2.jpg',
-    description: 'What a noble steed.',
-  },
-  {
-    name: 'The Prophecy',
-    image: 'https://f4.bcbits.com/img/a3261223391_2.jpg',
-    description: 'What a noble steed.',
-  },
-];
-
-const dummyAnimalNotes = [
-  {
-    name: 'Brian',
-    imageUrl: 'https://f4.bcbits.com/img/a0905339103_16.jpg',
-    description: 'What a noble steed.',
-  },
-  {
-    name: 'John',
-    imageUrl: 'https://f4.bcbits.com/img/a0905339103_16.jpg',
-    description: 'What a noble steed.',
-  },
-  {
-    name: 'Lucy',
-    imageUrl: 'https://f4.bcbits.com/img/a0905339103_16.jpg',
-    description: 'What a noble steed.',
-  },
-];
-
 const Inventory = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState('');
   const [isShowingPeople, setIsShowingPeople] = useState(false);
-  const [items, setItems] = useState(dummyInventory);
   const dispatch = useDispatch();
 
   const isMapOpen = useSelector((state) => state.dialogue.isMapOpen);
@@ -120,7 +83,6 @@ const Inventory = () => {
   }
 
   function toggleShowingPeople() {
-    setItems(!isShowingPeople ? dummyAnimalNotes : dummyInventory);
     setIsShowingPeople(!isShowingPeople);
   }
 
@@ -224,7 +186,6 @@ const ItemDetailsDisplay = ({
   }
 
   function presentItem() {
-    console.log(itemObj);
     if (itemObj.name === requiredEvidence) {
       dispatch(switchConversation(nextResponseID));
       closeDetailsDisplay();

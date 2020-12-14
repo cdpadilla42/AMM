@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import normal from '../imgs/normal.png';
 import mad from '../imgs/mad.png';
 import laugh from '../imgs/laugh.png';

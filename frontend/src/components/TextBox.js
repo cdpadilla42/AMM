@@ -24,9 +24,9 @@ const TextBox = (props) => {
   let currentDialogueObj = useCurrentDialogueObj();
 
   const phrases = currentDialogueObj && currentDialogueObj.phrase;
-  const responseOptions = currentDialogueObj
-    ? currentDialogueObj.responseOptions
-    : null;
+  // const responseOptions = currentDialogueObj
+  //   ? currentDialogueObj.responseOptions
+  //   : null;
 
   // On change effect
   useEffect(() => {

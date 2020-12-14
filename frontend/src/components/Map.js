@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { toggleInventory, switchConversation } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
-import urlFor from '../lib/imageUrlBuilder';
 
 const StyledMap = styled.div`
   /* position: absolute; */
@@ -69,7 +68,6 @@ const StyledMap = styled.div`
 `;
 
 const Map = () => {
-  const [selectedItem, setSelectedItem] = useState('');
   const currentDialogueObj = useCurrentDialogueObj();
   const dispatch = useDispatch();
 

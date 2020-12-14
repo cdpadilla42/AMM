@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getConversations } from '../store/conversations';
@@ -27,7 +27,12 @@ const SelectConversation = () => {
     <div>
       <Link to="/inventory">Inventory</Link>
       <Link to="/testimony/test">Blank Testimony</Link>
-      <h1>UGLY SELECT SCREEN 🦝🏝</h1>
+      <h1>
+        UGLY SELECT SCREEN{' '}
+        <span role="img" aria-label="image">
+          🦝🏝
+        </span>
+      </h1>
       <ul>{renderConversations()}</ul>
     </div>
   );
