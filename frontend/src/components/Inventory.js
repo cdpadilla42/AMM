@@ -113,7 +113,6 @@ const Inventory = () => {
       );
     });
 
-    console.log(jsx);
     return jsx;
   }
   return (
@@ -188,12 +187,11 @@ const ItemDetailsDisplay = ({
   function presentItem() {
     if (itemObj.name === requiredEvidence) {
       dispatch(switchConversation(nextResponseID));
-      closeDetailsDisplay();
-      dispatch(toggleInventory());
     } else {
-      console.log('Soooorrry, wrong one');
-      closeDetailsDisplay();
+      dispatch(switchConversation('Incorrect'));
     }
+    closeDetailsDisplay();
+    dispatch(toggleInventory());
   }
 
   return (

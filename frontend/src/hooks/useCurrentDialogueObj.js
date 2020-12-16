@@ -11,6 +11,11 @@ const useCurrentDialogueObj = () => {
     currentDialogueObj = dialogueList.find(
       (dialogue) => dialogue.name === 'Start'
     );
+    // Change below to switch over to incorrect evidence
+  } else if (currentDialogueID === 'Incorrect') {
+    currentDialogueObj = dialogueList.find(
+      (dialogue) => dialogue.name === 'Start'
+    );
   } else {
     currentDialogueObj = dialogueList.find(
       (dialogue) => dialogue._id === currentDialogueID
