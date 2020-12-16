@@ -5,6 +5,7 @@ import {
   toggleInventory,
   switchConversation,
   toggleMap,
+  displayInvalidEvidenceDialogue,
 } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import urlFor from '../lib/imageUrlBuilder';
@@ -188,7 +189,7 @@ const ItemDetailsDisplay = ({
     if (itemObj.name === requiredEvidence) {
       dispatch(switchConversation(nextResponseID));
     } else {
-      dispatch(switchConversation('Incorrect'));
+      dispatch(displayInvalidEvidenceDialogue());
     }
     closeDetailsDisplay();
     dispatch(toggleInventory());

@@ -7,6 +7,7 @@ import {
   prevDialogue,
   toggleResponseBox,
   toggleInventory,
+  switchConversation,
 } from '../store/dialogue';
 import draw from '../lib/async-typer';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
@@ -19,6 +20,7 @@ const TextBox = (props) => {
     currentDialoguePosition,
     currentDialogueName,
     currentDialogueID,
+    prevDialogueID,
   } = useSelector((state) => state.dialogue);
 
   let currentDialogueObj = useCurrentDialogueObj();
@@ -45,7 +47,9 @@ const TextBox = (props) => {
     const isEndOfDialogue =
       currentDialoguePosition === currentDialogueObj.phrase.length - 1;
 
-    if (isEndOfDialogue && currentDialogueObj.needEvidence) {
+    if (isEndOfDialogue && currentDialogueObj.name === 'Incorrect') {
+      props.switchConversation(prevDialogueID);
+    } else if (isEndOfDialogue && currentDialogueObj.needEvidence) {
       props.toggleInventory();
     } else if (isEndOfDialogue && currentDialogueObj.isFinalDialogue) {
       history.push('/');
@@ -82,7 +86,13 @@ const TextBox = (props) => {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { nextDialogue, prevDialogue, toggleResponseBox, toggleInventory },
+    {
+      nextDialogue,
+      prevDialogue,
+      toggleResponseBox,
+      toggleInventory,
+      switchConversation,
+    },
     dispatch
   );
 }

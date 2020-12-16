@@ -5,6 +5,7 @@ const initialState = {
   currentDialoguePosition: 0,
   currentDialogueName: 'Start',
   currentDialogueID: null,
+  prevDialogueID: null,
   dialogue: [
     {
       name: 'Start',
@@ -31,6 +32,9 @@ export const toggleResponseBox = createAction('TOGGLE_RESPONSE_BOX');
 export const toggleInventory = createAction('TOGGLE_INVENTORY');
 export const toggleMap = createAction('TOGGLE_MAP');
 export const switchConversation = createAction('SWITCH_CONVERSATION');
+export const displayInvalidEvidenceDialogue = createAction(
+  'DISPLAY_INVALID_ERROR_DIALOGUE'
+);
 
 export const getDialogue = createAsyncThunk(
   'GET_DIALOGUE',
@@ -98,6 +102,13 @@ function dialogueReducer(state = initialState, action) {
         currentDialogueID: payload,
         currentDialoguePosition: 0,
         responseBoxIsOpen: false,
+      };
+    case displayInvalidEvidenceDialogue.toString():
+      return {
+        ...state,
+        currentDialogueID: 'Incorrect',
+        prevDialogueID: state.currentDialogueID,
+        currentDialoguePosition: 0,
       };
     default:
       return state;
