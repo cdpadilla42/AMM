@@ -97,6 +97,7 @@ function dialogueReducer(state = initialState, action) {
         isMapOpen: !state.isMapOpen,
       };
     case switchConversation.toString():
+      // TODO Here - try including logic saying if the currentDialogueName is 'Incorrect', return to the previouse dialogue's final position
       return {
         ...state,
         currentDialogueID: payload,
