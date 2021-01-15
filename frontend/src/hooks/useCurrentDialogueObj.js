@@ -10,8 +10,8 @@ const useCurrentDialogueObj = () => {
   let currentDialogueObj;
 
   if (!currentDialogueID) {
-    currentDialogueObj = dialogueList.find(
-      (dialogue) => dialogue.name === 'Start'
+    currentDialogueObj = dialogueList.find((dialogue) =>
+      dialogue.name.includes('Start')
     );
   } else if (currentDialogueID === 'Incorrect') {
     currentDialogueObj = {
