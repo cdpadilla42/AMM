@@ -29,15 +29,22 @@ const StyledResponseBox = styled.div`
 `;
 
 const ResponseBox = () => {
-  const { responseBoxIsOpen, currentDialogueName, dialogue } = useSelector(
+  const { responseBoxIsOpen, currentDialogueID, dialogue } = useSelector(
     (state) => state.dialogue
   );
   const dispatch = useDispatch();
 
   function renderResponseOptions() {
-    const currentDialogue = dialogue.find(
-      (phrases) => phrases.name === currentDialogueName
-    );
+    let currentDialogue;
+    if (!currentDialogueID) {
+      currentDialogue = dialogue.find((phrases) =>
+        phrases.name.includes('Start')
+      );
+    } else {
+      currentDialogue = dialogue.find(
+        (phrases) => phrases._id === currentDialogueID
+      );
+    }
     const { responseOptions } = currentDialogue;
     if (!responseOptions) return;
     console.log(responseOptions);
