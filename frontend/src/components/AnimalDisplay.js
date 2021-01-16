@@ -37,7 +37,7 @@ const AnimalDisplay = () => {
   return (
     <div className="game_container__animal">
       <img
-        src={animalImages[emotion]}
+        src={spriteUrl || normal}
         alt=""
         className="game_container__animal_image"
       />
