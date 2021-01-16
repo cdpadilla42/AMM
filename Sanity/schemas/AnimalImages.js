@@ -1,5 +1,5 @@
 export default {
-  title: 'AnimalImages',
+  title: 'Animal Images',
   name: 'animalImage',
   type: 'document',
   fields: [
@@ -39,8 +39,8 @@ export default {
               to: [{ type: 'emotions' }],
             },
             {
-              title: 'Neutral Image',
-              name: 'normal',
+              title: 'Sprite',
+              name: 'sprite',
               type: 'image',
             },
           ],
