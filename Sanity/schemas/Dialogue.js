@@ -86,7 +86,7 @@ export default {
       title: 'Required Evidence',
       name: 'requiredEvidence',
       type: 'reference',
-      to: [{ type: 'item' }],
+      to: [{ type: 'item' }, { type: 'animalNotes' }],
       description:
         'Only required if above is on. Must reference an item or animal note',
     },
