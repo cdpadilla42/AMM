@@ -17,9 +17,9 @@ const AnimalDisplay = () => {
   console.log('dialogue', { emotion, speaker });
 
   const spriteObj = sprites?.find((sprite) => sprite.name === speaker);
-  const spriteUrl = spriteObj?.images.find(
-    (image) => image.emotion.emotion === emotion
-  ).spriteUrl;
+  const spriteUrl =
+    spriteObj?.images.find((image) => image.emotion.emotion === emotion)
+      ?.spriteUrl || normal;
 
   console.log('sprites', sprites);
   console.log({ spriteObj });
@@ -36,11 +36,7 @@ const AnimalDisplay = () => {
 
   return (
     <div className="game_container__animal">
-      <img
-        src={spriteUrl || normal}
-        alt=""
-        className="game_container__animal_image"
-      />
+      <img src={spriteUrl} alt="" className="game_container__animal_image" />
     </div>
   );
 };
