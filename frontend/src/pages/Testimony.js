@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AnimalDisplay from '../components/AnimalDisplay';
 import { getDialogue, resetDialoguePosition } from '../store/dialogue';
 import { getInventoryItems, getAnimalNotes } from '../store/inventory';
+import { getSprites } from '../store/sprites';
 import TextBox from '../components/TextBox';
 import Nav from '../components/Nav';
 import ResponseBox from '../components/ResponseBox';
@@ -17,6 +18,7 @@ const Testimony = (props) => {
 
   useEffect(() => {
     dispatch(getDialogue(props.match.params.id));
+    dispatch(getSprites());
     // set place to 0
     dispatch(resetDialoguePosition());
   }, []);
