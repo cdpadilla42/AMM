@@ -91,6 +91,24 @@ export default {
         'Only required if above is on. Must reference an item or animal note',
     },
     {
+      title: 'Special Event',
+      name: 'specialEvent',
+      type: 'document',
+      description: 'Optional trigger for a specific event',
+      fields: [
+        {
+          title: 'Name',
+          name: 'name',
+          type: 'string',
+        },
+        {
+          title: 'Description',
+          name: 'description',
+          type: 'string',
+        },
+      ],
+    },
+    {
       title: 'Final dialogue of conversation??',
       name: 'isFinalDialogue',
       type: 'boolean',
