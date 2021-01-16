@@ -1,4 +1,4 @@
-import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import sanityClient from '../client';
 
 const initialState = {};
@@ -18,3 +18,21 @@ export const getSprites = createAsyncThunk(
     return response;
   }
 );
+
+// Reducer
+
+function spritesReducer(state = initialState, action) {
+  const { type, payload } = action;
+  switch (type) {
+    case 'GET_SPRITES/fulfilled':
+      return {
+        ...state,
+        sprites: payload,
+      };
+
+    default:
+      return state;
+  }
+}
+
+export default spritesReducer;
