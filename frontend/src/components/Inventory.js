@@ -187,10 +187,10 @@ const ItemDetailsDisplay = ({
 
   function presentItem() {
     // TODO Filter here
-    const mathedEvidence = requiredEvidence.find(
+    const matchedEvidence = requiredEvidence.find(
       (item) => item.name === itemObj.name
     );
-    if (mathedEvidence) {
+    if (matchedEvidence) {
       dispatch(switchConversation(nextResponseID));
     } else {
       dispatch(displayInvalidEvidenceDialogue());

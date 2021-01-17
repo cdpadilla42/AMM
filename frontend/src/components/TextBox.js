@@ -33,9 +33,8 @@ const TextBox = (props) => {
   // On change effect
   useEffect(() => {
     const textEl = textRef.current;
-    const speaker = phrases[currentDialoguePosition].speaker.name;
     const text = phrases[currentDialoguePosition].text;
-    draw(textEl, `${speaker}: ${text}`);
+    draw(textEl, text);
   }, [
     dialogue,
     currentDialoguePosition,
@@ -72,7 +71,9 @@ const TextBox = (props) => {
 
   return (
     <div className="text_box">
-      <div className="text_box__name">Gato</div>
+      <div className="text_box__name">
+        {phrases[currentDialoguePosition].speaker.name}
+      </div>
       <div className="text_box__main">
         <p className="text_box__text" ref={textRef}></p>
         <button className="text_box__left_arrow" onClick={handlePrevClick}>
