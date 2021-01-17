@@ -85,10 +85,19 @@ export default {
     {
       title: 'Required Evidence',
       name: 'requiredEvidence',
-      type: 'reference',
-      to: [{ type: 'item' }, { type: 'animalNotes' }],
       description:
         'Only required if above is on. Must reference an item or animal note',
+      // type: 'reference',
+      // to: [{ type: 'item' }, { type: 'animalNotes' }],
+      type: 'array',
+      of: [
+        {
+          title: 'Possible Evidence',
+          name: 'possibleEvidence',
+          type: 'reference',
+          to: [{ type: 'item' }, { type: 'animalNotes' }],
+        },
+      ],
     },
     {
       title: 'Special Event',

@@ -48,7 +48,8 @@ export const getDialogue = createAsyncThunk(
 				"responseOptions": responseOptions[]{
           text, 
 					followingDialogue->{_id}
-        }
+        },
+				"requiredEvidence": requiredEvidence[]->{name}
       }`
     );
     return response;
