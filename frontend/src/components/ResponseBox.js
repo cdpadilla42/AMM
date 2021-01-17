@@ -45,7 +45,7 @@ const ResponseBox = () => {
         (phrases) => phrases._id === currentDialogueID
       );
     }
-    const { responseOptions } = currentDialogue;
+    const responseOptions = currentDialogue?.responseOptions;
     if (!responseOptions) return;
     console.log(responseOptions);
 

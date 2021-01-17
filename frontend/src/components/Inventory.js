@@ -72,7 +72,7 @@ const Inventory = () => {
   const animalNotes = useSelector((store) => store.inventory.notes);
   const currentDialogueObj = useCurrentDialogueObj();
 
-  const requiredEvidence = currentDialogueObj.requiredEvidence.name;
+  const requiredEvidence = currentDialogueObj.requiredEvidence;
   const nextResponseID =
     currentDialogueObj.responseOptions[0].followingDialogue._id;
 
@@ -186,7 +186,11 @@ const ItemDetailsDisplay = ({
   }
 
   function presentItem() {
-    if (itemObj.name === requiredEvidence) {
+    // TODO Filter here
+    const mathedEvidence = requiredEvidence.find(
+      (item) => item.name === itemObj.name
+    );
+    if (mathedEvidence) {
       dispatch(switchConversation(nextResponseID));
     } else {
       dispatch(displayInvalidEvidenceDialogue());
