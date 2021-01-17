@@ -43,7 +43,7 @@ export const getDialogue = createAsyncThunk(
       `*[_type == "dialogue" && conversation._ref == "${conversationID}"]{
         name, responseOptions, needEvidence, _id, isFinalDialogue, requiredEvidence->{name},
   			"phrase": phrase[]{
-  				emotion->{emotion}, speaker->{name}, text	
+  				emotion->{emotion}, speaker->{name, color}, text	
 				},
 				"responseOptions": responseOptions[]{
           text, 

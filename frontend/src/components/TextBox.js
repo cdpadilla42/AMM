@@ -71,7 +71,12 @@ const TextBox = (props) => {
 
   return (
     <div className="text_box">
-      <div className="text_box__name">
+      <div
+        className="text_box__name"
+        style={{
+          backgroundColor: phrases[currentDialoguePosition].speaker.color?.hex,
+        }}
+      >
         {phrases[currentDialoguePosition].speaker.name}
       </div>
       <div className="text_box__main">
