@@ -186,7 +186,6 @@ const ItemDetailsDisplay = ({
   }
 
   function presentItem() {
-    // TODO Filter here
     const matchedEvidence = requiredEvidence.find(
       (item) => item.name === itemObj.name
     );

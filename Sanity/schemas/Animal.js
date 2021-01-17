@@ -17,7 +17,7 @@ export default {
     {
       title: 'Color',
       name: 'color',
-      description: `Used in name tag and collored accents. Must be hex color. Ex: "#BADA55"`,
+      description: `Used in name tag and collored accents.`,
       type: 'color',
     },
   ],
