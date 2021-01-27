@@ -51,7 +51,6 @@ const TextBox = (props) => {
     } else if (isEndOfDialogue && currentDialogueObj.needEvidence) {
       props.toggleInventory();
     } else if (isEndOfDialogue && currentDialogueObj.isFinalDialogue) {
-      // TODO reset position here
       props.switchConversation('');
       history.push('/');
     } else if (isEndOfDialogue) {
