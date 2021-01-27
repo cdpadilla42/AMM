@@ -8,5 +8,10 @@ export default {
       name: 'emotion',
       type: 'string',
     },
+    {
+      title: 'Image',
+      name: 'image',
+      type: 'image',
+    },
   ],
 };

@@ -26,6 +26,12 @@ export default {
       of: [
         {
           type: 'object',
+          preview: {
+            select: {
+              title: 'text',
+              media: 'emotion.image', // Use the image of emotion field as thumbnail
+            },
+          },
           fields: [
             {
               title: 'Text',
