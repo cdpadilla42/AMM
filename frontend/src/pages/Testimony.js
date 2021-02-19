@@ -26,8 +26,6 @@ const Testimony = (props) => {
       state.conversations?.backgroundURL?.backgroundURL?.image.asset.url
   );
 
-  console.log({ backgroundURL });
-
   useEffect(() => {
     dispatch(getDialogue(props.match.params.id));
     dispatch(getBackground(props.match.params.id));

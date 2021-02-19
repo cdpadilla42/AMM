@@ -87,6 +87,8 @@ const Inventory = () => {
     setIsShowingPeople(!isShowingPeople);
   }
 
+  // * NOTE: We have the ability to filter based on what's in the user's inventory!
+  // * It's this function
   function selectUserItemsFromFullInventory() {
     const userItemsInventory = JSON.parse(
       window.localStorage.getItem('itemsInInventory')
@@ -99,9 +101,7 @@ const Inventory = () => {
   }
 
   function renderInventory() {
-    const selectedItems = isShowingPeople
-      ? animalNotes
-      : selectUserItemsFromFullInventory();
+    const selectedItems = isShowingPeople ? animalNotes : fullItemsInventory;
     const jsx = selectedItems.map((item) => {
       return (
         <div key={item.name} data-name={item.name} onClick={displayItemDetails}>
@@ -121,9 +121,7 @@ const Inventory = () => {
       {isDetailsOpen ? (
         <ItemDetailsDisplay
           selectedItem={selectedItem}
-          inventory={
-            isShowingPeople ? animalNotes : selectUserItemsFromFullInventory()
-          }
+          inventory={isShowingPeople ? animalNotes : fullItemsInventory}
           setIsDetailsOpen={setIsDetailsOpen}
           requiredEvidence={requiredEvidence}
           nextResponseID={nextResponseID}
@@ -186,9 +184,14 @@ const ItemDetailsDisplay = ({
   }
 
   function presentItem() {
-    const matchedEvidence = requiredEvidence.find(
-      (item) => item.name === itemObj.name
-    );
+    let matchedEvidence;
+    if (Array.isArray(requiredEvidence)) {
+      matchedEvidence = requiredEvidence.find(
+        (item) => item.name === itemObj.name
+      );
+    } else {
+      matchedEvidence = requiredEvidence;
+    }
     if (matchedEvidence) {
       dispatch(switchConversation(nextResponseID));
     } else {
