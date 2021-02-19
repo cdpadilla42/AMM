@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { switchConversation } from '../store/dialogue';
+import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
+import { useHistory } from 'react-router-dom';
 
 const StyledResponseBox = styled.div`
   width: 200px;
@@ -33,6 +35,8 @@ const ResponseBox = () => {
     (state) => state.dialogue
   );
   const dispatch = useDispatch();
+  const currentDialogueObj = useCurrentDialogueObj();
+  const history = useHistory();
 
   function renderResponseOptions() {
     let currentDialogue;
@@ -50,14 +54,16 @@ const ResponseBox = () => {
     console.log(responseOptions);
 
     return responseOptions.map((optionObj) => (
-      <li onClick={() => handleClick(optionObj.followingDialogue._id)}>
+      <li onClick={() => handleClick(optionObj.followingDialogue?._id)}>
         {optionObj.text}
       </li>
     ));
   }
 
   function handleClick(followingDialogueID) {
-    // TODO If there is no follup up dialogue, return to home screen
+    if (currentDialogueObj?.isFinalDialogue) {
+      history.push('/');
+    }
     dispatch(switchConversation(followingDialogueID));
   }
 
