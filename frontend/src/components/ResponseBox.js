@@ -63,8 +63,9 @@ const ResponseBox = () => {
   function handleClick(followingDialogueID) {
     if (currentDialogueObj?.isFinalDialogue) {
       history.push('/');
+    } else {
+      dispatch(switchConversation(followingDialogueID));
     }
-    dispatch(switchConversation(followingDialogueID));
   }
 
   return (
