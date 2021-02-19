@@ -48,7 +48,7 @@ const TextBox = (props) => {
 
     const isEndOfDialogueWithResponseOption =
       isEndOfDialogue &&
-      currentDialogueObj?.responseOptions[0] &&
+      currentDialogueObj?.responseOptions?.length &&
       currentDialogueObj?.isFinalDialogue;
 
     if (isEndOfDialogue && currentDialogueObj.name === 'Incorrect') {
