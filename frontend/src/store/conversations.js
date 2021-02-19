@@ -3,6 +3,7 @@ import sanityClient from '../client';
 
 const initialState = {
   conversations: 'none',
+  backgroundURL: null,
 };
 
 // Actions
@@ -47,7 +48,8 @@ function conversationsReducer(state = initialState, action) {
     case `GET_CONVERSATION_BACKGROUND/fulfilled`:
       return {
         ...state,
-        conversations: payload,
+
+        backgroundURL: payload[0],
       };
     default:
       return state;

@@ -21,6 +21,10 @@ const Testimony = (props) => {
   const isInventoryOpen = useSelector(
     (state) => state.dialogue.isInventoryOpen
   );
+  const backgroundURL = useSelector(
+    (state) =>
+      state.conversations?.conversations?.backgroundURL?.image.asset.url
+  );
 
   useEffect(() => {
     dispatch(getDialogue(props.match.params.id));
@@ -49,7 +53,7 @@ const Testimony = (props) => {
   return (
     <StyledContainer
       className="container"
-      background={'https://wallpapercave.com/wp/wp2586787.jpg'}
+      background={backgroundURL || 'https://wallpapercave.com/wp/wp2586787.jpg'}
     >
       <Nav />
       <div className="game_container">
