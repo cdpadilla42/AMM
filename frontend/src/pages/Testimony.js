@@ -23,8 +23,10 @@ const Testimony = (props) => {
   );
   const backgroundURL = useSelector(
     (state) =>
-      state.conversations?.conversations?.backgroundURL?.image.asset.url
+      state.conversations?.backgroundURL?.backgroundURL?.image.asset.url
   );
+
+  console.log({ backgroundURL });
 
   useEffect(() => {
     dispatch(getDialogue(props.match.params.id));
