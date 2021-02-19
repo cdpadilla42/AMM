@@ -57,7 +57,7 @@ const ResponseBox = () => {
   }
 
   function handleClick(followingDialogueID) {
-    console.log(followingDialogueID);
+    // TODO If there is no follup up dialogue, return to home screen
     dispatch(switchConversation(followingDialogueID));
   }
 

@@ -46,11 +46,20 @@ const TextBox = (props) => {
     const isEndOfDialogue =
       currentDialoguePosition === currentDialogueObj.phrase.length - 1;
 
+    const isEndOfDialogueWithResponseOption =
+      isEndOfDialogue &&
+      currentDialogueObj?.responseOptions[0] &&
+      currentDialogueObj?.isFinalDialogue;
+
     if (isEndOfDialogue && currentDialogueObj.name === 'Incorrect') {
       props.switchConversation(prevDialogueID);
     } else if (isEndOfDialogue && currentDialogueObj.needEvidence) {
       props.toggleInventory();
-    } else if (isEndOfDialogue && currentDialogueObj.isFinalDialogue) {
+    } else if (
+      isEndOfDialogue &&
+      currentDialogueObj.isFinalDialogue &&
+      !isEndOfDialogueWithResponseOption
+    ) {
       props.switchConversation('');
       history.push('/');
     } else if (isEndOfDialogue) {
