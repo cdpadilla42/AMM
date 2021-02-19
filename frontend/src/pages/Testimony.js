@@ -8,7 +8,12 @@ import TextBox from '../components/TextBox';
 import Nav from '../components/Nav';
 import ResponseBox from '../components/ResponseBox';
 import Inventory from '../components/Inventory';
+import styled from 'styled-components';
 import '../styles/testimony.css';
+
+const StyledContainer = styled.div`
+  background-image: url(${(props) => props.background});
+`;
 
 const Testimony = (props) => {
   const dispatch = useDispatch();
@@ -40,7 +45,10 @@ const Testimony = (props) => {
   }, []);
 
   return (
-    <div className="container">
+    <StyledContainer
+      className="container"
+      background={'https://wallpapercave.com/wp/wp2586787.jpg'}
+    >
       <Nav />
       <div className="game_container">
         <AnimalDisplay />
@@ -48,7 +56,7 @@ const Testimony = (props) => {
         <ResponseBox />
         <TextBox />
       </div>
-    </div>
+    </StyledContainer>
   );
 };
 
