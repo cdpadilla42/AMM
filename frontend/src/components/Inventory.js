@@ -34,6 +34,7 @@ const StyledInventory = styled.div`
     grid-gap: 1rem;
     height: calc(100% - 2rem);
     width: 100%;
+    overflow-y: scroll;
   }
 
   div {
