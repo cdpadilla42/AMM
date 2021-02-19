@@ -56,6 +56,22 @@ export const getDialogue = createAsyncThunk(
   }
 );
 
+export const getConversation = createAsyncThunk(
+  'GET_CONVERSATION',
+  async (conversationID) => {
+    const response = await sanityClient.fetch(
+      `*[_type == "conversation" && conversation._id == "${conversationID}"]{
+        "backgroundURL": background->{
+          image{
+          	asset->{url}
+        	}
+        }
+      }`
+    );
+    return response;
+  }
+);
+
 // Reducer
 
 function dialogueReducer(state = initialState, action) {
