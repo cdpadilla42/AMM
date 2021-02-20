@@ -45,15 +45,12 @@ const TextBox = (props) => {
   // Add Keyboard listeners to document
   useEffect(() => {
     function handleKeydown(e) {
-      console.log(e.code);
       if (e.code === 'ArrowRight') {
         // next
-        console.log('next');
         handleNextClick();
       } else if (e.code === 'ArrowLeft') {
         // back
         handlePrevClick();
-        console.log('back');
       }
     }
 
