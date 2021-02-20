@@ -42,6 +42,26 @@ const TextBox = (props) => {
     currentDialogueID,
   ]);
 
+  // Add Keyboard listeners to document
+  useEffect(() => {
+    function handleKeydown(e) {
+      console.log(e.code);
+      if (e.code === 'ArrowRight') {
+        // next
+        console.log('next');
+        handleNextClick();
+      } else if (e.code === 'ArrowLeft') {
+        // back
+        handlePrevClick();
+        console.log('back');
+      }
+    }
+
+    document.addEventListener('keydown', handleKeydown);
+
+    return () => document.removeEventListener('keydown', handleKeydown);
+  });
+
   const handleNextClick = () => {
     const isEndOfDialogue =
       currentDialoguePosition === currentDialogueObj.phrase.length - 1;
