@@ -25,6 +25,7 @@ nav {
 @media all and (max-width: 600px) {
   nav {
     width: 280px;
+    font-size: 0.7em;
   }
 }
 nav a {
@@ -35,8 +36,13 @@ nav a {
   color: white;
   text-decoration: none;
   border-radius: 10px;
-  transform: translateY(50px);
   z-index: 2;
+  transform: translateY(50px);
+}
+@media all and (max-width: 600px) {
+  nav a {
+    transform: translateY(35px);
+  }
 }
 
 .container {
@@ -49,6 +55,7 @@ nav a {
 @media all and (max-width: 600px) {
   .container {
     background-size: 600px auto;
+    overflow: hidden;
   }
 }
 
@@ -63,8 +70,9 @@ nav a {
 @media all and (max-width: 600px) {
   .game_container {
     width: 280px;
-    height: calc(100% - 8rem);
+    height: calc(100% - 4rem);
     padding: 0 2rem;
+    margin: 0 auto;
   }
 }
 
@@ -77,8 +85,9 @@ nav a {
 }
 @media all and (max-width: 600px) {
   .game_container__animal_image {
-    width: 350px;
-    right: -8rem;
+    width: 300px;
+    right: -2rem;
+    bottom: 11rem;
   }
 }
 

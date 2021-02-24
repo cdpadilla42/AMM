@@ -21,6 +21,7 @@ nav {
   align-items: center;
   @media all and (max-width: 600px) {
     width: 280px;
+    font-size: 0.7em;
   }
 
   a {
@@ -31,8 +32,13 @@ nav {
     color: white;
     text-decoration: none;
     border-radius: 10px;
-    transform: translateY(50px);
+    // This is in the anchor tag to keep the nav from being placed behind the filter in react.
+    // Weird, I know!
     z-index: 2;
+    transform: translateY(50px);
+    @media all and (max-width: 600px) {
+      transform: translateY(35px);
+    }
   }
 }
 
@@ -45,6 +51,7 @@ nav {
   background-repeat: no-repeat;
   @media all and (max-width: 600px) {
     background-size: 600px auto;
+    overflow: hidden;
   }
 }
 
@@ -58,8 +65,9 @@ nav {
 
   @media all and (max-width: 600px) {
     width: 280px;
-    height: calc(100% - 8rem);
+    height: calc(100% - 4rem);
     padding: 0 2rem;
+    margin: 0 auto;
   }
 }
 
@@ -73,8 +81,9 @@ nav {
     // height: 100px;
 
     @media all and (max-width: 600px) {
-      width: 350px;
-      right: -8rem;
+      width: 300px;
+      right: -2rem;
+      bottom: 11rem;
     }
   }
 }

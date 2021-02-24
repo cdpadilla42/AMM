@@ -10,11 +10,19 @@ const StyledResponseBox = styled.div`
   background-color: #fff;
   border: 1px solid green;
   position: absolute;
-  right: 1rem;
-  bottom: 170px;
+  /* right: 25%; */
+
   z-index: 2;
   border-radius: 20px;
   padding: 1rem;
+  @media all and (max-width: 600px) {
+    top: 20px;
+    height: auto;
+    width: calc(100% - 4rem);
+  }
+  @media all and (min-width: 601px) {
+    bottom: 170px;
+  }
 
   &.hide {
     display: none;
