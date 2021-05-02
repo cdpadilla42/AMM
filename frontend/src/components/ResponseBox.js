@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { switchConversation } from '../store/dialogue';
@@ -45,19 +45,19 @@ const ResponseBox = () => {
   const dispatch = useDispatch();
   const currentDialogueObj = useCurrentDialogueObj();
   const history = useHistory();
+  let currentDialogue;
+  if (!currentDialogueID) {
+    currentDialogue = dialogue.find((phrases) =>
+      phrases.name.includes('Start')
+    );
+  } else {
+    currentDialogue = dialogue.find(
+      (phrases) => phrases._id === currentDialogueID
+    );
+  }
+  const responseOptions = currentDialogue?.responseOptions;
 
   function renderResponseOptions() {
-    let currentDialogue;
-    if (!currentDialogueID) {
-      currentDialogue = dialogue.find((phrases) =>
-        phrases.name.includes('Start')
-      );
-    } else {
-      currentDialogue = dialogue.find(
-        (phrases) => phrases._id === currentDialogueID
-      );
-    }
-    const responseOptions = currentDialogue?.responseOptions;
     if (!responseOptions) return;
     console.log(responseOptions);
 
@@ -75,6 +75,19 @@ const ResponseBox = () => {
       dispatch(switchConversation(followingDialogueID));
     }
   }
+
+  useEffect(() => {
+    const responseOptions = currentDialogue?.responseOptions;
+    function handleKeydown(e) {
+      if (e.code === 'ArrowRight' && responseBoxIsOpen) {
+        handleClick(responseOptions[0]?.followingDialogue?._id);
+      }
+    }
+
+    document.addEventListener('keydown', handleKeydown);
+
+    return () => document.removeEventListener('keydown', handleKeydown);
+  });
 
   return (
     <StyledResponseBox className={responseBoxIsOpen ? '' : 'hide'}>

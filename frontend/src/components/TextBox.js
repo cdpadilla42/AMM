@@ -21,6 +21,7 @@ const TextBox = (props) => {
     currentDialogueName,
     currentDialogueID,
     prevDialogueID,
+    responseBoxIsOpen,
   } = useSelector((state) => state.dialogue);
 
   let currentDialogueObj = useCurrentDialogueObj();
@@ -45,7 +46,7 @@ const TextBox = (props) => {
   // Add Keyboard listeners to document
   useEffect(() => {
     function handleKeydown(e) {
-      if (e.code === 'ArrowRight') {
+      if (e.code === 'ArrowRight' && !responseBoxIsOpen) {
         // next
         handleNextClick();
       } else if (e.code === 'ArrowLeft') {
