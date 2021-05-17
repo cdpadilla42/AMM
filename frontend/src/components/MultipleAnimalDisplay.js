@@ -27,13 +27,23 @@ const MultipleAnimalDisplay = () => {
   // });
 
   useEffect(() => {
-    const indexToChange = animalsState?.findIndex(
+    let indexToChange;
+    const newState = [...animalsState];
+    const newAnimalsInConvo = dialogue?.animals;
+    // if there is a dialogue.animals field
+    if (newAnimalsInConvo) {
+      // set the speakers
+      newState.forEach((speaker, i) => {
+        if (speaker.name !== newAnimalsInConvo[i].name) {
+          newState[i].name = newAnimalsInConvo[i].name;
+        }
+      });
+    }
+    indexToChange = animalsState?.findIndex(
       (animal) => animal.name === speaker
     );
     console.log({ indexToChange });
-    setAnimalsState((prevState) => {
-      console.log({ prevState });
-      const newState = [...prevState];
+    setAnimalsState(() => {
       newState[indexToChange].emotion = emotion;
       return newState;
     });
