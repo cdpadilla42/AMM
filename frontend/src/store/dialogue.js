@@ -44,7 +44,10 @@ export const getDialogue = createAsyncThunk(
         name, responseOptions, needEvidence, _id, isFinalDialogue, requiredEvidence->{name},
 				animals[]->{name},
   			"phrase": phrase[]{
-  				emotion->{emotion}, speaker->{name, color}, text	
+  				emotion->{emotion}, speaker->{name, color}, text, 
+					"trailingText" : trailingText[]{
+            emotion->{emotion}, text
+          }	
 				},
 				"responseOptions": responseOptions[]{
           text, 

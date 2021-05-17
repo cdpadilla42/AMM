@@ -6,7 +6,7 @@ import MultipleAnimalDisplay from './MultipleAnimalDisplay';
 
 const AnimalsDisplayController = () => {
   const dialogue = useCurrentDialogueObj();
-  const animalsFromDialouge = dialogue.animals;
+  const animalsFromDialouge = dialogue?.animals;
   const [isMultiAnimalConvo, setIsMultiAnimalConvo] = useState(
     !!dialogue.animals?.length
   );

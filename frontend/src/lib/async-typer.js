@@ -6,7 +6,11 @@ function getRandomBetween(min = 10, max = 25, randomNumber = Math.random()) {
   return Math.floor(randomNumber * (max - min) + min);
 }
 
-async function draw(el, text) {
+async function draw(el, text, options = { isTrailing: false }) {
+  let showText = '';
+  if (options.isTrailing) {
+    showText = document.querySelector('.text_box__text .show').textContent;
+  }
   console.log('Drawing!');
   // const text = el.dataset.text;
   const html = `
@@ -16,7 +20,7 @@ async function draw(el, text) {
   const hideField = el.querySelector('.hide');
   console.log(showField);
   let hideText = text;
-  let showText = '';
+
   for (const letter of text) {
     showText += letter;
     hideText = hideText.slice(1);
@@ -27,17 +31,6 @@ async function draw(el, text) {
     await wait(amountOfTimeToWait);
   }
 }
-
-// async for of loop
-// async function draw(el) {
-//   const text = el.textContent;
-//   let soFar = '';
-//   for (const letter of text) {
-//     soFar += letter;
-//     el.textContent = soFar;
-//     // wait for some amount of time
-//   }
-// }
 
 const text = document.querySelector('.text_box__text');
 const buttons = document.querySelectorAll('button');

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useHistory } from 'react-router-dom';
@@ -23,6 +23,8 @@ const TextBox = (props) => {
     prevDialogueID,
     responseBoxIsOpen,
   } = useSelector((state) => state.dialogue);
+
+  const [trailingDialoguePosition, setTrailingDialoguePosition] = useState(-1);
 
   let currentDialogueObj = useCurrentDialogueObj();
 
@@ -61,6 +63,7 @@ const TextBox = (props) => {
   });
 
   const handleNextClick = () => {
+    const textEl = textRef.current;
     const isEndOfDialogue =
       currentDialoguePosition === currentDialogueObj.phrase.length - 1;
 
@@ -68,8 +71,23 @@ const TextBox = (props) => {
       isEndOfDialogue &&
       currentDialogueObj?.responseOptions?.length &&
       currentDialogueObj?.isFinalDialogue;
-
-    if (isEndOfDialogue && currentDialogueObj.name === 'Incorrect') {
+    // if there is trailing dialogue...
+    if (
+      phrases[currentDialoguePosition].trailingText &&
+      phrases[currentDialoguePosition].trailingText.length - 1 >
+        trailingDialoguePosition
+    ) {
+      // add on to the end of the current text and change emotions
+      const newTrailingDialoguePosition = trailingDialoguePosition + 1;
+      draw(
+        textEl,
+        phrases[currentDialoguePosition].trailingText[
+          newTrailingDialoguePosition
+        ].text,
+        { isTrailing: true }
+      );
+      setTrailingDialoguePosition(newTrailingDialoguePosition);
+    } else if (isEndOfDialogue && currentDialogueObj.name === 'Incorrect') {
       props.switchConversation(prevDialogueID);
     } else if (isEndOfDialogue && currentDialogueObj.needEvidence) {
       props.toggleInventory();
@@ -84,6 +102,7 @@ const TextBox = (props) => {
       props.toggleResponseBox();
     } else {
       props.nextDialogue();
+      setTrailingDialoguePosition(-1);
     }
   };
 

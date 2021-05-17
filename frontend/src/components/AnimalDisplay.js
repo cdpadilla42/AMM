@@ -15,11 +15,11 @@ const AnimalDisplay = ({
   const { sprites } = useSelector((state) => state.sprites);
   const dialogue = useCurrentDialogueObj();
   const { currentDialoguePosition } = useSelector((state) => state.dialogue);
-  const speaker = speakerFromProps;
-  //  || dialogue.phrase[currentDialoguePosition].speaker.name;
-  let emotion = emotionFromProps;
-  //  ||
-  // dialogue.phrase[currentDialoguePosition].emotion.emotion;
+  const speaker =
+    speakerFromProps || dialogue.phrase[currentDialoguePosition].speaker.name;
+  let emotion =
+    emotionFromProps ||
+    dialogue.phrase[currentDialoguePosition].emotion.emotion;
 
   const spriteObj = sprites?.find((sprite) => sprite.name === speaker);
   const spriteUrl =
