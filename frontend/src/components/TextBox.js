@@ -24,7 +24,7 @@ const TextBox = (props) => {
     responseBoxIsOpen,
   } = useSelector((state) => state.dialogue);
 
-  const [trailingDialoguePosition, setTrailingDialoguePosition] = useState(-1);
+  const [fromLink, setFromLink] = useState(false);
 
   let currentDialogueObj = useCurrentDialogueObj();
 
@@ -37,7 +37,7 @@ const TextBox = (props) => {
   useEffect(() => {
     const textEl = textRef.current;
     const text = phrases[currentDialoguePosition].text;
-    draw(textEl, text);
+    draw(textEl, text, { isTrailing: fromLink });
   }, [
     dialogue,
     currentDialoguePosition,
@@ -72,21 +72,10 @@ const TextBox = (props) => {
       currentDialogueObj?.responseOptions?.length &&
       currentDialogueObj?.isFinalDialogue;
     // if there is trailing dialogue...
-    if (
-      phrases[currentDialoguePosition].trailingText &&
-      phrases[currentDialoguePosition].trailingText.length - 1 >
-        trailingDialoguePosition
-    ) {
+    if (phrases[currentDialoguePosition].link) {
       // add on to the end of the current text and change emotions
-      const newTrailingDialoguePosition = trailingDialoguePosition + 1;
-      draw(
-        textEl,
-        phrases[currentDialoguePosition].trailingText[
-          newTrailingDialoguePosition
-        ].text,
-        { isTrailing: true }
-      );
-      setTrailingDialoguePosition(newTrailingDialoguePosition);
+      setFromLink(true);
+      props.nextDialogue();
     } else if (isEndOfDialogue && currentDialogueObj.name === 'Incorrect') {
       props.switchConversation(prevDialogueID);
     } else if (isEndOfDialogue && currentDialogueObj.needEvidence) {
@@ -102,7 +91,6 @@ const TextBox = (props) => {
       props.toggleResponseBox();
     } else {
       props.nextDialogue();
-      setTrailingDialoguePosition(-1);
     }
   };
 

@@ -9,6 +9,7 @@ function getRandomBetween(min = 10, max = 25, randomNumber = Math.random()) {
 async function draw(el, text, options = { isTrailing: false }) {
   let showText = '';
   if (options.isTrailing) {
+    console.log('Trailing...');
     showText = document.querySelector('.text_box__text .show').textContent;
   }
   console.log('Drawing!');

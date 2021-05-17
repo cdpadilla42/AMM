@@ -67,33 +67,11 @@ export default {
               to: [{ type: 'animal' }],
             },
             {
-              title: 'Trailing Text',
-              name: 'trailingText',
-              type: 'array',
-              of: [
-                {
-                  type: 'object',
-                  preview: {
-                    select: {
-                      title: 'text',
-                      media: 'emotion.image', // Use the image of emotion field as thumbnail
-                    },
-                  },
-                  fields: [
-                    {
-                      title: 'Text',
-                      name: 'text',
-                      type: 'string',
-                    },
-                    {
-                      title: 'Emotion',
-                      name: 'emotion',
-                      type: 'reference',
-                      to: [{ type: 'emotions' }],
-                    },
-                  ],
-                },
-              ],
+              title: 'Link',
+              name: 'link',
+              type: 'boolean',
+              description:
+                'Turn on if you would like the next phrase added to this one',
             },
           ],
         },
