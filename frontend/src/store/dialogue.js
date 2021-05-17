@@ -42,6 +42,7 @@ export const getDialogue = createAsyncThunk(
     const response = await sanityClient.fetch(
       `*[_type == "dialogue" && conversation._ref == "${conversationID}"]{
         name, responseOptions, needEvidence, _id, isFinalDialogue, requiredEvidence->{name},
+				animals[]->{name},
   			"phrase": phrase[]{
   				emotion->{emotion}, speaker->{name, color}, text	
 				},

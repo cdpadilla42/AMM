@@ -7,19 +7,30 @@ import laugh from '../imgs/laugh.png';
 import sad from '../imgs/sad.png';
 import sleep from '../imgs/sleep.png';
 
-const AnimalDisplay = () => {
+const AnimalDisplay = ({
+  speaker: speakerFromProps,
+  emotion: emotionFromProps,
+  orientation,
+}) => {
+  const { sprites } = useSelector((state) => state.sprites);
   const dialogue = useCurrentDialogueObj();
   const { currentDialoguePosition } = useSelector((state) => state.dialogue);
-  const { sprites } = useSelector((state) => state.sprites);
-  const speaker = dialogue.phrase[currentDialoguePosition].speaker.name;
-  let emotion = dialogue.phrase[currentDialoguePosition].emotion.emotion;
-
-  console.log('dialogue', { emotion, speaker });
+  const speaker = speakerFromProps;
+  //  || dialogue.phrase[currentDialoguePosition].speaker.name;
+  let emotion = emotionFromProps;
+  //  ||
+  // dialogue.phrase[currentDialoguePosition].emotion.emotion;
 
   const spriteObj = sprites?.find((sprite) => sprite.name === speaker);
   const spriteUrl =
     spriteObj?.images.find((image) => image.emotion.emotion === emotion)
       ?.spriteUrl || normal;
+
+  console.log(emotion);
+  console.log(
+    'Matched url',
+    spriteObj?.images.find((image) => image.emotion.emotion === emotion)
+  );
 
   console.log('sprites', sprites);
   console.log({ spriteObj });
@@ -32,11 +43,18 @@ const AnimalDisplay = () => {
     sleep,
   };
 
-  if (!animalImages[emotion]) emotion = 'normal';
-
+  if (!animalImages[emotionFromProps]) emotionFromProps = 'normal';
+  let className;
+  if (orientation === 'left') {
+    className = 'game_container__animal_image left';
+  } else if (orientation === 'right') {
+    className = 'game_container__animal_image right';
+  } else {
+    className = 'game_container__animal_image';
+  }
   return (
-    <div className="game_container__animal">
-      <img src={spriteUrl} alt="" className="game_container__animal_image" />
+    <div className={'game_container__animal'}>
+      <img src={spriteUrl} alt="" className={className} />
     </div>
   );
 };

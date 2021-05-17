@@ -11,6 +11,7 @@ import ResponseBox from '../components/ResponseBox';
 import Inventory from '../components/Inventory';
 import styled from 'styled-components';
 import '../styles/testimony.css';
+import AnimalsDisplayController from '../components/AnimalsDisplayController';
 
 const StyledContainer = styled.div`
   background-image: url(${(props) => props.background});
@@ -57,7 +58,7 @@ const Testimony = (props) => {
     >
       <Nav />
       <div className="game_container">
-        <AnimalDisplay />
+        <AnimalsDisplayController />
         {isInventoryOpen && <Inventory />}
         <ResponseBox />
         <TextBox />

@@ -90,6 +90,14 @@ nav a {
     top: -6rem;
   }
 }
+.game_container__animal_image.left {
+  left: -5rem;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+.game_container__animal_image.right {
+  right: -5rem;
+}
 
 .text_box {
   position: absolute;

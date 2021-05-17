@@ -19,6 +19,22 @@ export default {
       to: [{ type: 'conversation' }],
     },
     {
+      title: 'Animals',
+      name: 'animals',
+      type: 'array',
+      validation: (Rule) => Rule.max(2),
+      description:
+        'If more than one animal in conversation, put em here! If changing from before, put em here!',
+      of: [
+        {
+          title: 'Animal',
+          name: 'animal',
+          type: 'reference',
+          to: [{ type: 'animal' }],
+        },
+      ],
+    },
+    {
       title: 'Phrases',
       name: 'phrase',
       type: 'array',
