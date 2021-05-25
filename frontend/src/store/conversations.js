@@ -35,6 +35,18 @@ export const getBackground = createAsyncThunk(
   }
 );
 
+export const getConversationDetails = createAsyncThunk(
+  'GET_CONVERSATION_DETAILS',
+  async (conversationID) => {
+    const response = await sanityClient.fetch(
+      `*[_type == "conversation" && conversation._id == "${conversationID}"]{
+        act
+      }`
+    );
+    return response;
+  }
+);
+
 // Reducer
 
 function conversationsReducer(state = initialState, action) {
@@ -44,6 +56,11 @@ function conversationsReducer(state = initialState, action) {
       return {
         ...state,
         conversations: payload,
+      };
+    case 'GET_CONVERSATION_DETAILS/fulfilled':
+      return {
+        ...state,
+        conversation: payload,
       };
     case `GET_CONVERSATION_BACKGROUND/fulfilled`:
       return {

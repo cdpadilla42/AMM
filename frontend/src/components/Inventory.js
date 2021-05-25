@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import BlockContent from '@sanity/block-content-to-react';
 import {
   toggleInventory,
   switchConversation,
@@ -179,6 +180,7 @@ const ItemDetailsDisplay = ({
 }) => {
   const itemObj = inventory.find((item) => item.name === selectedItem);
   const dispatch = useDispatch();
+  const act = useSelector((store) => store.conversations.conversation?.[0].act);
 
   function closeDetailsDisplay() {
     setIsDetailsOpen(false);
@@ -203,12 +205,30 @@ const ItemDetailsDisplay = ({
     dispatch(toggleInventory());
   }
 
+  const serializers = {
+    types: {
+      block: (props) => {
+        return BlockContent.defaultSerializers.types.block(props);
+      },
+    },
+  };
+
+  const renderDescription = () => {
+    if (!act) {
+      return <p>{itemObj.description}</p>;
+    } else {
+      const description = itemObj[`description${act.toUpperCase()}`];
+      if (!description) return <p>{itemObj.description}</p>;
+      return <BlockContent blocks={description} serializers={serializers} />;
+    }
+  };
+
   return (
     <StyledItemDetailsDisplay>
       <img src={itemObj.imageUrl} alt="" />
       <div className="written_details">
         <h4>{itemObj.name}</h4>
-        <p>{itemObj.description}</p>
+        {renderDescription()}
         <button onClick={presentItem}>Present</button>
         <button onClick={closeDetailsDisplay}>Close</button>
       </div>

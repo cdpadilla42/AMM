@@ -63,6 +63,7 @@ const TextBox = (props) => {
   });
 
   const handleNextClick = () => {
+    if (fromLink) setFromLink(false);
     const textEl = textRef.current;
     const isEndOfDialogue =
       currentDialoguePosition === currentDialogueObj.phrase.length - 1;
