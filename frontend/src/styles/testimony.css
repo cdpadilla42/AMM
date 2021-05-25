@@ -137,4 +137,9 @@ nav a {
   right: 1rem;
 }
 
+span.highlight {
+  color: #0c8ecb;
+  font-weight: 700;
+}
+
 /*# sourceMappingURL=testimony.css.map */

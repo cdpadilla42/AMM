@@ -18,7 +18,7 @@ export default {
       title: 'Description',
       name: 'description',
       type: 'string',
-      description: 'For Sanity use only, does not appear in game',
+      description: 'Fall back in case no description set for current act',
     },
     {
       title: 'Image',

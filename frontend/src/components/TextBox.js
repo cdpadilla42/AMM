@@ -9,7 +9,7 @@ import {
   toggleInventory,
   switchConversation,
 } from '../store/dialogue';
-import draw from '../lib/async-typer';
+import { useDraw } from '../lib/async-typer';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 
 const TextBox = (props) => {
@@ -23,10 +23,13 @@ const TextBox = (props) => {
     prevDialogueID,
     responseBoxIsOpen,
   } = useSelector((state) => state.dialogue);
+  const { items } = useSelector((state) => state.inventory);
 
   const [fromLink, setFromLink] = useState(false);
 
   let currentDialogueObj = useCurrentDialogueObj();
+
+  const draw = useDraw(items);
 
   const phrases = currentDialogueObj && currentDialogueObj.phrase;
   // const responseOptions = currentDialogueObj
