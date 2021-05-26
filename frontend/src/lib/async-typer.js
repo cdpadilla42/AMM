@@ -6,13 +6,27 @@ function getRandomBetween(min = 10, max = 25, randomNumber = Math.random()) {
   return Math.floor(randomNumber * (max - min) + min);
 }
 
-export const useDraw = (items = []) => {
+export const useDraw = ({ items = [], animals = [] }) => {
   const highlightFilter = (string) => {
     let newString = string;
     items.forEach((item) => {
       newString = newString.replaceAll(
-        item.name,
+        `${item.name}`,
         `<span class="highlight">${item.name}</span><i><img style="height: 19px; width: 19px;" src="${item.imageUrl}" /></i>`
+      );
+    });
+    console.log(animals);
+    animals.forEach((animal) => {
+      let query;
+      if (animal.name === 'Katt') {
+        query = new RegExp(`Katt(?!('s )?Junkyard)`, 'gi');
+        console.log(query);
+      } else {
+        query = animal.name;
+      }
+      newString = newString.replaceAll(
+        query,
+        `<span class="highlight">${animal.name}</span><i><img style="height: 19px; width: 19px;" src="${animal.imageUrl}" /></i>`
       );
     });
     return newString;

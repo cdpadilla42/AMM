@@ -23,13 +23,13 @@ const TextBox = (props) => {
     prevDialogueID,
     responseBoxIsOpen,
   } = useSelector((state) => state.dialogue);
-  const { items } = useSelector((state) => state.inventory);
+  const { items, notes: animals } = useSelector((state) => state.inventory);
 
   const [fromLink, setFromLink] = useState(false);
 
   let currentDialogueObj = useCurrentDialogueObj();
 
-  const draw = useDraw(items);
+  const draw = useDraw({ items, animals });
 
   const phrases = currentDialogueObj && currentDialogueObj.phrase;
   // const responseOptions = currentDialogueObj
