@@ -17,6 +17,16 @@ export const useHighlightFilter = ({ items = [], animals = [] }) => {
         `<span class="highlight">${item.name}</span>`
       );
     });
+    // animal nickname
+    animals.forEach((animal) => {
+      const query = animal.nickname;
+
+      newString = newString.replaceAll(
+        query,
+        `<img style="height: 19px; width: 19px;" src="${animal.imageUrl}" /> <span class="highlight">${animal.nickname}</span>`
+      );
+    });
+    // animal name
     animals.forEach((animal) => {
       let query;
       if (animal.name === 'Katt') {
@@ -30,6 +40,7 @@ export const useHighlightFilter = ({ items = [], animals = [] }) => {
         `<img style="height: 19px; width: 19px;" src="${animal.imageUrl}" /> <span class="highlight">${animal.name}</span>`
       );
     });
+
     return newString;
   };
 
