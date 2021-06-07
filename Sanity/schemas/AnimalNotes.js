@@ -15,6 +15,12 @@ export default {
       type: 'string',
     },
     {
+      title: 'Nickname',
+      name: 'nickname',
+      type: 'string',
+      description: 'Used for text highlighting',
+    },
+    {
       title: 'Notes',
       name: 'description',
       type: 'string',
