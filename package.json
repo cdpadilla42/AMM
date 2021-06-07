@@ -14,5 +14,6 @@
   "bugs": {
     "url": "https://github.com/cdpadilla42/AMM/issues"
   },
-  "homepage": "https://github.com/cdpadilla42/AMM#readme"
+  "homepage": "https://github.com/cdpadilla42/AMM#readme",
+  "dependencies": {}
 }

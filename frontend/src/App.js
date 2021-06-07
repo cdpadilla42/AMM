@@ -5,6 +5,7 @@ import Testimony from './pages/Testimony';
 import SelectConversation from './pages/SelectConversation';
 import Map from './components/Map';
 import store from './store/store';
+import Playground from './pages/Playground';
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
         <Switch>
           <Route path="/inventory">
             <Map />
+          </Route>
+          <Route path="/playground">
+            <Playground />
           </Route>
           <Route
             path="/testimony/:id"

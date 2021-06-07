@@ -9,8 +9,10 @@ import {
   toggleInventory,
   switchConversation,
 } from '../store/dialogue';
-import { useDraw } from '../lib/async-typer';
+import { useHighlightFilter } from '../lib/async-typer';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
+import Typist from 'react-typist';
+import ReactHtmlParser from 'react-html-parser';
 
 const TextBox = (props) => {
   const textRef = useRef(null);
@@ -29,18 +31,18 @@ const TextBox = (props) => {
 
   let currentDialogueObj = useCurrentDialogueObj();
 
-  const draw = useDraw({ items, animals });
+  const highlightFilter = useHighlightFilter({ items, animals });
 
   const phrases = currentDialogueObj && currentDialogueObj.phrase;
   // const responseOptions = currentDialogueObj
   //   ? currentDialogueObj.responseOptions
   //   : null;
 
+  const text = phrases[currentDialoguePosition].text;
   // On change effect
   useEffect(() => {
-    const textEl = textRef.current;
-    const text = phrases[currentDialoguePosition].text;
-    draw(textEl, text, { isTrailing: fromLink });
+    // const textEl = textRef.current;
+    // draw(textEl, text, { isTrailing: fromLink });
   }, [
     dialogue,
     currentDialoguePosition,
@@ -106,6 +108,29 @@ const TextBox = (props) => {
     }
   };
 
+  const renderText = (text) => {
+    if (!text) return '';
+    const highlightedText = highlightFilter(text);
+
+    const createMarkup = () => {
+      return {
+        __html: `<p className="text_box__text" >${highlightedText}</p>`,
+      };
+    };
+
+    console.log('typing....', highlightedText, createMarkup());
+    return (
+      <Typist
+        key={text}
+        cursor={{ show: false }}
+        startDelay={2}
+        avgTypingDelay={15}
+      >
+        {ReactHtmlParser(highlightedText)}
+      </Typist>
+    );
+  };
+
   return (
     <div className="text_box">
       <div
@@ -117,7 +142,7 @@ const TextBox = (props) => {
         {phrases[currentDialoguePosition].speaker.name}
       </div>
       <div className="text_box__main">
-        <p className="text_box__text" ref={textRef}></p>
+        {renderText(text)}
         <button className="text_box__left_arrow" onClick={handlePrevClick}>
           Back
         </button>
