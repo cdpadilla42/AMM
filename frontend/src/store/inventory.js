@@ -38,6 +38,7 @@ export const getAnimalNotes = createAsyncThunk('GET_ANIMAL_NOTES', async () => {
   const response = await sanityClient.fetch(
     `*[_type == "animalNotes"]{
         name, description, nickname,
+        "animalRef": animalRef->{color},
         "imageUrl": image.asset->url
  
 }`

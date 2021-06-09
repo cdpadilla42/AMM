@@ -21,6 +21,14 @@ export default {
       description: 'Used for text highlighting',
     },
     {
+      title: 'Animal Ref',
+      name: 'animalRef',
+      type: 'reference',
+      to: [{ type: 'animal' }],
+      description:
+        'Reference to the Animal doc. Helps with picking the color for highlighted text',
+    },
+    {
       title: 'Notes',
       name: 'description',
       type: 'string',

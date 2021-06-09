@@ -20,15 +20,21 @@ export const useHighlightFilter = ({ items = [], animals = [] }) => {
     // animal nickname
     animals.forEach((animal) => {
       const query = animal.nickname;
+      const animalHighlightStyle = animal.animalRef
+        ? `style="color: ${animal.animalRef.color.hex};"`
+        : '';
 
       newString = newString.replaceAll(
         query,
-        `<img style="height: 19px; width: 19px;" src="${animal.imageUrl}" /> <span class="highlight">${animal.nickname}</span>`
+        `<img style="height: 19px; width: 19px;" src="${animal.imageUrl}" /> <span class="highlight" ${animalHighlightStyle}>${animal.nickname}</span>`
       );
     });
     // animal name
     animals.forEach((animal) => {
       let query;
+      const animalHighlightStyle = animal.animalRef
+        ? `style="color: ${animal.animalRef.color.hex};"`
+        : '';
       if (animal.name === 'Katt') {
         query = new RegExp(`Katt(?!('s )?Junkyard)`, 'gi');
         console.log(query);
@@ -37,7 +43,7 @@ export const useHighlightFilter = ({ items = [], animals = [] }) => {
       }
       newString = newString.replaceAll(
         query,
-        `<img style="height: 19px; width: 19px;" src="${animal.imageUrl}" /> <span class="highlight">${animal.name}</span>`
+        `<img style="height: 19px; width: 19px;" src="${animal.imageUrl}" /> <span class="highlight" ${animalHighlightStyle}>${animal.name}</span>`
       );
     });
 
