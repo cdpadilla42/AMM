@@ -12,6 +12,7 @@ import Inventory from '../components/Inventory';
 import styled from 'styled-components';
 import '../styles/testimony.css';
 import AnimalsDisplayController from '../components/AnimalsDisplayController';
+import ImageLoader from '../components/ImageLoader';
 
 const StyledContainer = styled.div`
   background-image: url(${(props) => props.background});
@@ -53,18 +54,22 @@ const Testimony = (props) => {
   }, []);
 
   return (
-    <StyledContainer
-      className="container"
-      background={backgroundURL || 'https://wallpapercave.com/wp/wp2586787.jpg'}
-    >
-      <Nav />
-      <div className="game_container">
-        <AnimalsDisplayController />
-        {isInventoryOpen && <Inventory />}
-        <ResponseBox />
-        <TextBox />
-      </div>
-    </StyledContainer>
+    <ImageLoader>
+      <StyledContainer
+        className="container"
+        background={
+          backgroundURL || 'https://wallpapercave.com/wp/wp2586787.jpg'
+        }
+      >
+        <Nav />
+        <div className="game_container">
+          <AnimalsDisplayController />
+          {isInventoryOpen && <Inventory />}
+          <ResponseBox />
+          <TextBox />
+        </div>
+      </StyledContainer>
+    </ImageLoader>
   );
 };
 
