@@ -46,63 +46,41 @@ nav a {
 }
 
 .container {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  background-size: 1200px auto;
-  background-position: center top;
+  background-position: center;
   background-repeat: no-repeat;
-}
-@media all and (max-width: 600px) {
-  .container {
-    background-size: 600px auto;
-    overflow: hidden;
-  }
-}
-
-.game_container {
-  width: 560px;
-  height: 600px;
-  background-color: rgba(0, 0, 0, 0.2);
-  margin: 2rem auto;
   position: relative;
-  padding: 2rem;
-}
-@media all and (max-width: 600px) {
-  .game_container {
-    width: 280px;
-    height: calc(100% - 4rem);
-    padding: 0 2rem;
-    margin: 0 auto;
-  }
 }
 
 .game_container__animal_image {
-  width: 450px;
   position: absolute;
-  bottom: 10.2rem;
+  bottom: calc(50vh - 36px);
+  width: 597px;
   padding: 1rem;
   right: 0;
 }
 @media all and (max-width: 600px) {
   .game_container__animal_image {
     width: 300px;
-    right: -2rem;
     top: -6rem;
   }
 }
 .game_container__animal_image.left {
-  left: -5rem;
+  left: calc(50vw - 510px);
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
 }
 .game_container__animal_image.right {
-  right: -5rem;
+  right: calc(50vw - 476px);
 }
 
 .text_box {
   position: absolute;
-  bottom: 1rem;
-  width: calc(100% - 4rem);
+  bottom: calc(50vh - 444px);
+  width: 679px;
+  left: 50vw;
+  transform: translate(-50%, -50%);
 }
 .text_box__name {
   background-color: grey;
@@ -118,7 +96,7 @@ nav a {
   background-color: #fff;
   border-radius: 20px;
   padding: 1rem;
-  height: 175px;
+  height: 249px;
   font-size: 1.2rem;
 }
 @media all and (max-width: 600px) {
@@ -137,6 +115,33 @@ nav a {
   right: 1rem;
 }
 
+@media all and (max-height: 1126px) {
+  .container {
+    background-position: center calc(50% + 100px);
+  }
+
+  .text_box {
+    height: 254px;
+    bottom: calc(50vh - 487px);
+  }
+
+  .game_container__animal_image {
+    bottom: calc(50vh - 136px);
+    width: 597px;
+  }
+  .game_container__animal_image.left {
+    left: calc(50vw - 510px);
+  }
+  .game_container__animal_image.right {
+    right: calc(50vw - 476px);
+  }
+}
+@media all and (max-width: 600px) {
+  .container {
+    background-size: 400px auto;
+    background-position: center;
+  }
+}
 span.highlight {
   color: #0c8ecb;
   font-weight: 700;
