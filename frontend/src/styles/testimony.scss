@@ -79,11 +79,6 @@ nav {
     right: 0;
     // height: 100px;
 
-    @media all and (max-width: 600px) {
-      width: 300px;
-      top: -6rem;
-    }
-
     &.left {
       left: calc(50vw - 510px);
       -webkit-transform: scaleX(-1);
@@ -166,10 +161,28 @@ nav {
   }
 }
 
-@media all and (max-width: 600px) {
+@media all and (max-width: 900px) {
   .container {
     background-size: 400px auto;
     background-position: center;
+  }
+
+  .game_container__animal_image {
+    width: 280px;
+    bottom: calc(50vh - 107px);
+    // width: 597px;
+
+    &.left {
+      left: calc(50vw - 228px);
+    }
+
+    &.right {
+      right: calc(50vw - 216px);
+    }
+  }
+
+  .text_box {
+    width: 85%;
   }
 }
 

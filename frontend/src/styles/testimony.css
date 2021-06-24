@@ -65,12 +65,6 @@ nav a {
   padding: 1rem;
   right: 0;
 }
-@media all and (max-width: 600px) {
-  .game_container__animal_image {
-    width: 300px;
-    top: -6rem;
-  }
-}
 .game_container__animal_image.left {
   left: calc(50vw - 510px);
   -webkit-transform: scaleX(-1);
@@ -141,10 +135,25 @@ nav a {
     right: calc(50vw - 476px);
   }
 }
-@media all and (max-width: 600px) {
+@media all and (max-width: 900px) {
   .container {
     background-size: 400px auto;
     background-position: center;
+  }
+
+  .game_container__animal_image {
+    width: 280px;
+    bottom: calc(50vh - 107px);
+  }
+  .game_container__animal_image.left {
+    left: calc(50vw - 228px);
+  }
+  .game_container__animal_image.right {
+    right: calc(50vw - 216px);
+  }
+
+  .text_box {
+    width: 85%;
   }
 }
 span.highlight {
