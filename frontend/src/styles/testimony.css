@@ -52,6 +52,11 @@ nav a {
   background-repeat: no-repeat;
   position: relative;
 }
+@media all and (max-width: 800px) {
+  .container {
+    overflow: hidden;
+  }
+}
 
 .game_container__animal_image {
   position: absolute;
