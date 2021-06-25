@@ -106,6 +106,7 @@ nav {
     border-radius: 10px;
     transform: translateY(15px) rotate(-5deg);
     margin-left: 1rem;
+    z-index: 50;
   }
 
   &__main {
@@ -114,6 +115,8 @@ nav {
     padding: 1rem;
     height: 249px;
     font-size: 1.2rem;
+    position: relative;
+    z-index: -1;
     @media all and (max-width: 600px) {
       height: 120px;
     }
@@ -161,7 +164,7 @@ nav {
   }
 }
 
-@media all and (max-width: 900px) {
+@media all and (max-width: 420px) {
   .container {
     background-size: 400px auto;
     background-position: center;
@@ -182,7 +185,12 @@ nav {
   }
 
   .text_box {
-    width: 85%;
+    width: 95%;
+    bottom: calc(50vh - 469px);
+  }
+
+  .text_box__name {
+    transform: translateY(9px) rotate(-5deg);
   }
 }
 
