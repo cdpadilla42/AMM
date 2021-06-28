@@ -12,6 +12,22 @@ export default {
       title: 'Image',
       name: 'image',
       type: 'image',
+      description: "Old, don't use me",
+    },
+    {
+      title: 'Desktop',
+      name: 'desktop',
+      type: 'image',
+    },
+    {
+      title: 'Tablet',
+      name: 'tablet',
+      type: 'image',
+    },
+    {
+      title: 'Phone',
+      name: 'phone',
+      type: 'image',
     },
   ],
 };
