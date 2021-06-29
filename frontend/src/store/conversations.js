@@ -27,7 +27,16 @@ export const getBackground = createAsyncThunk(
         "backgroundURL": background->{
           image{
           	asset->{url}
-        	}
+        	},
+          desktop{
+          	asset->{url}
+        	},
+          tablet{
+          	asset->{url}
+        	},
+          phone{
+          	asset->{url}
+        	},
         }
       }`
     );

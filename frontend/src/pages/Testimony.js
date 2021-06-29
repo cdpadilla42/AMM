@@ -14,18 +14,14 @@ import '../styles/testimony.css';
 import AnimalsDisplayController from '../components/AnimalsDisplayController';
 import ImageLoader from '../components/ImageLoader';
 
-const StyledContainer = styled.div`
-  background-image: url(${(props) => props.background});
-`;
-
 const Testimony = (props) => {
   const dispatch = useDispatch();
   const isInventoryOpen = useSelector(
     (state) => state.dialogue.isInventoryOpen
   );
-  const backgroundURL = useSelector(
-    (state) =>
-      state.conversations?.backgroundURL?.backgroundURL?.image.asset.url
+  const backgroundURLs = useSelector(
+    (state) => state.conversations?.backgroundURL?.backgroundURL
+    // state.conversations?.backgroundURL?.backgroundURL?.image.asset.url
   );
 
   useEffect(() => {
@@ -55,12 +51,7 @@ const Testimony = (props) => {
 
   return (
     <ImageLoader>
-      <StyledContainer
-        className="container"
-        background={
-          backgroundURL || 'https://wallpapercave.com/wp/wp2586787.jpg'
-        }
-      >
+      <StyledContainer className="container" background={backgroundURLs} mobile>
         <Nav />
         <div className="game_container">
           <AnimalsDisplayController />
@@ -72,5 +63,18 @@ const Testimony = (props) => {
     </ImageLoader>
   );
 };
+
+const StyledContainer = styled.div`
+  background-image: url(${(props) => props.background.image.asset.url});
+  background-image: url(${(props) => props.background.desktop.asset.url});
+
+  @media all and (max-width: 1024px) {
+    background-image: url(${(props) => props.background.tablet.asset.url});
+  }
+
+  @media all and (max-width: 420px) {
+    background-image: url(${(props) => props.background.phone.asset.url});
+  }
+`;
 
 export default Testimony;
