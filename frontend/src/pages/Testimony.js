@@ -51,7 +51,13 @@ const Testimony = (props) => {
 
   return (
     <ImageLoader>
-      <StyledContainer className="container" background={backgroundURLs} mobile>
+      <StyledContainer
+        className="container"
+        fallback={backgroundURLs?.image?.asset.url}
+        desktop={backgroundURLs?.desktop?.asset.url}
+        phone={backgroundURLs?.phone?.asset.url}
+        tablet={backgroundURLs?.tablet?.asset.url}
+      >
         <Nav />
         <div className="game_container">
           <AnimalsDisplayController />
@@ -65,15 +71,14 @@ const Testimony = (props) => {
 };
 
 const StyledContainer = styled.div`
-  background-image: url(${(props) => props.background.image.asset.url});
-  background-image: url(${(props) => props.background.desktop.asset.url});
+  background-image: url(${(props) => props.desktop || props.fallback});
 
   @media all and (max-width: 1024px) {
-    background-image: url(${(props) => props.background.tablet.asset.url});
+    background-image: url(${(props) => props.tablet || props.fallback});
   }
 
   @media all and (max-width: 420px) {
-    background-image: url(${(props) => props.background.phone.asset.url});
+    background-image: url(${(props) => props.phone || props.fallback});
   }
 `;
 
