@@ -77,6 +77,12 @@ const StyledContainer = styled.div`
     background-image: url(${(props) => props.tablet || props.fallback});
   }
 
+  /* Comment below option for sideways tablets */
+  /* @media all and (min-height: 800px), all and (max-width: 1370px) { */
+  @media all and (max-width: 1024px) {
+    background-image: url(${(props) => props.tablet || props.fallback});
+  }
+
   @media all and (max-width: 420px) {
     background-image: url(${(props) => props.phone || props.fallback});
   }

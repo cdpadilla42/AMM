@@ -62,35 +62,36 @@ nav {
   // position: relative;
   // padding: 2rem;
 
-  // @media all and (max-width: 600px) {
-  //   width: 280px;
-  //   height: calc(100% - 4rem);
-  //   padding: 0 2rem;
-  //   margin: 0 auto;
-  // }
+  @media all and (max-width: 600px) {
+    width: 280px;
+    height: calc(100% - 4rem);
+    padding: 0 2rem;
+    margin: 0 auto;
+  }
 }
 
 .game_container {
   &__animal_image {
     position: absolute;
-    bottom: calc(50vh - 36px);
-    width: 597px;
+    bottom: calc(50vh - 140px);
+    width: 437px;
     padding: 1rem;
     right: 0;
     // height: 100px;
 
     &.left {
-      left: calc(50vw - 510px);
+      left: calc(50vw - 374px);
       -webkit-transform: scaleX(-1);
       transform: scaleX(-1);
     }
 
     &.right {
-      right: calc(50vw - 476px);
+      right: calc(50vw - 346px);
     }
   }
 }
 
+// Desktop
 .text_box {
   position: absolute;
   bottom: calc(50vh - 444px);
@@ -113,7 +114,7 @@ nav {
     background-color: #fff;
     border-radius: 20px;
     padding: 1rem;
-    height: 249px;
+    height: 186px;
     font-size: 1.2rem;
     position: relative;
     z-index: -1;
@@ -135,11 +136,40 @@ nav {
   }
 }
 
-@media all and (max-height: 1126px) {
+// Large Tablet
+@media all and (min-height: 900px) and (min-width: 1000px) {
+  .game_container__animal_image {
+    width: 597px;
+    bottom: calc(50vh - 36px);
+    // width: 597px;
+
+    &.left {
+      left: calc(50vw - 510px);
+    }
+
+    &.right {
+      right: calc(50vw - 476px);
+    }
+  }
+
+  .text_box {
+    // width: 95%;
+    bottom: calc(50vh - 444px);
+  }
+
+  .text_box__main {
+    height: 249px;
+  }
+}
+// Comment below option for sideways tablets
+// @media all and (min-height: 800px), all and (max-width: 1370px) {
+// Medium tablet
+@media all and (max-height: 1126px) and (max-width: 800px) {
   .container {
     background-position: center calc(50% + 100px);
   }
-
+}
+@media all and (max-height: 1126px) and (max-width: 800px) {
   // .game_container {
   //   width: 747px;
   //   height: 877px;
@@ -164,6 +194,7 @@ nav {
   }
 }
 
+// Phone
 @media all and (max-width: 420px) {
   .container {
     background-size: 400px auto;
