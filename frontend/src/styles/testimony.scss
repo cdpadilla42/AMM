@@ -137,7 +137,7 @@ nav {
 }
 
 // Large Tablet
-@media only screen and (min-height: 900px) and (min-width: 1000px) and (max-width: 1026px) {
+@media all and (min-height: 900px) and (min-width: 1000px) and (max-width: 1026px) {
   .game_container__animal_image {
     width: 597px;
     bottom: calc(50vh - 36px);
@@ -223,6 +223,11 @@ nav {
   .text_box__name {
     transform: translateY(9px) rotate(-5deg);
   }
+}
+
+.game_container__animal_image.single {
+  right: 50%;
+  transform: translateX(50%);
 }
 
 span.highlight {

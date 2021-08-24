@@ -50,10 +50,10 @@ const AnimalDisplay = ({
   } else if (orientation === 'right') {
     className = 'game_container__animal_image right';
   } else {
-    className = 'game_container__animal_image';
+    className = 'game_container__animal_image single';
   }
   return (
-    <div className={'game_container__animal'}>
+    <div className="game_container__animal">
       <img src={spriteUrl} alt="" className={className} />
     </div>
   );
