@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import '../styles/testimony.css';
 import AnimalsDisplayController from '../components/AnimalsDisplayController';
 import ImageLoader from '../components/ImageLoader';
+import PatternedBG from '../imgs/video-game-controller-gamepads-seamless-pattern-flat-style-illustrations-71807888.jpeg';
 
 const Testimony = (props) => {
   const dispatch = useDispatch();
@@ -57,7 +58,9 @@ const Testimony = (props) => {
         desktop={backgroundURLs?.desktop?.asset.url}
         phone={backgroundURLs?.phone?.asset.url}
         tablet={backgroundURLs?.tablet?.asset.url}
+        PatternedBG={PatternedBG}
       >
+        <div className="desktop_main_background" />
         <Nav />
         <div className="game_container">
           <AnimalsDisplayController />
@@ -71,20 +74,41 @@ const Testimony = (props) => {
 };
 
 const StyledContainer = styled.div`
-  background-image: url(${(props) => props.desktop || props.fallback});
+  background-image: url(${PatternedBG});
+  background-repeat: repeat;
+  /* background-repeat: no-repeat;
+  background-size: 755px 765px; */
+
+  .desktop_main_background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: center;
+    // TODO show none if no props.desktop
+    background-image: url(${(props) => props.desktop || props.fallback});
+    background-size: 755px 765px;
+
+    @media all and (max-width: 1024px) {
+      display: none;
+    }
+  }
 
   @media all and (max-width: 1024px) {
     background-image: url(${(props) => props.tablet || props.fallback});
+    background-size: initial;
   }
 
   /* Comment below option for sideways tablets */
   /* @media all and (min-height: 800px), all and (max-width: 1370px) { */
   @media all and (max-width: 1024px) {
     background-image: url(${(props) => props.tablet || props.fallback});
+    background-size: initial;
   }
 
   @media all and (max-width: 420px) {
     background-image: url(${(props) => props.phone || props.fallback});
+    background-size: initial;
   }
 `;
 

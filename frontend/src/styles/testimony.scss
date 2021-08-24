@@ -137,7 +137,7 @@ nav {
 }
 
 // Large Tablet
-@media all and (min-height: 900px) and (min-width: 1000px) {
+@media only screen and (min-height: 900px) and (min-width: 1000px) and (max-width: 1026px) {
   .game_container__animal_image {
     width: 597px;
     bottom: calc(50vh - 36px);
