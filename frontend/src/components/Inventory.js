@@ -14,13 +14,32 @@ import Map from './Map';
 
 const StyledInventory = styled.div`
   position: absolute;
-  width: calc(100% - 4rem);
+  /* Add them here */
+  top: calc(50vh - 290px);
+  left: 50vw;
+  transform: translateX(-50%);
+  width: 679px;
   height: 350px;
   z-index: 6;
   border: 1px solid black;
   padding: 1rem;
   background-color: palegoldenrod;
   border-radius: 5px;
+
+  @media all and (max-width: 800px) {
+    width: 597px;
+  }
+
+  @media all and (max-width: 420px) {
+    width: 95vw;
+    top: 10vh;
+    height: auto;
+    bottom: calc(50vh - 86px);
+  }
+
+  @media all and (min-height: 900px) and (min-width: 1000px) and (max-width: 1026px) {
+    top: calc(50vh - 478px);
+  }
 
   .inventory_header {
     width: 100%;
