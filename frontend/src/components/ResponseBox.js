@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { switchConversation } from '../store/dialogue';
+import {
+  switchConversation,
+  resetConversationToStart,
+  toggleResponseBox,
+} from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import { useHistory } from 'react-router-dom';
 
@@ -37,6 +41,7 @@ const ResponseBox = () => {
 
   function handleClick(followingDialogueID) {
     if (currentDialogueObj?.isFinalDialogue) {
+      dispatch(resetConversationToStart());
       history.push('/');
     } else {
       dispatch(switchConversation(followingDialogueID));

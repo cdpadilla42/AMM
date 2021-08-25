@@ -8,6 +8,7 @@ import {
   toggleResponseBox,
   toggleInventory,
   switchConversation,
+  resetConversationToStart,
 } from '../store/dialogue';
 import { useHighlightFilter } from '../lib/async-typer';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
@@ -162,6 +163,7 @@ function mapDispatchToProps(dispatch) {
       toggleResponseBox,
       toggleInventory,
       switchConversation,
+      resetConversationToStart,
     },
     dispatch
   );
