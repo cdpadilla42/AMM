@@ -181,7 +181,7 @@ const ItemDetailsDisplay = ({
   }
 
   function presentItem() {
-    console.log({ selectedItem });
+    console.log({ selectedItem, requiredEvidence, itemObj });
     let matchedEvidence;
     if (Array.isArray(requiredEvidence)) {
       matchedEvidence = requiredEvidence.find(
@@ -190,7 +190,8 @@ const ItemDetailsDisplay = ({
     } else {
       matchedEvidence = requiredEvidence;
     }
-    if (selectedItem === matchedEvidence.name) {
+    console.log({ matchedEvidence });
+    if (selectedItem === matchedEvidence?.name) {
       dispatch(switchConversation(nextResponseID));
     } else {
       dispatch(displayInvalidEvidenceDialogue());
