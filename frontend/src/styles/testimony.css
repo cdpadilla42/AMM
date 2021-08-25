@@ -9,6 +9,12 @@
 
 body {
   margin: 0;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+html {
+  height: -webkit-fill-available;
 }
 
 * {
@@ -85,7 +91,7 @@ nav a {
 
 .text_box {
   position: absolute;
-  width: 679px;
+  width: 600px;
   bottom: calc(50vh - 444px);
   left: 50vw;
   transform: translate(-50%, -50%);
