@@ -5,39 +5,6 @@ import { switchConversation } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import { useHistory } from 'react-router-dom';
 
-const StyledResponseBox = styled.div`
-  width: 200px;
-  background-color: #fff;
-  border: 1px solid green;
-  position: absolute;
-  /* right: 25%; */
-
-  z-index: 2;
-  border-radius: 20px;
-  padding: 1rem;
-  @media all and (max-width: 600px) {
-    top: 20px;
-    height: auto;
-    width: calc(100% - 4rem);
-  }
-  @media all and (min-width: 601px) {
-    bottom: 170px;
-  }
-
-  &.hide {
-    display: none;
-  }
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  li {
-    padding: 0.3rem 0;
-  }
-`;
-
 const ResponseBox = () => {
   const { responseBoxIsOpen, currentDialogueID, dialogue } = useSelector(
     (state) => state.dialogue
@@ -97,3 +64,40 @@ const ResponseBox = () => {
 };
 
 export default ResponseBox;
+
+const StyledResponseBox = styled.div`
+  width: 200px;
+  background-color: #fff;
+  border: 1px solid green;
+  position: absolute;
+  bottom: calc(50vh - 156px);
+  right: calc(50vw - 322px);
+  /* transform: translate(-50%, -50%); */
+
+  z-index: 2;
+  border-radius: 20px;
+  padding: 1rem;
+  @media all and (max-width: 420px) {
+    height: auto;
+    /* width: calc(100% - 4rem); */
+    bottom: calc(50vh - 130px);
+    right: calc(5vw);
+  }
+
+  @media all and (min-height: 900px) and (min-width: 1000px) and (max-width: 1026px) {
+    bottom: calc(50vh - 64px);
+  }
+
+  &.hide {
+    display: none;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    padding: 0.3rem 0;
+  }
+`;
