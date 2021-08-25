@@ -14,7 +14,6 @@ import { useHighlightFilter } from '../lib/async-typer';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import Typist from 'react-typist';
 import ReactHtmlParser from 'react-html-parser';
-import throttle from 'lodash.throttle';
 
 const TextBox = (props) => {
   const textRef = useRef(null);
@@ -65,11 +64,9 @@ const TextBox = (props) => {
       }
     }
 
-    const handleKeyDownButChill = throttle(handleKeydown, 2000);
+    document.addEventListener('keyup', handleKeydown);
 
-    document.addEventListener('keydown', handleKeyDownButChill);
-
-    return () => document.removeEventListener('keydown', handleKeydown);
+    return () => document.removeEventListener('keyup', handleKeydown);
   });
 
   const handleNextClick = () => {
