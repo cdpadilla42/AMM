@@ -8,6 +8,7 @@ import {
 } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import { useHistory } from 'react-router-dom';
+import throttle from 'lodash.throttle';
 
 const ResponseBox = () => {
   const { responseBoxIsOpen, currentDialogueID, dialogue } = useSelector(
@@ -48,11 +49,13 @@ const ResponseBox = () => {
     }
   }
 
+  const handleClickButChill = throttle(handleClick, 1000);
+
   useEffect(() => {
     const responseOptions = currentDialogue?.responseOptions;
     function handleKeydown(e) {
       if (e.code === 'ArrowRight' && responseBoxIsOpen) {
-        handleClick(responseOptions[0]?.followingDialogue?._id);
+        handleClickButChill(responseOptions[0]?.followingDialogue?._id);
       }
     }
 

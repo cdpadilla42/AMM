@@ -14,6 +14,7 @@ import { useHighlightFilter } from '../lib/async-typer';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import Typist from 'react-typist';
 import ReactHtmlParser from 'react-html-parser';
+import throttle from 'lodash.throttle';
 
 const TextBox = (props) => {
   const textRef = useRef(null);
@@ -39,7 +40,7 @@ const TextBox = (props) => {
   //   ? currentDialogueObj.responseOptions
   //   : null;
 
-  const text = phrases[currentDialoguePosition].text;
+  const text = phrases[currentDialoguePosition]?.text;
   // On change effect
   useEffect(() => {
     // const textEl = textRef.current;
@@ -56,6 +57,7 @@ const TextBox = (props) => {
     function handleKeydown(e) {
       if (e.code === 'ArrowRight' && !responseBoxIsOpen) {
         // next
+        console.log('CHILLING!!!');
         handleNextClick();
       } else if (e.code === 'ArrowLeft') {
         // back
@@ -63,7 +65,9 @@ const TextBox = (props) => {
       }
     }
 
-    document.addEventListener('keydown', handleKeydown);
+    const handleKeyDownButChill = throttle(handleKeydown, 2000);
+
+    document.addEventListener('keydown', handleKeyDownButChill);
 
     return () => document.removeEventListener('keydown', handleKeydown);
   });
@@ -137,10 +141,11 @@ const TextBox = (props) => {
       <div
         className="text_box__name"
         style={{
-          backgroundColor: phrases[currentDialoguePosition].speaker.color?.hex,
+          backgroundColor:
+            phrases[currentDialoguePosition]?.speaker.color?.hex || 'grey',
         }}
       >
-        {phrases[currentDialoguePosition].speaker.name}
+        {phrases[currentDialoguePosition]?.speaker.name}
       </div>
       <div className="text_box__main">
         {renderText(text)}
