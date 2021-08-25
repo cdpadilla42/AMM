@@ -12,9 +12,92 @@ import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import urlFor from '../lib/imageUrlBuilder';
 import Map from './Map';
 
+const Inventory = () => {
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState('');
+  const [isShowingPeople, setIsShowingPeople] = useState(false);
+  const dispatch = useDispatch();
+
+  const isMapOpen = useSelector((state) => state.dialogue.isMapOpen);
+  const fullItemsInventory = useSelector((store) => store.inventory.items);
+  const animalNotes = useSelector((store) => store.inventory.notes);
+  const currentDialogueObj = useCurrentDialogueObj();
+
+  const requiredEvidence = currentDialogueObj.requiredEvidence;
+  const nextResponseID =
+    currentDialogueObj.responseOptions[0].followingDialogue._id;
+
+  function displayItemDetails(e) {
+    const itemName = e.currentTarget.dataset.name;
+    console.log(e.currentTarget.dataset.name);
+    setSelectedItem(itemName);
+    setIsDetailsOpen(true);
+  }
+
+  function toggleShowingPeople() {
+    setIsShowingPeople(!isShowingPeople);
+  }
+
+  // * NOTE: We have the ability to filter based on what's in the user's inventory!
+  // * It's this function
+  function selectUserItemsFromFullInventory() {
+    const userItemsInventory = JSON.parse(
+      window.localStorage.getItem('itemsInInventory')
+    ).items;
+    console.log('fullItemsInventory', fullItemsInventory);
+    console.log('userItemsInventory', userItemsInventory);
+    return fullItemsInventory.filter((item) => {
+      return userItemsInventory.includes(item.name);
+    });
+  }
+
+  function renderInventory() {
+    const selectedItems = isShowingPeople ? animalNotes : fullItemsInventory;
+    const jsx = selectedItems.map((item) => {
+      return (
+        <div key={item.name} data-name={item.name} onClick={displayItemDetails}>
+          <img
+            src={urlFor(item.imageUrl).width(200).height(200).url()}
+            alt=""
+          />
+          <span>{item.name}</span>
+        </div>
+      );
+    });
+
+    return jsx;
+  }
+  return (
+    <div className="inventory_container">
+      {isDetailsOpen ? (
+        <ItemDetailsDisplay
+          selectedItem={selectedItem}
+          inventory={isShowingPeople ? animalNotes : fullItemsInventory}
+          setIsDetailsOpen={setIsDetailsOpen}
+          requiredEvidence={requiredEvidence}
+          nextResponseID={nextResponseID}
+        />
+      ) : (
+        <StyledInventory>
+          <div className="inventory_header">
+            <button onClick={toggleShowingPeople}>
+              {isShowingPeople ? 'Items' : 'Animals'}
+            </button>
+            <button onClick={() => dispatch(toggleMap())}>Map</button>
+          </div>
+          {isMapOpen ? (
+            <Map />
+          ) : (
+            <div className="inventory_grid">{renderInventory()}</div>
+          )}
+        </StyledInventory>
+      )}
+    </div>
+  );
+};
+
 const StyledInventory = styled.div`
   position: absolute;
-  /* Add them here */
   top: calc(50vh - 290px);
   left: 50vw;
   transform: translateX(-50%);
@@ -79,114 +162,6 @@ const StyledInventory = styled.div`
 
   button {
     display: inline;
-  }
-`;
-
-const Inventory = () => {
-  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState('');
-  const [isShowingPeople, setIsShowingPeople] = useState(false);
-  const dispatch = useDispatch();
-
-  const isMapOpen = useSelector((state) => state.dialogue.isMapOpen);
-  const fullItemsInventory = useSelector((store) => store.inventory.items);
-  const animalNotes = useSelector((store) => store.inventory.notes);
-  const currentDialogueObj = useCurrentDialogueObj();
-
-  const requiredEvidence = currentDialogueObj.requiredEvidence;
-  const nextResponseID =
-    currentDialogueObj.responseOptions[0].followingDialogue._id;
-
-  function displayItemDetails(e) {
-    const itemName = e.currentTarget.dataset.name;
-    console.log(e.currentTarget.dataset.name);
-    setSelectedItem(itemName);
-    setIsDetailsOpen(true);
-  }
-
-  function toggleShowingPeople() {
-    setIsShowingPeople(!isShowingPeople);
-  }
-
-  // * NOTE: We have the ability to filter based on what's in the user's inventory!
-  // * It's this function
-  function selectUserItemsFromFullInventory() {
-    const userItemsInventory = JSON.parse(
-      window.localStorage.getItem('itemsInInventory')
-    ).items;
-    console.log('fullItemsInventory', fullItemsInventory);
-    console.log('userItemsInventory', userItemsInventory);
-    return fullItemsInventory.filter((item) => {
-      return userItemsInventory.includes(item.name);
-    });
-  }
-
-  function renderInventory() {
-    const selectedItems = isShowingPeople ? animalNotes : fullItemsInventory;
-    const jsx = selectedItems.map((item) => {
-      return (
-        <div key={item.name} data-name={item.name} onClick={displayItemDetails}>
-          <img
-            src={urlFor(item.imageUrl).width(200).height(200).url()}
-            alt=""
-          />
-          <span>{item.name}</span>
-        </div>
-      );
-    });
-
-    return jsx;
-  }
-  return (
-    <>
-      {isDetailsOpen ? (
-        <ItemDetailsDisplay
-          selectedItem={selectedItem}
-          inventory={isShowingPeople ? animalNotes : fullItemsInventory}
-          setIsDetailsOpen={setIsDetailsOpen}
-          requiredEvidence={requiredEvidence}
-          nextResponseID={nextResponseID}
-        />
-      ) : (
-        <StyledInventory>
-          <div className="inventory_header">
-            <button onClick={toggleShowingPeople}>
-              {isShowingPeople ? 'Items' : 'Animals'}
-            </button>
-            <button onClick={() => dispatch(toggleMap())}>Map</button>
-          </div>
-          {isMapOpen ? (
-            <Map />
-          ) : (
-            <div className="inventory_grid">{renderInventory()}</div>
-          )}
-        </StyledInventory>
-      )}
-    </>
-  );
-};
-
-const StyledItemDetailsDisplay = styled.div`
-  position: absolute;
-  width: calc(100% - 4rem);
-  height: 50%;
-  z-index: 6;
-  border: 1px solid black;
-  display: grid;
-  grid-gap: 1rem;
-  padding: 1rem;
-  grid-template-columns: 200px 1fr;
-  background-color: palegoldenrod;
-  border-radius: 5px;
-
-  img {
-    width: 200px;
-    height: 200px;
-  }
-
-  h4 {
-    margin: 0;
-    padding: 0;
   }
 `;
 
@@ -256,3 +231,47 @@ const ItemDetailsDisplay = ({
 };
 
 export default Inventory;
+
+const StyledItemDetailsDisplay = styled.div`
+  position: absolute;
+  top: calc(50vh - 290px);
+  left: 50vw;
+  transform: translateX(-50%);
+  width: 679px;
+  height: 350px;
+  border: 1px solid black;
+  display: grid;
+  grid-gap: 1rem;
+  padding: 1rem;
+  grid-template-columns: 200px 1fr;
+  background-color: palegoldenrod;
+  border-radius: 5px;
+
+  @media all and (max-width: 800px) {
+    width: 597px;
+  }
+
+  @media all and (max-width: 420px) {
+    width: 95vw;
+    top: 10vh;
+    height: auto;
+    bottom: calc(50vh - 86px);
+  }
+
+  @media all and (min-height: 900px) and (min-width: 1000px) and (max-width: 1026px) {
+    top: calc(50vh - 478px);
+  }
+
+  .inventory_container {
+  }
+
+  img {
+    width: 200px;
+    height: 200px;
+  }
+
+  h4 {
+    margin: 0;
+    padding: 0;
+  }
+`;

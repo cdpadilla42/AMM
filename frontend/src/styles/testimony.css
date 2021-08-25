@@ -85,8 +85,8 @@ nav a {
 
 .text_box {
   position: absolute;
-  bottom: calc(50vh - 444px);
   width: 679px;
+  bottom: calc(50vh - 444px);
   left: 50vw;
   transform: translate(-50%, -50%);
 }
