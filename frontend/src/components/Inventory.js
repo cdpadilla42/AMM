@@ -88,7 +88,9 @@ const Inventory = () => {
           {isMapOpen ? (
             <Map />
           ) : (
-            <div className="inventory_grid">{renderInventory()}</div>
+            <div className="inventory_grid_container">
+              <div className="inventory_grid">{renderInventory()}</div>
+            </div>
           )}
         </StyledInventory>
       )}
@@ -130,14 +132,24 @@ const StyledInventory = styled.div`
     text-align: center;
   }
 
+  .inventory_grid_container {
+    height: calc(100% - 2rem);
+    width: 100%;
+    overflow-y: scroll;
+    padding: 1rem;
+  }
+
   .inventory_grid {
+    border: none;
     display: grid;
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 1rem;
-    height: calc(100% - 2rem);
+    height: auto;
     width: 100%;
-    overflow-y: scroll;
+    /* div:last-child {
+      margin-bottom: 1rem;
+    } */
   }
 
   div {
