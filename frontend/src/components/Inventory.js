@@ -55,10 +55,16 @@ const Inventory = () => {
     const selectedItems = isShowingPeople ? animalNotes : fullItemsInventory;
     const jsx = selectedItems.map((item) => {
       return (
-        <div key={item.name} data-name={item.name} onClick={displayItemDetails}>
+        <div
+          key={item.name}
+          data-name={item.name}
+          onClick={displayItemDetails}
+          className="inventory_item"
+        >
           <img
             src={urlFor(item.imageUrl).width(200).height(200).url()}
             alt=""
+            className="inventory_item_image"
           />
           <span>{item.name}</span>
         </div>
@@ -106,9 +112,9 @@ const StyledInventory = styled.div`
   width: 679px;
   height: 350px;
   z-index: 6;
-  border: 1px solid black;
-  padding: 1rem;
-  background-color: palegoldenrod;
+  /* border: 1px solid black; */
+  /* padding: 1rem; */
+  background: url('https://catwithmonocle.com/wp-content/uploads/2020/03/ac-new-horizons-nook-pattern-3840x2160-1.jpg');
   border-radius: 5px;
 
   @media all and (max-width: 800px) {
@@ -128,8 +134,9 @@ const StyledInventory = styled.div`
 
   .inventory_header {
     width: 100%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     text-align: center;
+    background: none;
   }
 
   .inventory_grid_container {
@@ -137,6 +144,7 @@ const StyledInventory = styled.div`
     width: 100%;
     overflow-y: scroll;
     padding: 1rem;
+    background: none;
   }
 
   .inventory_grid {
@@ -147,13 +155,14 @@ const StyledInventory = styled.div`
     grid-gap: 1rem;
     height: auto;
     width: 100%;
+    background: none;
     /* div:last-child {
       margin-bottom: 1rem;
     } */
   }
 
   div {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     /* display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -162,7 +171,14 @@ const StyledInventory = styled.div`
     background-color: #fff;
   }
 
-  img {
+  .inventory_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+  }
+
+  img.inventory_item_image {
     width: 80px;
     height: 80px;
   }
