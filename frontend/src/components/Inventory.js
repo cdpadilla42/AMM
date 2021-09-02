@@ -114,7 +114,8 @@ const StyledInventory = styled.div`
   z-index: 6;
   /* border: 1px solid black; */
   /* padding: 1rem; */
-  background: url('https://catwithmonocle.com/wp-content/uploads/2020/03/ac-new-horizons-nook-pattern-3840x2160-1.jpg');
+  background: rgb(188, 221, 200)
+    url('https://catwithmonocle.com/wp-content/uploads/2020/03/ac-new-horizons-nook-pattern-3840x2160-1.jpg');
   border-radius: 5px;
 
   @media all and (max-width: 800px) {
