@@ -11,6 +11,8 @@ import {
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import urlFor from '../lib/imageUrlBuilder';
 import Map from './Map';
+import { getInventoryItems } from '../store/inventory';
+import { getUserItemsFromLocalStorage } from '../lib/localStorage';
 
 const Inventory = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -41,9 +43,7 @@ const Inventory = () => {
   // * NOTE: We have the ability to filter based on what's in the user's inventory!
   // * It's this function
   function selectUserItemsFromFullInventory() {
-    const userItemsInventory = JSON.parse(
-      window.localStorage.getItem('itemsInInventory')
-    ).items;
+    const userItemsInventory = getUserItemsFromLocalStorage();
     console.log('fullItemsInventory', fullItemsInventory);
     console.log('userItemsInventory', userItemsInventory);
     return fullItemsInventory.filter((item) => {
@@ -52,7 +52,9 @@ const Inventory = () => {
   }
 
   function renderInventory() {
-    const selectedItems = isShowingPeople ? animalNotes : fullItemsInventory;
+    const selectedItems = isShowingPeople
+      ? animalNotes
+      : selectUserItemsFromFullInventory();
     const jsx = selectedItems.map((item) => {
       return (
         <div

@@ -16,6 +16,8 @@ const initialState = {
       description: 'QT',
     },
   ],
+  userItems: [],
+  lastUpdated: null,
 };
 
 // Actions
@@ -47,6 +49,7 @@ export const getAnimalNotes = createAsyncThunk('GET_ANIMAL_NOTES', async () => {
 });
 
 export const addToInventory = createAction('ADD_TO_INVENTORY');
+export const markInventoryUpdated = createAction('ADD_TO_INVENTORY');
 
 // Reducer
 
@@ -58,7 +61,11 @@ function inventoryReducer(state = initialState, action) {
     case 'GET_ANIMAL_NOTES/fulfilled':
       return { ...state, notes: payload };
     case addToInventory.toString():
-      return { ...state, payload };
+      const newItems = [...state.items, payload];
+      return { ...state, items: newItems };
+    case markInventoryUpdated.toString():
+      const lastUpdated = new Date().toISOString();
+      return { ...state, lastUpdated };
     default:
       return state;
   }

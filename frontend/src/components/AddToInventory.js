@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { addItemToLocalStorageInventory } from '../lib/localStorage';
-import { getInventoryItems } from '../store/inventory';
+import { getInventoryItems, markInventoryUpdated } from '../store/inventory';
 
 const AddToInventory = () => {
   const { inputs, handleChange, resetForm, clearForm } = useForm({ item: '' });
@@ -15,7 +15,10 @@ const AddToInventory = () => {
     );
     if (!!matchedInGameItem) {
       // Add to users inventory
+      // save to local storage
       addItemToLocalStorageInventory(matchedInGameItem.name);
+      // notify redux to trigger component updates
+      dispatch(markInventoryUpdated());
     } else {
       // Show error to user
     }

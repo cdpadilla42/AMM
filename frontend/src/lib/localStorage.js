@@ -5,9 +5,7 @@ const itemsInInventory = {
 };
 
 export const addItemToLocalStorageInventory = (item) => {
-  const storageData = JSON.parse(
-    window.localStorage.getItem('itemsInInventory')
-  );
+  const storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
 
   const initialInventory = storageData.items;
 
@@ -17,3 +15,6 @@ export const addItemToLocalStorageInventory = (item) => {
 
   localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
 };
+
+export const getUserItemsFromLocalStorage = () =>
+  JSON.parse(localStorage.getItem('itemsInInventory'))?.items;
