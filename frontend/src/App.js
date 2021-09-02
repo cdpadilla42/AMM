@@ -6,12 +6,16 @@ import SelectConversation from './pages/SelectConversation';
 import Map from './components/Map';
 import store from './store/store';
 import Playground from './pages/Playground';
+import AddToInventory from './components/AddToInventory';
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
         <Switch>
+          <Route path="/addItemTest">
+            <AddToInventory />
+          </Route>
           <Route path="/inventory">
             <Map />
           </Route>
