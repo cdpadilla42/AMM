@@ -1,7 +1,7 @@
 const { localStorage } = window;
 const itemsInInventory = {
-  items: ['The Prophecy'],
-  act: 2,
+  items: [],
+  act: 1,
 };
 
 export const addItemToLocalStorageInventory = (item) => {
@@ -16,5 +16,16 @@ export const addItemToLocalStorageInventory = (item) => {
   localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
 };
 
-export const getUserItemsFromLocalStorage = () =>
-  JSON.parse(localStorage.getItem('itemsInInventory'))?.items;
+export const getUserItemsFromLocalStorage = () => {
+  const res = JSON.parse(localStorage.getItem('itemsInInventory'))?.items;
+  if (!!res) {
+    return res;
+  } else {
+    initializeLocalStorageInventory();
+    return { items: [] };
+  }
+};
+
+export const initializeLocalStorageInventory = () => {
+  localStorage.setItem('itemsInInventory', JSON.stringify(itemsInInventory));
+};
