@@ -12,7 +12,9 @@ import {
 
 const AddToInventory = () => {
   const { inputs, handleChange, resetForm, clearForm } = useForm({ item: '' });
-  const { items: fullItemsList } = useSelector((state) => state.inventory);
+  const { items: fullItemsList, userItems } = useSelector(
+    (state) => state.inventory
+  );
   const dispatch = useDispatch();
   const [message, setMessage] = useState(null);
 
@@ -22,6 +24,13 @@ const AddToInventory = () => {
       (item) => item?.name.toLowerCase() === inputs.item.trim().toLowerCase()
     );
     if (!!matchedInGameItem) {
+      if (userItems.includes(matchedInGameItem.name)) {
+        showMessage({
+          type: 'success',
+          text: `Oh hey! ${matchedInGameItem.name} is already in the file.`,
+        });
+        return;
+      }
       // Add to users inventory
       // save to local storage
       addItemToLocalStorageInventory(matchedInGameItem.name);
