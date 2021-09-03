@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import useForm from '../hooks/useForm';
 import { addItemToLocalStorageInventory } from '../lib/localStorage';
-import { getInventoryItems, markInventoryUpdated } from '../store/inventory';
+import {
+  addToInventory,
+  getInventoryItems,
+  initializeUserInventoryFromLocalStorage,
+  markInventoryUpdated,
+} from '../store/inventory';
 
 const AddToInventory = () => {
   const { inputs, handleChange, resetForm, clearForm } = useForm({ item: '' });
@@ -14,14 +19,14 @@ const AddToInventory = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const matchedInGameItem = fullItemsList.find(
-      (item) => item.name.toLowerCase() === inputs.item.trim().toLowerCase()
+      (item) => item?.name.toLowerCase() === inputs.item.trim().toLowerCase()
     );
     if (!!matchedInGameItem) {
       // Add to users inventory
       // save to local storage
       addItemToLocalStorageInventory(matchedInGameItem.name);
-      // notify redux to trigger component updates
-      dispatch(markInventoryUpdated());
+      // add to redux
+      dispatch(addToInventory(matchedInGameItem.name));
       showMessage({
         type: 'success',
         text: `Great! ${matchedInGameItem.name} was added to the evidence file.`,
@@ -51,6 +56,7 @@ const AddToInventory = () => {
   useEffect(() => {
     // TODO Rip me out when integrating with rest of application
     dispatch(getInventoryItems());
+    dispatch(initializeUserInventoryFromLocalStorage());
   }, []);
 
   return (
