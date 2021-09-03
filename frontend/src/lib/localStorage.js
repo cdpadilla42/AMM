@@ -5,7 +5,12 @@ const itemsInInventory = {
 };
 
 export const addItemToLocalStorageInventory = (item) => {
-  const storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
+  let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
+
+  if (!storageData) {
+    initializeLocalStorageInventory();
+    storageData = itemsInInventory;
+  }
 
   const initialInventory = storageData.items;
 
@@ -27,5 +32,7 @@ export const getUserItemsFromLocalStorage = () => {
 };
 
 export const initializeLocalStorageInventory = () => {
-  localStorage.setItem('itemsInInventory', JSON.stringify(itemsInInventory));
+  if (!localStorage.getItem('itemsInInventory')) {
+    localStorage.setItem('itemsInInventory', JSON.stringify(itemsInInventory));
+  }
 };
