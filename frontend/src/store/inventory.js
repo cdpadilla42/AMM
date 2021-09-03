@@ -49,7 +49,7 @@ export const getAnimalNotes = createAsyncThunk('GET_ANIMAL_NOTES', async () => {
 });
 
 export const addToInventory = createAction('ADD_TO_INVENTORY');
-export const markInventoryUpdated = createAction('ADD_TO_INVENTORY');
+export const markInventoryUpdated = createAction('MARK_INVENTORY_UPDATED');
 
 // Reducer
 

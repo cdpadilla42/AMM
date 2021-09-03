@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import useForm from '../hooks/useForm';
 import { addItemToLocalStorageInventory } from '../lib/localStorage';
 import { getInventoryItems, markInventoryUpdated } from '../store/inventory';
@@ -8,6 +9,8 @@ const AddToInventory = () => {
   const { inputs, handleChange, resetForm, clearForm } = useForm({ item: '' });
   const { items: fullItemsList } = useSelector((state) => state.inventory);
   const dispatch = useDispatch();
+  const [message, setMessage] = useState(null);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const matchedInGameItem = fullItemsList.find(
@@ -19,9 +22,30 @@ const AddToInventory = () => {
       addItemToLocalStorageInventory(matchedInGameItem.name);
       // notify redux to trigger component updates
       dispatch(markInventoryUpdated());
+      showMessage({
+        type: 'success',
+        text: `Great! ${matchedInGameItem.name} was added to the evidence file.`,
+      });
     } else {
       // Show error to user
+      showMessage({
+        type: 'error',
+        text: "Hmmm, that doesn't seem like a piece of evidence. Did you spell it correctly?",
+      });
     }
+  };
+
+  const showMessage = (message) => {
+    /*
+    message: {
+      type: 'success' || 'error',
+      text: String,
+    } 
+    */
+    setMessage(message);
+    setTimeout(() => {
+      setMessage(null);
+    }, 7000);
   };
 
   useEffect(() => {
@@ -30,7 +54,12 @@ const AddToInventory = () => {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <StyledAddToInventory onSubmit={handleSubmit}>
+      <div
+        className={`addtoinventory_message_display ${message && message.type}`}
+      >
+        <span>{message?.text}</span>
+      </div>
       <input
         type="text"
         name="item"
@@ -38,8 +67,18 @@ const AddToInventory = () => {
         value={inputs.item}
         onChange={handleChange}
       />
-    </form>
+    </StyledAddToInventory>
   );
 };
 
 export default AddToInventory;
+
+const StyledAddToInventory = styled.form`
+  .addtoinventory_message_display.success {
+    color: green;
+  }
+
+  .addtoinventory_message_display.error {
+    color: red;
+  }
+`;
