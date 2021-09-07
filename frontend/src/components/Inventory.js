@@ -13,11 +13,13 @@ import urlFor from '../lib/imageUrlBuilder';
 import Map from './Map';
 import { getInventoryItems } from '../store/inventory';
 import { getUserItemsFromLocalStorage } from '../lib/localStorage';
+import AddToInventory from './AddToInventory';
 
 const Inventory = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState('');
   const [isShowingPeople, setIsShowingPeople] = useState(false);
+  const [isShowingAddItem, setIsShowingAddItem] = useState(false);
   const dispatch = useDispatch();
 
   const isMapOpen = useSelector((state) => state.dialogue.isMapOpen);
@@ -38,6 +40,10 @@ const Inventory = () => {
 
   function toggleShowingPeople() {
     setIsShowingPeople(!isShowingPeople);
+  }
+
+  function toggleShowingAddItem() {
+    setIsShowingAddItem(!isShowingAddItem);
   }
 
   // * NOTE: We have the ability to filter based on what's in the user's inventory!
@@ -92,12 +98,16 @@ const Inventory = () => {
               {isShowingPeople ? 'Items' : 'Animals'}
             </button>
             <button onClick={() => dispatch(toggleMap())}>Map</button>
+            <button onClick={toggleShowingAddItem}>Add to inventory</button>
           </div>
           {isMapOpen ? (
             <Map />
           ) : (
             <div className="inventory_grid_container">
               <div className="inventory_grid">{renderInventory()}</div>
+              <div className="addtoinventory_container">
+                <AddToInventory />
+              </div>
             </div>
           )}
         </StyledInventory>
@@ -133,6 +143,16 @@ const StyledInventory = styled.div`
 
   @media all and (min-height: 900px) and (min-width: 1000px) and (max-width: 1026px) {
     top: calc(50vh - 478px);
+  }
+
+  .addtoinventory_container {
+    position: absolute;
+    width: 90%;
+    height: 120px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
   }
 
   .inventory_header {

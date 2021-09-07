@@ -70,6 +70,7 @@ const AddToInventory = () => {
 
   return (
     <StyledAddToInventory onSubmit={handleSubmit}>
+      <h2 className="addtoinventory_title">Add Item to Inventory</h2>
       <div
         className={`addtoinventory_message_display ${message && message.type}`}
       >
@@ -78,6 +79,7 @@ const AddToInventory = () => {
       <input
         type="text"
         name="item"
+        className="addtoinventory_input"
         id="item"
         value={inputs.item}
         onChange={handleChange}
@@ -89,11 +91,25 @@ const AddToInventory = () => {
 export default AddToInventory;
 
 const StyledAddToInventory = styled.form`
+  text-align: center;
+  .addtoinventory_title {
+    margin: 0;
+  }
+
+  .addtoinventory_message_display {
+    height: 25px;
+  }
+
   .addtoinventory_message_display.success {
     color: green;
   }
 
   .addtoinventory_message_display.error {
     color: red;
+  }
+
+  .addtoinventory_input {
+    width: 200px;
+    font-size: 1.8rem;
   }
 `;
