@@ -52,9 +52,7 @@ const Inventory = () => {
   }
 
   function renderInventory() {
-    const selectedItems = isShowingPeople
-      ? animalNotes
-      : selectUserItemsFromFullInventory();
+    const selectedItems = isShowingPeople ? animalNotes : fullItemsInventory;
     const jsx = selectedItems.map((item) => {
       return (
         <div
@@ -266,6 +264,7 @@ export default Inventory;
 
 const StyledItemDetailsDisplay = styled.div`
   position: absolute;
+  z-index: 6;
   top: calc(50vh - 290px);
   left: 50vw;
   transform: translateX(-50%);
