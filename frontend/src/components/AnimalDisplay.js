@@ -26,15 +26,6 @@ const AnimalDisplay = ({
     spriteObj?.images.find((image) => image.emotion.emotion === emotion)
       ?.spriteUrl || normal;
 
-  console.log(emotion);
-  console.log(
-    'Matched url',
-    spriteObj?.images.find((image) => image.emotion.emotion === emotion)
-  );
-
-  console.log('sprites', sprites);
-  console.log({ spriteObj });
-  console.log({ spriteUrl });
   const animalImages = {
     normal,
     mad,

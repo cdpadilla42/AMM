@@ -30,7 +30,6 @@ const ResponseBox = () => {
 
   function renderResponseOptions() {
     if (!responseOptions) return;
-    console.log(responseOptions);
 
     return responseOptions.map((optionObj) => (
       <li onClick={() => handleClick(optionObj.followingDialogue?._id)}>

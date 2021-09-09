@@ -56,7 +56,6 @@ const TextBox = (props) => {
     function handleKeydown(e) {
       if (e.code === 'ArrowRight' && !responseBoxIsOpen) {
         // next
-        console.log('CHILLING!!!');
         handleNextClick();
       } else if (e.code === 'ArrowLeft') {
         // back
@@ -104,7 +103,6 @@ const TextBox = (props) => {
 
   const handlePrevClick = () => {
     if (currentDialoguePosition === 0) {
-      console.log('stopping');
     } else {
       props.prevDialogue();
     }
@@ -120,7 +118,6 @@ const TextBox = (props) => {
       };
     };
 
-    console.log('typing....', highlightedText, createMarkup());
     return (
       <Typist
         key={text}

@@ -22,13 +22,13 @@ const ImageLoader = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    console.log('loading', loading);
-    console.log('numOfSprites', numOfSprites);
-    if (!loading) {
-      console.log('started at', startTime.current, 'ended at', new Date());
-    }
-  }, [loading]);
+  // useEffect(() => {
+  //   console.log('loading', loading);
+  //   console.log('numOfSprites', numOfSprites);
+  //   if (!loading) {
+  //     console.log('started at', startTime.current, 'ended at', new Date());
+  //   }
+  // }, [loading]);
 
   const renderHiddenImages = (hideBool) => {
     return sprites.map((animal) => {
@@ -38,6 +38,7 @@ const ImageLoader = ({ children }) => {
             src={spriteObj.spriteUrl}
             onLoad={imageLoaded}
             className="hide"
+            key={spriteObj.spriteUrl}
           />
         );
       });

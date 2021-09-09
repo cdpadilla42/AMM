@@ -42,7 +42,6 @@ const MultipleAnimalDisplay = () => {
     indexToChange = animalsState?.findIndex(
       (animal) => animal.name === speaker
     );
-    console.log({ indexToChange });
     setAnimalsState(() => {
       newState[indexToChange].emotion = emotion;
       return newState;

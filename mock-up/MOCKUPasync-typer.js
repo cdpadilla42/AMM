@@ -13,7 +13,6 @@ async function draw(el) {
   el.innerHTML = html;
   const showField = el.querySelector('.show');
   const hideField = el.querySelector('.hide');
-  console.log(showField);
   let hideText = text;
   let showText = '';
   for (const letter of text) {

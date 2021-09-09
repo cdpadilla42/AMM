@@ -11,7 +11,6 @@ import {
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import urlFor from '../lib/imageUrlBuilder';
 import Map from './Map';
-import { getInventoryItems } from '../store/inventory';
 import { getUserItemsFromLocalStorage } from '../lib/localStorage';
 import AddToInventory from './AddToInventory';
 
@@ -24,6 +23,7 @@ const Inventory = () => {
 
   const isMapOpen = useSelector((state) => state.dialogue.isMapOpen);
   const fullItemsInventory = useSelector((store) => store.inventory.items);
+  const { userItems } = useSelector((store) => store.inventory);
   const animalNotes = useSelector((store) => store.inventory.notes);
   const currentDialogueObj = useCurrentDialogueObj();
 
@@ -46,14 +46,15 @@ const Inventory = () => {
     setIsShowingAddItem(!isShowingAddItem);
   }
 
+  function closeShowingAddItems() {
+    setIsShowingAddItem(false);
+  }
+
   // * NOTE: We have the ability to filter based on what's in the user's inventory!
   // * It's this function
   function selectUserItemsFromFullInventory() {
-    const userItemsInventory = getUserItemsFromLocalStorage();
-    console.log('fullItemsInventory', fullItemsInventory);
-    console.log('userItemsInventory', userItemsInventory);
     return fullItemsInventory.filter((item) => {
-      return userItemsInventory.includes(item.name);
+      return userItems.includes(item.name);
     });
   }
 
@@ -105,8 +106,12 @@ const Inventory = () => {
           ) : (
             <div className="inventory_grid_container">
               <div className="inventory_grid">{renderInventory()}</div>
-              <div className="addtoinventory_container">
-                <AddToInventory />
+              <div
+                className={`addtoinventory_container ${
+                  isShowingAddItem ? '' : 'hide'
+                }`}
+              >
+                <AddToInventory closeDisplay={closeShowingAddItems} />
               </div>
             </div>
           )}
@@ -213,6 +218,10 @@ const StyledInventory = styled.div`
 
   button {
     display: inline;
+  }
+
+  .hide {
+    display: none;
   }
 `;
 

@@ -37,7 +37,6 @@ export const useHighlightFilter = ({ items = [], animals = [] }) => {
         : '';
       if (animal.name === 'Katt') {
         query = new RegExp(`Katt(?!('s )?Junkyard)`, 'gi');
-        console.log(query);
       } else {
         query = animal.name;
       }

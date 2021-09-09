@@ -14,8 +14,6 @@ const SelectConversation = () => {
   }, []);
 
   function renderConversations() {
-    console.log(conversations);
-
     return conversations.map((convo) => (
       <li key={convo._id} id={convo._id}>
         <Link to={`/testimony/${convo._id}`}>{convo.name}</Link>

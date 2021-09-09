@@ -68,6 +68,7 @@ function inventoryReducer(state = initialState, action) {
       const userItems = getUserItemsFromLocalStorage();
       return { ...state, userItems };
     case addToInventory.toString():
+      console.log();
       const newItems = [...state.userItems, payload];
       return { ...state, userItems: newItems };
     case markInventoryUpdated.toString():
