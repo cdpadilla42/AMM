@@ -13,6 +13,7 @@ import Item from './Item';
 import AnimalNotes from './AnimalNotes';
 import Background from './Background';
 import AnimalImages from './AnimalImages';
+import SNotes from './Snotes';
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -30,5 +31,6 @@ export default createSchema({
     Item,
     AnimalNotes,
     Background,
+    SNotes,
   ]),
 });

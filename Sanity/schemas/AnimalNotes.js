@@ -41,18 +41,21 @@ export default {
     {
       title: 'Part A',
       name: 'descriptionA',
+      type: 'array',
       of: [{ type: 'block' }],
       fieldset: 'descriptions',
     },
     {
       title: 'Part B',
       name: 'descriptionB',
+      type: 'array',
       of: [{ type: 'block' }],
       fieldset: 'descriptions',
     },
     {
       title: 'Part C',
       name: 'descriptionC',
+      type: 'array',
       of: [{ type: 'block' }],
       fieldset: 'descriptions',
     },
