@@ -17,7 +17,6 @@ const AnimalsDisplayController = () => {
     }
   }, [dialogue]);
   if (isMultiAnimalConvo) {
-    console.log('Two can play at that!');
     // control the changing of speaker emotion
     return <MultipleAnimalDisplay />;
   }

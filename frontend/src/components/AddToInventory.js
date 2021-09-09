@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import onClickOutside from 'react-onclickoutside';
 import useForm from '../hooks/useForm';
 import { addItemToLocalStorageInventory } from '../lib/localStorage';
 import {
@@ -10,13 +12,27 @@ import {
   markInventoryUpdated,
 } from '../store/inventory';
 
-const AddToInventory = () => {
+const AddToInventory = ({ closeDisplay }) => {
   const { inputs, handleChange, resetForm, clearForm } = useForm({ item: '' });
   const { items: fullItemsList, userItems } = useSelector(
     (state) => state.inventory
   );
   const dispatch = useDispatch();
   const [message, setMessage] = useState(null);
+  const containerRef = useRef(null);
+
+  // useEffect(() => {
+  //   const listenForClickOutside = (e) => {
+  //     if (e.target !== containerRef.current) closeDisplay();
+  //     console.log(e);
+  //   };
+
+  //   window.addEventListener('click', listenForClickOutside);
+
+  //   return () => {
+  //     window.removeEventListener('click', listenForClickOutside);
+  //   };
+  // }, [containerRef]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,17 +45,20 @@ const AddToInventory = () => {
           type: 'success',
           text: `Oh hey! ${matchedInGameItem.name} is already in the file.`,
         });
+        clearForm();
         return;
+      } else {
+        // Add to users inventory
+        // save to local storage
+        addItemToLocalStorageInventory(matchedInGameItem.name);
+        // add to redux
+        dispatch(addToInventory(matchedInGameItem.name));
+        showMessage({
+          type: 'success',
+          text: `Great! ${matchedInGameItem.name} was added to the evidence file.`,
+        });
+        clearForm();
       }
-      // Add to users inventory
-      // save to local storage
-      addItemToLocalStorageInventory(matchedInGameItem.name);
-      // add to redux
-      dispatch(addToInventory(matchedInGameItem.name));
-      showMessage({
-        type: 'success',
-        text: `Great! ${matchedInGameItem.name} was added to the evidence file.`,
-      });
     } else {
       // Show error to user
       showMessage({
@@ -62,14 +81,28 @@ const AddToInventory = () => {
     }, 7000);
   };
 
-  useEffect(() => {
-    // TODO Rip me out when integrating with rest of application
-    dispatch(getInventoryItems());
-    dispatch(initializeUserInventoryFromLocalStorage());
-  }, []);
+  // useEffect(() => {
+  //   // TODO Rip me out when integrating with rest of application
+  //   dispatch(getInventoryItems());
+  //   dispatch(initializeUserInventoryFromLocalStorage());
+  // }, []);
+
+  const handleCloseClick = (e) => {
+    e.preventDefault();
+    closeDisplay();
+  };
 
   return (
-    <StyledAddToInventory onSubmit={handleSubmit}>
+    <StyledAddToInventory onSubmit={handleSubmit} ref={containerRef}>
+      <button
+        className="addtoinventory_close"
+        aria-label="Close Add Item Modal Box"
+        type="button"
+        onClick={handleCloseClick}
+      >
+        &times;
+      </button>
+      <h2 className="addtoinventory_title">Add Item to Inventory</h2>
       <div
         className={`addtoinventory_message_display ${message && message.type}`}
       >
@@ -78,6 +111,7 @@ const AddToInventory = () => {
       <input
         type="text"
         name="item"
+        className="addtoinventory_input"
         id="item"
         value={inputs.item}
         onChange={handleChange}
@@ -88,12 +122,41 @@ const AddToInventory = () => {
 
 export default AddToInventory;
 
+AddToInventory.propTypes = {
+  closeDisplay: PropTypes.func,
+};
+
+AddToInventory.defaultProps = {
+  closeDisplay: () => {},
+};
+
 const StyledAddToInventory = styled.form`
+  text-align: center;
+
+  .addtoinventory_close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .addtoinventory_title {
+    margin: 0;
+  }
+
+  .addtoinventory_message_display {
+    height: 25px;
+  }
+
   .addtoinventory_message_display.success {
     color: green;
   }
 
   .addtoinventory_message_display.error {
     color: red;
+  }
+
+  .addtoinventory_input {
+    width: 200px;
+    font-size: 1.8rem;
   }
 `;

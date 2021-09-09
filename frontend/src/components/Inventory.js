@@ -11,17 +11,19 @@ import {
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import urlFor from '../lib/imageUrlBuilder';
 import Map from './Map';
-import { getInventoryItems } from '../store/inventory';
 import { getUserItemsFromLocalStorage } from '../lib/localStorage';
+import AddToInventory from './AddToInventory';
 
 const Inventory = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState('');
   const [isShowingPeople, setIsShowingPeople] = useState(false);
+  const [isShowingAddItem, setIsShowingAddItem] = useState(false);
   const dispatch = useDispatch();
 
   const isMapOpen = useSelector((state) => state.dialogue.isMapOpen);
   const fullItemsInventory = useSelector((store) => store.inventory.items);
+  const { userItems } = useSelector((store) => store.inventory);
   const animalNotes = useSelector((store) => store.inventory.notes);
   const currentDialogueObj = useCurrentDialogueObj();
 
@@ -40,14 +42,19 @@ const Inventory = () => {
     setIsShowingPeople(!isShowingPeople);
   }
 
+  function toggleShowingAddItem() {
+    setIsShowingAddItem(!isShowingAddItem);
+  }
+
+  function closeShowingAddItems() {
+    setIsShowingAddItem(false);
+  }
+
   // * NOTE: We have the ability to filter based on what's in the user's inventory!
   // * It's this function
   function selectUserItemsFromFullInventory() {
-    const userItemsInventory = getUserItemsFromLocalStorage();
-    console.log('fullItemsInventory', fullItemsInventory);
-    console.log('userItemsInventory', userItemsInventory);
     return fullItemsInventory.filter((item) => {
-      return userItemsInventory.includes(item.name);
+      return userItems.includes(item.name);
     });
   }
 
@@ -90,12 +97,20 @@ const Inventory = () => {
               {isShowingPeople ? 'Items' : 'Animals'}
             </button>
             <button onClick={() => dispatch(toggleMap())}>Map</button>
+            <button onClick={toggleShowingAddItem}>Add to inventory</button>
           </div>
           {isMapOpen ? (
             <Map />
           ) : (
             <div className="inventory_grid_container">
               <div className="inventory_grid">{renderInventory()}</div>
+              <div
+                className={`addtoinventory_container ${
+                  isShowingAddItem ? '' : 'hide'
+                }`}
+              >
+                <AddToInventory closeDisplay={closeShowingAddItems} />
+              </div>
             </div>
           )}
         </StyledInventory>
@@ -131,6 +146,16 @@ const StyledInventory = styled.div`
 
   @media all and (min-height: 900px) and (min-width: 1000px) and (max-width: 1026px) {
     top: calc(50vh - 478px);
+  }
+
+  .addtoinventory_container {
+    position: absolute;
+    width: 90%;
+    height: 120px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
   }
 
   .inventory_header {
@@ -191,6 +216,10 @@ const StyledInventory = styled.div`
 
   button {
     display: inline;
+  }
+
+  .hide {
+    display: none;
   }
 `;
 

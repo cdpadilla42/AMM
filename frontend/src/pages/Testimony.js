@@ -2,7 +2,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AnimalDisplay from '../components/AnimalDisplay';
 import { getDialogue, resetDialoguePosition } from '../store/dialogue';
-import { getInventoryItems, getAnimalNotes } from '../store/inventory';
+import {
+  getInventoryItems,
+  getAnimalNotes,
+  initializeUserInventoryFromLocalStorage,
+} from '../store/inventory';
 import { getSprites } from '../store/sprites';
 import { getBackground, getConversationDetails } from '../store/conversations';
 import TextBox from '../components/TextBox';
@@ -38,16 +42,7 @@ const Testimony = (props) => {
   useEffect(() => {
     dispatch(getInventoryItems());
     dispatch(getAnimalNotes());
-  }, []);
-
-  // on load, set local storage
-  useEffect(() => {
-    const { localStorage } = window;
-    const itemsInInventory = {
-      items: ['The Prophecy'],
-      act: 2,
-    };
-    localStorage.setItem('itemsInInventory', JSON.stringify(itemsInInventory));
+    dispatch(initializeUserInventoryFromLocalStorage());
   }, []);
 
   return (
