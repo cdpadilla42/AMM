@@ -5,6 +5,7 @@ import { getDialogue, resetDialoguePosition } from '../store/dialogue';
 import {
   getInventoryItems,
   getAnimalNotes,
+  getSNotes,
   initializeUserInventoryFromLocalStorage,
 } from '../store/inventory';
 import { getSprites } from '../store/sprites';
@@ -38,10 +39,11 @@ const Testimony = (props) => {
     dispatch(resetDialoguePosition());
   }, []);
 
-  // Get items for inventory & Animal notes
+  // Get items for inventory, Animal notes & Agent S Notes
   useEffect(() => {
     dispatch(getInventoryItems());
     dispatch(getAnimalNotes());
+    dispatch(getSNotes());
     dispatch(initializeUserInventoryFromLocalStorage());
   }, []);
 

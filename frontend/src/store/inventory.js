@@ -17,6 +17,8 @@ const initialState = {
       description: 'QT',
     },
   ],
+  sNotes: [],
+  userSNotes: [],
   userItems: [],
   lastUpdated: null,
 };
@@ -43,7 +45,15 @@ export const getAnimalNotes = createAsyncThunk('GET_ANIMAL_NOTES', async () => {
         name, descriptionA, descriptionB, descriptionC, descriptionD, nickname,
         "animalRef": animalRef->{color},
         "imageUrl": image.asset->url
- 
+}`
+  );
+  return response;
+});
+
+export const getSNotes = createAsyncThunk('GET_SNOTES', async () => {
+  const response = await sanityClient.fetch(
+    `*[_type == "snotes"]{
+        name, description, count,
 }`
   );
   return response;
@@ -53,6 +63,7 @@ export const initializeUserInventoryFromLocalStorage = createAction(
   'INITIALIZAE_USER_INVENTORY_FROM_LOCAL_STORAGE'
 );
 export const addToInventory = createAction('ADD_TO_INVENTORY');
+export const addToSNotesList = createAction('ADD_TO_SNOTES_LIST');
 export const markInventoryUpdated = createAction('MARK_INVENTORY_UPDATED');
 
 // Reducer
@@ -64,13 +75,17 @@ function inventoryReducer(state = initialState, action) {
       return { ...state, items: payload };
     case 'GET_ANIMAL_NOTES/fulfilled':
       return { ...state, notes: payload };
+    case 'GET_SNOTES/fulfilled':
+      return { ...state, sNotes: payload };
     case initializeUserInventoryFromLocalStorage.toString():
       const userItems = getUserItemsFromLocalStorage();
       return { ...state, userItems };
     case addToInventory.toString():
-      console.log();
       const newItems = [...state.userItems, payload];
       return { ...state, userItems: newItems };
+    case addToSNotesList.toString():
+      const newSNotes = [...state.userSNotes, payload];
+      return { ...state, userSNotes: newSNotes };
     case markInventoryUpdated.toString():
       const lastUpdated = new Date().toISOString();
       return { ...state, lastUpdated };
