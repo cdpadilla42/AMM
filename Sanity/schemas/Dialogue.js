@@ -73,6 +73,32 @@ export default {
               description:
                 'Turn on if you would like the next phrase added to this one',
             },
+            {
+              title: 'Agent S Notes Event',
+              name: 'sNotesEventTriggered',
+              type: 'boolean',
+              description: 'On if this dialogue triggers an event',
+            },
+            {
+              title: 'Agent S Notes Event Type',
+              name: 'sNotesEventType',
+              type: 'string',
+              description: 'Adding or completing a note',
+              options: {
+                list: ['Add', 'Complete'],
+                layout: 'radio',
+              },
+              hidden: ({ parent }) => !parent.sNotesEventTriggered,
+            },
+            {
+              title: 'Agent S Notes Event Reference',
+              name: 'sNotesEventRef',
+              type: 'reference',
+              to: [{ type: 'snotes' }],
+              description:
+                'Reference to the note created in the Agent S Notes Doc type in Sanity.',
+              hidden: ({ parent }) => !parent.sNotesEventTriggered,
+            },
           ],
         },
       ],
