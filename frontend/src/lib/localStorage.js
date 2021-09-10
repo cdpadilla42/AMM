@@ -2,7 +2,18 @@ const { localStorage } = window;
 const itemsInInventory = {
   items: [],
   act: 1,
+  sNotes: {},
 };
+
+/*
+  sNotes Object: {
+    name: {
+      completed: Boolean,
+      totalCount: Integer,
+      userEventInstances: [] // * Array of dialogue ID's for where event fired. Keep same event from adding to count
+    }
+  }
+*/
 
 export const addItemToLocalStorageInventory = (item) => {
   let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
@@ -23,6 +34,25 @@ export const addItemToLocalStorageInventory = (item) => {
   localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
 };
 
+export const addSNoteToLocalStorageInventory = (sNote) => {
+  let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
+  console.log('function start', storageData);
+  if (!storageData) {
+    initializeLocalStorageInventory();
+    storageData = itemsInInventory;
+  }
+
+  const initialSNotesList = storageData.sNotes;
+
+  const newSNotesList = [...initialSNotesList, sNote];
+
+  storageData.sNotes = newSNotesList;
+
+  console.log('function end', storageData);
+
+  localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
+};
+
 export const getUserItemsFromLocalStorage = () => {
   const res = JSON.parse(localStorage.getItem('itemsInInventory'))?.items;
   console.log(res);
@@ -30,7 +60,18 @@ export const getUserItemsFromLocalStorage = () => {
     return res;
   } else {
     initializeLocalStorageInventory();
-    return { items: [] };
+    return [];
+  }
+};
+
+export const getUserSNotesFromLocalStorage = () => {
+  const res = JSON.parse(localStorage.getItem('itemsInInventory'))?.sNotes;
+  console.log(res);
+  if (!!res) {
+    return res;
+  } else {
+    initializeLocalStorageInventory();
+    return [];
   }
 };
 

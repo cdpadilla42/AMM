@@ -7,6 +7,7 @@ import Map from './components/Map';
 import store from './store/store';
 import Playground from './pages/Playground';
 import AddToInventory from './components/AddToInventory';
+import { addSNoteToLocalStorageInventory } from './lib/localStorage';
 
 function App() {
   return (
@@ -14,7 +15,9 @@ function App() {
       <Router>
         <Switch>
           <Route path="/addItemTest">
-            <AddToInventory />
+            <AddToInventory
+              addSNoteToLocalStorageInventory={addSNoteToLocalStorageInventory}
+            />
           </Route>
           <Route path="/inventory">
             <Map />
