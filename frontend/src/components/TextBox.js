@@ -38,6 +38,7 @@ const TextBox = (props) => {
     notes: animals,
     userSNotes,
   } = useSelector((state) => state.inventory);
+  const { showSNotes } = useSelector((state) => state.notepad);
 
   const [fromLink, setFromLink] = useState(false);
 
@@ -166,6 +167,7 @@ const TextBox = (props) => {
   // Add Keyboard listeners to document
   useEffect(() => {
     function handleKeydown(e) {
+      if (showSNotes) return;
       if (e.code === 'ArrowRight' && !responseBoxIsOpen) {
         // next
         handleNextClick();
