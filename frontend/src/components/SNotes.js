@@ -57,19 +57,24 @@ const SNotes = () => {
   };
 
   return (
-    <StyledSNotes onClick={onOutsideClick} showSNotes={showSNotes}>
-      <div className={`notepad_wrapper ${showSNotes ? '' : 'off_screen'}`}>
-        <div className="notepad_sheet">
-          <button
-            className="notepad_button"
-            type="button"
-            aria-label="Open Agent S's Notes"
-            onClick={toggleNotes}
-          >
-            📝
-          </button>
+    <StyledSNotes>
+      <div
+        onClick={onOutsideClick}
+        className={`overlay ${showSNotes ? 'showSNotes' : ''}`}
+      >
+        <div className={`notepad_wrapper ${showSNotes ? '' : 'off_screen'}`}>
+          <div className="notepad_sheet">
+            <button
+              className="notepad_button"
+              type="button"
+              aria-label="Open Agent S's Notes"
+              onClick={toggleNotes}
+            >
+              📝
+            </button>
+          </div>
+          <div className="notepad">{renderSNotes()}</div>
         </div>
-        <div className="notepad">{renderSNotes()}</div>
       </div>
     </StyledSNotes>
   );
@@ -78,19 +83,28 @@ const SNotes = () => {
 export default SNotes;
 
 const StyledSNotes = styled.div`
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.1);
-  transition: background-color 0.8s ease;
-  z-index: 100;
-  overflow-x: hidden;
+  .overlay {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: background-color 0.8s ease;
+    z-index: 100;
+    overflow-x: hidden;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: background-color 0.8s ease;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0);
+    pointer-events: none;
 
-  ${(props) =>
-    props.showSNotes
-      ? 'background-color: rgba(0, 0, 0, 0.1);'
-      : 'background-color: rgba(0,0,0,0);'};
-  ${(props) => (props.showSNotes ? '' : 'pointer-events: none')};
+    &.showSNotes {
+      background-color: rgba(0, 0, 0, 0.1);
+      pointer-events: auto;
+    }
+  }
 
   .notepad_wrapper {
     position: absolute;

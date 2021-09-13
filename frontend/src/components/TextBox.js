@@ -50,7 +50,7 @@ const TextBox = (props) => {
   //   ? currentDialogueObj.responseOptions
   //   : null;
 
-  const currentPhrase = phrases[currentDialoguePosition];
+  const currentPhrase = phrases?.[currentDialoguePosition] || {};
 
   const userHasSNote = (sNoteName) => {
     return !!userSNotes.find((userSNote) => userSNote.name === sNoteName);
