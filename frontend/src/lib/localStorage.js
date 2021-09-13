@@ -2,16 +2,17 @@ const { localStorage } = window;
 const itemsInInventory = {
   items: [],
   act: 1,
-  sNotes: {},
+  sNotes: [],
 };
 
 /*
   sNotes Object: {
-    name: {
+    [
+      nameL String,
       completed: Boolean,
       totalCount: Integer,
       userEventInstances: [] // * Array of dialogue ID's for where event fired. Keep same event from adding to count
-    }
+    ]
   }
 */
 
