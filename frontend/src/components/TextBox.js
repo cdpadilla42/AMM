@@ -129,15 +129,17 @@ const TextBox = (props) => {
             newUserEventInstances.push(sNoteDialoguePositionID);
             updatedSNote.userEventInstances = newUserEventInstances;
             // Update userSNotes
-            updateSNoteByIndex(updatedSNote, userSNoteIndex);
+
             // show message
             if (newCountForNote === count) {
               toast(`NICE! You checked off all items for ${name}!`);
+              updatedSNote.completed = true;
             } else {
               toast(
                 `Alright! ${newCountForNote} out of ${count} items checked off for ${name}!`
               );
             }
+            updateSNoteByIndex(updatedSNote, userSNoteIndex);
           }
         }
       }

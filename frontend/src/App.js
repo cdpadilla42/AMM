@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Testimony from './pages/Testimony';
 import SelectConversation from './pages/SelectConversation';
@@ -10,6 +10,7 @@ import store from './store/store';
 import Playground from './pages/Playground';
 import AddToInventory from './components/AddToInventory';
 import { addSNoteToLocalStorageInventory } from './lib/localStorage';
+import SNotes from './components/SNotes';
 
 function App() {
   return (
@@ -17,10 +18,8 @@ function App() {
       <ToastContainer />
       <Router>
         <Switch>
-          <Route path="/addItemTest">
-            <AddToInventory
-              addSNoteToLocalStorageInventory={addSNoteToLocalStorageInventory}
-            />
+          <Route path="/snotes">
+            <SNotes />
           </Route>
           <Route path="/inventory">
             <Map />

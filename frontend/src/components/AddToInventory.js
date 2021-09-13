@@ -2,15 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import onClickOutside from 'react-onclickoutside';
 import useForm from '../hooks/useForm';
 import { addItemToLocalStorageInventory } from '../lib/localStorage';
-import {
-  addToInventory,
-  getInventoryItems,
-  initializeUserInventoryFromLocalStorage,
-  markInventoryUpdated,
-} from '../store/inventory';
+import { addToInventory } from '../store/inventory';
 
 const AddToInventory = ({ closeDisplay }) => {
   const { inputs, handleChange, resetForm, clearForm } = useForm({ item: '' });
