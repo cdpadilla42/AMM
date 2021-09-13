@@ -8,7 +8,7 @@ const itemsInInventory = {
 /*
   sNotes Object: {
     [
-      nameL String,
+      name: String,
       completed: Boolean,
       totalCount: Integer,
       userEventInstances: [] // * Array of dialogue ID's for where event fired. Keep same event from adding to count
@@ -48,6 +48,19 @@ export const addSNoteToLocalStorageInventory = (sNote) => {
   const newSNotesList = [...initialSNotesList, sNote];
 
   storageData.sNotes = newSNotesList;
+
+  console.log('function end', storageData);
+
+  localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
+};
+
+export const updateSNoteInLocalStorageInventory = (sNote, index) => {
+  let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
+  console.log('function start', storageData);
+
+  const sNotesList = storageData.sNotes;
+
+  sNotesList[index] = sNote;
 
   console.log('function end', storageData);
 

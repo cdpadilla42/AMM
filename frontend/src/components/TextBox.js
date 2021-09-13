@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { connect, useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useHistory } from 'react-router-dom';
 import {
@@ -10,12 +10,18 @@ import {
   switchConversation,
   resetConversationToStart,
 } from '../store/dialogue';
+import { addToSNotesList, updateSNote } from '../store/inventory';
 import { useHighlightFilter } from '../lib/async-typer';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import Typist from 'react-typist';
 import ReactHtmlParser from 'react-html-parser';
+import {
+  addSNoteToLocalStorageInventory,
+  updateSNoteInLocalStorageInventory,
+} from '../lib/localStorage';
 
 const TextBox = (props) => {
+  const dispatch = useDispatch();
   const textRef = useRef(null);
   const history = useHistory();
   const {
@@ -26,7 +32,11 @@ const TextBox = (props) => {
     prevDialogueID,
     responseBoxIsOpen,
   } = useSelector((state) => state.dialogue);
-  const { items, notes: animals } = useSelector((state) => state.inventory);
+  const {
+    items,
+    notes: animals,
+    userSNotes,
+  } = useSelector((state) => state.inventory);
 
   const [fromLink, setFromLink] = useState(false);
 
@@ -39,7 +49,78 @@ const TextBox = (props) => {
   //   ? currentDialogueObj.responseOptions
   //   : null;
 
-  const text = phrases[currentDialoguePosition]?.text;
+  const currentPhrase = phrases[currentDialoguePosition];
+
+  const userHasSNote = (sNoteName) => {
+    return !!userSNotes.find((userSNote) => userSNote.name === sNoteName);
+  };
+
+  // Handle sNotes Event
+  useEffect(() => {
+    // If currentPhrase data available
+    if (currentPhrase && Object.keys(currentPhrase).length) {
+      // If we have all the necessary event data
+      if (
+        currentPhrase?.sNotesEventTriggered &&
+        currentPhrase.sNotesEventType &&
+        currentPhrase.sNotesEventRef?.name
+      ) {
+        // Handle the event
+        console.log('Handling SNote...');
+        const {
+          sNotesEventType,
+          sNotesEventRef: { name, count },
+        } = currentPhrase;
+        if (sNotesEventType === 'Add') {
+          // Construct the sNote object
+          const sNote = {
+            name,
+            completed: false,
+          };
+          // If event is already stored, return
+          if (userHasSNote(name)) return;
+          if (count) {
+            sNote.totalCount = count;
+            sNote.userEventInstances = [];
+          }
+          // store into redux
+          dispatch(addToSNotesList(sNote));
+          // store into local storage
+          addSNoteToLocalStorageInventory(sNote);
+          // show event message
+          console.log(`Added ${name} to Agent S's Notes! 📓`);
+        } else if (sNotesEventType === 'Complete') {
+          // if there is no totalCount, mark the sNote completed
+          if (!count) {
+            // Find the index of the matching user's SNote
+            const userSNoteIndex = userSNotes.findIndex(
+              (userSNote) => userSNote.name === name
+            );
+            const updatedSNote = { ...userSNotes[userSNoteIndex] };
+            // update the SNote
+            updatedSNote.completed = true;
+            // update redux
+            dispatch(
+              updateSNote({ sNote: updatedSNote, index: userSNoteIndex })
+            );
+            // update local storage
+            updateSNoteInLocalStorageInventory(updatedSNote, userSNoteIndex);
+            // show message
+            console.log(`HOORAY! You can check off ${name}!`);
+            // if there IS a total count
+          } else {
+            // if the sNote doesn't have this phrase ID stored in sNote.userEventInstances
+            // add to userEventInstances
+            // update redux
+            // update local storage
+            // show message (calc how many are left and render message)
+          }
+        }
+      }
+    }
+  }, [currentPhrase]);
+
+  const text = currentPhrase?.text;
   // On change effect
   useEffect(() => {
     // const textEl = textRef.current;

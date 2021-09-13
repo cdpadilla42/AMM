@@ -67,6 +67,7 @@ export const initializeUserInventoryFromLocalStorage = createAction(
 );
 export const addToInventory = createAction('ADD_TO_INVENTORY');
 export const addToSNotesList = createAction('ADD_TO_SNOTES_LIST');
+export const updateSNote = createAction('UPDATE_SNOTE');
 export const markInventoryUpdated = createAction('MARK_INVENTORY_UPDATED');
 
 // Reducer
@@ -90,6 +91,11 @@ function inventoryReducer(state = initialState, action) {
     case addToSNotesList.toString():
       const newSNotes = [...state.userSNotes, payload];
       return { ...state, userSNotes: newSNotes };
+    case updateSNote.toString():
+      const { sNote, index } = payload;
+      const newSNotesList = [...state.userSNotes];
+      newSNotesList[index] = sNote;
+      return { ...state, userSNotes: newSNotesList };
     case markInventoryUpdated.toString():
       const lastUpdated = new Date().toISOString();
       return { ...state, lastUpdated };
