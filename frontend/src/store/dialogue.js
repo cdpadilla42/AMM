@@ -48,7 +48,7 @@ export const getDialogue = createAsyncThunk(
 				animals[]->{name},
   			"phrase": phrase[]{
   				emotion->{emotion}, speaker->{name, color}, text, 
-					link,
+					link, sNotesEventRef->{name}, sNotesEventTriggered, sNotesEventType,
 				},
 				"responseOptions": responseOptions[]{
           text, 
