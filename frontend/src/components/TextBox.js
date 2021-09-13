@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {
   nextDialogue,
   prevDialogue,
@@ -94,8 +95,8 @@ const TextBox = (props) => {
           // store into local storage
           addSNoteToLocalStorageInventory(sNote);
           // show event message
-          console.log(`Added ${name} to Agent S's Notes! 📓`);
-        } else if (sNotesEventType === 'Complete') {
+          toast(`Added ${name} to Agent S's Notes! 📓`);
+        } else if (sNotesEventType === 'Complete' && userHasSNote(name)) {
           // Find the index of the matching user's SNote
           const userSNoteIndex = userSNotes.findIndex(
             (userSNote) => userSNote.name === name
@@ -111,10 +112,11 @@ const TextBox = (props) => {
             // update userSNotes
             updateSNoteByIndex(updatedSNote, userSNoteIndex);
             // show message
-            console.log(`HOORAY! You can check off ${name}!`);
+            toast(`HOORAY! You can check off ${name}!`);
             // if there IS a total count
           } else {
             const updatedSNote = { ...userSNotes[userSNoteIndex] };
+            const newCountForNote = updatedSNote.userEventInstances.length + 1;
             // if the sNote doesn't have this phrase ID stored in sNote.userEventInstances
             if (
               updatedSNote.userEventInstances.find(
@@ -129,10 +131,12 @@ const TextBox = (props) => {
             // Update userSNotes
             updateSNoteByIndex(updatedSNote, userSNoteIndex);
             // show message
-            if (updatedSNote.userEventInstances.length === count) {
-              console.log(`NICE! You checked off all items for ${name}!`);
+            if (newCountForNote === count) {
+              toast(`NICE! You checked off all items for ${name}!`);
             } else {
-              console.log(`Alright! One item checked off for ${name}!`);
+              toast(
+                `Alright! ${newCountForNote} out of ${count} items checked off for ${name}!`
+              );
             }
           }
         }
