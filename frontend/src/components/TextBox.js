@@ -55,8 +55,14 @@ const TextBox = (props) => {
     return !!userSNotes.find((userSNote) => userSNote.name === sNoteName);
   };
 
-  // Handle sNotes Event
-  useEffect(() => {
+  const updateSNoteByIndex = (updatedSNote, userSNoteIndex) => {
+    // redux
+    dispatch(updateSNote({ sNote: updatedSNote, index: userSNoteIndex }));
+    // update local storage
+    updateSNoteInLocalStorageInventory(updatedSNote, userSNoteIndex);
+  };
+
+  const handleSNotesEvent = () => {
     // If currentPhrase data available
     if (currentPhrase && Object.keys(currentPhrase).length) {
       // If we have all the necessary event data
@@ -102,12 +108,8 @@ const TextBox = (props) => {
             const updatedSNote = { ...userSNotes[userSNoteIndex] };
             // update the SNote
             updatedSNote.completed = true;
-            // update redux
-            dispatch(
-              updateSNote({ sNote: updatedSNote, index: userSNoteIndex })
-            );
-            // update local storage
-            updateSNoteInLocalStorageInventory(updatedSNote, userSNoteIndex);
+            // update userSNotes
+            updateSNoteByIndex(updatedSNote, userSNoteIndex);
             // show message
             console.log(`HOORAY! You can check off ${name}!`);
             // if there IS a total count
@@ -124,15 +126,11 @@ const TextBox = (props) => {
             const newUserEventInstances = [...updatedSNote.userEventInstances];
             newUserEventInstances.push(sNoteDialoguePositionID);
             updatedSNote.userEventInstances = newUserEventInstances;
-            // update redux
-            dispatch(
-              updateSNote({ sNote: updatedSNote, index: userSNoteIndex })
-            );
-            // update local storage
-            updateSNoteInLocalStorageInventory(updatedSNote, userSNoteIndex);
+            // Update userSNotes
+            updateSNoteByIndex(updatedSNote, userSNoteIndex);
             // show message
             if (updatedSNote.userEventInstances.length === count) {
-              console.log(`NICE! You checked off all iems for ${name}!`);
+              console.log(`NICE! You checked off all items for ${name}!`);
             } else {
               console.log(`Alright! One item checked off for ${name}!`);
             }
@@ -140,6 +138,11 @@ const TextBox = (props) => {
         }
       }
     }
+  };
+
+  // Handle sNotes Event
+  useEffect(() => {
+    handleSNotesEvent();
   }, [currentPhrase]);
 
   const text = currentPhrase?.text;
