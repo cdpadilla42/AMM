@@ -90,12 +90,15 @@ const TextBox = (props) => {
           // show event message
           console.log(`Added ${name} to Agent S's Notes! 📓`);
         } else if (sNotesEventType === 'Complete') {
+          // Find the index of the matching user's SNote
+          const userSNoteIndex = userSNotes.findIndex(
+            (userSNote) => userSNote.name === name
+          );
+          const sNoteDialoguePositionID = `${
+            currentDialogueID ?? text
+          }:${currentDialoguePosition}`;
           // if there is no totalCount, mark the sNote completed
           if (!count) {
-            // Find the index of the matching user's SNote
-            const userSNoteIndex = userSNotes.findIndex(
-              (userSNote) => userSNote.name === name
-            );
             const updatedSNote = { ...userSNotes[userSNoteIndex] };
             // update the SNote
             updatedSNote.completed = true;
@@ -109,11 +112,30 @@ const TextBox = (props) => {
             console.log(`HOORAY! You can check off ${name}!`);
             // if there IS a total count
           } else {
+            const updatedSNote = { ...userSNotes[userSNoteIndex] };
             // if the sNote doesn't have this phrase ID stored in sNote.userEventInstances
+            if (
+              updatedSNote.userEventInstances.find(
+                (userSNote) => userSNote === sNoteDialoguePositionID
+              )
+            )
+              return;
             // add to userEventInstances
+            const newUserEventInstances = [...updatedSNote.userEventInstances];
+            newUserEventInstances.push(sNoteDialoguePositionID);
+            updatedSNote.userEventInstances = newUserEventInstances;
             // update redux
+            dispatch(
+              updateSNote({ sNote: updatedSNote, index: userSNoteIndex })
+            );
             // update local storage
-            // show message (calc how many are left and render message)
+            updateSNoteInLocalStorageInventory(updatedSNote, userSNoteIndex);
+            // show message
+            if (updatedSNote.userEventInstances.length === count) {
+              console.log(`NICE! You checked off all iems for ${name}!`);
+            } else {
+              console.log(`Alright! One item checked off for ${name}!`);
+            }
           }
         }
       }
