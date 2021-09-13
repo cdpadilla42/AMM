@@ -5,19 +5,20 @@ import {
   getSNotes,
   initializeUserInventoryFromLocalStorage,
 } from '../store/inventory';
+import { closeSNotes, toggleSNotes } from '../store/notepad';
 
 const SNotes = () => {
   const { userSNotes, sNotes } = useSelector((state) => state.inventory);
+  const { showSNotes } = useSelector((state) => state.notepad);
   const [sNotesToRender, setSNotesToRender] = useState([]);
-  const [showSNotes, setShowSNotes] = useState(false);
-  // TODO Remove when integrating
   const dispatch = useDispatch();
 
-  // TODO Remove when integrating
-  useEffect(() => {
-    dispatch(initializeUserInventoryFromLocalStorage());
-    dispatch(getSNotes());
-  }, []);
+  // // TODO Remove when integrating
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(initializeUserInventoryFromLocalStorage());
+  //   dispatch(getSNotes());
+  // }, []);
 
   const sNotesLoaded = userSNotes && userSNotes.length;
   const sNotesDictLoaded = sNotes && sNotes.length;
@@ -29,9 +30,10 @@ const SNotes = () => {
         const matchedSNote = sNotes.find(
           (sNote) => sNote.name === userSNote.name
         );
-        matchedSNote.completed = userSNote.completed;
-        matchedSNote.userCount = userSNote.userEventInstances?.length;
-        res.push(matchedSNote);
+        const resSNote = { ...matchedSNote };
+        resSNote.completed = userSNote.completed;
+        resSNote.userCount = userSNote.userEventInstances?.length;
+        res.push(resSNote);
       });
       setSNotesToRender(res);
     }
@@ -47,11 +49,11 @@ const SNotes = () => {
     ));
   };
 
-  const toggleNotes = () => setShowSNotes(!showSNotes);
+  const toggleNotes = () => dispatch(toggleSNotes());
 
   const onOutsideClick = (e) => {
     console.log('reading...');
-    if (e.currentTarget === e.target) setShowSNotes(false);
+    if (e.currentTarget === e.target) dispatch(closeSNotes());
   };
 
   return (
@@ -69,7 +71,6 @@ const SNotes = () => {
         </div>
         <div className="notepad">{renderSNotes()}</div>
       </div>
-      Helloooo
     </StyledSNotes>
   );
 };
@@ -83,12 +84,13 @@ const StyledSNotes = styled.div`
   background-color: rgba(0, 0, 0, 0.1);
   transition: background-color 0.8s ease;
   z-index: 100;
+  overflow-x: hidden;
 
   ${(props) =>
     props.showSNotes
       ? 'background-color: rgba(0, 0, 0, 0.1);'
       : 'background-color: rgba(0,0,0,0);'};
-  ${(props) => (props.showSNotes ? 'pointer-events: none' : '')};
+  ${(props) => (props.showSNotes ? '' : 'pointer-events: none')};
 
   .notepad_wrapper {
     position: absolute;

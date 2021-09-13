@@ -19,6 +19,7 @@ import '../styles/testimony.css';
 import AnimalsDisplayController from '../components/AnimalsDisplayController';
 import ImageLoader from '../components/ImageLoader';
 import PatternedBG from '../imgs/video-game-controller-gamepads-seamless-pattern-flat-style-illustrations-71807888.jpeg';
+import SNotes from '../components/SNotes';
 
 const Testimony = (props) => {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ const Testimony = (props) => {
 
   return (
     <ImageLoader>
+      <SNotes />
       <StyledContainer
         className="container"
         fallback={backgroundURLs?.image?.asset.url}

@@ -8,8 +8,6 @@ import SelectConversation from './pages/SelectConversation';
 import Map from './components/Map';
 import store from './store/store';
 import Playground from './pages/Playground';
-import AddToInventory from './components/AddToInventory';
-import { addSNoteToLocalStorageInventory } from './lib/localStorage';
 import SNotes from './components/SNotes';
 
 function App() {
