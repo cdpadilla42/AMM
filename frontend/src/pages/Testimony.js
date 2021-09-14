@@ -73,6 +73,8 @@ const Testimony = (props) => {
 };
 
 const StyledContainer = styled.div`
+  /* background: rgb(188,255,200);
+  background: linear-gradient(90deg, rgba(188,255,200,1) 35%, rgba(0,212,255,1) 100%); */
   background-image: url(${PatternedBG});
   background-repeat: repeat;
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
 import { sprites } from '../lib/sprites';
 
 const numOfSprites = sprites.reduce((tally, current) => {
@@ -47,12 +48,27 @@ const ImageLoader = ({ children }) => {
 
   if (loading)
     return (
-      <>
+      <StyledImageLoader>
         {renderHiddenImages()}
         <p>Loading...</p>
-      </>
+      </StyledImageLoader>
     );
   return children;
 };
 
 export default ImageLoader;
+
+const StyledImageLoader = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background: rgb(188, 255, 200);
+  background: linear-gradient(
+    0deg,
+    rgba(188, 255, 200, 1) 40%,
+    rgba(0, 212, 255, 1) 100%
+  );
+
+  p {
+    margin: 0;
+  }
+`;
