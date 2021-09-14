@@ -80,14 +80,20 @@ const StyledContainer = styled.div`
   background-size: 755px 765px; */
 
   .desktop_main_background {
-    width: 100%;
-    height: 100%;
+    width: 755px;
+    height: 765px;
     position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
     background-repeat: no-repeat;
     background-position: center;
     // TODO show none if no props.desktop
-    background-image: url(${(props) => props.desktop || props.fallback});
-    background-size: 755px 765px;
+    background: rgb(188, 221, 200)
+      url(${(props) => props.desktop || props.fallback});
+    background-size: cover;
 
     @media all and (max-width: 420px) {
       display: none;
