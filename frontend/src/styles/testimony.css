@@ -132,26 +132,6 @@ nav a {
   right: 1rem;
 }
 
-@media all and (min-height: 900px) and (min-width: 1000px) and (max-width: 1026px) {
-  .game_container__animal_image {
-    width: 597px;
-    bottom: calc(50vh - 36px);
-  }
-  .game_container__animal_image.left {
-    left: calc(50vw - 510px);
-  }
-  .game_container__animal_image.right {
-    right: calc(50vw - 476px);
-  }
-
-  .text_box {
-    bottom: calc(50vh - 444px);
-  }
-
-  .text_box__main {
-    height: 249px;
-  }
-}
 @media all and (max-height: 1126px) and (max-width: 800px) {
   .container {
     background-position: center calc(50% + 100px);
@@ -161,17 +141,6 @@ nav a {
   .text_box {
     height: 254px;
     bottom: calc(50vh - 487px);
-  }
-
-  .game_container__animal_image {
-    bottom: calc(50vh - 136px);
-    width: 597px;
-  }
-  .game_container__animal_image.left {
-    left: calc(50vw - 510px);
-  }
-  .game_container__animal_image.right {
-    right: calc(50vw - 476px);
   }
 }
 @media all and (max-width: 420px) {

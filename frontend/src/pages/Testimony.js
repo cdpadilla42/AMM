@@ -89,22 +89,19 @@ const StyledContainer = styled.div`
     background-image: url(${(props) => props.desktop || props.fallback});
     background-size: 755px 765px;
 
-    @media all and (max-width: 1024px) {
+    @media all and (max-width: 420px) {
       display: none;
     }
   }
 
-  @media all and (max-width: 1024px) {
-    background-image: url(${(props) => props.tablet || props.fallback});
-    background-size: initial;
-  }
-
   /* Comment below option for sideways tablets */
   /* @media all and (min-height: 800px), all and (max-width: 1370px) { */
-  @media all and (max-width: 1024px) {
+
+  /* BELOW => Tablet settings */
+  /* @media all and (max-width: 1024px) {
     background-image: url(${(props) => props.tablet || props.fallback});
     background-size: initial;
-  }
+  } */
 
   @media all and (max-width: 420px) {
     background-image: url(${(props) => props.phone || props.fallback});

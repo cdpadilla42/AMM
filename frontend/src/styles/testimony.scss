@@ -144,31 +144,31 @@ nav {
   }
 }
 
-// Large Tablet
-@media all and (min-height: 900px) and (min-width: 1000px) and (max-width: 1026px) {
-  .game_container__animal_image {
-    width: 597px;
-    bottom: calc(50vh - 36px);
-    // width: 597px;
+// // Large Tablet
+// @media all and (min-height: 900px) and (min-width: 1000px) and (max-width: 1026px) {
+//   .game_container__animal_image {
+//     width: 597px;
+//     bottom: calc(50vh - 36px);
+//     // width: 597px;
 
-    &.left {
-      left: calc(50vw - 510px);
-    }
+//     &.left {
+//       left: calc(50vw - 510px);
+//     }
 
-    &.right {
-      right: calc(50vw - 476px);
-    }
-  }
+//     &.right {
+//       right: calc(50vw - 476px);
+//     }
+//   }
 
-  .text_box {
-    // width: 95%;
-    bottom: calc(50vh - 444px);
-  }
+//   .text_box {
+//     // width: 95%;
+//     bottom: calc(50vh - 444px);
+//   }
 
-  .text_box__main {
-    height: 249px;
-  }
-}
+//   .text_box__main {
+//     height: 249px;
+//   }
+// }
 // Comment below option for sideways tablets
 // @media all and (min-height: 800px), all and (max-width: 1370px) {
 // Medium tablet
@@ -188,18 +188,18 @@ nav {
     bottom: calc(50vh - 487px);
   }
 
-  .game_container__animal_image {
-    bottom: calc(50vh - 136px);
-    width: 597px;
+  // .game_container__animal_image {
+  //   bottom: calc(50vh - 136px);
+  //   width: 597px;
 
-    &.left {
-      left: calc(50vw - 510px);
-    }
+  //   &.left {
+  //     left: calc(50vw - 510px);
+  //   }
 
-    &.right {
-      right: calc(50vw - 476px);
-    }
-  }
+  //   &.right {
+  //     right: calc(50vw - 476px);
+  //   }
+  // }
 }
 
 // Phone
