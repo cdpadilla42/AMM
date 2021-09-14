@@ -29,7 +29,7 @@ const Inventory = () => {
 
   const requiredEvidence = currentDialogueObj.requiredEvidence;
   const nextResponseID =
-    currentDialogueObj.responseOptions[0].followingDialogue._id;
+    currentDialogueObj?.responseOptions?.[0].followingDialogue._id;
 
   function displayItemDetails(e) {
     const itemName = e.currentTarget.dataset.name;

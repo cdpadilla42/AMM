@@ -75,6 +75,7 @@ const Testimony = (props) => {
 const StyledContainer = styled.div`
   background-image: url(${PatternedBG});
   background-repeat: repeat;
+
   /* background-repeat: no-repeat;
   background-size: 755px 765px; */
 
@@ -108,6 +109,10 @@ const StyledContainer = styled.div`
   @media all and (max-width: 420px) {
     background-image: url(${(props) => props.phone || props.fallback});
     background-size: initial;
+  }
+
+  @media all and (min-width: 400px) and (max-width: 500px) {
+    background-size: cover;
   }
 `;
 
