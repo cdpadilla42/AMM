@@ -43,7 +43,7 @@ export const addSNoteToLocalStorageInventory = (sNote) => {
     storageData = itemsInInventory;
   }
 
-  const initialSNotesList = storageData.sNotes;
+  const initialSNotesList = storageData?.sNotes ?? [];
 
   const newSNotesList = [...initialSNotesList, sNote];
 
