@@ -9,6 +9,7 @@ import Map from './components/Map';
 import store from './store/store';
 import Playground from './pages/Playground';
 import SNotes from './components/SNotes';
+import ErrorBoundary from './components/ErrorBoundary';
 
 function App() {
   return (
@@ -17,7 +18,9 @@ function App() {
       <Router>
         <Switch>
           <Route path="/snotes">
-            <SNotes />
+            <ErrorBoundary>
+              <SNotes />
+            </ErrorBoundary>
           </Route>
           <Route path="/inventory">
             <Map />
@@ -25,9 +28,14 @@ function App() {
           <Route path="/playground">
             <Playground />
           </Route>
+
           <Route
             path="/testimony/:id"
-            render={(props) => <Testimony match={props.match} />}
+            render={(props) => (
+              <ErrorBoundary>
+                <Testimony match={props.match} />
+              </ErrorBoundary>
+            )}
           ></Route>
           <Route path="/">
             <SelectConversation />
