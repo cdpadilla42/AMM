@@ -59,7 +59,10 @@ const Inventory = () => {
   }
 
   function renderInventory() {
-    const selectedItems = isShowingPeople ? animalNotes : fullItemsInventory;
+    // Below is where you can swap in and out fullItemsInventory and the inventory based on the user inventory
+    const selectedItems = isShowingPeople
+      ? animalNotes
+      : selectUserItemsFromFullInventory();
     const jsx = selectedItems.map((item) => {
       return (
         <div

@@ -24,7 +24,7 @@ export const addItemToLocalStorageInventory = (item) => {
     storageData = itemsInInventory;
   }
 
-  const initialInventory = storageData.items;
+  const initialInventory = storageData?.items ?? [];
 
   const newInventory = [...initialInventory, item];
 
