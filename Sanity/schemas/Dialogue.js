@@ -74,6 +74,58 @@ export default {
                 'Turn on if you would like the next phrase added to this one',
             },
             {
+              title: 'Change position',
+              name: 'changePosition',
+              type: 'boolean',
+              description: 'On if you want to change animal positions',
+            },
+            {
+              title: 'Left Animal',
+              name: 'leftAnimal',
+              type: 'reference',
+              to: [{ type: 'animal' }],
+              hidden: ({ parent }) => !parent.changePosition,
+            },
+            {
+              title: 'Left Orientation',
+              name: 'leftOrientation',
+              type: 'string',
+              initialValue: 'Right',
+              description:
+                '* Marks default. If nothing selected, default will be used',
+              options: {
+                list: [
+                  { title: 'Left', value: 'left' },
+                  { title: 'Right*', value: 'right' },
+                ],
+                layout: 'radio',
+              },
+              hidden: ({ parent }) => !parent.changePosition,
+            },
+            {
+              title: 'Right Animal',
+              name: 'rightAnimal',
+              type: 'reference',
+              to: [{ type: 'animal' }],
+              hidden: ({ parent }) => !parent.changePosition,
+            },
+            {
+              title: 'Right Orientation',
+              name: 'rightOrientation',
+              type: 'string',
+              initialValue: 'left',
+              description:
+                '* Marks default. If nothing selected, default will be used',
+              options: {
+                list: [
+                  { title: 'Left*', value: 'left' },
+                  { title: 'Right', value: 'right' },
+                ],
+                layout: 'radio',
+              },
+              hidden: ({ parent }) => !parent.changePosition,
+            },
+            {
               title: 'Agent S Notes Event',
               name: 'sNotesEventTriggered',
               type: 'boolean',
