@@ -68,12 +68,14 @@ const MultipleAnimalDisplay = () => {
       <AnimalDisplay
         emotion={animalsState[0].emotion}
         speaker={animalsState[0].name}
+        isCurrentSpeaker={animalsState[0].name === speaker}
         orientation={'left'}
         key={animalsState[0].name}
       />
       <AnimalDisplay
         emotion={animalsState[1].emotion}
         speaker={animalsState[1].name}
+        isCurrentSpeaker={animalsState[1].name === speaker}
         orientation={'right'}
         key={animalsState[1].name}
       />

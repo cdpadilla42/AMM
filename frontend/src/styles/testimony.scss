@@ -86,17 +86,29 @@ nav {
     padding: 1rem;
     right: 0;
     // height: 100px;
-
+    transition: transform 0.6s cubic-bezier(0.21, 0.6, 0.35, 1.44);
+    transform: scaleX(1);
     &.left {
       left: calc(50vw - 374px);
       -webkit-transform: scaleX(-1);
-      transform: scaleX(-1);
+      transform: scaleX(-1) scale(1) translateY(0);
     }
 
     &.right {
       right: calc(50vw - 346px);
     }
   }
+}
+
+.inactive {
+  -webkit-filter: contrast(50%);
+  -webkit-filter: brightness(80%);
+  transform: scale(0.95) translateY(10px);
+  transition: transform 0.4s ease;
+}
+
+.inactive.left {
+  transform: scaleX(-1) scale(0.95) translateY(10px);
 }
 
 // Desktop

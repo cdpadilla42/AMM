@@ -5,6 +5,7 @@ import conversationsReducer from './conversations';
 import inventoryReducer from './inventory';
 import spritesReducer from './sprites';
 import notepadReducer from './notepad';
+import loadedReducer from './loaded';
 
 const reducer = combineReducers({
   dialogue: dialogueReducer,
@@ -12,6 +13,7 @@ const reducer = combineReducers({
   inventory: inventoryReducer,
   sprites: spritesReducer,
   notepad: notepadReducer,
+  loaded: loadedReducer,
 });
 
 const store = configureStore({ reducer });

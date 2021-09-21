@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import normal from '../imgs/normal.png';
@@ -11,6 +12,7 @@ const AnimalDisplay = ({
   speaker: speakerFromProps,
   emotion: emotionFromProps,
   orientation,
+  isCurrentSpeaker,
 }) => {
   const { sprites } = useSelector((state) => state.sprites);
   const dialogue = useCurrentDialogueObj();
@@ -43,11 +45,23 @@ const AnimalDisplay = ({
   } else {
     className = 'game_container__animal_image single';
   }
+
+  if (!isCurrentSpeaker) {
+    className += ' inactive';
+  }
   return (
     <div className="game_container__animal">
       <img src={spriteUrl} alt="" className={className} />
     </div>
   );
+};
+
+AnimalDisplay.propTypes = {
+  isCurrentSpeaker: PropTypes.bool,
+};
+
+AnimalDisplay.defaultProps = {
+  isCurrentSpeaker: true,
 };
 
 export default AnimalDisplay;
