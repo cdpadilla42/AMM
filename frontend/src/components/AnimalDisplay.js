@@ -13,6 +13,7 @@ const AnimalDisplay = ({
   emotion: emotionFromProps,
   orientation,
   isCurrentSpeaker,
+  direction,
 }) => {
   const { sprites } = useSelector((state) => state.sprites);
   const dialogue = useCurrentDialogueObj();
@@ -49,6 +50,9 @@ const AnimalDisplay = ({
   if (!isCurrentSpeaker) {
     className += ' inactive';
   }
+  if (direction) {
+    className += ` ${direction}_facing`;
+  }
   return (
     <div className="game_container__animal">
       <img src={spriteUrl} alt="" className={className} />
@@ -58,6 +62,7 @@ const AnimalDisplay = ({
 
 AnimalDisplay.propTypes = {
   isCurrentSpeaker: PropTypes.bool,
+  direction: PropTypes.string,
 };
 
 AnimalDisplay.defaultProps = {

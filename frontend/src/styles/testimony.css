@@ -90,6 +90,14 @@ nav a {
 .game_container__animal_image.right {
   right: calc(50vw - 346px);
 }
+.game_container__animal_image.right.right_facing {
+  transition: transform 0.4s ease;
+  transform: scaleX(-1) scaleX(1);
+}
+.game_container__animal_image.left.left_facing {
+  transition: transform 0.4s ease;
+  transform: scaleX(1) scale(1) translateY(0);
+}
 
 .inactive {
   -webkit-filter: contrast(50%);
