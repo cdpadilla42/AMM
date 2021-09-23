@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import AnimalDisplay from './AnimalDisplay';
 
@@ -36,7 +37,6 @@ const MultipleAnimalDisplay = () => {
     const newState = [...animalsState];
     const newAnimalsInConvo = dialogue?.animals;
 
-    // if the boolean is turned on for swapping positions on the current phrase, reset.
     if (currentPhraseObj.changePosition) {
       // set the speakers
       // TODO Uncomment
@@ -66,6 +66,7 @@ const MultipleAnimalDisplay = () => {
     indexToChange = animalsState?.findIndex(
       (animal) => animal.name === speaker
     );
+    console.log({ indexToChange, animalsState });
     setAnimalsState(() => {
       newState[indexToChange].emotion = emotion;
       return newState;
@@ -88,24 +89,56 @@ const MultipleAnimalDisplay = () => {
     });
 
   return (
-    <>
-      <AnimalDisplay
-        emotion={animalsState[0].emotion}
-        speaker={animalsState[0].name}
-        isCurrentSpeaker={animalsState[0].name === speaker}
-        orientation={'left'}
-        direction={animalsState[0].direction || 'right'}
-        key={animalsState[0].name}
-      />
-      <AnimalDisplay
-        emotion={animalsState[1].emotion}
-        speaker={animalsState[1].name}
-        isCurrentSpeaker={animalsState[1].name === speaker}
-        orientation={'right'}
-        direction={animalsState[1].direction || 'left'}
-        key={animalsState[1].name}
-      />
-    </>
+    <TransitionGroup
+      component="div"
+      className="animal_display_transition_group"
+    >
+      {animalsState.map((animalState, i) => (
+        <CSSTransition
+          classNames={`animal_transition_${i === 0 ? 'left' : 'right'}`}
+          key={animalState.name}
+          timeout={{ exit: 600, enter: 600 }}
+        >
+          <AnimalDisplay
+            emotion={animalState.emotion}
+            speaker={animalState.name}
+            isCurrentSpeaker={animalState.name === speaker}
+            orientation={i === 0 ? 'left' : 'right'}
+            direction={animalState.direction ?? (i === 0 ? 'right' : 'left')}
+            key={animalState.name}
+          />
+        </CSSTransition>
+      ))}
+
+      {/* <CSSTransition
+        classNames="animal_transition"
+        key={'left'}
+        timeout={{ exit: 200 }}
+      >
+        <AnimalDisplay
+          emotion={animalsState[0].emotion}
+          speaker={animalsState[0].name}
+          isCurrentSpeaker={animalsState[0].name === speaker}
+          orientation={'left'}
+          direction={animalsState[0].direction || 'right'}
+          key={animalsState[0].name}
+        />
+      </CSSTransition>
+      <CSSTransition
+        classNames="animal_transition"
+        key={'right'}
+        timeout={{ exit: 200 }}
+      >
+        <AnimalDisplay
+          emotion={animalsState[1].emotion}
+          speaker={animalsState[1].name}
+          isCurrentSpeaker={animalsState[1].name === speaker}
+          orientation={'right'}
+          direction={animalsState[1].direction || 'left'}
+          key={animalsState[1].name}
+        />
+      </CSSTransition> */}
+    </TransitionGroup>
   );
 };
 
