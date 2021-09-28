@@ -250,7 +250,7 @@ const TextBox = (props) => {
         className="text_box__name"
         style={{
           backgroundColor:
-            phrases[currentDialoguePosition]?.speaker.color?.hex || 'grey',
+            phrases?.[currentDialoguePosition]?.speaker.color?.hex || 'grey',
         }}
       >
         {phrases[currentDialoguePosition]?.speaker.name}

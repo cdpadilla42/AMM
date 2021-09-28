@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AnimalDisplay from '../components/AnimalDisplay';
-import { getDialogue, resetDialoguePosition } from '../store/dialogue';
+import {
+  clearDialogueData,
+  getDialogue,
+  resetDialoguePosition,
+} from '../store/dialogue';
 import {
   getInventoryItems,
   getAnimalNotes,
@@ -20,6 +24,7 @@ import AnimalsDisplayController from '../components/AnimalsDisplayController';
 import ImageLoader from '../components/ImageLoader';
 import PatternedBG from '../imgs/video-game-controller-gamepads-seamless-pattern-flat-style-illustrations-71807888.jpeg';
 import SNotes from '../components/SNotes';
+import { closeSNotes } from '../store/notepad';
 
 const Testimony = (props) => {
   const dispatch = useDispatch();
@@ -38,6 +43,11 @@ const Testimony = (props) => {
     dispatch(getSprites());
     // set place to 0
     dispatch(resetDialoguePosition());
+
+    return () => {
+      dispatch(clearDialogueData());
+      dispatch(closeSNotes());
+    };
   }, []);
 
   // Get items for inventory, Animal notes & Agent S Notes
