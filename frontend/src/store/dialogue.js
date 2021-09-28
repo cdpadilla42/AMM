@@ -18,6 +18,7 @@ const initialState = {
       ],
     },
   ],
+  returnToDialoguePositionAfterIncorrect: 0,
   responseBoxIsOpen: false,
   dialogueFromSanity: 'apples',
   isInventoryOpen: false,
@@ -34,8 +35,12 @@ export const resetConversationToStart = createAction(
 export const clearDialogueData = createAction('CLEAR_DIALOGUE_DATA');
 export const toggleResponseBox = createAction('TOGGLE_RESPONSE_BOX');
 export const toggleInventory = createAction('TOGGLE_INVENTORY');
+export const openInventory = createAction('OPEN_INVENTORY');
 export const toggleMap = createAction('TOGGLE_MAP');
 export const switchConversation = createAction('SWITCH_CONVERSATION');
+export const switchConversationFromIncorrect = createAction(
+  'SWITCH_CONVERSATION_FROM_INCORRECT'
+);
 export const displayInvalidEvidenceDialogue = createAction(
   'DISPLAY_INVALID_ERROR_DIALOGUE'
 );
@@ -111,6 +116,11 @@ function dialogueReducer(state = initialState, action) {
         ...state,
         isInventoryOpen: !state.isInventoryOpen,
       };
+    case openInventory.toString():
+      return {
+        ...state,
+        isInventoryOpen: true,
+      };
     case toggleMap.toString():
       return {
         ...state,
@@ -118,11 +128,17 @@ function dialogueReducer(state = initialState, action) {
         isMapOpen: !state.isMapOpen,
       };
     case switchConversation.toString():
-      // TODO Here - try including logic saying if the currentDialogueName is 'Incorrect', return to the previouse dialogue's final position
       return {
         ...state,
         currentDialogueID: payload,
         currentDialoguePosition: 0,
+        responseBoxIsOpen: false,
+      };
+    case switchConversationFromIncorrect.toString():
+      return {
+        ...state,
+        currentDialogueID: payload,
+        currentDialoguePosition: state.returnToDialoguePositionAfterIncorrect,
         responseBoxIsOpen: false,
       };
     case displayInvalidEvidenceDialogue.toString():
@@ -130,6 +146,7 @@ function dialogueReducer(state = initialState, action) {
         ...state,
         currentDialogueID: 'Incorrect',
         prevDialogueID: state.currentDialogueID,
+        returnToDialoguePositionAfterIncorrect: state.currentDialoguePosition,
         currentDialoguePosition: 0,
       };
     default:

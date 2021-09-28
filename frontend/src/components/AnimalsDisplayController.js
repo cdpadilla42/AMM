@@ -12,6 +12,7 @@ const AnimalsDisplayController = () => {
   );
 
   useEffect(() => {
+    if (!animalsFromDialouge) return;
     if (isMultiAnimalConvo !== !!dialogue.animals?.length) {
       setIsMultiAnimalConvo(!!dialogue.animals?.length);
     }

@@ -6,9 +6,11 @@ import { toast } from 'react-toastify';
 import {
   nextDialogue,
   prevDialogue,
+  openInventory,
   toggleResponseBox,
   toggleInventory,
   switchConversation,
+  switchConversationFromIncorrect,
   resetConversationToStart,
 } from '../store/dialogue';
 import { addToSNotesList, updateSNote } from '../store/inventory';
@@ -32,6 +34,7 @@ const TextBox = (props) => {
     currentDialogueID,
     prevDialogueID,
     responseBoxIsOpen,
+    returnToDialoguePositionAfterIncorrect,
   } = useSelector((state) => state.dialogue);
   const {
     items,
@@ -198,7 +201,8 @@ const TextBox = (props) => {
       setFromLink(true);
       props.nextDialogue();
     } else if (isEndOfDialogue && currentDialogueObj.name === 'Incorrect') {
-      props.switchConversation(prevDialogueID);
+      props.switchConversationFromIncorrect(prevDialogueID);
+      props.openInventory();
     } else if (isEndOfDialogue && currentDialogueObj.needEvidence) {
       props.toggleInventory();
     } else if (
@@ -274,8 +278,10 @@ function mapDispatchToProps(dispatch) {
       nextDialogue,
       prevDialogue,
       toggleResponseBox,
+      openInventory,
       toggleInventory,
       switchConversation,
+      switchConversationFromIncorrect,
       resetConversationToStart,
     },
     dispatch
