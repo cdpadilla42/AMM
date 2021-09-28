@@ -15,6 +15,7 @@ const useCurrentDialogueObj = () => {
     );
   } else if (currentDialogueID === 'Incorrect') {
     currentDialogueObj = {
+      animals: [{ name: 'Agent S' }],
       phrase: [
         {
           emotion: {

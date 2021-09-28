@@ -56,6 +56,7 @@ const MultipleAnimalDisplay = () => {
     } else if (newAnimalsInConvo) {
       // if there is a dialogue.animals field
       // set the speakers
+      if (newAnimalsInConvo.length === 1) return;
       newState.forEach((speaker, i) => {
         if (speaker.name !== newAnimalsInConvo[i].name) {
           newState[i].name = newAnimalsInConvo[i].name;
