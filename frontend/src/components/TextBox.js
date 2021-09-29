@@ -56,8 +56,17 @@ const TextBox = (props) => {
 
   const currentPhrase = phrases?.[currentDialoguePosition] || {};
 
+  const getUserSNote = (sNoteName) => {
+    return userSNotes.find((userSNote) => userSNote.name === sNoteName);
+  };
+
   const userHasSNote = (sNoteName) => {
     return !!userSNotes.find((userSNote) => userSNote.name === sNoteName);
+  };
+
+  const userCompletedSNote = (sNoteName) => {
+    const sNote = userSNotes.find((userSNote) => userSNote.name === sNoteName);
+    return sNote.completed;
   };
 
   const updateSNoteByIndex = (updatedSNote, userSNoteIndex) => {
@@ -82,6 +91,7 @@ const TextBox = (props) => {
           sNotesEventType,
           sNotesEventRef: { name, count },
         } = currentPhrase;
+        const userSNote = getUserSNote(name);
         if (sNotesEventType === 'Add') {
           // Construct the sNote object
           const sNote = {
@@ -89,7 +99,7 @@ const TextBox = (props) => {
             completed: false,
           };
           // If event is already stored, return
-          if (userHasSNote(name)) return;
+          if (userSNote) return;
           if (count) {
             sNote.totalCount = count;
             sNote.userEventInstances = [];
@@ -100,7 +110,12 @@ const TextBox = (props) => {
           addSNoteToLocalStorageInventory(sNote);
           // show event message
           toast(`Added ${name} to Agent S's Notes! 📓`);
-        } else if (sNotesEventType === 'Complete' && userHasSNote(name)) {
+          // If this is a completion event and the user has the note and it has not been completed
+        } else if (
+          sNotesEventType === 'Complete' &&
+          userSNote &&
+          !userSNote.completed
+        ) {
           // Find the index of the matching user's SNote
           const userSNoteIndex = userSNotes.findIndex(
             (userSNote) => userSNote.name === name
