@@ -60,15 +60,6 @@ const TextBox = (props) => {
     return userSNotes.find((userSNote) => userSNote.name === sNoteName);
   };
 
-  const userHasSNote = (sNoteName) => {
-    return !!userSNotes.find((userSNote) => userSNote.name === sNoteName);
-  };
-
-  const userCompletedSNote = (sNoteName) => {
-    const sNote = userSNotes.find((userSNote) => userSNote.name === sNoteName);
-    return sNote.completed;
-  };
-
   const updateSNoteByIndex = (updatedSNote, userSNoteIndex) => {
     // redux
     dispatch(updateSNote({ sNote: updatedSNote, index: userSNoteIndex }));

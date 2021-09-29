@@ -79,7 +79,32 @@ const Inventory = () => {
     const selectedItems = isShowingPeople
       ? animalNotes
       : selectUserItemsFromFullInventory();
-    const jsx = selectedItems.map((item) => {
+
+    return (
+      <div className="inventory_grid_container">
+        {!selectedItems || selectedItems.length === 0 ? (
+          <div className="inventory_noitems_message">
+            You don't have any evidence! Try snooping around the New Leaf Island
+            on the Switch
+          </div>
+        ) : (
+          <div className="inventory_grid">
+            renderInventoryItems(selectedItems)
+          </div>
+        )}
+        <div
+          className={`addtoinventory_container ${
+            isShowingAddItem ? '' : 'hide'
+          }`}
+        >
+          <AddToInventory closeDisplay={closeShowingAddItems} />
+        </div>
+      </div>
+    );
+  }
+
+  function renderInventoryItems(selectedItems) {
+    return selectedItems.map((item) => {
       return (
         <div
           key={item.name}
@@ -96,8 +121,6 @@ const Inventory = () => {
         </div>
       );
     });
-
-    return jsx;
   }
   return (
     <div className="inventory_container">
@@ -117,20 +140,7 @@ const Inventory = () => {
             <button onClick={showMap}>Map</button>
             <button onClick={toggleShowingAddItem}>Add to inventory</button>
           </div>
-          {isMapOpen ? (
-            <Map />
-          ) : (
-            <div className="inventory_grid_container">
-              <div className="inventory_grid">{renderInventory()}</div>
-              <div
-                className={`addtoinventory_container ${
-                  isShowingAddItem ? '' : 'hide'
-                }`}
-              >
-                <AddToInventory closeDisplay={closeShowingAddItems} />
-              </div>
-            </div>
-          )}
+          {isMapOpen ? <Map /> : renderInventory()}
         </StyledInventory>
       )}
     </div>
@@ -220,6 +230,13 @@ const StyledInventory = styled.div`
     flex-direction: column;
     align-items: center;
     background-color: #fff;
+  }
+
+  .inventory_noitems_message {
+    padding: 0.5rem;
+    background-color: #fff;
+    border-radius: 5px;
+    text-align: center;
   }
 
   img.inventory_item_image {
