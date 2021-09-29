@@ -37,6 +37,8 @@ export const toggleResponseBox = createAction('TOGGLE_RESPONSE_BOX');
 export const toggleInventory = createAction('TOGGLE_INVENTORY');
 export const openInventory = createAction('OPEN_INVENTORY');
 export const toggleMap = createAction('TOGGLE_MAP');
+export const openMap = createAction('OPEN_MAP');
+export const closeMap = createAction('CLOSE_MAP');
 export const switchConversation = createAction('SWITCH_CONVERSATION');
 export const switchConversationFromIncorrect = createAction(
   'SWITCH_CONVERSATION_FROM_INCORRECT'
@@ -126,6 +128,18 @@ function dialogueReducer(state = initialState, action) {
         ...state,
         // isInventoryOpen: !state.isInventoryOpen,
         isMapOpen: !state.isMapOpen,
+      };
+    case openMap.toString():
+      return {
+        ...state,
+        // isInventoryOpen: !state.isInventoryOpen,
+        isMapOpen: true,
+      };
+    case closeMap.toString():
+      return {
+        ...state,
+        // isInventoryOpen: !state.isInventoryOpen,
+        isMapOpen: false,
       };
     case switchConversation.toString():
       return {

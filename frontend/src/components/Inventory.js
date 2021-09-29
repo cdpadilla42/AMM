@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import BlockContent from '@sanity/block-content-to-react';
 import {
+  closeMap,
   toggleInventory,
   switchConversation,
   toggleMap,
   displayInvalidEvidenceDialogue,
+  openMap,
 } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import urlFor from '../lib/imageUrlBuilder';
@@ -42,8 +44,32 @@ const Inventory = () => {
     setIsShowingPeople(!isShowingPeople);
   }
 
+  function showPeopole() {
+    // TODO Hook this up
+    setIsShowingPeople(true);
+    // TODO comes from redux
+    dispatch(closeMap());
+    setIsShowingAddItem(false);
+  }
+
+  function showItems() {
+    // TODO Hook this up
+    setIsShowingPeople(false);
+    // TODO comes from redux
+    dispatch(closeMap());
+    setIsShowingAddItem(false);
+  }
+
+  function showMap() {
+    dispatch(openMap());
+    setIsShowingPeople(false);
+    setIsShowingAddItem(false);
+  }
+
   function toggleShowingAddItem() {
     setIsShowingAddItem(!isShowingAddItem);
+    setIsShowingPeople(false);
+    dispatch(closeMap());
   }
 
   function closeShowingAddItems() {
@@ -96,10 +122,9 @@ const Inventory = () => {
       ) : (
         <StyledInventory>
           <div className="inventory_header">
-            <button onClick={toggleShowingPeople}>
-              {isShowingPeople ? 'Items' : 'Animals'}
-            </button>
-            <button onClick={() => dispatch(toggleMap())}>Map</button>
+            <button onClick={showItems}>Items</button>
+            <button onClick={showPeopole}>Animals</button>
+            <button onClick={showMap}>Map</button>
             <button onClick={toggleShowingAddItem}>Add to inventory</button>
           </div>
           {isMapOpen ? (
