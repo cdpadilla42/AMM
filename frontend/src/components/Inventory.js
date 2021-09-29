@@ -90,13 +90,18 @@ const Inventory = () => {
 
     return (
       <div className="inventory_grid_container">
+<<<<<<< HEAD
         {(!selectedItems || selectedItems.length === 0) && !isShowingAddItem ? (
+=======
+        {!selectedItems || selectedItems.length === 0 ? (
+>>>>>>> 77a7067954d032679b4a1741a2154120b9ca3677
           <div className="inventory_noitems_message">
             You don't have any evidence! Try snooping around the New Leaf Island
             on the Switch
           </div>
         ) : (
           <div className="inventory_grid">
+<<<<<<< HEAD
             {renderInventoryItems(selectedItems)}
           </div>
         )}
@@ -111,6 +116,17 @@ const Inventory = () => {
             close={closeShowingAddItems}
             showErrorAnimation={showErrorAnimation}
           />
+=======
+            renderInventoryItems(selectedItems)
+          </div>
+        )}
+        <div
+          className={`addtoinventory_container ${
+            isShowingAddItem ? '' : 'hide'
+          }`}
+        >
+          <AddToInventory closeDisplay={closeShowingAddItems} />
+>>>>>>> 77a7067954d032679b4a1741a2154120b9ca3677
         </div>
       </div>
     );
