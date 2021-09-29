@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import BlockContent from '@sanity/block-content-to-react';
 import {
   closeMap,
@@ -19,6 +19,7 @@ const Inventory = () => {
   const [selectedItem, setSelectedItem] = useState('');
   const [isShowingPeople, setIsShowingPeople] = useState(false);
   const [isShowingAddItem, setIsShowingAddItem] = useState(false);
+  const [errorClass, setErroClass] = useState('');
   const dispatch = useDispatch();
 
   const isMapOpen = useSelector((state) => state.dialogue.isMapOpen);
@@ -66,6 +67,13 @@ const Inventory = () => {
     setIsShowingAddItem(false);
   }
 
+  const showErrorAnimation = () => {
+    setErroClass('ahashakeheartache');
+    setTimeout(() => {
+      setErroClass('');
+    }, 2000);
+  };
+
   // * NOTE: We have the ability to filter based on what's in the user's inventory!
   // * It's this function
   function selectUserItemsFromFullInventory() {
@@ -93,13 +101,15 @@ const Inventory = () => {
           </div>
         )}
         <div
-          className={`addtoinventory_container ${
+          className={`addtoinventory_container ${errorClass} ${
             isShowingAddItem ? '' : 'hide'
           }`}
         >
           <AddToInventory
             closeDisplay={closeShowingAddItems}
             isOpen={isShowingAddItem}
+            close={closeShowingAddItems}
+            showErrorAnimation={showErrorAnimation}
           />
         </div>
       </div>
@@ -149,6 +159,28 @@ const Inventory = () => {
     </div>
   );
 };
+
+const errorAnimation = keyframes`
+
+  0% {
+      transform: translate(calc(-50% + 30px), -50%);
+    }
+    20% {
+      transform: translate(calc(-50% - 30px ), -50%);
+    }
+    40% {
+      transform: translate(calc(-50% + 15px), -50%);
+    }
+    60% {
+      transform: translate(calc(-50% -15px ), -50%);
+    }
+    80% {
+      transform: translate(calc(-50% + 8px), -50%);
+    }
+    100% {
+      transform: translate(-50%, -50%);
+    }
+`;
 
 const StyledInventory = styled.div`
   position: absolute;
@@ -259,6 +291,72 @@ const StyledInventory = styled.div`
   .hide {
     display: none;
   }
+
+  .addtoinventory_container.ahashakeheartache {
+    animation-name: ${errorAnimation};
+    animation-duration: 0.4s;
+    animation-iteration-count: 1;
+  }
+  /* @-webkit-keyframes kf_shake {
+    0% {
+      -webkit-transform: translate(30px);
+    }
+    20% {
+      -webkit-transform: translate(-30px);
+    }
+    40% {
+      -webkit-transform: translate(15px);
+    }
+    60% {
+      -webkit-transform: translate(-15px);
+    }
+    80% {
+      -webkit-transform: translate(8px);
+    }
+    100% {
+      -webkit-transform: translate(0px);
+    }
+  }
+  @-moz-keyframes kf_shake {
+    0% {
+      -moz-transform: translate(30px);
+    }
+    20% {
+      -moz-transform: translate(-30px);
+    }
+    40% {
+      -moz-transform: translate(15px);
+    }
+    60% {
+      -moz-transform: translate(-15px);
+    }
+    80% {
+      -moz-transform: translate(8px);
+    }
+    100% {
+      -moz-transform: translate(0px);
+    }
+  }
+  @-o-keyframes kf_shake {
+    0% {
+      -o-transform: translate(30px);
+    }
+    20% {
+      -o-transform: translate(-30px);
+    }
+    40% {
+      -o-transform: translate(15px);
+    }
+    60% {
+      -o-transform: translate(-15px);
+    }
+    80% {
+      -o-transform: translate(8px);
+    }
+    100% {
+      -o-origin-transform: translate(0px);
+    }
+  } */
 `;
 
 const ItemDetailsDisplay = ({

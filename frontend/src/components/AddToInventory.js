@@ -2,11 +2,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 import useForm from '../hooks/useForm';
 import { addItemToLocalStorageInventory } from '../lib/localStorage';
 import { addToInventory } from '../store/inventory';
 
-const AddToInventory = ({ closeDisplay, isOpen }) => {
+const AddToInventory = ({
+  closeDisplay,
+  isOpen,
+  close,
+  showErrorAnimation,
+}) => {
   const { inputs, handleChange, resetForm, clearForm } = useForm({ item: '' });
   const { items: fullItemsList, userItems } = useSelector(
     (state) => state.inventory
@@ -55,11 +61,11 @@ const AddToInventory = ({ closeDisplay, isOpen }) => {
         addItemToLocalStorageInventory(matchedInGameItem.name);
         // add to redux
         dispatch(addToInventory(matchedInGameItem.name));
-        showMessage({
-          type: 'success',
-          text: `Great! ${matchedInGameItem.name} was added to the evidence file.`,
-        });
+        toast(
+          `🔎  Great! ${matchedInGameItem.name.toUppperCase()} was added to the evidence file.`
+        );
         clearForm();
+        close();
       }
     } else {
       // Show error to user
@@ -78,6 +84,7 @@ const AddToInventory = ({ closeDisplay, isOpen }) => {
     } 
     */
     setMessage(message);
+    showErrorAnimation();
     setTimeout(() => {
       setMessage(null);
     }, 7000);
@@ -127,10 +134,12 @@ export default AddToInventory;
 
 AddToInventory.propTypes = {
   closeDisplay: PropTypes.func,
+  isOpen: PropTypes.bool,
 };
 
 AddToInventory.defaultProps = {
   closeDisplay: () => {},
+  isOpen: false,
 };
 
 const StyledAddToInventory = styled.form`
