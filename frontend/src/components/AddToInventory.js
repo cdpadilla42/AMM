@@ -62,7 +62,7 @@ const AddToInventory = ({
         // add to redux
         dispatch(addToInventory(matchedInGameItem.name));
         toast(
-          `🔎  Great! ${matchedInGameItem.name.toUppperCase()} was added to the evidence file.`
+          `🔎  Great! ${matchedInGameItem.name.toUpperCase()} was added to the evidence file.`
         );
         clearForm();
         close();

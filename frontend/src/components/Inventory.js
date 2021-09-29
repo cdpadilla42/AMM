@@ -403,10 +403,14 @@ const ItemDetailsDisplay = ({
   };
 
   const renderDescription = () => {
+    let renderingAct = act;
+    if (act === 'b') {
+      renderingAct = 'a';
+    }
     if (!act) {
       return <p>{itemObj.description}</p>;
     } else {
-      const description = itemObj[`description${act.toUpperCase()}`];
+      const description = itemObj[`description${renderingAct.toUpperCase()}`];
       if (!description) return <p>{itemObj.description}</p>;
       return <BlockContent blocks={description} serializers={serializers} />;
     }
