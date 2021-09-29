@@ -6,7 +6,7 @@ import useForm from '../hooks/useForm';
 import { addItemToLocalStorageInventory } from '../lib/localStorage';
 import { addToInventory } from '../store/inventory';
 
-const AddToInventory = ({ closeDisplay }) => {
+const AddToInventory = ({ closeDisplay, isOpen }) => {
   const { inputs, handleChange, resetForm, clearForm } = useForm({ item: '' });
   const { items: fullItemsList, userItems } = useSelector(
     (state) => state.inventory
@@ -14,6 +14,14 @@ const AddToInventory = ({ closeDisplay }) => {
   const dispatch = useDispatch();
   const [message, setMessage] = useState(null);
   const containerRef = useRef(null);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      // focus on input el.
+      inputRef.current.focus();
+    }
+  }, [isOpen]);
 
   // useEffect(() => {
   //   const listenForClickOutside = (e) => {
@@ -109,6 +117,7 @@ const AddToInventory = ({ closeDisplay }) => {
         id="item"
         value={inputs.item}
         onChange={handleChange}
+        ref={inputRef}
       />
     </StyledAddToInventory>
   );

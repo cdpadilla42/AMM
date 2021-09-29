@@ -82,14 +82,14 @@ const Inventory = () => {
 
     return (
       <div className="inventory_grid_container">
-        {!selectedItems || selectedItems.length === 0 ? (
+        {(!selectedItems || selectedItems.length === 0) && !isShowingAddItem ? (
           <div className="inventory_noitems_message">
             You don't have any evidence! Try snooping around the New Leaf Island
             on the Switch
           </div>
         ) : (
           <div className="inventory_grid">
-            renderInventoryItems(selectedItems)
+            {renderInventoryItems(selectedItems)}
           </div>
         )}
         <div
@@ -97,7 +97,10 @@ const Inventory = () => {
             isShowingAddItem ? '' : 'hide'
           }`}
         >
-          <AddToInventory closeDisplay={closeShowingAddItems} />
+          <AddToInventory
+            closeDisplay={closeShowingAddItems}
+            isOpen={isShowingAddItem}
+          />
         </div>
       </div>
     );
