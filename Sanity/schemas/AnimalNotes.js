@@ -17,7 +17,8 @@ export default {
     {
       title: 'Nickname',
       name: 'nickname',
-      type: 'string',
+      type: 'array',
+      of: [{ type: 'string' }],
       description: 'Used for text highlighting',
     },
     {

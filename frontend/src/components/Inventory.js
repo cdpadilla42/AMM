@@ -6,14 +6,12 @@ import {
   closeMap,
   toggleInventory,
   switchConversation,
-  toggleMap,
   displayInvalidEvidenceDialogue,
   openMap,
 } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import urlFor from '../lib/imageUrlBuilder';
 import Map from './Map';
-import { getUserItemsFromLocalStorage } from '../lib/localStorage';
 import AddToInventory from './AddToInventory';
 
 const Inventory = () => {
@@ -40,22 +38,14 @@ const Inventory = () => {
     setIsDetailsOpen(true);
   }
 
-  function toggleShowingPeople() {
-    setIsShowingPeople(!isShowingPeople);
-  }
-
   function showPeopole() {
-    // TODO Hook this up
     setIsShowingPeople(true);
-    // TODO comes from redux
     dispatch(closeMap());
     setIsShowingAddItem(false);
   }
 
   function showItems() {
-    // TODO Hook this up
     setIsShowingPeople(false);
-    // TODO comes from redux
     dispatch(closeMap());
     setIsShowingAddItem(false);
   }

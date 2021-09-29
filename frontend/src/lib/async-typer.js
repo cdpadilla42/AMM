@@ -19,15 +19,20 @@ export const useHighlightFilter = ({ items = [], animals = [] }) => {
     });
     // animal nickname
     animals.forEach((animal) => {
-      const query = animal.nickname;
-      const animalHighlightStyle = animal.animalRef
-        ? `style="color: ${animal.animalRef.color.hex};"`
-        : '';
+      console.log(animal.nickname);
+      if (animal.nickname) {
+        animal.nickname.forEach((nickname) => {
+          const query = nickname;
+          const animalHighlightStyle = animal.animalRef
+            ? `style="color: ${animal.animalRef.color.hex};"`
+            : '';
 
-      newString = newString.replaceAll(
-        query,
-        `<img style="height: 19px; width: 19px;" src="${animal.imageUrl}?h=19" /> <span class="highlight" ${animalHighlightStyle}>${animal.nickname}</span>`
-      );
+          newString = newString.replaceAll(
+            query,
+            `<img style="height: 19px; width: 19px;" src="${animal.imageUrl}?h=19" /> <span class="highlight" ${animalHighlightStyle}>${animal.nickname}</span>`
+          );
+        });
+      }
     });
     // animal name
     animals.forEach((animal) => {
