@@ -85,15 +85,16 @@ export default SNotes;
 const StyledSNotes = styled.div`
   .overlay {
     position: absolute;
-    width: 100vw;
-    height: 100vh;
     background-color: rgba(0, 0, 0, 0.1);
     transition: background-color 0.8s ease;
     z-index: 100;
     overflow-x: hidden;
     position: absolute;
-    width: 100vw;
-    height: 100vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 755px;
+    height: 765px;
     background-color: rgba(0, 0, 0, 0.1);
     transition: background-color 0.8s ease;
     z-index: 100;
@@ -103,6 +104,14 @@ const StyledSNotes = styled.div`
     &.showSNotes {
       background-color: rgba(0, 0, 0, 0.1);
       pointer-events: auto;
+    }
+    @media all and (max-width: 420px) {
+      top: 0;
+      left: 0;
+      transform: none;
+      width: 100vw;
+      height: 100vh;
+      font-size: 1.5rem;
     }
   }
 
@@ -141,8 +150,13 @@ const StyledSNotes = styled.div`
     border: none;
     width: 50px;
     height: 50px;
-    background-color: blue;
+    background-color: #fdb71a;
+    border: 1px solid #30c3ee;
     position: relative;
     right: 50px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;

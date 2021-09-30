@@ -22,7 +22,7 @@ import styled from 'styled-components';
 import '../styles/testimony.css';
 import AnimalsDisplayController from '../components/AnimalsDisplayController';
 import ImageLoader from '../components/ImageLoader';
-import PatternedBG from '../imgs/video-game-controller-gamepads-seamless-pattern-flat-style-illustrations-71807888.jpeg';
+import PatternedBG from '../imgs/patternedbgs/aabg2.jpg';
 import SNotes from '../components/SNotes';
 import { closeSNotes } from '../store/notepad';
 
@@ -106,6 +106,7 @@ const StyledContainer = styled.div`
     background: rgb(188, 221, 200)
       url(${(props) => props.desktop || props.fallback});
     background-size: cover;
+    border: 1px solid #8193e3;
 
     @media all and (max-width: 420px) {
       display: none;
