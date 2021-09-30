@@ -30,12 +30,21 @@ const ResponseBox = () => {
 
   function renderResponseOptions() {
     if (!responseOptions) return;
+    return responseOptions.map((optionObj) => {
+      const blankSpacerTextForHighlight = optionObj.text.replace(
+        /[\s\S]*/,
+        ' '
+      );
 
-    return responseOptions.map((optionObj) => (
-      <li onClick={() => handleClick(optionObj.followingDialogue?._id)}>
-        {optionObj.text}
-      </li>
-    ));
+      return (
+        <li
+          onClick={() => handleClick(optionObj.followingDialogue?._id)}
+          data-highlight-space={blankSpacerTextForHighlight}
+        >
+          <span>{optionObj.text}</span>
+        </li>
+      );
+    });
   }
 
   function handleClick(followingDialogueID) {
@@ -71,15 +80,16 @@ export default ResponseBox;
 
 const StyledResponseBox = styled.div`
   width: 200px;
-  background-color: #fff;
-  border: 1px solid green;
+  background-color: #fff9e5;
+  color: #8e7e68;
+  border: 2px solid #8e7e68;
   position: absolute;
   bottom: calc(50vh - 156px);
   right: calc(50vw - 322px);
-  /* transform: translate(-50%, -50%); */
-
+  font-size: 1.5rem;
+  font-weight: 700;
   z-index: 2;
-  border-radius: 20px;
+  border-radius: 50px;
   padding: 1rem;
   @media all and (max-width: 420px) {
     height: auto;
@@ -103,5 +113,19 @@ const StyledResponseBox = styled.div`
 
   li {
     padding: 0.3rem 0;
+    &:hover,
+    &:active {
+      cursor: pointer;
+      span {
+        background-image: linear-gradient(to top, #ffcb66 40%, transparent 0);
+      }
+    }
+
+    &:after {
+      content: attr(data-highlight-space);
+      padding: 5px 15px;
+      border-radius: 10px;
+      transition: all 0.5s ease;
+    }
   }
 `;
