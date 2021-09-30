@@ -257,19 +257,22 @@ const StyledInventory = styled.div`
     justify-content: space-between;
     align-items: center; */
     padding: 0.4rem 0;
-    background-color: #fff;
+    background-color: #fff9e5;
+    color: #8e7e68;
   }
 
   .inventory_item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #fff;
+    background-color: #fff9e5;
+    color: #8e7e68;
   }
 
   .inventory_noitems_message {
     padding: 0.5rem;
-    background-color: #fff;
+    background-color: #fff9e5;
+    color: #8e7e68;
     border-radius: 5px;
     text-align: center;
   }
@@ -439,13 +442,15 @@ const StyledItemDetailsDisplay = styled.div`
   transform: translateX(-50%);
   width: 679px;
   height: 350px;
-  border: 1px solid black;
   display: grid;
   grid-gap: 1rem;
   padding: 1rem;
   grid-template-columns: 200px 1fr;
-  background-color: palegoldenrod;
+  background-color: #fff9e5;
+  color: #8e7e68;
   border-radius: 5px;
+  font-size: 1.5rem;
+  font-weight: 700;
 
   @media all and (max-width: 800px) {
     width: 597px;

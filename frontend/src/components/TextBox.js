@@ -17,6 +17,8 @@ import { addToSNotesList, updateSNote } from '../store/inventory';
 import { useHighlightFilter } from '../lib/async-typer';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import Typist from 'react-typist';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import ReactHtmlParser from 'react-html-parser';
 import {
   addSNoteToLocalStorageInventory,
@@ -44,6 +46,9 @@ const TextBox = (props) => {
   const { showSNotes } = useSelector((state) => state.notepad);
 
   const [fromLink, setFromLink] = useState(false);
+  const [doneTyping, setDoneTyping] = useState(false);
+
+  const onTypingDone = () => setDoneTyping(true);
 
   let currentDialogueObj = useCurrentDialogueObj();
 
@@ -192,6 +197,7 @@ const TextBox = (props) => {
   });
 
   const handleNextClick = () => {
+    setDoneTyping(false);
     if (fromLink) setFromLink(false);
     const textEl = textRef.current;
     const isEndOfDialogue =
@@ -248,6 +254,7 @@ const TextBox = (props) => {
         cursor={{ show: false }}
         startDelay={2}
         avgTypingDelay={15}
+        onTypingDone={onTypingDone}
       >
         {ReactHtmlParser(highlightedText)}
       </Typist>
@@ -267,12 +274,18 @@ const TextBox = (props) => {
       </div>
       <div className="text_box__main">
         {renderText(text)}
-        <button className="text_box__left_arrow" onClick={handlePrevClick}>
+        <div
+          className={`text_box__next_arrow${doneTyping ? '' : ' hidden'}`}
+          onClick={handleNextClick}
+        >
+          <FontAwesomeIcon icon={faCaretDown} color="#ffb500" size="2x" />
+        </div>
+        {/* <button className="text_box__left_arrow" onClick={handlePrevClick}>
           Back
         </button>
         <button className="text_box__right_arrow" onClick={handleNextClick}>
           Next
-        </button>
+        </button> */}
       </div>
     </div>
   );

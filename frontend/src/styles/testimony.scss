@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap');
+
+@keyframes bounce {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 10px, 0);
+  }
+}
+
 :root {
   font-size: 100%;
   @media all and (max-width: 600px) {
@@ -10,6 +21,8 @@ body {
   // For safari viewport wierdness
   min-height: 100vh;
   min-height: -webkit-fill-available;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
 }
 
 html {
@@ -172,10 +185,11 @@ nav {
   transform: translate(-50%, -50%);
   &__name {
     background-color: grey;
-    color: white;
+    color: #fff9e5;
     display: inline-block;
     padding: 0.5rem;
     font-size: 1.5rem;
+    font-weight: 700;
     border-radius: 10px;
     transform: translateY(15px) rotate(-5deg);
     margin-left: 1rem;
@@ -183,15 +197,35 @@ nav {
   }
 
   &__main {
-    background-color: #fff;
+    background-color: #fff9e5;
+    color: #8e7e68;
     border-radius: 20px;
     padding: 1rem;
     height: 186px;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    font-weight: 700;
     position: relative;
     z-index: -1;
     @media all and (max-width: 600px) {
       height: 120px;
+    }
+  }
+
+  &__next_arrow {
+    box-sizing: border-box;
+    position: absolute;
+    bottom: -0.8rem;
+    left: calc(50% - 25px);
+    animation: bounce 0.6s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    padding: 0 1rem;
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.hidden {
+      opacity: 0;
     }
   }
 

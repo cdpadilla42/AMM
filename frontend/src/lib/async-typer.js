@@ -29,7 +29,7 @@ export const useHighlightFilter = ({ items = [], animals = [] }) => {
 
           newString = newString.replaceAll(
             query,
-            `<img style="height: 19px; width: 19px;" src="${animal.imageUrl}?h=19" /> <span class="highlight" ${animalHighlightStyle}>${nickname}</span>`
+            `<img style="height: 24px; width: 24px;" src="${animal.imageUrl}?h=19" /> <span class="highlight" ${animalHighlightStyle}>${nickname}</span>`
           );
         });
       }
