@@ -125,11 +125,13 @@ const Inventory = () => {
           onClick={displayItemDetails}
           className="inventory_item"
         >
-          <img
-            src={urlFor(item.imageUrl).width(200).height(200).url()}
-            alt=""
-            className="inventory_item_image"
-          />
+          <div className="image_wrapper">
+            <img
+              src={urlFor(item.imageUrl).width(200).height(200).url()}
+              alt=""
+              className="inventory_item_image"
+            />
+          </div>
           <span>{item.name}</span>
         </div>
       );
@@ -265,8 +267,15 @@ const StyledInventory = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #fff9e5;
     color: #8e7e68;
+    background-color: #fff;
+    cursor: pointer;
+  }
+
+  .image_wrapper {
+    background-color: #fff9e5;
+    width: 80%;
+    text-align: center;
   }
 
   .inventory_noitems_message {
@@ -421,12 +430,23 @@ const ItemDetailsDisplay = ({
 
   return (
     <StyledItemDetailsDisplay>
-      <img src={itemObj.imageUrl} alt="" />
+      <div className="left_grid_container">
+        <div className="polaroid">
+          <div className="image">
+            <img src={itemObj.imageUrl} alt="" />
+          </div>
+          <div className="caption">{itemObj.name}</div>
+        </div>
+      </div>
       <div className="written_details">
-        <h4>{itemObj.name}</h4>
+        {/* <h4>{itemObj.name}</h4> */}
         {renderDescription()}
-        <button onClick={presentItem}>Present</button>
-        <button onClick={closeDetailsDisplay}>Close</button>
+        <button onClick={presentItem} className="present">
+          Present
+        </button>
+        <button onClick={closeDetailsDisplay} className="close">
+          &times;
+        </button>
       </div>
     </StyledItemDetailsDisplay>
   );
@@ -441,11 +461,11 @@ const StyledItemDetailsDisplay = styled.div`
   left: 50vw;
   transform: translateX(-50%);
   width: 679px;
-  height: 350px;
+  max-height: 350px;
   display: grid;
   grid-gap: 1rem;
   padding: 1rem;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 250px 1fr;
   background-color: #fff9e5;
   color: #8e7e68;
   border-radius: 5px;
@@ -460,7 +480,8 @@ const StyledItemDetailsDisplay = styled.div`
     width: 95vw;
     top: 10vh;
     height: auto;
-    bottom: calc(50vh - 86px);
+    /* bottom: calc(50vh - 86px); */
+    grid-template-columns: 125px 1fr;
   }
 
   @media all and (min-height: 900px) and (min-width: 1000px) and (max-width: 1026px) {
@@ -470,13 +491,70 @@ const StyledItemDetailsDisplay = styled.div`
   .inventory_container {
   }
 
+  .polaroid {
+    background: #fff;
+    padding: 1rem;
+    box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
+    height: auto;
+  }
+  .polaroid > .image {
+    max-width: 100%;
+    height: auto;
+    background-color: #fff9e5;
+    text-align: center;
+  }
+  .caption {
+    font-size: 1.8rem;
+    text-align: center;
+    line-height: 2em;
+  }
+
   img {
     width: 200px;
     height: 200px;
+    @media all and (max-width: 420px) {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  .written_details {
+    font-size: 1.2rem;
+    position: relative;
   }
 
   h4 {
     margin: 0;
     padding: 0;
+  }
+
+  button {
+    background-color: #34b3a5;
+    color: #fff9e5;
+    border: none;
+    border-radius: 45px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    transform: translateY(0);
+    transition: transform 1s ease;
+    &:hover {
+      color: #fdb71a;
+      cursor: pointer;
+      transform: translateY(-5px);
+    }
+  }
+
+  button.close {
+    position: absolute;
+    right: -0.5rem;
+    top: -0.5rem;
+    padding: 0.5rem 1rem;
+  }
+
+  button.present {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
   }
 `;
