@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { clearSNotesFromLocalStorage } from '../lib/localStorage';
+import {
+  clearItemsFromLocalStorage,
+  clearSNotesFromLocalStorage,
+} from '../lib/localStorage';
 import { getConversations } from '../store/conversations';
 
 const SelectConversation = () => {
@@ -25,7 +28,10 @@ const SelectConversation = () => {
   return (
     <div>
       <button type="button" onClick={clearSNotesFromLocalStorage}>
-        Clear Agent S Notes and Inventory
+        Clear Agent S Notes from Inventory
+      </button>
+      <button type="button" onClick={clearItemsFromLocalStorage}>
+        Clear Items from Inventory
       </button>
       <h1>
         UGLY SELECT SCREEN{' '}
