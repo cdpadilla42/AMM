@@ -20,11 +20,6 @@ export default {
       type: 'image',
     },
     {
-      title: 'Tablet',
-      name: 'tablet',
-      type: 'image',
-    },
-    {
       title: 'Phone',
       name: 'phone',
       type: 'image',

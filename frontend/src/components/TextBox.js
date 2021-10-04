@@ -181,7 +181,7 @@ const TextBox = (props) => {
   // Add Keyboard listeners to document
   useEffect(() => {
     function handleKeydown(e) {
-      if (showSNotes) return;
+      if (showSNotes || props.isInventoryOpen) return;
       if (e.code === 'ArrowRight' && !responseBoxIsOpen) {
         // next
         handleNextClick();
@@ -291,6 +291,11 @@ const TextBox = (props) => {
   );
 };
 
+function mapStateToProps(state) {
+  const { dialogue } = state;
+  return { isInventoryOpen: dialogue.isInventoryOpen };
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
@@ -307,4 +312,4 @@ function mapDispatchToProps(dispatch) {
   );
 }
 
-export default connect(null, mapDispatchToProps)(TextBox);
+export default connect(mapStateToProps, mapDispatchToProps)(TextBox);
