@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { clearSNotesFromLocalStorage } from '../lib/localStorage';
 import { getConversations } from '../store/conversations';
 
 const SelectConversation = () => {
@@ -23,8 +24,9 @@ const SelectConversation = () => {
 
   return (
     <div>
-      <Link to="/inventory">Inventory</Link>
-      <Link to="/testimony/test">Blank Testimony</Link>
+      <button type="button" onClick={clearSNotesFromLocalStorage}>
+        Clear Agent S Notes and Inventory
+      </button>
       <h1>
         UGLY SELECT SCREEN{' '}
         <span role="img" aria-label="image">

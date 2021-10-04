@@ -54,6 +54,23 @@ export const addSNoteToLocalStorageInventory = (sNote) => {
   localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
 };
 
+export const clearSNotesFromLocalStorage = () => {
+  let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
+  console.log('function start', storageData);
+  if (!storageData) {
+    initializeLocalStorageInventory();
+    storageData = itemsInInventory;
+  }
+
+  const newSNotesList = [];
+
+  storageData.sNotes = newSNotesList;
+
+  console.log('function end', storageData);
+
+  localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
+};
+
 export const updateSNoteInLocalStorageInventory = (sNote, index) => {
   let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
   console.log('function start', storageData);

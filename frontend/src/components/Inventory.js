@@ -270,6 +270,9 @@ const StyledInventory = styled.div`
     color: #8e7e68;
     background-color: #fff;
     cursor: pointer;
+    &:hover {
+      color: #34b3a5;
+    }
   }
 
   .image_wrapper {
@@ -289,6 +292,10 @@ const StyledInventory = styled.div`
   img.inventory_item_image {
     width: 80px;
     height: 80px;
+    @media all and (max-width: 420px) {
+      width: 40px;
+      height: 40px;
+    }
   }
 
   span {
@@ -298,10 +305,29 @@ const StyledInventory = styled.div`
 
   button {
     display: inline;
+    color: #8e7e68;
+    background-color: #fff9e5;
+    border: none;
+    border-radius: 45px;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.1rem 1rem;
+    transform: translateY(0);
+    transition: transform 0.2s ease;
+    margin: 0 0.5rem;
+    &:hover {
+      color: #34b3a5;
+      cursor: pointer;
+      transform: translateY(-2px);
+    }
   }
 
   .hide {
     display: none;
+  }
+
+  .addtoinventory_container {
+    box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
   }
 
   .addtoinventory_container.ahashakeheartache {
@@ -521,6 +547,7 @@ const StyledItemDetailsDisplay = styled.div`
   .written_details {
     font-size: 1.2rem;
     position: relative;
+    padding-bottom: 2rem;
   }
 
   h4 {

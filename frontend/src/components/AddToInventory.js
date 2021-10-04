@@ -117,15 +117,17 @@ const AddToInventory = ({
       >
         <span>{message?.text}</span>
       </div>
-      <input
-        type="text"
-        name="item"
-        className="addtoinventory_input"
-        id="item"
-        value={inputs.item}
-        onChange={handleChange}
-        ref={inputRef}
-      />
+      <div className="input_wrapper">
+        <input
+          type="text"
+          name="item"
+          className="addtoinventory_input"
+          id="item"
+          value={inputs.item}
+          onChange={handleChange}
+          ref={inputRef}
+        />
+      </div>
     </StyledAddToInventory>
   );
 };
@@ -156,7 +158,7 @@ const StyledAddToInventory = styled.form`
   }
 
   .addtoinventory_message_display {
-    height: 25px;
+    min-height: 25px;
   }
 
   .addtoinventory_message_display.success {
@@ -167,8 +169,30 @@ const StyledAddToInventory = styled.form`
     color: red;
   }
 
+  .input_wrapper {
+    position: relative;
+    &:after {
+      border-bottom: 4px dotted #8e7e68;
+      display: block;
+      content: '';
+      width: 180px;
+      height: 4px;
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 10px;
+    }
+  }
+
   .addtoinventory_input {
+    position: relative;
     width: 200px;
     font-size: 1.8rem;
+    border-radius: 15px;
+    padding: 0 1rem;
+    border: none;
+    color: #8e7e68;
+    line-height: 4rem;
   }
 `;
