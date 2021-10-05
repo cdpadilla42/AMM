@@ -24,6 +24,7 @@ const initialState = {
   userSNotes: [],
   userItems: [],
   lastUpdated: null,
+  userPromptedForEvidence: false,
 };
 
 // Actions
@@ -69,6 +70,12 @@ export const addToInventory = createAction('ADD_TO_INVENTORY');
 export const addToSNotesList = createAction('ADD_TO_SNOTES_LIST');
 export const updateSNote = createAction('UPDATE_SNOTE');
 export const markInventoryUpdated = createAction('MARK_INVENTORY_UPDATED');
+export const markUserPromptedForEvidence = createAction(
+  'MARK_USER_PROMPTED_FOR_EVIDENCE'
+);
+export const markUserNotPromptedForEvidence = createAction(
+  'MARK_USER_NOT_PROMPTED_FOR_EVIDENCE'
+);
 
 // Reducer
 
@@ -99,6 +106,10 @@ function inventoryReducer(state = initialState, action) {
     case markInventoryUpdated.toString():
       const lastUpdated = new Date().toISOString();
       return { ...state, lastUpdated };
+    case markUserPromptedForEvidence.toString():
+      return { ...state, userPromptedForEvidence: true };
+    case markUserNotPromptedForEvidence.toString():
+      return { ...state, userPromptedForEvidence: false };
     default:
       return state;
   }

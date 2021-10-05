@@ -13,6 +13,7 @@ import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import urlFor from '../lib/imageUrlBuilder';
 import Map from './Map';
 import AddToInventory from './AddToInventory';
+import { markUserNotPromptedForEvidence } from '../store/inventory';
 
 const Inventory = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -24,7 +25,9 @@ const Inventory = () => {
 
   const isMapOpen = useSelector((state) => state.dialogue.isMapOpen);
   const fullItemsInventory = useSelector((store) => store.inventory.items);
-  const { userItems } = useSelector((store) => store.inventory);
+  const { userItems, userPromptedForEvidence } = useSelector(
+    (store) => store.inventory
+  );
   const animalNotes = useSelector((store) => store.inventory.notes);
   const currentDialogueObj = useCurrentDialogueObj();
 
@@ -81,6 +84,12 @@ const Inventory = () => {
       return userItems.includes(item.name);
     });
   }
+
+  const handleComeBackLaterClick = () => {
+    // TODO Send user off to leaving dialogue
+    console.log('Bye!');
+    dispatch(markUserNotPromptedForEvidence());
+  };
 
   function renderInventory() {
     // Below is where you can swap in and out fullItemsInventory and the inventory based on the user inventory
@@ -154,6 +163,14 @@ const Inventory = () => {
             <button onClick={showPeopole}>Animals</button>
             <button onClick={showMap}>Map</button>
             <button onClick={toggleShowingAddItem}>Add to inventory</button>
+            {userPromptedForEvidence && (
+              <button
+                onClick={handleComeBackLaterClick}
+                className="come_back_button"
+              >
+                Come Back Later
+              </button>
+            )}
           </div>
           {isMapOpen ? <Map /> : renderInventory()}
         </StyledInventory>
@@ -322,6 +339,11 @@ const StyledInventory = styled.div`
     }
   }
 
+  .come_back_button {
+    background-color: #8e7e68;
+    color: #fff9e5;
+  }
+
   .hide {
     display: none;
   }
@@ -425,6 +447,7 @@ const ItemDetailsDisplay = ({
     console.log({ matchedEvidence });
     if (selectedItem === matchedEvidence?.name) {
       dispatch(switchConversation(nextResponseID));
+      dispatch(markUserNotPromptedForEvidence());
     } else {
       dispatch(displayInvalidEvidenceDialogue());
     }

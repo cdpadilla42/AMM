@@ -13,7 +13,12 @@ import {
   switchConversationFromIncorrect,
   resetConversationToStart,
 } from '../store/dialogue';
-import { addToSNotesList, updateSNote } from '../store/inventory';
+import {
+  addToSNotesList,
+  updateSNote,
+  markUserPromptedForEvidence,
+  markUserNotPromptedForEvidence,
+} from '../store/inventory';
 import { useHighlightFilter } from '../lib/async-typer';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import Typist from 'react-typist';
@@ -215,8 +220,10 @@ const TextBox = (props) => {
     } else if (isEndOfDialogue && currentDialogueObj.name === 'Incorrect') {
       props.switchConversationFromIncorrect(prevDialogueID);
       props.openInventory();
+      props.markUserPromptedForEvidence();
     } else if (isEndOfDialogue && currentDialogueObj.needEvidence) {
       props.toggleInventory();
+      props.markUserPromptedForEvidence();
     } else if (
       isEndOfDialogue &&
       currentDialogueObj.isFinalDialogue &&
@@ -307,6 +314,8 @@ function mapDispatchToProps(dispatch) {
       switchConversation,
       switchConversationFromIncorrect,
       resetConversationToStart,
+      markUserNotPromptedForEvidence,
+      markUserPromptedForEvidence,
     },
     dispatch
   );
