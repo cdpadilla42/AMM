@@ -46,6 +46,9 @@ export const switchConversationFromIncorrect = createAction(
 export const displayInvalidEvidenceDialogue = createAction(
   'DISPLAY_INVALID_ERROR_DIALOGUE'
 );
+export const displayComeBackLaterDialogue = createAction(
+  'DISPLAY_COME_BACK_LATER_DIALOGUE'
+);
 
 export const getDialogue = createAsyncThunk(
   'GET_DIALOGUE',
@@ -161,6 +164,13 @@ function dialogueReducer(state = initialState, action) {
         currentDialogueID: 'Incorrect',
         prevDialogueID: state.currentDialogueID,
         returnToDialoguePositionAfterIncorrect: state.currentDialoguePosition,
+        currentDialoguePosition: 0,
+      };
+    case displayComeBackLaterDialogue.toString():
+      return {
+        ...state,
+        currentDialogueID: 'Come Back Later',
+        prevDialogueID: state.currentDialogueID,
         currentDialoguePosition: 0,
       };
     default:

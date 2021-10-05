@@ -8,6 +8,7 @@ import {
   switchConversation,
   displayInvalidEvidenceDialogue,
   openMap,
+  displayComeBackLaterDialogue,
 } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import urlFor from '../lib/imageUrlBuilder';
@@ -88,6 +89,9 @@ const Inventory = () => {
   const handleComeBackLaterClick = () => {
     // TODO Send user off to leaving dialogue
     console.log('Bye!');
+    dispatch(displayComeBackLaterDialogue());
+    dispatch(toggleInventory());
+
     dispatch(markUserNotPromptedForEvidence());
   };
 

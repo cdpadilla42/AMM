@@ -23,11 +23,34 @@ const useCurrentDialogueObj = () => {
           },
           speaker: {
             name: 'Agent S',
+            color: {
+              hex: '#1e28e1',
+            },
           },
           text: 'Ummmm, maybe try again....',
         },
       ],
       name: 'Incorrect',
+    };
+  } else if (currentDialogueID === 'Come Back Later') {
+    currentDialogueObj = {
+      animals: [{ name: 'Agent S' }],
+      phrase: [
+        {
+          emotion: {
+            emotion: 'normal',
+          },
+          speaker: {
+            name: 'Agent S',
+            color: {
+              hex: '#1e28e1',
+            },
+          },
+          text: "OK! We need more evidence. Let's come back and pretend we never had this conversation!",
+        },
+      ],
+      name: 'Come Back Later',
+      isFinalDialogue: true,
     };
   } else {
     currentDialogueObj = dialogueList.find(
