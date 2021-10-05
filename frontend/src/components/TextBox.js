@@ -187,7 +187,7 @@ const TextBox = (props) => {
   useEffect(() => {
     function handleKeydown(e) {
       if (showSNotes || props.isInventoryOpen) return;
-      if (e.code === 'ArrowRight' && !responseBoxIsOpen) {
+      if (e.code === 'Enter' && !responseBoxIsOpen) {
         // next
         handleNextClick();
       } else if (e.code === 'ArrowLeft') {
