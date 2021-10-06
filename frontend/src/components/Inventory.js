@@ -252,11 +252,14 @@ const StyledInventory = styled.div`
   }
 
   .inventory_grid_container {
-    height: calc(100% - 2rem - 2px);
+    height: calc(100% - 2rem - 3px);
     width: 100%;
     overflow-y: scroll;
     padding: 1rem;
     background: none;
+    @media all and (max-width: 800px) {
+      height: calc(100% - 65px - 3px);
+    }
   }
 
   .inventory_grid {
@@ -268,6 +271,7 @@ const StyledInventory = styled.div`
     height: auto;
     width: 100%;
     background: none;
+    padding: 0;
     /* div:last-child {
       margin-bottom: 1rem;
     } */
