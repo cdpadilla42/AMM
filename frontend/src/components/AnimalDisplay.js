@@ -14,6 +14,7 @@ const AnimalDisplay = ({
   orientation,
   isCurrentSpeaker,
   direction,
+  centered,
 }) => {
   const { sprites } = useSelector((state) => state.sprites);
   const dialogue = useCurrentDialogueObj();
@@ -39,7 +40,9 @@ const AnimalDisplay = ({
 
   if (!animalImages[emotionFromProps]) emotionFromProps = 'normal';
   let className;
-  if (orientation === 'left') {
+  if (centered) {
+    className = 'game_container__animal_image single';
+  } else if (orientation === 'left') {
     className = 'game_container__animal_image left';
   } else if (orientation === 'right') {
     className = 'game_container__animal_image right';

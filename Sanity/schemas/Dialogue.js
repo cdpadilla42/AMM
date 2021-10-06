@@ -24,7 +24,7 @@ export default {
       type: 'array',
       validation: (Rule) => Rule.max(2),
       description:
-        'If more than one animal in conversation, put em here! If changing from before, put em here!',
+        'If more than one animal at the start of the conversation put em here!',
       of: [
         {
           title: 'Animal',
@@ -48,6 +48,16 @@ export default {
               media: 'emotion.image', // Use the image of emotion field as thumbnail
             },
           },
+          fieldsets: [
+            {
+              title: 'Change position',
+              name: 'changePosition',
+            },
+            {
+              title: 'Agent S Notes Event',
+              name: 'sNote',
+            },
+          ],
           fields: [
             {
               title: 'Text',
@@ -78,12 +88,23 @@ export default {
               name: 'changePosition',
               type: 'boolean',
               description: 'On if you want to change animal positions',
+              fieldset: 'changePosition',
+            },
+            {
+              title: 'Left Animal Centered',
+              name: 'leftAnimalCentered',
+              type: 'boolean',
+              description:
+                'On if you want to switch to only one animal. Put their deets in the left animal slots and leave the right blank',
+              fieldset: 'changePosition',
+              hidden: ({ parent }) => !parent.changePosition,
             },
             {
               title: 'Left Animal',
               name: 'leftAnimal',
               type: 'reference',
               to: [{ type: 'animal' }],
+              fieldset: 'changePosition',
               hidden: ({ parent }) => !parent.changePosition,
             },
             {
@@ -100,6 +121,7 @@ export default {
                 ],
                 layout: 'radio',
               },
+              fieldset: 'changePosition',
               hidden: ({ parent }) => !parent.changePosition,
             },
             {
@@ -107,7 +129,9 @@ export default {
               name: 'rightAnimal',
               type: 'reference',
               to: [{ type: 'animal' }],
-              hidden: ({ parent }) => !parent.changePosition,
+              fieldset: 'changePosition',
+              hidden: ({ parent }) =>
+                !parent.changePosition || parent.leftAnimalCentered,
             },
             {
               title: 'Right Orientation',
@@ -123,13 +147,16 @@ export default {
                 ],
                 layout: 'radio',
               },
-              hidden: ({ parent }) => !parent.changePosition,
+              fieldset: 'changePosition',
+              hidden: ({ parent }) =>
+                !parent.changePosition || parent.leftAnimalCentered,
             },
             {
               title: 'Agent S Notes Event',
               name: 'sNotesEventTriggered',
               type: 'boolean',
               description: 'On if this dialogue triggers an event',
+              fieldset: 'sNote',
             },
             {
               title: 'Agent S Notes Event Type',
@@ -140,6 +167,7 @@ export default {
                 list: ['Add', 'Complete'],
                 layout: 'radio',
               },
+              fieldset: 'sNote',
               hidden: ({ parent }) => !parent.sNotesEventTriggered,
             },
             {
@@ -149,6 +177,7 @@ export default {
               to: [{ type: 'snotes' }],
               description:
                 'Reference to the note created in the Agent S Notes Doc type in Sanity.',
+              fieldset: 'sNote',
               hidden: ({ parent }) => !parent.sNotesEventTriggered,
             },
           ],

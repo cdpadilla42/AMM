@@ -179,6 +179,32 @@ nav a {
   transform: rotateY(0) translateX(0);
 }
 
+.animal_transition_left-enter.game_container__animal_image.single,
+.animal_transition_right-enter.game_container__animal_image.single {
+  transition: transform 0.6s ease, right 0.6s ease;
+  right: 200%;
+  transform: translateX(100%);
+}
+
+.animal_transition_left-enter-active.game_container__animal_image.single,
+.animal_transition_right-enter-active.game_container__animal_image.single {
+  right: 50%;
+  transform: translateX(50%);
+}
+
+.animal_transition_left-enter.game_container__animal_image.single.left_facing,
+.animal_transition_right-enter.game_container__animal_image.single.left_facing {
+  transition: transform 0.6s ease, right 0.6s ease;
+  right: 200%;
+  transform: translateX(100%) rotateY(180deg);
+}
+
+.animal_transition_left-enter-active.game_container__animal_image.single.left_facing,
+.animal_transition_right-enter-active.game_container__animal_image.single.left_facing {
+  right: 50%;
+  transform: translateX(50%) rotateY(180deg);
+}
+
 .text_box {
   position: absolute;
   width: 600px;

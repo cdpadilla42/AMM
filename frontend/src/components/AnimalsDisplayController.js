@@ -10,13 +10,31 @@ const AnimalsDisplayController = () => {
   const [isMultiAnimalConvo, setIsMultiAnimalConvo] = useState(
     !!dialogue?.animals?.length
   );
+  const { currentDialoguePosition } = useSelector((state) => state.dialogue);
 
   useEffect(() => {
-    if (!animalsFromDialouge) return;
-    if (isMultiAnimalConvo !== !!dialogue.animals?.length) {
+    // if (!animalsFromDialouge) return;
+    if (
+      animalsFromDialouge &&
+      isMultiAnimalConvo !== !!dialogue.animals?.length
+    ) {
       setIsMultiAnimalConvo(!!dialogue.animals?.length);
     }
-  }, [dialogue]);
+    if (dialogue.phrase[currentDialoguePosition].changePosition) {
+      console.log('switch set to on');
+      // If set on the phrase, defer to letting the multi animal component handle
+      if (dialogue.phrase[currentDialoguePosition].leftAnimalCentered) {
+        return;
+      }
+      if (!dialogue.phrase[currentDialoguePosition].rightAnimal) {
+        console.log('no right animal');
+        setIsMultiAnimalConvo(false);
+      } else {
+        console.log('right animal!');
+        setIsMultiAnimalConvo(true);
+      }
+    }
+  }, [dialogue, currentDialoguePosition]);
   if (isMultiAnimalConvo) {
     // control the changing of speaker emotion
     return <MultipleAnimalDisplay />;
