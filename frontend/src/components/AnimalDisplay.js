@@ -53,11 +53,12 @@ const AnimalDisplay = ({
   if (direction) {
     className += ` ${direction}_facing`;
   }
-  return (
-    <div className="game_container__animal">
-      <img src={spriteUrl} alt="" className={className} />
-    </div>
-  );
+  return <img src={spriteUrl} alt="" className={className} />;
+  // return (
+  //   <div className="game_container__animal">
+  //     <img src={spriteUrl} alt="" className={className} />
+  //   </div>
+  // );
 };
 
 AnimalDisplay.propTypes = {

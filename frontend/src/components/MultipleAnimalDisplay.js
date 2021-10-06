@@ -98,7 +98,7 @@ const MultipleAnimalDisplay = () => {
         <CSSTransition
           classNames={`animal_transition_${i === 0 ? 'left' : 'right'}`}
           key={animalState.name}
-          timeout={{ exit: 600, enter: 600 }}
+          timeout={{ exit: 600, enter: 6000 }}
         >
           <AnimalDisplay
             emotion={animalState.emotion}

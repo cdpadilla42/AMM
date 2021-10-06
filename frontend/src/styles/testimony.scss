@@ -88,18 +88,35 @@ nav {
   // position: relative;
   // padding: 2rem;
 
+  // TODO Just added
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   @media all and (max-width: 600px) {
-    width: 280px;
+    width: 100vw;
     height: calc(100% - 4rem);
-    padding: 0 2rem;
+    // padding: 0 2rem;
     margin: 0 auto;
+  }
+}
+
+.animal_display_transition_group {
+  // TODO Just Added
+  overflow: hidden;
+  width: 755px;
+  height: 765px;
+  position: relative;
+  @media all and (max-width: 600px) {
+    width: 100vw;
+    height: 100vh;
   }
 }
 
 .game_container {
   &__animal_image {
     position: absolute;
-    bottom: calc(50vh - 150px);
+    top: calc(50vh - 372px);
     width: 437px;
     padding: 1rem;
     right: 0;
@@ -107,13 +124,13 @@ nav {
     transition: transform 0.6s cubic-bezier(0.21, 0.6, 0.35, 1.44);
     transform: rotateY(0);
     &.left {
-      left: calc(50vw - 374px);
+      left: 2px;
       -webkit-transform: rotateY(180deg);
       transform: rotateY(180deg) scale(1) translateY(0);
     }
 
     &.right {
-      right: calc(50vw - 346px);
+      right: 33px;
     }
 
     &.right.right_facing {
@@ -140,44 +157,36 @@ nav {
 }
 
 // Left enter/exit animation
-.game_container__animal.animal_transition_left-exit
-  .game_container__animal_image.left {
+.animal_transition_left-exit.game_container__animal_image.left {
   transition: transform 0.6s ease;
   transform: scale(1) translateX(0);
 }
-.game_container__animal.animal_transition_left-exit-active
-  .game_container__animal_image.left {
+.animal_transition_left-exit-active.game_container__animal_image.left {
   transform: scale(1) translateX(-100%);
 }
 
-.game_container__animal.animal_transition_left-enter
-  .game_container__animal_image.left {
+.animal_transition_left-enter.game_container__animal_image.left {
   transition: transform 0.6s ease;
   transform: rotateY(180deg) translateX(100%);
 }
-.game_container__animal.animal_transition_left-enter-active
-  .game_container__animal_image.left {
+.animal_transition_left-enter-active.game_container__animal_image.left {
   transform: rotateY(180deg) translateX(0);
 }
 
 // Right enter/exit animation
-.game_container__animal.animal_transition_right-exit
-  .game_container__animal_image.right {
+.animal_transition_right-exit.game_container__animal_image.right {
   transition: transform 0.6s ease;
   transform: scale(1) translateX(0);
 }
-.game_container__animal.animal_transition_right-exit-active
-  .game_container__animal_image.right {
+.animal_transition_right-exit-active.game_container__animal_image.right {
   transform: scale(1) translateX(120%);
 }
 
-.game_container__animal.animal_transition_right-enter
-  .game_container__animal_image.right {
+.animal_transition_right-enter.game_container__animal_image.right {
   transition: transform 0.6s ease;
   transform: rotateY(0) translateX(100%);
 }
-.game_container__animal.animal_transition_right-enter-active
-  .game_container__animal_image.right {
+.animal_transition_right-enter-active.game_container__animal_image.right {
   transform: rotateY(0) translateX(0);
 }
 
@@ -314,7 +323,7 @@ nav {
 
   .game_container__animal_image {
     width: 280px;
-    bottom: calc(50vh - 107px);
+    top: calc(50vh - 198px);
     // width: 597px;
 
     &.left {

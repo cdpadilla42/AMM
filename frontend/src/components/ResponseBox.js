@@ -59,7 +59,10 @@ const ResponseBox = () => {
   useEffect(() => {
     const responseOptions = currentDialogue?.responseOptions;
     function handleKeydown(e) {
-      if (e.code === 'ArrowRight' && responseBoxIsOpen) {
+      if (
+        (e.code === 'ArrowRight' || e.code === 'Enter') &&
+        responseBoxIsOpen
+      ) {
         handleClick(responseOptions[0]?.followingDialogue?._id);
       }
     }
