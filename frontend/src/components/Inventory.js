@@ -575,6 +575,12 @@ const StyledItemDetailsDisplay = styled.div`
     font-size: 1.2rem;
     position: relative;
     padding-bottom: 2rem;
+    max-height: 318px;
+    p:first-child,
+    div:first-child {
+      overflow: scroll;
+      max-height: 239px;
+    }
   }
 
   h4 {
