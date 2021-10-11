@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+<<<<<<< HEAD
 import { TransitionGroup } from 'react-transition-group';
+=======
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+>>>>>>> multianimalfix
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import AnimalDisplay from './AnimalDisplay';
 import MultipleAnimalDisplay from './MultipleAnimalDisplay';
@@ -47,7 +51,13 @@ const AnimalsDisplayController = () => {
       component="div"
       className="animal_display_transition_group"
     >
-      <AnimalDisplay />;
+      <CSSTransition
+        classNames={`animal_transition_left`}
+        key={dialogue.phrase[currentDialoguePosition].speaker.name}
+        timeout={{ exit: 600, enter: 600 }}
+      >
+        <AnimalDisplay />
+      </CSSTransition>
     </TransitionGroup>
   );
 };
