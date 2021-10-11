@@ -37,28 +37,28 @@ const AnimalsDisplayController = () => {
       }
     }
   }, [dialogue, currentDialoguePosition]);
-  if (isMultiAnimalConvo) {
-    // control the changing of speaker emotion
-    return <MultipleAnimalDisplay />;
-  }
+  // if (isMultiAnimalConvo) {
+  // control the changing of speaker emotion
+  return <MultipleAnimalDisplay />;
+  // }
 
   // If only one animal in dialogue, return
-  return (
-    <TransitionGroup
-      component="div"
-      className="animal_display_transition_group"
-    >
-      <CSSTransition
-        classNames={`animal_transition_left`}
-        key={dialogue.phrase[currentDialoguePosition].speaker.name}
-        timeout={{ exit: 600, enter: 60000 }}
-      >
-        <AnimalDisplay
-          key={dialogue.phrase[currentDialoguePosition].speaker.name}
-        />
-      </CSSTransition>
-    </TransitionGroup>
-  );
+  //   return (
+  //     <TransitionGroup
+  //       component="div"
+  //       className="animal_display_transition_group"
+  //     >
+  //       <CSSTransition
+  //         classNames={`animal_transition_left`}
+  //         key={dialogue.phrase[currentDialoguePosition].speaker.name}
+  //         timeout={{ exit: 600, enter: 60000 }}
+  //       >
+  //         <AnimalDisplay
+  //           key={dialogue.phrase[currentDialoguePosition].speaker.name}
+  //         />
+  //       </CSSTransition>
+  //     </TransitionGroup>
+  //   );
 };
 
 export default AnimalsDisplayController;

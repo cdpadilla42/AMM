@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import isEqual from 'lodash.isequal';
+import { v4 as uuidv4 } from 'uuid';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import AnimalDisplay from './AnimalDisplay';
 
@@ -37,9 +39,10 @@ const MultipleAnimalDisplay = () => {
     });
   }, []);
 
-  const [animalsState, setAnimalsState] = useState(initialState);
+  const [animalsState, setAnimalsState] = useState([]);
   const [centeredView, setCenteredView] = useState(false);
 
+  console.log('Current state', animalsState);
   console.log({ currentPhraseObj });
 
   // dialogue.animals.forEach((animal) => {
@@ -106,19 +109,24 @@ const MultipleAnimalDisplay = () => {
         if (speaker.name !== newAnimalsInConvo[i].name) {
           newState[i].name = newAnimalsInConvo[i].name;
         }
+        newState[i].id = uuidv4();
       });
     }
 
     indexToChange = newState?.findIndex((animal) => animal.name === speaker);
     console.log({ indexToChange, newState, speaker });
+    if (indexToChange === -1) indexToChange = 0;
+
+    if (!newState[indexToChange]) return;
+    if (isEqual(newState, animalsState)) return;
     setAnimalsState(() => {
       newState[indexToChange].emotion = emotion;
       return newState;
     });
 
-    return () => {
-      setAnimalsState([]);
-    };
+    // return () => {
+    //   setAnimalsState([]);
+    // };
   }, [currentDialoguePosition, emotion, speaker]);
 
   const renderAnimals = () =>
@@ -141,28 +149,23 @@ const MultipleAnimalDisplay = () => {
       component="div"
       className="animal_display_transition_group"
     >
-      {animalsState.map(
-        (animalState, i) =>
-          !(animalState.centered === false) && (
-            <CSSTransition
-              classNames={`animal_transition_${i === 0 ? 'left' : 'right'}`}
-              key={animalState.name}
-              timeout={{ exit: 600, enter: 60000 }}
-            >
-              <AnimalDisplay
-                emotion={animalState.emotion}
-                speaker={animalState.name}
-                isCurrentSpeaker={animalState.name === speaker}
-                orientation={i === 0 ? 'left' : 'right'}
-                direction={
-                  animalState.direction ?? (i === 0 ? 'right' : 'left')
-                }
-                key={animalState.name}
-                centered={animalState.centered}
-              />
-            </CSSTransition>
-          )
-      )}
+      {animalsState.map((animalState, i) => (
+        <CSSTransition
+          classNames={`animal_transition_${i === 0 ? 'left' : 'right'}`}
+          key={animalState.id}
+          timeout={{ exit: 60000, enter: 60000 }}
+        >
+          <AnimalDisplay
+            emotion={animalState.emotion}
+            speaker={animalState.name}
+            isCurrentSpeaker={animalState.name === speaker}
+            orientation={i === 0 ? 'left' : 'right'}
+            direction={animalState.direction ?? (i === 0 ? 'right' : 'left')}
+            key={animalState.id}
+            centered={animalState.centered}
+          />
+        </CSSTransition>
+      ))}
 
       {/* <CSSTransition
         classNames="animal_transition"

@@ -27,7 +27,7 @@ const ImageLoader = ({ children }) => {
   useEffect(() => {
     if (loading) return;
     setTransitioning(true);
-    setTimeout(() => setTransitioning(false), 600);
+    setTimeout(() => setTransitioning(false), 0);
   }, [loading]);
 
   // useEffect(() => {
