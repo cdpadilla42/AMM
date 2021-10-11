@@ -13,8 +13,12 @@ const MultipleAnimalDisplay = () => {
   const initialState = useMemo(() => {
     const initialAnimalFromPhrase = [
       dialogue?.phrase[currentDialoguePosition].leftAnimal,
-      dialogue?.phrase[currentDialoguePosition].rightAnimal,
     ];
+    if (dialogue?.phrase[currentDialoguePosition].rightAnimal) {
+      initialAnimalFromPhrase.push(
+        dialogue?.phrase[currentDialoguePosition].rightAnimal
+      );
+    }
     return initialAnimalFromPhrase.map((animal) => {
       const initialAnimal = { ...animal };
       // set initial emotions
@@ -56,22 +60,24 @@ const MultipleAnimalDisplay = () => {
       }
       if (
         currentPhraseObj.rightAnimal &&
-        newState[1].name !== currentPhraseObj.rightAnimal.name
+        newState[1]?.name !== currentPhraseObj.rightAnimal.name
       ) {
+        if (!newState[1]) newState[1] = {};
         newState[1].name = currentPhraseObj.rightAnimal.name;
       }
 
       // Handle swapping directions
       newState[0].direction = currentPhraseObj.leftOrientation || 'right';
-      newState[1].direction = currentPhraseObj.rightOrientation || 'left';
+      if (newState[1])
+        newState[1].direction = currentPhraseObj.rightOrientation || 'left';
 
       if (currentPhraseObj.leftAnimalCentered) {
         const centeredAnimal = currentPhraseObj.leftAnimal.name;
         if (newState[0].name === centeredAnimal) {
           newState[0].centered = true;
-          newState[1].centered = false;
+          if (newState[1]) newState[1].centered = false;
         }
-        if (newState[1].name === centeredAnimal) {
+        if (newState[1]?.name === centeredAnimal) {
           newState[1].centered = true;
           newState[0].centered = false;
         }
@@ -79,7 +85,7 @@ const MultipleAnimalDisplay = () => {
       } else {
         setCenteredView(false);
         delete newState[0].centered;
-        delete newState[1].centered;
+        if (newState[1]) delete newState[1].centered;
       }
     } else if (newAnimalsInConvo) {
       // if there is a dialogue.animals field

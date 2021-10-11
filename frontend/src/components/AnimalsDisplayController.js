@@ -8,10 +8,11 @@ import MultipleAnimalDisplay from './MultipleAnimalDisplay';
 const AnimalsDisplayController = () => {
   const dialogue = useCurrentDialogueObj();
   const animalsFromDialouge = dialogue?.animals;
-  const [isMultiAnimalConvo, setIsMultiAnimalConvo] = useState(
-    !!dialogue?.animals?.length
-  );
   const { currentDialoguePosition } = useSelector((state) => state.dialogue);
+  const [isMultiAnimalConvo, setIsMultiAnimalConvo] = useState(
+    !!dialogue?.animals?.length ||
+      dialogue.phrase[currentDialoguePosition].leftAnimalCentered
+  );
 
   useEffect(() => {
     // if (!animalsFromDialouge) return;
