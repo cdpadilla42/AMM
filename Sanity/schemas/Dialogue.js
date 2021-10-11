@@ -96,7 +96,7 @@ export default {
               name: 'leftAnimalCentered',
               type: 'boolean',
               description:
-                'On if you want to switch to only one animal. Put their deets in the left animal slots and leave the right blank',
+                'On if you want to switch to only one animal. Info pulled from Speaker field',
               fieldset: 'changePosition',
               hidden: ({ parent }) => !parent.changePosition,
             },
@@ -106,7 +106,8 @@ export default {
               type: 'reference',
               to: [{ type: 'animal' }],
               fieldset: 'changePosition',
-              hidden: ({ parent }) => !parent.changePosition,
+              hidden: ({ parent }) =>
+                !parent.changePosition || parent.leftAnimalCentered,
             },
             {
               title: 'Left Orientation',
@@ -123,7 +124,8 @@ export default {
                 layout: 'radio',
               },
               fieldset: 'changePosition',
-              hidden: ({ parent }) => !parent.changePosition,
+              hidden: ({ parent }) =>
+                !parent.changePosition || parent.leftAnimalCentered,
             },
             {
               title: 'Right Animal',
