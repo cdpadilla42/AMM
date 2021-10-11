@@ -13,6 +13,7 @@ const numOfSprites = sprites.reduce((tally, current) => {
 
 const ImageLoader = ({ children }) => {
   const [loading, setLoading] = useState(true);
+  const [transitioning, setTransitioning] = useState(true);
   const counter = useRef(0);
   const startTime = useRef(new Date());
 
@@ -22,6 +23,12 @@ const ImageLoader = ({ children }) => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (loading) return;
+    setTransitioning(true);
+    setTimeout(() => setTransitioning(false), 600);
+  }, [loading]);
 
   // useEffect(() => {
   //   console.log('loading', loading);
@@ -53,7 +60,16 @@ const ImageLoader = ({ children }) => {
         <p>Loading...</p>
       </StyledImageLoader>
     );
-  return children;
+  return (
+    <>
+      {transitioning && (
+        <StyledImageLoader>
+          <p>Loading...</p>
+        </StyledImageLoader>
+      )}
+      {children}
+    </>
+  );
 };
 
 export default ImageLoader;
@@ -62,6 +78,8 @@ const StyledImageLoader = styled.div`
   width: 100vw;
   height: 100vh;
   background: rgb(188, 255, 200);
+  z-index: 1000;
+  position: absolute;
   background: linear-gradient(
     0deg,
     rgba(188, 255, 200, 1) 40%,

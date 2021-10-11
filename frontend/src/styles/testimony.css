@@ -307,6 +307,7 @@ nav a {
 .game_container__animal_image.single {
   right: 50%;
   transform: translateX(50%);
+  transition: transform 0.6s ease, right 0.6s ease;
 }
 
 span.highlight {

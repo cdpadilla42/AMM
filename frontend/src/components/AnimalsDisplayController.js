@@ -51,9 +51,11 @@ const AnimalsDisplayController = () => {
       <CSSTransition
         classNames={`animal_transition_left`}
         key={dialogue.phrase[currentDialoguePosition].speaker.name}
-        timeout={{ exit: 600, enter: 600 }}
+        timeout={{ exit: 600, enter: 60000 }}
       >
-        <AnimalDisplay />
+        <AnimalDisplay
+          key={dialogue.phrase[currentDialoguePosition].speaker.name}
+        />
       </CSSTransition>
     </TransitionGroup>
   );

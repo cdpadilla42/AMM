@@ -11,14 +11,20 @@ const MultipleAnimalDisplay = () => {
   let emotion = dialogue.phrase?.[currentDialoguePosition].emotion.emotion;
   const { ...currentPhraseObj } = dialogue.phrase?.[currentDialoguePosition];
   const initialState = useMemo(() => {
-    const initialAnimalFromPhrase = [
-      dialogue?.phrase[currentDialoguePosition].leftAnimal,
-    ];
+    const initialAnimalFromPhrase = [];
+    if (dialogue.phrase[currentDialoguePosition].leftAnimal) {
+      initialAnimalFromPhrase.push(
+        dialogue.phrase[currentDialoguePosition].leftAnimal
+      );
+    } else {
+      initialAnimalFromPhrase.push({ name: speaker });
+    }
     if (dialogue?.phrase[currentDialoguePosition].rightAnimal) {
       initialAnimalFromPhrase.push(
         dialogue?.phrase[currentDialoguePosition].rightAnimal
       );
     }
+    console.log(initialAnimalFromPhrase);
     return initialAnimalFromPhrase.map((animal) => {
       const initialAnimal = { ...animal };
       // set initial emotions
@@ -46,7 +52,7 @@ const MultipleAnimalDisplay = () => {
   // Handles emotions per phrase and animal swaps by dialogue
   useEffect(() => {
     let indexToChange;
-    const newState = [...animalsState];
+    let newState = [...animalsState];
     const newAnimalsInConvo = dialogue?.animals;
 
     if (currentPhraseObj.changePosition) {
@@ -55,15 +61,20 @@ const MultipleAnimalDisplay = () => {
       console.log("let's mix it up!");
 
       // Handle new animals
-      if (newState[0].name !== currentPhraseObj.leftAnimal.name) {
-        newState[0].name = currentPhraseObj.leftAnimal.name;
-      }
-      if (
-        currentPhraseObj.rightAnimal &&
-        newState[1]?.name !== currentPhraseObj.rightAnimal.name
-      ) {
-        if (!newState[1]) newState[1] = {};
-        newState[1].name = currentPhraseObj.rightAnimal.name;
+      if (currentPhraseObj.leftAnimalCentered) {
+        newState = [];
+        newState = [{ name: speaker }];
+      } else {
+        if (newState[0].name !== currentPhraseObj.leftAnimal.name) {
+          newState[0].name = currentPhraseObj.leftAnimal.name;
+        }
+        if (
+          currentPhraseObj.rightAnimal &&
+          newState[1]?.name !== currentPhraseObj.rightAnimal.name
+        ) {
+          if (!newState[1]) newState[1] = {};
+          newState[1].name = currentPhraseObj.rightAnimal.name;
+        }
       }
 
       // Handle swapping directions
@@ -72,7 +83,7 @@ const MultipleAnimalDisplay = () => {
         newState[1].direction = currentPhraseObj.rightOrientation || 'left';
 
       if (currentPhraseObj.leftAnimalCentered) {
-        const centeredAnimal = currentPhraseObj.leftAnimal.name;
+        const centeredAnimal = currentPhraseObj.leftAnimal?.name || speaker;
         if (newState[0].name === centeredAnimal) {
           newState[0].centered = true;
           if (newState[1]) newState[1].centered = false;
@@ -104,6 +115,10 @@ const MultipleAnimalDisplay = () => {
       newState[indexToChange].emotion = emotion;
       return newState;
     });
+
+    return () => {
+      setAnimalsState([]);
+    };
   }, [currentDialoguePosition, emotion, speaker]);
 
   const renderAnimals = () =>
@@ -132,7 +147,7 @@ const MultipleAnimalDisplay = () => {
             <CSSTransition
               classNames={`animal_transition_${i === 0 ? 'left' : 'right'}`}
               key={animalState.name}
-              timeout={{ exit: 600, enter: 600 }}
+              timeout={{ exit: 600, enter: 60000 }}
             >
               <AnimalDisplay
                 emotion={animalState.emotion}

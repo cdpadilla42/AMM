@@ -23,6 +23,7 @@ export default {
       name: 'animals',
       type: 'array',
       validation: (Rule) => Rule.max(2),
+      hidden: ({ parent }) => true,
       description:
         'If more than one animal at the start of the conversation put em here!',
       of: [
@@ -91,7 +92,7 @@ export default {
               fieldset: 'changePosition',
             },
             {
-              title: 'Left Animal Centered',
+              title: 'Centered Animal',
               name: 'leftAnimalCentered',
               type: 'boolean',
               description:
