@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { TransitionGroup } from 'react-transition-group';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import AnimalDisplay from './AnimalDisplay';
 import MultipleAnimalDisplay from './MultipleAnimalDisplay';
@@ -41,7 +42,14 @@ const AnimalsDisplayController = () => {
   }
 
   // If only one animal in dialogue, return
-  return <AnimalDisplay />;
+  return (
+    <TransitionGroup
+      component="div"
+      className="animal_display_transition_group"
+    >
+      <AnimalDisplay />;
+    </TransitionGroup>
+  );
 };
 
 export default AnimalsDisplayController;

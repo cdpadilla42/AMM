@@ -7,6 +7,7 @@ import mad from '../imgs/mad.png';
 import laugh from '../imgs/laugh.png';
 import sad from '../imgs/sad.png';
 import sleep from '../imgs/sleep.png';
+import { CSSTransition } from 'react-transition-group';
 
 const AnimalDisplay = ({
   speaker: speakerFromProps,
@@ -56,7 +57,16 @@ const AnimalDisplay = ({
   if (direction) {
     className += ` ${direction}_facing`;
   }
-  return <img src={spriteUrl} alt="" className={className} />;
+  return (
+    <CSSTransition
+      classNames={`animal_transition_`}
+      key={speaker}
+      timeout={{ exit: 600, enter: 600 }}
+    >
+      <img src={spriteUrl} alt="" className={className} />;
+    </CSSTransition>
+  );
+
   // return (
   //   <div className="game_container__animal">
   //     <img src={spriteUrl} alt="" className={className} />
