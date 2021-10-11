@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import cloneDeep from 'lodash.clonedeep';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import AnimalDisplay from './AnimalDisplay';
 
@@ -43,7 +42,7 @@ const MultipleAnimalDisplay = () => {
   // Handles emotions per phrase and animal swaps by dialogue
   useEffect(() => {
     let indexToChange;
-    const newState = cloneDeep(animalsState);
+    const newState = [...animalsState];
     const newAnimalsInConvo = dialogue?.animals;
 
     if (currentPhraseObj.changePosition) {

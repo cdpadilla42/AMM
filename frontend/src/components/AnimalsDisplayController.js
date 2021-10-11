@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-<<<<<<< HEAD
-import { TransitionGroup } from 'react-transition-group';
-=======
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
->>>>>>> multianimalfix
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import AnimalDisplay from './AnimalDisplay';
 import MultipleAnimalDisplay from './MultipleAnimalDisplay';
@@ -66,6 +62,10 @@ export default AnimalsDisplayController;
 
 // Set State - single or multiple conversation
 // if multiple, lay out the animals
+// set initial state at a controller level of animal name and emotion
+// listen for the dialogue position to change
+// When it does, find which animal is currently speaking
+// if it's them, change their emotion
 // set initial state at a controller level of animal name and emotion
 // listen for the dialogue position to change
 // When it does, find which animal is currently speaking
