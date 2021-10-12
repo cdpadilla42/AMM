@@ -100,8 +100,8 @@ function inventoryReducer(state = initialState, action) {
       return { ...state, userSNotes: newSNotes };
     case updateSNote.toString():
       const { sNote, index } = payload;
-      const newSNotesList = [...state.userSNotes];
-      newSNotesList[index] = sNote;
+      const newSNotesList = state.userSNotes.map((sNote) => ({ ...sNote }));
+      newSNotesList[index] = { ...sNote };
       return { ...state, userSNotes: newSNotesList };
     case markInventoryUpdated.toString():
       const lastUpdated = new Date().toISOString();

@@ -37,7 +37,7 @@ const SNotes = () => {
       });
       setSNotesToRender(res);
     }
-  }, [sNotesLoaded, sNotesDictLoaded]);
+  }, [sNotesLoaded, sNotesDictLoaded, userSNotes]);
 
   console.log(sNotesToRender);
 
