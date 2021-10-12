@@ -52,8 +52,11 @@ const TextBox = (props) => {
 
   const [fromLink, setFromLink] = useState(false);
   const [doneTyping, setDoneTyping] = useState(false);
+  const [showFullText, setShowFullText] = useState(false);
 
-  const onTypingDone = () => setDoneTyping(true);
+  const onTypingDone = () => {
+    setDoneTyping(true);
+  };
 
   let currentDialogueObj = useCurrentDialogueObj();
 
@@ -183,6 +186,8 @@ const TextBox = (props) => {
     currentDialogueID,
   ]);
 
+  const highlightedTextHTML = ReactHtmlParser(highlightFilter(text));
+
   // Add Keyboard listeners to document
   useEffect(() => {
     function handleKeydown(e) {
@@ -191,8 +196,13 @@ const TextBox = (props) => {
         (e.code === 'Enter' || e.code === 'ArrowRight') &&
         !responseBoxIsOpen
       ) {
-        // next
-        handleNextClick();
+        if (doneTyping) {
+          // next
+          handleNextClick();
+        } else {
+          setShowFullText(true);
+          setDoneTyping(true);
+        }
       } else if (e.code === 'ArrowLeft') {
         // back
         handlePrevClick();
@@ -206,6 +216,7 @@ const TextBox = (props) => {
 
   const handleNextClick = () => {
     setDoneTyping(false);
+    setShowFullText(false);
     if (fromLink) setFromLink(false);
     const textEl = textRef.current;
     const isEndOfDialogue =
@@ -250,13 +261,12 @@ const TextBox = (props) => {
 
   const renderText = (text) => {
     if (!text) return '';
-    const highlightedText = highlightFilter(text);
 
-    const createMarkup = () => {
-      return {
-        __html: `<p className="text_box__text" >${highlightedText}</p>`,
-      };
-    };
+    // const createMarkup = () => {
+    //   return {
+    //     __html: `<p className="text_box__text" >${highlightedText}</p>`,
+    //   };
+    // };
 
     return (
       <Typist
@@ -266,7 +276,7 @@ const TextBox = (props) => {
         avgTypingDelay={15}
         onTypingDone={onTypingDone}
       >
-        {ReactHtmlParser(highlightedText)}
+        {highlightedTextHTML}
       </Typist>
     );
   };
@@ -283,7 +293,7 @@ const TextBox = (props) => {
         {phrases[currentDialoguePosition]?.speaker.name}
       </div>
       <div className="text_box__main">
-        {renderText(text)}
+        {showFullText ? highlightedTextHTML : renderText(text)}
         <div
           className={`text_box__next_arrow${doneTyping ? '' : ' hidden'}`}
           onClick={handleNextClick}

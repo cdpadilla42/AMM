@@ -128,6 +128,17 @@ export default {
                 !parent.changePosition || parent.leftAnimalCentered,
             },
             {
+              title: 'Left Emotion',
+              name: 'leftEmotion',
+              type: 'reference',
+              description:
+                'Use if this is not the current speakeer and you want a change',
+              to: [{ type: 'emotions' }],
+              fieldset: 'changePosition',
+              hidden: ({ parent }) =>
+                !parent.changePosition || parent.leftAnimalCentered,
+            },
+            {
               title: 'Right Animal',
               name: 'rightAnimal',
               type: 'reference',
@@ -150,6 +161,17 @@ export default {
                 ],
                 layout: 'radio',
               },
+              fieldset: 'changePosition',
+              hidden: ({ parent }) =>
+                !parent.changePosition || parent.leftAnimalCentered,
+            },
+            {
+              title: 'Right Emotion',
+              name: 'rightEmotion',
+              type: 'reference',
+              to: [{ type: 'emotions' }],
+              description:
+                'Use if this is not the current speakeer and you want a change',
               fieldset: 'changePosition',
               hidden: ({ parent }) =>
                 !parent.changePosition || parent.leftAnimalCentered,

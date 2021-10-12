@@ -37,10 +37,7 @@ const ResponseBox = () => {
       );
 
       return (
-        <li
-          onClick={() => handleClick(optionObj.followingDialogue?._id)}
-          data-highlight-space={blankSpacerTextForHighlight}
-        >
+        <li onClick={() => handleClick(optionObj.followingDialogue?._id)}>
           <span>{optionObj.text}</span>
         </li>
       );
@@ -82,27 +79,23 @@ const ResponseBox = () => {
 export default ResponseBox;
 
 const StyledResponseBox = styled.div`
-  width: 200px;
-  background-color: #fff9e5;
-  color: #8e7e68;
-  border: 2px solid #8e7e68;
+  width: 65%;
   position: absolute;
-  bottom: calc(50vh - 156px);
-  right: calc(50vw - 322px);
+  top: calc(50vh - 300px);
+  /* bottom: calc(50vh - 156px); */
+  /* right: calc(50vw - 322px); */
   font-size: 1.5rem;
   font-weight: 700;
   z-index: 2;
-  border-radius: 50px;
-  padding: 1rem;
   @media all and (max-width: 420px) {
     height: auto;
     /* width: calc(100% - 4rem); */
-    bottom: calc(50vh - 130px);
-    right: calc(5vw);
+    /* bottom: calc(50vh - 130px); */
+    /* right: calc(5vw); */
   }
 
   @media all and (min-height: 900px) and (min-width: 1000px) and (max-width: 1026px) {
-    bottom: calc(50vh - 64px);
+    /* bottom: calc(50vh - 64px); */
   }
 
   &.hide {
@@ -115,7 +108,13 @@ const StyledResponseBox = styled.div`
   }
 
   li {
-    padding: 0.3rem 0;
+    display: block;
+    background-color: #fff9e5;
+    color: #8e7e68;
+    border: 2px solid #8e7e68;
+    padding: 1rem;
+    border-radius: 50px;
+    margin: 0.5rem 0;
     &:hover,
     &:active {
       cursor: pointer;

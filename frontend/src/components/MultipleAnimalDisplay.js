@@ -58,6 +58,8 @@ const MultipleAnimalDisplay = () => {
     let newState = [...animalsState];
     const newAnimalsInConvo = dialogue?.animals;
 
+    if (speaker === 'Everyone') return;
+
     if (currentPhraseObj.changePosition) {
       // set the speakers
       // TODO Uncomment
@@ -67,8 +69,15 @@ const MultipleAnimalDisplay = () => {
       if (currentPhraseObj.leftAnimalCentered) {
         newState = [{ name: speaker }];
       } else {
-        if (newState[0].name !== currentPhraseObj.leftAnimal.name) {
+        if (
+          currentPhraseObj.leftAnimal &&
+          newState[0]?.name !== currentPhraseObj.leftAnimal.name
+        ) {
+          if (!newState[0]) newState[0] = {};
           newState[0].name = currentPhraseObj.leftAnimal.name;
+          if (currentPhraseObj.leftEmotion) {
+            newState[0].emotion = currentPhraseObj.leftEmotion;
+          }
         }
         if (
           currentPhraseObj.rightAnimal &&
@@ -76,6 +85,9 @@ const MultipleAnimalDisplay = () => {
         ) {
           if (!newState[1]) newState[1] = {};
           newState[1].name = currentPhraseObj.rightAnimal.name;
+          if (currentPhraseObj.rightEmotion) {
+            newState[0].emotion = currentPhraseObj.rightEmotion;
+          }
         }
       }
 

@@ -9,6 +9,11 @@
   }
 }
 
+// * {
+//   border: 1px solid greenyellow;
+//   box-sizing: border-box;
+// }
+
 :root {
   font-size: 100%;
   @media all and (max-width: 600px) {
@@ -97,7 +102,7 @@ nav {
     width: 100vw;
     height: calc(100% - 4rem);
     // padding: 0 2rem;
-    margin: 0 auto;
+    // margin: 0 auto;
   }
 }
 

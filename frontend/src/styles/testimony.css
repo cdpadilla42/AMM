@@ -89,7 +89,6 @@ nav a {
   .game_container {
     width: 100vw;
     height: calc(100% - 4rem);
-    margin: 0 auto;
   }
 }
 

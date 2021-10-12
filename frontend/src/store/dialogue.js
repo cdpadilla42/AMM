@@ -60,7 +60,7 @@ export const getDialogue = createAsyncThunk(
   			"phrase": phrase[]{
   				emotion->{emotion}, speaker->{name, color}, text, 
 					link, sNotesEventRef->{name, count}, sNotesEventTriggered, sNotesEventType, 
-          changePosition, leftAnimal->{name}, rightAnimal->{name}, leftOrientation, rightOrientation, leftAnimalCentered,
+          changePosition, leftAnimal->{name}, rightAnimal->{name}, leftOrientation, rightOrientation, leftAnimalCentered, leftEmotion->{emotion}, rightEmotion->{emotion},
 				},
 				"responseOptions": responseOptions[]{
           text, 
