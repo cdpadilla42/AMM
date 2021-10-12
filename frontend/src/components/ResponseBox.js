@@ -84,7 +84,7 @@ const StyledResponseBox = styled.div`
   top: calc(50vh - 300px);
   /* bottom: calc(50vh - 156px); */
   /* right: calc(50vw - 322px); */
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   font-weight: 700;
   z-index: 2;
   @media all and (max-width: 420px) {
