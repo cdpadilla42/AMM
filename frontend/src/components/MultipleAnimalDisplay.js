@@ -65,7 +65,6 @@ const MultipleAnimalDisplay = () => {
 
       // Handle new animals
       if (currentPhraseObj.leftAnimalCentered) {
-        newState = [];
         newState = [{ name: speaker }];
       } else {
         if (newState[0].name !== currentPhraseObj.leftAnimal.name) {
@@ -118,7 +117,7 @@ const MultipleAnimalDisplay = () => {
     if (indexToChange === -1) indexToChange = 0;
 
     if (!newState[indexToChange]) return;
-    if (isEqual(newState, animalsState)) return;
+    // if (isEqual(newState, animalsState)) return;
     setAnimalsState(() => {
       newState[indexToChange].emotion = emotion;
       return newState;
@@ -152,8 +151,8 @@ const MultipleAnimalDisplay = () => {
       {animalsState.map((animalState, i) => (
         <CSSTransition
           classNames={`animal_transition_${i === 0 ? 'left' : 'right'}`}
-          key={animalState.id}
-          timeout={{ exit: 60000, enter: 60000 }}
+          timeout={{ exit: 600, enter: 600 }}
+          key={animalState.name}
         >
           <AnimalDisplay
             emotion={animalState.emotion}
@@ -161,7 +160,7 @@ const MultipleAnimalDisplay = () => {
             isCurrentSpeaker={animalState.name === speaker}
             orientation={i === 0 ? 'left' : 'right'}
             direction={animalState.direction ?? (i === 0 ? 'right' : 'left')}
-            key={animalState.id}
+            key={animalState.name}
             centered={animalState.centered}
           />
         </CSSTransition>
