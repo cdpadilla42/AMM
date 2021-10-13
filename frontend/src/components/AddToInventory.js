@@ -42,10 +42,17 @@ const AddToInventory = ({
   //   };
   // }, [containerRef]);
 
+  const isItemMatch = (item, input) => {
+    const cleanedInput = input.trim().toLowerCase();
+    const cleanedItem = item.toLowerCase();
+    return cleanedItem.includes(cleanedInput);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const matchedInGameItem = fullItemsList.find(
-      (item) => item?.name.toLowerCase() === inputs.item.trim().toLowerCase()
+      // (item) => item?.name.toLowerCase() === inputs.item.trim().toLowerCase()
+      (item) => isItemMatch(item?.name, inputs.item)
     );
     if (!!matchedInGameItem) {
       if (userItems.includes(matchedInGameItem.name)) {
@@ -133,11 +140,6 @@ const AddToInventory = ({
 };
 
 export default AddToInventory;
-
-AddToInventory.propTypes = {
-  closeDisplay: PropTypes.func,
-  isOpen: PropTypes.bool,
-};
 
 AddToInventory.defaultProps = {
   closeDisplay: () => {},
