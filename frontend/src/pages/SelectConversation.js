@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {
   clearItemsFromLocalStorage,
   clearSNotesFromLocalStorage,
@@ -25,6 +26,10 @@ const SelectConversation = () => {
     ));
   }
 
+  function showToast() {
+    toast('Toast!');
+  }
+
   return (
     <div>
       <button type="button" onClick={clearSNotesFromLocalStorage}>
@@ -32,6 +37,9 @@ const SelectConversation = () => {
       </button>
       <button type="button" onClick={clearItemsFromLocalStorage}>
         Clear Items from Inventory
+      </button>
+      <button type="button" onClick={showToast}>
+        Toast! 🍞
       </button>
       <h1>
         UGLY SELECT SCREEN{' '}

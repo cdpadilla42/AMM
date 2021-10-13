@@ -172,6 +172,7 @@ const Inventory = () => {
           setIsDetailsOpen={setIsDetailsOpen}
           requiredEvidence={requiredEvidence}
           nextResponseID={nextResponseID}
+          isMapOpen={isMapOpen}
         />
       ) : (
         <StyledInventory>
@@ -446,6 +447,7 @@ const ItemDetailsDisplay = ({
   setIsDetailsOpen,
   requiredEvidence,
   nextResponseID,
+  isMapOpen,
 }) => {
   const itemObj = inventory.find((item) => item.name === selectedItem);
   const dispatch = useDispatch();
@@ -456,7 +458,7 @@ const ItemDetailsDisplay = ({
   }
 
   function presentItem() {
-    console.log({ selectedItem, requiredEvidence, itemObj });
+    if (isMapOpen) return;
     let matchedEvidence;
     if (Array.isArray(requiredEvidence)) {
       matchedEvidence = requiredEvidence.find(

@@ -256,7 +256,11 @@ export default {
           title: 'Possible Evidence',
           name: 'possibleEvidence',
           type: 'reference',
-          to: [{ type: 'item' }, { type: 'animalNotes' }],
+          to: [
+            { type: 'item' },
+            { type: 'animalNotes' },
+            { type: 'mapLocation' },
+          ],
         },
       ],
     },

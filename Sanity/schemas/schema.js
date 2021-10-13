@@ -10,6 +10,7 @@ import Conversation from './Conversation';
 import Dialogue from './Dialogue';
 import Emotions from './Emotions';
 import Item from './Item';
+import MapLocation from './MapLocation';
 import AnimalNotes from './AnimalNotes';
 import Background from './Background';
 import AnimalImages from './AnimalImages';
@@ -29,6 +30,7 @@ export default createSchema({
     Animal,
     AnimalImages,
     Item,
+    MapLocation,
     AnimalNotes,
     Background,
     SNotes,
