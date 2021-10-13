@@ -236,7 +236,7 @@ const TextBox = (props) => {
       props.openInventory();
       props.markUserPromptedForEvidence();
     } else if (isEndOfDialogue && currentDialogueObj.needEvidence) {
-      props.toggleInventory();
+      props.toggleInventory(currentDialogueObj.requiredEvidence[0]._type);
       props.markUserPromptedForEvidence();
     } else if (
       isEndOfDialogue &&

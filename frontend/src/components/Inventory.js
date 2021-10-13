@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 import BlockContent from '@sanity/block-content-to-react';
@@ -26,6 +26,7 @@ const Inventory = () => {
 
   const isMapOpen = useSelector((state) => state.dialogue.isMapOpen);
   const fullItemsInventory = useSelector((store) => store.inventory.items);
+  const { inventoryScreen } = useSelector((store) => store.dialogue);
   const { userItems, userPromptedForEvidence } = useSelector(
     (store) => store.inventory
   );
@@ -35,6 +36,18 @@ const Inventory = () => {
   const requiredEvidence = currentDialogueObj?.requiredEvidence;
   const nextResponseID =
     currentDialogueObj?.responseOptions?.[0]?.followingDialogue?._id;
+
+  useEffect(() => {
+    if (inventoryScreen === 'animalNotes') {
+      showPeopole();
+    } else if (inventoryScreen === 'item') {
+      showItems();
+    } else if (inventoryScreen === 'mapLocation') {
+      showMap();
+    } else {
+      return;
+    }
+  }, [inventoryScreen]);
 
   function displayItemDetails(e) {
     const itemName = e.currentTarget.dataset.name;

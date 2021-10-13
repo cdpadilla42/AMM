@@ -22,6 +22,7 @@ const initialState = {
   responseBoxIsOpen: false,
   dialogueFromSanity: 'apples',
   isInventoryOpen: false,
+  inventoryScreen: 'items',
   isMapOpen: false,
 };
 
@@ -66,7 +67,7 @@ export const getDialogue = createAsyncThunk(
           text, 
 					followingDialogue->{_id}
         },
-				"requiredEvidence": requiredEvidence[]->{name}
+				"requiredEvidence": requiredEvidence[]->{name, _type}
       }`
     );
     return response;
@@ -120,6 +121,7 @@ function dialogueReducer(state = initialState, action) {
       return {
         ...state,
         isInventoryOpen: !state.isInventoryOpen,
+        inventoryScreen: payload,
       };
     case openInventory.toString():
       return {
