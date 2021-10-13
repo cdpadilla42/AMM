@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import './styles/customToast.css';
 import Testimony from './pages/Testimony';
 import SelectConversation from './pages/SelectConversation';
 import Map from './components/Map';
