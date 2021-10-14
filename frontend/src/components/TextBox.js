@@ -19,7 +19,7 @@ import {
   markUserPromptedForEvidence,
   markUserNotPromptedForEvidence,
 } from '../store/inventory';
-import { showHealthBar } from '../store/health';
+import { fullRecovery, showHealthBar } from '../store/health';
 import { useHighlightFilter } from '../lib/async-typer';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import Typist from 'react-typist';
@@ -251,6 +251,7 @@ const TextBox = (props) => {
       !isEndOfDialogueWithResponseOption
     ) {
       props.switchConversation('');
+      props.fullRecovery();
       history.push('/');
     } else if (isEndOfDialogue) {
       props.toggleResponseBox();
@@ -341,6 +342,7 @@ function mapDispatchToProps(dispatch) {
       markUserNotPromptedForEvidence,
       markUserPromptedForEvidence,
       showHealthBar,
+      fullRecovery,
     },
     dispatch
   );

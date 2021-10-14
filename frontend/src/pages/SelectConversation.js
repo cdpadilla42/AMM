@@ -26,16 +26,26 @@ const SelectConversation = () => {
     ));
   }
 
+  const handleClearInventoryClick = () => {
+    toast('Inventory Cleared');
+    clearItemsFromLocalStorage();
+  };
+
+  const handleClearSNotesClick = () => {
+    toast('Agent S Notes Cleared');
+    clearSNotesFromLocalStorage();
+  };
+
   function showToast() {
     toast('Toast!');
   }
 
   return (
     <div>
-      <button type="button" onClick={clearSNotesFromLocalStorage}>
+      <button type="button" onClick={handleClearSNotesClick}>
         Clear Agent S Notes from Inventory
       </button>
-      <button type="button" onClick={clearItemsFromLocalStorage}>
+      <button type="button" onClick={handleClearInventoryClick}>
         Clear Items from Inventory
       </button>
       <button type="button" onClick={showToast}>

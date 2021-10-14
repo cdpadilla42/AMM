@@ -45,7 +45,12 @@ const AddToInventory = ({
   const isItemMatch = (item, input) => {
     const cleanedInput = input.trim().toLowerCase();
     const cleanedItem = item.toLowerCase();
-    return cleanedItem.includes(cleanedInput);
+    const cleanedItemWords = cleanedItem.split(' ');
+    if (cleanedItemWords.length === 1) {
+      return cleanedItem === cleanedInput;
+    } else {
+      return cleanedItemWords.includes(cleanedInput);
+    }
   };
 
   const handleSubmit = (e) => {
