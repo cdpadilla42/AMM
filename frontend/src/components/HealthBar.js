@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { fullRecovery, loseHealth } from '../store/health';
@@ -6,6 +6,14 @@ import { fullRecovery, loseHealth } from '../store/health';
 const HealthBar = () => {
   const dispatch = useDispatch();
   const { current: health } = useSelector((state) => state.health);
+
+  useEffect(() => {
+    if (health === 0) {
+      setTimeout(() => {
+        onFullRecover();
+      }, 2000);
+    }
+  }, [health]);
 
   const onLoseHealthClick = () => {
     if (health === 1) {
@@ -30,13 +38,12 @@ const HealthBar = () => {
       <div className="meter">
         <span style={{ width: calcWidth }} />
       </div>
-      <span>{health}</span>
-      <button type="button" onClick={onLoseHealthClick}>
+      {/* <button type="button" onClick={onLoseHealthClick}>
         Oof
       </button>
       <button type="button" onClick={onFullRecover}>
         Recover
-      </button>
+      </button> */}
     </StyledHealthBar>
   );
 };
