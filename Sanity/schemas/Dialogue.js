@@ -2,6 +2,14 @@ export default {
   title: 'Dialogue',
   name: 'dialogue',
   type: 'document',
+  fieldsets: [
+    {
+      title: 'Evidence',
+      name: 'evidenceSet',
+      description:
+        'If presenting evidence, be sure to fill out the Response Option above so the app knows where to go afterwards',
+    },
+  ],
   fields: [
     {
       title: 'Name',
@@ -9,6 +17,7 @@ export default {
       type: 'string',
       description:
         "Named either 'Start' or the response text from the previous dialogue",
+      validation: (Rule) => Rule.required(),
     },
     {
       title: 'Conversation',
@@ -17,6 +26,7 @@ export default {
       description:
         'Ex: Ankha Act 3. Should reference an already defined conversation',
       to: [{ type: 'conversation' }],
+      validation: (Rule) => Rule.required(),
     },
     {
       title: 'Animals',
@@ -213,7 +223,8 @@ export default {
       title: 'Response Options',
       name: 'responseOptions',
       type: 'array',
-      description: 'Possible answers user can give',
+      description:
+        'Possible answers user can give. If presenting evidence, fill this out with a dummy name field and the next conversation you want to go to',
       of: [
         {
           title: 'Response',
@@ -242,14 +253,24 @@ export default {
       name: 'needEvidence',
       type: 'boolean',
       description: 'Switch on if you need to present someone or something',
+      fieldset: 'evidenceSet',
+    },
+    {
+      title: 'Risk of Losing Health',
+      name: 'loseHealthOnIncorrect',
+      type: 'boolean',
+      description:
+        'User will lose health when answering incorrectly if this is toggle to on.',
+      hidden: ({ parent }) => !parent.needEvidence,
+      fieldset: 'evidenceSet',
     },
     {
       title: 'Required Evidence',
       name: 'requiredEvidence',
+      fieldset: 'evidenceSet',
+      hidden: ({ parent }) => !parent.needEvidence,
       description:
-        'Only required if above is on. Must reference an item or animal note',
-      // type: 'reference',
-      // to: [{ type: 'item' }, { type: 'animalNotes' }],
+        'Only required if above is on. Must reference an item, animal note, or map location',
       type: 'array',
       of: [
         {
@@ -264,24 +285,24 @@ export default {
         },
       ],
     },
-    {
-      title: 'Special Event',
-      name: 'specialEvent',
-      type: 'document',
-      description: 'Optional trigger for a specific event',
-      fields: [
-        {
-          title: 'Name',
-          name: 'name',
-          type: 'string',
-        },
-        {
-          title: 'Description',
-          name: 'description',
-          type: 'string',
-        },
-      ],
-    },
+    // {
+    //   title: 'Special Event',
+    //   name: 'specialEvent',
+    //   type: 'document',
+    //   description: 'Optional trigger for a specific event',
+    //   fields: [
+    //     {
+    //       title: 'Name',
+    //       name: 'name',
+    //       type: 'string',
+    //     },
+    //     {
+    //       title: 'Description',
+    //       name: 'description',
+    //       type: 'string',
+    //     },
+    //   ],
+    // },
     {
       title: 'Final dialogue of conversation??',
       name: 'isFinalDialogue',

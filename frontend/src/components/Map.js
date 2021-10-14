@@ -1,9 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { toggleInventory, switchConversation } from '../store/dialogue';
+import {
+  toggleInventory,
+  switchConversation,
+  displayInvalidEvidenceDialogue,
+} from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import newLeafMap from '../imgs/newLeafMap.jpg';
+import { hideHealthBar, loseHealth } from '../store/health';
 
 const StyledMap = styled.div`
   position: relative;
@@ -198,9 +203,14 @@ const Map = () => {
     if (isMatch) {
       dispatch(switchConversation(nextResponseID));
       dispatch(toggleInventory());
+      dispatch(hideHealthBar());
     } else {
-      console.log('Soooorrry, wrong one', selectedRegion, requiredEvidence);
+      dispatch(displayInvalidEvidenceDialogue());
+      if (currentDialogueObj.loseHealthOnIncorrect) {
+        dispatch(loseHealth());
+      }
     }
+    dispatch(toggleInventory());
   }
 
   return (

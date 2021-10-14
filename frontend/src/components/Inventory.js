@@ -15,6 +15,7 @@ import urlFor from '../lib/imageUrlBuilder';
 import Map from './Map';
 import AddToInventory from './AddToInventory';
 import { markUserNotPromptedForEvidence } from '../store/inventory';
+import { hideHealthBar, loseHealth } from '../store/health';
 
 const Inventory = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -101,7 +102,6 @@ const Inventory = () => {
 
   const handleComeBackLaterClick = () => {
     // TODO Send user off to leaving dialogue
-    console.log('Bye!');
     dispatch(displayComeBackLaterDialogue());
     dispatch(toggleInventory());
 
@@ -173,6 +173,8 @@ const Inventory = () => {
           requiredEvidence={requiredEvidence}
           nextResponseID={nextResponseID}
           isMapOpen={isMapOpen}
+          loseHealthOnIncorrect={currentDialogueObj.loseHealthOnIncorrect}
+          onHealthOut={handleComeBackLaterClick}
         />
       ) : (
         <StyledInventory>
@@ -448,7 +450,10 @@ const ItemDetailsDisplay = ({
   requiredEvidence,
   nextResponseID,
   isMapOpen,
+  loseHealthOnIncorrect,
+  onHealthOut,
 }) => {
+  const { current: health } = useSelector((store) => store.health);
   const itemObj = inventory.find((item) => item.name === selectedItem);
   const dispatch = useDispatch();
   const act = useSelector((store) => store.conversations.conversation?.[0].act);
@@ -471,8 +476,17 @@ const ItemDetailsDisplay = ({
     if (selectedItem === matchedEvidence?.name) {
       dispatch(switchConversation(nextResponseID));
       dispatch(markUserNotPromptedForEvidence());
+      dispatch(hideHealthBar());
     } else {
       dispatch(displayInvalidEvidenceDialogue());
+      if (loseHealthOnIncorrect) {
+        if (health === 1) {
+          onHealthOut();
+          dispatch(hideHealthBar());
+          dispatch(toggleInventory());
+        }
+        dispatch(loseHealth());
+      }
     }
     closeDetailsDisplay();
     dispatch(toggleInventory());

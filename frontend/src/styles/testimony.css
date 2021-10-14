@@ -314,6 +314,28 @@ span.highlight {
   font-weight: 800;
 }
 
+.health_bar_wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 755px;
+  height: 765px;
+  overflow: hidden;
+}
+
+.health_bar_inset {
+  position: relative;
+  top: 35px;
+  left: 35px;
+  transition: transform 0.8s cubic-bezier(0.47, -0.51, 0.46, 1.64);
+  transform: translateX(0);
+}
+
+.health_bar_inset.offscreen {
+  transform: translateX(-100%);
+}
+
 .hide {
   opacity: 0;
   position: absolute;

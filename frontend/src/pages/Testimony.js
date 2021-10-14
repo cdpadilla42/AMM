@@ -18,6 +18,7 @@ import TextBox from '../components/TextBox';
 import Nav from '../components/Nav';
 import ResponseBox from '../components/ResponseBox';
 import Inventory from '../components/Inventory';
+import HealthBar from '../components/HealthBar';
 import styled from 'styled-components';
 import '../styles/testimony.css';
 import AnimalsDisplayController from '../components/AnimalsDisplayController';
@@ -33,7 +34,9 @@ const Testimony = (props) => {
   );
   const backgroundURLs = useSelector(
     (state) => state.conversations?.backgroundURL?.backgroundURL
-    // state.conversations?.backgroundURL?.backgroundURL?.image.asset.url
+  );
+  const showingHealthBar = useSelector(
+    (state) => state.health.showingHealthBar
   );
 
   useEffect(() => {
@@ -74,6 +77,15 @@ const Testimony = (props) => {
         <div className="game_container">
           <AnimalsDisplayController />
           {isInventoryOpen && <Inventory />}
+          <div className="health_bar_wrapper">
+            <div
+              className={`health_bar_inset${
+                showingHealthBar ? '' : ' offscreen'
+              }`}
+            >
+              <HealthBar />
+            </div>
+          </div>
           <ResponseBox />
           <TextBox />
         </div>

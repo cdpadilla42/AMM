@@ -19,6 +19,7 @@ import {
   markUserPromptedForEvidence,
   markUserNotPromptedForEvidence,
 } from '../store/inventory';
+import { showHealthBar } from '../store/health';
 import { useHighlightFilter } from '../lib/async-typer';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import Typist from 'react-typist';
@@ -41,6 +42,7 @@ const TextBox = (props) => {
     currentDialogueID,
     prevDialogueID,
     responseBoxIsOpen,
+    isInventoryOpen,
     returnToDialoguePositionAfterIncorrect,
   } = useSelector((state) => state.dialogue);
   const {
@@ -214,9 +216,16 @@ const TextBox = (props) => {
     return () => document.removeEventListener('keyup', handleKeydown);
   });
 
+  const handleOpenInventory = () => {
+    props.openInventory(currentDialogueObj.requiredEvidence?.[0]._type);
+    props.markUserPromptedForEvidence();
+    // if the boolean is on, show health bar
+    if (currentDialogueObj.loseHealthOnIncorrect) {
+      props.showHealthBar();
+    }
+  };
+
   const handleNextClick = () => {
-    setDoneTyping(false);
-    setShowFullText(false);
     if (fromLink) setFromLink(false);
     const textEl = textRef.current;
     const isEndOfDialogue =
@@ -233,11 +242,9 @@ const TextBox = (props) => {
       props.nextDialogue();
     } else if (isEndOfDialogue && currentDialogueObj.name === 'Incorrect') {
       props.switchConversationFromIncorrect(prevDialogueID);
-      props.openInventory();
-      props.markUserPromptedForEvidence();
+      handleOpenInventory();
     } else if (isEndOfDialogue && currentDialogueObj.needEvidence) {
-      props.toggleInventory(currentDialogueObj.requiredEvidence[0]._type);
-      props.markUserPromptedForEvidence();
+      handleOpenInventory();
     } else if (
       isEndOfDialogue &&
       currentDialogueObj.isFinalDialogue &&
@@ -248,6 +255,8 @@ const TextBox = (props) => {
     } else if (isEndOfDialogue) {
       props.toggleResponseBox();
     } else {
+      setDoneTyping(false);
+      setShowFullText(false);
       props.nextDialogue();
     }
   };
@@ -295,7 +304,9 @@ const TextBox = (props) => {
       <div className="text_box__main">
         {showFullText ? highlightedTextHTML : renderText(text)}
         <div
-          className={`text_box__next_arrow${doneTyping ? '' : ' hidden'}`}
+          className={`text_box__next_arrow${
+            doneTyping && !isInventoryOpen ? '' : ' hidden'
+          }`}
           onClick={handleNextClick}
         >
           <FontAwesomeIcon icon={faCaretDown} color="#ffb500" size="2x" />
@@ -329,6 +340,7 @@ function mapDispatchToProps(dispatch) {
       resetConversationToStart,
       markUserNotPromptedForEvidence,
       markUserPromptedForEvidence,
+      showHealthBar,
     },
     dispatch
   );

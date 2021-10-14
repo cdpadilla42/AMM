@@ -17,14 +17,6 @@ function App() {
       <ToastContainer />
       <Router>
         <Switch>
-          <Route path="/snotes">
-            <ErrorBoundary>
-              <SNotes />
-            </ErrorBoundary>
-          </Route>
-          <Route path="/inventory">
-            <Map />
-          </Route>
           <Route path="/playground">
             <Playground />
           </Route>
