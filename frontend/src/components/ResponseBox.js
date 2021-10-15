@@ -79,14 +79,17 @@ const ResponseBox = () => {
 export default ResponseBox;
 
 const StyledResponseBox = styled.div`
-  width: 65%;
+  width: 600px;
   position: absolute;
-  top: calc(50vh - 300px);
+  top: calc(var(--vh, 1vh) * 100 - 300px);
   /* bottom: calc(50vh - 156px); */
   /* right: calc(50vw - 322px); */
   font-size: 1.1rem;
   font-weight: 700;
   z-index: 2;
+  @media all and (max-width: 800px) {
+    width: 80%;
+  }
   @media all and (max-width: 420px) {
     height: auto;
     /* width: calc(100% - 4rem); */

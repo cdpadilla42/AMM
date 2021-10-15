@@ -355,7 +355,7 @@ nav {
 
   .game_container__animal_image {
     width: 280px;
-    top: calc((var(--vh, 1vh) * 100) - 474px);
+    top: calc(var(--vh, 1vh) * 50 - 216px);
     // width: 597px;
 
     &.left {
