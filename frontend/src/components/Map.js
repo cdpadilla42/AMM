@@ -1,5 +1,5 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import {
   toggleInventory,
@@ -16,24 +16,40 @@ const StyledMap = styled.div`
   height: 466px; // originally 350px
   /* z-index: 6; */
   border: 1px solid black;
-  background-image: url(${newLeafMap});
-  background-size: cover;
-  background-position: center;
   border-radius: 5px;
-
+  margin: 0;
+  padding: 0 !important;
+  overflow: scroll;
+  
   /* Use below for seeing click boxes */
   /* & > * {
-    border: 1px solid green;
   } */
-
-  & > .click_box {
-    background-color: rgba(0, 0, 0, 0);
+  
+  & > .click_boxes_container > .click_box {
+    background-color: transparent;
+    border: 1px solid green;
     &:hover,
     &:active {
       -moz-box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
       -webkit-box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
       box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
       cursor: pointer;
+    }
+  }
+  
+  .click_boxes_container {
+    background-image: url(${newLeafMap});
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    @media all and (max-width: 600px) {
+      width: 676px;
+      height: 463px:
     }
   }
 
@@ -177,12 +193,25 @@ const StyledMap = styled.div`
 `;
 
 const Map = () => {
+  const isMapOpen = useSelector((state) => state.dialogue.isMapOpen);
   const currentDialogueObj = useCurrentDialogueObj();
   const dispatch = useDispatch();
+  const outerRef = useRef();
+  const innerRef = useRef();
 
   const requiredEvidence = currentDialogueObj.requiredEvidence;
   const nextResponseID =
     currentDialogueObj.responseOptions[0].followingDialogue._id;
+
+  useEffect(() => {
+    if (isMapOpen) {
+      console.log(innerRef.current.clientWidth, outerRef.current.clientWidth);
+      const scroll =
+        (innerRef.current.clientWidth - outerRef.current.clientWidth) / 2;
+      console.log(scroll);
+      outerRef.current.scrollLeft = scroll;
+    }
+  }, [isMapOpen]);
 
   function presentLocation(e) {
     const selectedRegion = e.target.dataset.region;
@@ -213,22 +242,28 @@ const Map = () => {
     dispatch(toggleInventory());
   }
 
+  const genW = (value) => {
+    return (value / 676) * 100;
+  };
+
   return (
     <>
-      <StyledMap onClick={presentLocation}>
-        <div className="click_box julian" data-region="Julian Falls" />
-        <div className="click_box ankha" data-region="ankha" />
-        <div className="click_box agent_s" data-region="agent_s" />
-        <div className="click_box stitches" data-region="stitches" />
-        <div className="click_box elvis" data-region="elvis" />
-        <div className="click_box sterling" data-region="sterling" />
-        <div className="click_box lucky" data-region="lucky" />
-        <div className="click_box crime_scene" data-region="Crime Scene" />
-        <div className="click_box katt" data-region="katt" />
-        <div className="click_box merengue" data-region="merengue" />
-        <div className="click_box chadder" data-region="chadder" />
-        <div className="click_box nenn" data-region="nenn" />
-        <div className="click_box mailboxes" data-region="mailboxes" />
+      <StyledMap onClick={presentLocation} ref={outerRef}>
+        <div className="click_boxes_container" ref={innerRef}>
+          <div className="click_box julian" data-region="Julian Falls" />
+          <div className="click_box ankha" data-region="ankha" />
+          <div className="click_box agent_s" data-region="agent_s" />
+          <div className="click_box stitches" data-region="stitches" />
+          <div className="click_box elvis" data-region="elvis" />
+          <div className="click_box sterling" data-region="sterling" />
+          <div className="click_box lucky" data-region="lucky" />
+          <div className="click_box crime_scene" data-region="Crime Scene" />
+          <div className="click_box katt" data-region="katt" />
+          <div className="click_box merengue" data-region="merengue" />
+          <div className="click_box chadder" data-region="chadder" />
+          <div className="click_box nenn" data-region="nenn" />
+          <div className="click_box mailboxes" data-region="mailboxes" />
+        </div>
       </StyledMap>
     </>
   );
