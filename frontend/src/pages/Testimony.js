@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import throttle from 'lodash.throttle';
 import AnimalDisplay from '../components/AnimalDisplay';
 import {
   clearDialogueData,
@@ -63,13 +64,15 @@ const Testimony = (props) => {
       // We execute the same script as before
       let vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
-    }
+    };
 
-    window.addEventListener('resize', handleWindowResize);
+    const handleWindowResizeButChill = throttle(handleWindowResize, 100);
+
+    window.addEventListener('resize', handleWindowResizeButChill);
 
     return () => {
-      window.removeEventListener('resize', handleWindowResize);
-    }
+      window.removeEventListener('resize', handleWindowResizeButChill);
+    };
   }, []);
 
   // Get items for inventory, Animal notes & Agent S Notes
