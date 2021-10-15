@@ -110,7 +110,8 @@ const StyledSNotes = styled.div`
       left: 0;
       transform: none;
       width: 100vw;
-      height: 100vh;
+      height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+      height: calc(var(--vh, 1vh) * 100);
       font-size: 1.5rem;
     }
   }
