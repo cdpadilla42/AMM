@@ -332,6 +332,7 @@ span.highlight {
     height: 100vh;
     /* Fallback for browsers that do not support Custom Properties */
     height: calc(var(--vh, 1vh) * 100);
+    width: 100%;
   }
 }
 
@@ -341,6 +342,12 @@ span.highlight {
   left: 35px;
   transition: transform 0.8s cubic-bezier(0.47, -0.51, 0.46, 1.64);
   transform: translateX(0);
+}
+@media all and (max-width: 420px) {
+  .health_bar_inset {
+    top: 5vh;
+    left: 5px;
+  }
 }
 
 .health_bar_inset.offscreen {

@@ -36,7 +36,8 @@ const Inventory = () => {
 
   const requiredEvidence = currentDialogueObj?.requiredEvidence;
   const nextResponseID =
-    currentDialogueObj?.responseOptions?.[0]?.followingDialogue?._id;
+    currentDialogueObj.followingDialogueFromEvidence?._id ||
+    currentDialogueObj.responseOptions?.[0]?.followingDialogue._id;
 
   useEffect(() => {
     if (inventoryScreen === 'animalNotes') {

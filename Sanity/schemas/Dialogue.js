@@ -6,8 +6,7 @@ export default {
     {
       title: 'Evidence',
       name: 'evidenceSet',
-      description:
-        'If presenting evidence, be sure to fill out the Response Option above so the app knows where to go afterwards',
+      description: 'For presenting item, animal note, or map location',
     },
   ],
   fields: [
@@ -223,8 +222,9 @@ export default {
       title: 'Response Options',
       name: 'responseOptions',
       type: 'array',
+      hidden: ({ parent }) => parent.needEvidence,
       description:
-        'Possible answers user can give. If presenting evidence, fill this out with a dummy name field and the next conversation you want to go to',
+        'Possible answers user can give. Not Required if presenting evidence.',
       of: [
         {
           title: 'Response',
@@ -269,8 +269,7 @@ export default {
       name: 'requiredEvidence',
       fieldset: 'evidenceSet',
       hidden: ({ parent }) => !parent.needEvidence,
-      description:
-        'Only required if above is on. Must reference an item, animal note, or map location',
+      description: 'Must reference an item, animal note, or map location',
       type: 'array',
       of: [
         {
@@ -284,6 +283,16 @@ export default {
           ],
         },
       ],
+    },
+    {
+      title: 'Following Dialogue',
+      name: 'followingDialogueFromEvidence',
+      type: 'reference',
+      to: [{ type: 'dialogue' }],
+      fieldset: 'evidenceSet',
+      hidden: ({ parent }) => !parent.needEvidence,
+      description:
+        'Reference a dialogue to jump to after answering with this response',
     },
     // {
     //   title: 'Special Event',

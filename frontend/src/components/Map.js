@@ -27,7 +27,6 @@ const StyledMap = styled.div`
   
   & > .click_boxes_container > .click_box {
     background-color: transparent;
-    border: 1px solid green;
     &:hover,
     &:active {
       -moz-box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
@@ -200,15 +199,15 @@ const Map = () => {
   const innerRef = useRef();
 
   const requiredEvidence = currentDialogueObj.requiredEvidence;
+
   const nextResponseID =
-    currentDialogueObj.responseOptions[0].followingDialogue._id;
+    currentDialogueObj.followingDialogueFromEvidence?._id ||
+    currentDialogueObj.responseOptions?.[0]?.followingDialogue._id;
 
   useEffect(() => {
     if (isMapOpen) {
-      console.log(innerRef.current.clientWidth, outerRef.current.clientWidth);
       const scroll =
         (innerRef.current.clientWidth - outerRef.current.clientWidth) / 2;
-      console.log(scroll);
       outerRef.current.scrollLeft = scroll;
     }
   }, [isMapOpen]);
