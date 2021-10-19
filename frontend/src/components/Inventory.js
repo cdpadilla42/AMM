@@ -28,7 +28,7 @@ const Inventory = () => {
   const isMapOpen = useSelector((state) => state.dialogue.isMapOpen);
   const fullItemsInventory = useSelector((store) => store.inventory.items);
   const { inventoryScreen } = useSelector((store) => store.dialogue);
-  const { userItems, userPromptedForEvidence } = useSelector(
+  const { userItems, userPromptedForEvidence, mapLocations } = useSelector(
     (store) => store.inventory
   );
   const animalNotes = useSelector((store) => store.inventory.notes);
@@ -164,12 +164,22 @@ const Inventory = () => {
       );
     });
   }
+
+  let currentInventoryForItemDetailsDisplay;
+  if (isShowingPeople) {
+    currentInventoryForItemDetailsDisplay = animalNotes;
+  } else if (isMapOpen) {
+    currentInventoryForItemDetailsDisplay = mapLocations;
+  } else {
+    currentInventoryForItemDetailsDisplay = fullItemsInventory;
+  }
+
   return (
     <div className="inventory_container">
       {isDetailsOpen ? (
         <ItemDetailsDisplay
           selectedItem={selectedItem}
-          inventory={isShowingPeople ? animalNotes : fullItemsInventory}
+          inventory={currentInventoryForItemDetailsDisplay}
           setIsDetailsOpen={setIsDetailsOpen}
           requiredEvidence={requiredEvidence}
           nextResponseID={nextResponseID}
@@ -193,7 +203,11 @@ const Inventory = () => {
               </button>
             )}
           </div>
-          {isMapOpen ? <Map /> : renderInventory()}
+          {isMapOpen && !isDetailsOpen ? (
+            <Map onRegionClick={displayItemDetails} />
+          ) : (
+            renderInventory()
+          )}
         </StyledInventory>
       )}
     </div>
@@ -444,7 +458,7 @@ const StyledInventory = styled.div`
   } */
 `;
 
-const ItemDetailsDisplay = ({
+export const ItemDetailsDisplay = ({
   selectedItem,
   inventory,
   setIsDetailsOpen,
@@ -459,12 +473,13 @@ const ItemDetailsDisplay = ({
   const dispatch = useDispatch();
   const act = useSelector((store) => store.conversations.conversation?.[0].act);
 
+  console.log({ selectedItem, inventory });
+
   function closeDetailsDisplay() {
     setIsDetailsOpen(false);
   }
 
   function presentItem() {
-    if (isMapOpen) return;
     let matchedEvidence;
     if (Array.isArray(requiredEvidence)) {
       matchedEvidence = requiredEvidence.find(
@@ -593,7 +608,7 @@ const StyledItemDetailsDisplay = styled.div`
   .caption {
     font-size: 1.8rem;
     text-align: center;
-    line-height: 2em;
+    line-height: 2rem;
   }
 
   img {

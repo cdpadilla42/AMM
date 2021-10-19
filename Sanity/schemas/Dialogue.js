@@ -55,6 +55,7 @@ export default {
           preview: {
             select: {
               title: 'text',
+              subtitle: 'speaker.name', // Use the Animals name as the subtitle
               media: 'emotion.image', // Use the image of emotion field as thumbnail
             },
           },

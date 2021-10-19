@@ -12,6 +12,7 @@ import {
   getAnimalNotes,
   getSNotes,
   initializeUserInventoryFromLocalStorage,
+  getMapLocations,
 } from '../store/inventory';
 import { getSprites } from '../store/sprites';
 import { getBackground, getConversationDetails } from '../store/conversations';
@@ -58,6 +59,7 @@ const Testimony = (props) => {
   useEffect(() => {
     dispatch(getInventoryItems());
     dispatch(getAnimalNotes());
+    dispatch(getMapLocations());
     dispatch(getSNotes());
     dispatch(initializeUserInventoryFromLocalStorage());
   }, []);

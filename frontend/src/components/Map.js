@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import PropTypes from 'react-proptypes';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import {
@@ -33,6 +34,16 @@ const StyledMap = styled.div`
       -webkit-box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
       box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
       cursor: pointer;
+      &:after {
+        content: attr(data-name);
+        color: black;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
     }
   }
   
@@ -191,7 +202,7 @@ const StyledMap = styled.div`
   } */
 `;
 
-const Map = () => {
+const Map = ({ onRegionClick }) => {
   const isMapOpen = useSelector((state) => state.dialogue.isMapOpen);
   const currentDialogueObj = useCurrentDialogueObj();
   const dispatch = useDispatch();
@@ -247,25 +258,85 @@ const Map = () => {
 
   return (
     <>
-      <StyledMap onClick={presentLocation} ref={outerRef}>
+      <StyledMap ref={outerRef}>
         <div className="click_boxes_container" ref={innerRef}>
-          <div className="click_box julian" data-region="Julian Falls" />
-          <div className="click_box ankha" data-region="ankha" />
-          <div className="click_box agent_s" data-region="agent_s" />
-          <div className="click_box stitches" data-region="stitches" />
-          <div className="click_box elvis" data-region="elvis" />
-          <div className="click_box sterling" data-region="sterling" />
-          <div className="click_box lucky" data-region="lucky" />
-          <div className="click_box crime_scene" data-region="Crime Scene" />
-          <div className="click_box katt" data-region="katt" />
-          <div className="click_box merengue" data-region="merengue" />
-          <div className="click_box chadder" data-region="chadder" />
-          <div className="click_box nenn" data-region="nenn" />
-          <div className="click_box mailboxes" data-region="mailboxes" />
+          <div
+            className="click_box julian"
+            data-name="Julian Falls"
+            onClick={onRegionClick}
+          />
+          <div
+            className="click_box ankha"
+            data-name="Ankha's Exhibit"
+            onClick={onRegionClick}
+          />
+          <div
+            className="click_box agent_s"
+            data-name="Agent S's Base"
+            onClick={onRegionClick}
+          />
+          <div
+            className="click_box stitches"
+            data-name="Stitches's Playplace"
+            onClick={onRegionClick}
+          />
+          <div
+            className="click_box elvis"
+            data-name="Elvis's Castle"
+            onClick={onRegionClick}
+          />
+          <div
+            className="click_box sterling"
+            data-name="Sterling's Fort"
+            onClick={onRegionClick}
+          />
+          <div
+            className="click_box lucky"
+            data-name="Lucky's Infirmary"
+            onClick={onRegionClick}
+          />
+          <div
+            className="click_box crime_scene"
+            data-name="Crime Scene"
+            onClick={onRegionClick}
+          />
+          <div
+            className="click_box katt"
+            data-name="Katt's Junkyard"
+            onClick={onRegionClick}
+          />
+          <div
+            className="click_box merengue"
+            data-name="Merengue's Bakery"
+            onClick={onRegionClick}
+          />
+          <div
+            className="click_box chadder"
+            data-name="Chadder's Restaurant"
+            onClick={onRegionClick}
+          />
+          <div
+            className="click_box nenn"
+            data-name="Ñenn's Ring"
+            onClick={onRegionClick}
+          />
+          <div
+            className="click_box mailboxes"
+            data-name="Mailroom"
+            onClick={onRegionClick}
+          />
         </div>
       </StyledMap>
     </>
   );
+};
+
+Map.propTypes = {
+  onRegionClick: PropTypes.func,
+};
+
+Map.defaultProps = {
+  onRegionClick: () => {},
 };
 
 export default Map;

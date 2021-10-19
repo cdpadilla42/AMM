@@ -20,6 +20,7 @@ const initialState = {
       description: 'QT',
     },
   ],
+  mapLocations: [],
   sNotes: [],
   userSNotes: [],
   userItems: [],
@@ -54,6 +55,19 @@ export const getAnimalNotes = createAsyncThunk('GET_ANIMAL_NOTES', async () => {
   return response;
 });
 
+export const getMapLocations = createAsyncThunk(
+  'GET_MAP_LOCATIONS',
+  async () => {
+    const response = await sanityClient.fetch(
+      `*[_type == "mapLocation"]{
+        name, descriptionA, descriptionC, descriptionD,
+        "imageUrl": image.asset->url
+}`
+    );
+    return response;
+  }
+);
+
 export const getSNotes = createAsyncThunk('GET_SNOTES', async () => {
   const response = await sanityClient.fetch(
     `*[_type == "snotes"]{
@@ -86,6 +100,8 @@ function inventoryReducer(state = initialState, action) {
       return { ...state, items: payload };
     case 'GET_ANIMAL_NOTES/fulfilled':
       return { ...state, notes: payload };
+    case 'GET_MAP_LOCATIONS/fulfilled':
+      return { ...state, mapLocations: payload };
     case 'GET_SNOTES/fulfilled':
       return { ...state, sNotes: payload };
     case initializeUserInventoryFromLocalStorage.toString():
