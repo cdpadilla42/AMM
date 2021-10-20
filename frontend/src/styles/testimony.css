@@ -208,6 +208,10 @@ nav a {
   transform: translateX(50%) rotateY(180deg);
 }
 
+.Typist {
+  display: inline;
+}
+
 .text_box {
   position: absolute;
   width: 600px;
