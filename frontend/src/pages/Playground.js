@@ -1,10 +1,10 @@
 import React from 'react';
-import HealthBar from '../components/HealthBar';
+import TestimonyImage from '../components/TestimonyImage';
 
 const Playground = () => {
   return (
     <div>
-      <HealthBar />
+      <TestimonyImage />
     </div>
   );
 };

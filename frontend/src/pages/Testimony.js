@@ -28,6 +28,7 @@ import ImageLoader from '../components/ImageLoader';
 import PatternedBG from '../imgs/patternedbgs/aabg2.jpg';
 import SNotes from '../components/SNotes';
 import { closeSNotes } from '../store/notepad';
+import TestimonyImage from '../components/TestimonyImage';
 
 const Testimony = (props) => {
   const dispatch = useDispatch();
@@ -89,6 +90,7 @@ const Testimony = (props) => {
               <HealthBar />
             </div>
           </div>
+          <TestimonyImage />
           <ResponseBox />
           <TextBox />
         </div>

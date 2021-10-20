@@ -68,6 +68,10 @@ export default {
               title: 'Agent S Notes Event',
               name: 'sNote',
             },
+            {
+              title: 'Image',
+              name: 'imageFieldset',
+            },
           ],
           fields: [
             {
@@ -214,6 +218,23 @@ export default {
                 'Reference to the note created in the Agent S Notes Doc type in Sanity.',
               fieldset: 'sNote',
               hidden: ({ parent }) => !parent.sNotesEventTriggered,
+            },
+            {
+              title: 'Show Image',
+              name: 'showImage',
+              type: 'boolean',
+              description:
+                'If you previously set an image and want to keep showing it, turn this on.',
+              fieldset: 'imageFieldset',
+            },
+            {
+              title: 'Image',
+              name: 'image',
+              type: 'image',
+              description:
+                'If first phrase that "Show Image" is on, add photo here. Or if you want to change images.',
+              fieldset: 'imageFieldset',
+              hidden: ({ parent }) => !parent.showImage,
             },
           ],
         },
