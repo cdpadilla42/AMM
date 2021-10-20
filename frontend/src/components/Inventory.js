@@ -51,6 +51,10 @@ const Inventory = () => {
     }
   }, [inventoryScreen]);
 
+  useEffect(() => {
+    return () => dispatch(hideHealthBar());
+  }, []);
+
   function displayItemDetails(e) {
     const itemName = e.currentTarget.dataset.name;
     setSelectedItem(itemName);
