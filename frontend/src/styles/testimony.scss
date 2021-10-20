@@ -201,8 +201,8 @@ nav {
 .animal_transition_left-enter.game_container__animal_image.single,
 .animal_transition_right-enter.game_container__animal_image.single {
   transition: transform 0.6s ease;
-  right: 200%;
-  transform: translateX(100%);
+  right: 50%;
+  transform: translateX(-100%);
 }
 .animal_transition_left-enter-active.game_container__animal_image.single,
 .animal_transition_right-enter-active.game_container__animal_image.single {
@@ -213,8 +213,8 @@ nav {
 .animal_transition_left-enter.game_container__animal_image.single.left_facing,
 .animal_transition_right-enter.game_container__animal_image.single.left_facing {
   transition: transform 0.6s ease;
-  right: 200%;
-  transform: translateX(100%) rotateY(180deg);
+  right: 50%;
+  transform: translateX(-100%) rotateY(180deg);
 }
 .animal_transition_left-enter-active.game_container__animal_image.single.left_facing,
 .animal_transition_right-enter-active.game_container__animal_image.single.left_facing {
