@@ -17,7 +17,6 @@ const HealthBar = () => {
 
   const onLoseHealthClick = () => {
     if (health === 1) {
-      console.log('You lose!');
       dispatch(loseHealth());
     } else if (health === 0) {
       return;

@@ -53,7 +53,6 @@ const Inventory = () => {
 
   function displayItemDetails(e) {
     const itemName = e.currentTarget.dataset.name;
-    console.log(e.currentTarget.dataset.name);
     setSelectedItem(itemName);
     setIsDetailsOpen(true);
   }
@@ -473,8 +472,6 @@ export const ItemDetailsDisplay = ({
   const dispatch = useDispatch();
   const act = useSelector((store) => store.conversations.conversation?.[0].act);
 
-  console.log({ selectedItem, inventory });
-
   function closeDetailsDisplay() {
     setIsDetailsOpen(false);
   }
@@ -488,7 +485,6 @@ export const ItemDetailsDisplay = ({
     } else {
       matchedEvidence = requiredEvidence;
     }
-    console.log({ matchedEvidence });
     if (selectedItem === matchedEvidence?.name) {
       dispatch(switchConversation(nextResponseID));
       dispatch(markUserNotPromptedForEvidence());

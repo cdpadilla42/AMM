@@ -26,7 +26,6 @@ const MultipleAnimalDisplay = () => {
         dialogue?.phrase[currentDialoguePosition].rightAnimal
       );
     }
-    console.log(initialAnimalFromPhrase);
     return initialAnimalFromPhrase.map((animal) => {
       const initialAnimal = { ...animal };
       // set initial emotions
@@ -41,9 +40,6 @@ const MultipleAnimalDisplay = () => {
 
   const [animalsState, setAnimalsState] = useState([]);
   const [centeredView, setCenteredView] = useState(false);
-
-  console.log('Current state', animalsState);
-  console.log({ currentPhraseObj });
 
   // dialogue.animals.forEach((animal) => {
   //   console.log({
@@ -62,8 +58,6 @@ const MultipleAnimalDisplay = () => {
 
     if (currentPhraseObj.changePosition) {
       // set the speakers
-      // TODO Uncomment
-      console.log("let's mix it up!");
 
       // Handle new animals
       if (currentPhraseObj.leftAnimalCentered) {
@@ -125,7 +119,6 @@ const MultipleAnimalDisplay = () => {
     }
 
     indexToChange = newState?.findIndex((animal) => animal.name === speaker);
-    console.log({ indexToChange, newState, speaker });
     if (indexToChange === -1) indexToChange = 0;
 
     if (!newState[indexToChange]) return;

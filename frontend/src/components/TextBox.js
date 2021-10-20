@@ -55,6 +55,7 @@ const TextBox = (props) => {
   const [fromLink, setFromLink] = useState(false);
   const [doneTyping, setDoneTyping] = useState(false);
   const [showFullText, setShowFullText] = useState(false);
+  const [trailedText, setTrailedText] = useState('');
 
   const onTypingDone = () => {
     setDoneTyping(true);
@@ -92,7 +93,6 @@ const TextBox = (props) => {
         currentPhrase.sNotesEventRef?.name
       ) {
         // Handle the event
-        console.log('Handling SNote...');
         const {
           sNotesEventType,
           sNotesEventRef: { name, count },
@@ -188,7 +188,9 @@ const TextBox = (props) => {
     currentDialogueID,
   ]);
 
-  const highlightedTextHTML = ReactHtmlParser(highlightFilter(text));
+  const highlightedTextString = highlightFilter(text);
+
+  const highlightedTextHTML = ReactHtmlParser(highlightedTextString);
 
   // Add Keyboard listeners to document
   useEffect(() => {
@@ -228,6 +230,8 @@ const TextBox = (props) => {
   const handleNextClick = () => {
     if (fromLink) setFromLink(false);
     const textEl = textRef.current;
+    const prevText = trailedText;
+    setTrailedText('');
     const isEndOfDialogue =
       currentDialoguePosition === currentDialogueObj.phrase.length - 1;
 
@@ -239,6 +243,7 @@ const TextBox = (props) => {
     if (phrases[currentDialoguePosition].link) {
       // add on to the end of the current text and change emotions
       setFromLink(true);
+      setTrailedText(prevText + highlightedTextString);
       props.nextDialogue();
     } else if (isEndOfDialogue && currentDialogueObj.name === 'Incorrect') {
       props.switchConversationFromIncorrect(prevDialogueID);
@@ -303,6 +308,7 @@ const TextBox = (props) => {
         {phrases[currentDialoguePosition]?.speaker.name}
       </div>
       <div className="text_box__main">
+        {ReactHtmlParser(trailedText)}
         {showFullText ? highlightedTextHTML : renderText(text)}
         <div
           className={`text_box__next_arrow${

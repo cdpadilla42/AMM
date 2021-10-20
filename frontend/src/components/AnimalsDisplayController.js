@@ -23,16 +23,13 @@ const AnimalsDisplayController = () => {
       setIsMultiAnimalConvo(!!dialogue.animals?.length);
     }
     if (dialogue.phrase[currentDialoguePosition].changePosition) {
-      console.log('switch set to on');
       // If set on the phrase, defer to letting the multi animal component handle
       if (dialogue.phrase[currentDialoguePosition].leftAnimalCentered) {
         return;
       }
       if (!dialogue.phrase[currentDialoguePosition].rightAnimal) {
-        console.log('no right animal');
         setIsMultiAnimalConvo(false);
       } else {
-        console.log('right animal!');
         setIsMultiAnimalConvo(true);
       }
     }

@@ -37,7 +37,10 @@ const ResponseBox = () => {
       );
 
       return (
-        <li onClick={() => handleClick(optionObj.followingDialogue?._id)}>
+        <li
+          key={optionObj.text}
+          onClick={() => handleClick(optionObj.followingDialogue?._id)}
+        >
           <span>{optionObj.text}</span>
         </li>
       );

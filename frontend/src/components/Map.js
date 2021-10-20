@@ -230,7 +230,6 @@ const Map = ({ onRegionClick }) => {
       !Array.isArray(requiredEvidence) &&
       selectedRegion === requiredEvidence
     ) {
-      console.log('Presenting', selectedRegion);
       isMatch(true);
     } else if (Array.isArray(requiredEvidence)) {
       const matchedEvidence = requiredEvidence.find(

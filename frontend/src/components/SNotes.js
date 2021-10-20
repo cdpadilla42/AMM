@@ -39,8 +39,6 @@ const SNotes = () => {
     }
   }, [sNotesLoaded, sNotesDictLoaded, userSNotes]);
 
-  console.log(sNotesToRender);
-
   const renderSNotes = () => {
     return sNotesToRender.map((sNote) => (
       <div className="note" key={sNote.name}>
@@ -52,7 +50,6 @@ const SNotes = () => {
   const toggleNotes = () => dispatch(toggleSNotes());
 
   const onOutsideClick = (e) => {
-    console.log('reading...');
     if (e.currentTarget === e.target) dispatch(closeSNotes());
   };
 

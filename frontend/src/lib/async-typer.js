@@ -19,7 +19,6 @@ export const useHighlightFilter = ({ items = [], animals = [] }) => {
     });
     // animal nickname
     animals.forEach((animal) => {
-      console.log(animal.nickname);
       if (animal.nickname) {
         animal.nickname.forEach((nickname) => {
           const query = nickname;

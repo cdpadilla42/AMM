@@ -18,7 +18,6 @@ const itemsInInventory = {
 
 export const addItemToLocalStorageInventory = (item) => {
   let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
-  console.log('function start', storageData);
   if (!storageData) {
     initializeLocalStorageInventory();
     storageData = itemsInInventory;
@@ -30,14 +29,11 @@ export const addItemToLocalStorageInventory = (item) => {
 
   storageData.items = newInventory;
 
-  console.log('function end', storageData);
-
   localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
 };
 
 export const addSNoteToLocalStorageInventory = (sNote) => {
   let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
-  console.log('function start', storageData);
   if (!storageData) {
     initializeLocalStorageInventory();
     storageData = itemsInInventory;
@@ -49,14 +45,11 @@ export const addSNoteToLocalStorageInventory = (sNote) => {
 
   storageData.sNotes = newSNotesList;
 
-  console.log('function end', storageData);
-
   localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
 };
 
 export const clearSNotesFromLocalStorage = () => {
   let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
-  console.log('function start', storageData);
   if (!storageData) {
     initializeLocalStorageInventory();
     storageData = itemsInInventory;
@@ -66,14 +59,11 @@ export const clearSNotesFromLocalStorage = () => {
 
   storageData.sNotes = newSNotesList;
 
-  console.log('function end', storageData);
-
   localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
 };
 
 export const clearItemsFromLocalStorage = () => {
   let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
-  console.log('function start', storageData);
   if (!storageData) {
     initializeLocalStorageInventory();
     storageData = itemsInInventory;
@@ -83,27 +73,21 @@ export const clearItemsFromLocalStorage = () => {
 
   storageData.items = newInventory;
 
-  console.log('function end', storageData);
-
   localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
 };
 
 export const updateSNoteInLocalStorageInventory = (sNote, index) => {
   let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
-  console.log('function start', storageData);
 
   const sNotesList = storageData.sNotes;
 
   sNotesList[index] = sNote;
-
-  console.log('function end', storageData);
 
   localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
 };
 
 export const getUserItemsFromLocalStorage = () => {
   const res = JSON.parse(localStorage.getItem('itemsInInventory'))?.items;
-  console.log(res);
   if (!!res) {
     return res;
   } else {
@@ -114,7 +98,6 @@ export const getUserItemsFromLocalStorage = () => {
 
 export const getUserSNotesFromLocalStorage = () => {
   const res = JSON.parse(localStorage.getItem('itemsInInventory'))?.sNotes;
-  console.log(res);
   if (!!res) {
     return res;
   } else {
@@ -124,7 +107,6 @@ export const getUserSNotesFromLocalStorage = () => {
 };
 
 export const initializeLocalStorageInventory = () => {
-  console.log('Initializing local storage');
   if (!localStorage.getItem('itemsInInventory')) {
     localStorage.setItem('itemsInInventory', JSON.stringify(itemsInInventory));
   }
