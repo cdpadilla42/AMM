@@ -212,6 +212,17 @@ nav a {
   display: inline;
 }
 
+.highlighted_text_icon {
+  width: 24px;
+  height: 24px;
+}
+@media all and (max-width: 600px) {
+  .highlighted_text_icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
 .text_box {
   position: absolute;
   width: 600px;

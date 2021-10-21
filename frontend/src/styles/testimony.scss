@@ -226,6 +226,15 @@ nav {
   display: inline;
 }
 
+.highlighted_text_icon {
+  width: 24px;
+  height: 24px;
+  @media all and (max-width: 600px) {
+    width: 18px;
+    height: 18px;
+  }
+}
+
 // Desktop
 .text_box {
   position: absolute;

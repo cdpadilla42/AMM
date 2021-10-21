@@ -28,7 +28,7 @@ export const useHighlightFilter = ({ items = [], animals = [] }) => {
 
           newString = newString.replaceAll(
             query,
-            `<img style="height: 24px; width: 24px;" src="${animal.imageUrl}?h=19" /> <span class="highlight" ${animalHighlightStyle}>${nickname}</span>`
+            `<img class="highlighted_text_icon" src="${animal.imageUrl}?h=18" /> <span class="highlight" ${animalHighlightStyle}>${nickname}</span>`
           );
         });
       }
@@ -46,7 +46,7 @@ export const useHighlightFilter = ({ items = [], animals = [] }) => {
       }
       newString = newString.replaceAll(
         query,
-        `<img style="height: 19px; width: 19px;" src="${animal.imageUrl}?h=19" /> <span class="highlight" ${animalHighlightStyle}>${animal.name}</span>`
+        `<img class="highlighted_text_icon" src="${animal.imageUrl}?h=18" /> <span class="highlight" ${animalHighlightStyle}>${animal.name}</span>`
       );
     });
 
