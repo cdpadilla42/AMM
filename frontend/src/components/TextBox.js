@@ -227,7 +227,10 @@ const TextBox = (props) => {
     }
   };
 
-  const handleNextClick = () => {
+  const handleNextClick = (e) => {
+    if (e) {
+      e.stopPropagation();
+    }
     if (fromLink) setFromLink(false);
     const textEl = textRef.current;
     const prevText = trailedText;
@@ -243,7 +246,7 @@ const TextBox = (props) => {
     if (phrases[currentDialoguePosition].link) {
       // add on to the end of the current text and change emotions
       setFromLink(true);
-      setTrailedText(prevText + highlightedTextString);
+      setTrailedText(prevText + highlightedTextString + ' ');
       props.nextDialogue();
     } else if (isEndOfDialogue && currentDialogueObj.name === 'Incorrect') {
       props.switchConversationFromIncorrect(prevDialogueID);
@@ -271,6 +274,13 @@ const TextBox = (props) => {
     if (currentDialoguePosition === 0) {
     } else {
       props.prevDialogue();
+    }
+  };
+
+  const handleTextBoxClick = () => {
+    if (!doneTyping) {
+      setShowFullText(true);
+      setDoneTyping(true);
     }
   };
 
@@ -307,7 +317,7 @@ const TextBox = (props) => {
       >
         {phrases[currentDialoguePosition]?.speaker.name}
       </div>
-      <div className="text_box__main">
+      <div className="text_box__main" onClick={handleTextBoxClick}>
         {ReactHtmlParser(trailedText)}
         {showFullText ? highlightedTextHTML : renderText(text)}
         <div
