@@ -50,5 +50,10 @@ const StyledTestimonyImage = styled.div`
   img {
     max-width: 600px;
     max-height: 400px;
+
+    @media all and (max-width: 420px) {
+      max-width: 80vw;
+      max-height: 250px;
+    }
   }
 `;
