@@ -278,7 +278,10 @@ const TextBox = (props) => {
   };
 
   const handleTextBoxClick = () => {
-    if (!doneTyping) {
+    if (doneTyping) {
+      // next
+      handleNextClick();
+    } else {
       setShowFullText(true);
       setDoneTyping(true);
     }

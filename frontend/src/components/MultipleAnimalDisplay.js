@@ -70,7 +70,7 @@ const MultipleAnimalDisplay = () => {
           if (!newState[0]) newState[0] = {};
           newState[0].name = currentPhraseObj.leftAnimal.name;
           if (currentPhraseObj.leftEmotion) {
-            newState[0].emotion = currentPhraseObj.leftEmotion;
+            newState[0].emotion = currentPhraseObj.leftEmotion.emotion;
           }
         }
         if (
@@ -80,7 +80,7 @@ const MultipleAnimalDisplay = () => {
           if (!newState[1]) newState[1] = {};
           newState[1].name = currentPhraseObj.rightAnimal.name;
           if (currentPhraseObj.rightEmotion) {
-            newState[0].emotion = currentPhraseObj.rightEmotion;
+            newState[0].emotion = currentPhraseObj.rightEmotion.emotion;
           }
         }
       }
