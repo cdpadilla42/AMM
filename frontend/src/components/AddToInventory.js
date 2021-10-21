@@ -179,7 +179,7 @@ const StyledAddToInventory = styled.form`
   .input_wrapper {
     position: relative;
     &:after {
-      border-bottom: 4px dotted #8e7e68;
+      border-bottom: 4px dotted var(--brown-black);
       display: block;
       content: '';
       width: 180px;
@@ -199,7 +199,7 @@ const StyledAddToInventory = styled.form`
     border-radius: 15px;
     padding: 0 1rem;
     border: none;
-    color: #8e7e68;
+    color: var(--brown-black);
     line-height: 4rem;
   }
 `;

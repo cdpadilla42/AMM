@@ -56,7 +56,7 @@ const StyledHealthBar = styled.div`
     height: 10px; /* Can be anything */
     position: relative;
     /* margin: 60px 0 20px 0; Just for demo spacing */
-    background: #fff9e5;
+    background: var(--cream);
     border-radius: 25px;
     padding: 4px;
     box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
@@ -65,7 +65,7 @@ const StyledHealthBar = styled.div`
     display: block;
     height: 100%;
     border-radius: 20px;
-    background: #0c8ecb;
+    background: var(--blue);
     position: relative;
     overflow: hidden;
     transition: width 0.6s ease;

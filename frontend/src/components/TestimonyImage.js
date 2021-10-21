@@ -41,8 +41,8 @@ const StyledTestimonyImage = styled.div`
   left: 50%;
   transform: translate(-50%, calc(-50% - 125px));
   position: absolute;
-  color: #fff9e5;
-  background-color: #8e7e68;
+  color: var(--cream);
+  background-color: var(--brown-black);
   border-radius: 20px;
   padding: 1rem;
   display: inline-block;

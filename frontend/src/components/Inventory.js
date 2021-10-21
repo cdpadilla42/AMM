@@ -318,15 +318,15 @@ const StyledInventory = styled.div`
     justify-content: space-between;
     align-items: center; */
     padding: 0.4rem 0;
-    background-color: #fff9e5;
-    color: #8e7e68;
+    background-color: var(--cream);
+    color: var(--brown-black);
   }
 
   .inventory_item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #8e7e68;
+    color: var(--brown-black);
     background-color: #fff;
     cursor: pointer;
     &:hover {
@@ -335,15 +335,15 @@ const StyledInventory = styled.div`
   }
 
   .image_wrapper {
-    background-color: #fff9e5;
+    background-color: var(--cream);
     width: 80%;
     text-align: center;
   }
 
   .inventory_noitems_message {
     padding: 0.5rem;
-    background-color: #fff9e5;
-    color: #8e7e68;
+    background-color: var(--cream);
+    color: var(--brown-black);
     border-radius: 5px;
     text-align: center;
   }
@@ -364,8 +364,8 @@ const StyledInventory = styled.div`
 
   button {
     display: inline;
-    color: #8e7e68;
-    background-color: #fff9e5;
+    color: var(--brown-black);
+    background-color: var(--cream);
     border: none;
     border-radius: 45px;
     font-size: 1rem;
@@ -382,8 +382,8 @@ const StyledInventory = styled.div`
   }
 
   .come_back_button {
-    background-color: #8e7e68;
-    color: #fff9e5;
+    background-color: var(--brown-black);
+    color: var(--cream);
   }
 
   .hide {
@@ -568,8 +568,8 @@ const StyledItemDetailsDisplay = styled.div`
   grid-gap: 1rem;
   padding: 1rem;
   grid-template-columns: 250px 1fr;
-  background-color: #fff9e5;
-  color: #8e7e68;
+  background-color: var(--cream);
+  color: var(--brown-black);
   border-radius: 5px;
   font-size: 1.5rem;
   font-weight: 700;
@@ -602,7 +602,7 @@ const StyledItemDetailsDisplay = styled.div`
   .polaroid > .image {
     max-width: 100%;
     height: auto;
-    background-color: #fff9e5;
+    background-color: var(--cream);
     text-align: center;
   }
   .caption {
@@ -639,7 +639,7 @@ const StyledItemDetailsDisplay = styled.div`
 
   button {
     background-color: #34b3a5;
-    color: #fff9e5;
+    color: var(--cream);
     border: none;
     border-radius: 45px;
     font-size: 1.5rem;

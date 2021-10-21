@@ -116,9 +116,9 @@ const StyledResponseBox = styled.div`
 
   li {
     display: block;
-    background-color: #fff9e5;
-    color: #8e7e68;
-    border: 2px solid #8e7e68;
+    background-color: var(--cream);
+    color: var(--brown-black);
+    border: 2px solid var(--brown-black);
     padding: 1rem;
     border-radius: 50px;
     margin: 0.5rem 0;

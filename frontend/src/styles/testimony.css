@@ -232,7 +232,7 @@ nav a {
 }
 .text_box__name {
   background-color: grey;
-  color: #fff9e5;
+  color: var(--cream);
   display: inline-block;
   padding: 0.5rem;
   font-size: 1.5rem;
@@ -243,8 +243,8 @@ nav a {
   z-index: 50;
 }
 .text_box__main {
-  background-color: #fff9e5;
-  color: #8e7e68;
+  background-color: var(--cream);
+  color: var(--brown-black);
   border-radius: 20px;
   padding: 1rem;
   height: 186px;
@@ -329,7 +329,7 @@ nav a {
 }
 
 span.highlight {
-  color: #0c8ecb;
+  color: var(--blue);
   font-weight: 800;
 }
 
