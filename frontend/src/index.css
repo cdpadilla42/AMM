@@ -17,3 +17,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.loader {
+  width: 100vw;
+  height: 100vh;
+  background: rgb(188, 255, 200);
+  z-index: 1000;
+  position: absolute;
+  pointer-events: none;
+  background: linear-gradient(
+    0deg,
+    rgba(188, 255, 200, 1) 40%,
+    rgba(0, 212, 255, 1) 100%
+  );
+}
+
+.loader > p {
+  margin: 0;
+}

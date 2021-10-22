@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { AnimatePresence, motion } from 'framer-motion';
 import { sprites } from '../lib/sprites';
 
 const numOfSprites = sprites.reduce((tally, current) => {
@@ -11,12 +13,19 @@ const numOfSprites = sprites.reduce((tally, current) => {
   );
 }, 0);
 
-const ImageLoader = ({ children }) => {
+const ImageLoader = ({ children, disableLoading }) => {
   const [loading, setLoading] = useState(true);
   const [transitioning, setTransitioning] = useState(true);
   const counter = useRef(0);
   const startTime = useRef(new Date());
+  const location = useLocation();
 
+  useEffect(() => {
+    if (disableLoading) {
+      setLoading(false);
+      setTransitioning(false);
+    }
+  }, []);
   const imageLoaded = () => {
     counter.current += 1;
     if (counter.current >= numOfSprites) {
@@ -29,6 +38,10 @@ const ImageLoader = ({ children }) => {
     setTransitioning(true);
     setTimeout(() => setTransitioning(false), 0);
   }, [loading]);
+
+  useEffect(() => {
+    return () => setLoading(true);
+  }, []);
 
   // useEffect(() => {
   //   console.log('loading', loading);
@@ -53,40 +66,38 @@ const ImageLoader = ({ children }) => {
     });
   };
 
-  if (loading)
-    return (
-      <StyledImageLoader>
-        {renderHiddenImages()}
-        <p>Loading...</p>
-      </StyledImageLoader>
-    );
+  const showLoader = loading || transitioning;
+
   return (
     <>
-      {transitioning && (
-        <StyledImageLoader>
-          <p>Loading...</p>
-        </StyledImageLoader>
-      )}
+      <AnimatePresence exitBeforeEnter>
+        {showLoader && (
+          <motion.div
+            className="loader"
+            transition={{ duration: 0.4, ease: [0.6, 0.01, -0.05, 0.9] }}
+            initial={{ transform: 'translateX(0%)' }}
+            exit={{ transform: 'translateX(100%)' }}
+            animate={{ transform: 'translateX(0%)' }}
+            key={`loader:${location.pathname}`}
+          >
+            <p>Loading...</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <motion.div
+        className="loader"
+        transition={{ duration: 0.4, ease: [0.6, 0.01, -0.05, 0.9] }}
+        initial={{ transform: 'translateX(100%)' }}
+        exit={{ transform: 'translateX(0%)' }}
+        animate={{ transform: 'translateX(100%)' }}
+        key={`loader:${location.pathname}:transition`}
+      >
+        <p>Loading...</p>
+      </motion.div>
+      {loading && renderHiddenImages()}
       {children}
     </>
   );
 };
 
 export default ImageLoader;
-
-const StyledImageLoader = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background: rgb(188, 255, 200);
-  z-index: 1000;
-  position: absolute;
-  background: linear-gradient(
-    0deg,
-    rgba(188, 255, 200, 1) 40%,
-    rgba(0, 212, 255, 1) 100%
-  );
-
-  p {
-    margin: 0;
-  }
-`;

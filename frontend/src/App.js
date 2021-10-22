@@ -1,18 +1,21 @@
 import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useLocation,
+} from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import './styles/customToast.css';
 import Testimony from './pages/Testimony';
 import SelectConversation from './pages/SelectConversation';
-import Map from './components/Map';
-import store from './store/store';
 import Playground from './pages/Playground';
-import SNotes from './components/SNotes';
 import ErrorBoundary from './components/ErrorBoundary';
 import { throttle } from 'lodash';
 
 function App() {
+  const location = useLocation();
   // For handling window resizing and iOS bottom bar
   useEffect(() => {
     // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
@@ -34,29 +37,22 @@ function App() {
       window.removeEventListener('resize', handleWindowResizeButChill);
     };
   }, []);
-  return (
-    <Provider store={store}>
-      <ToastContainer />
-      <Router>
-        <Switch>
-          <Route path="/playground">
-            <Playground />
-          </Route>
 
-          <Route
-            path="/testimony/:id"
-            render={(props) => (
-              <ErrorBoundary>
-                <Testimony match={props.match} />
-              </ErrorBoundary>
-            )}
-          ></Route>
-          <Route path="/">
-            <SelectConversation />
-          </Route>
-        </Switch>
-      </Router>
-    </Provider>
+  return (
+    <AnimatePresence exitBeforeEnter>
+      <Switch location={location} key={location.pathname}>
+        <Route path="/playground">
+          <Playground />
+        </Route>
+        <Route
+          path="/testimony/:id"
+          render={(props) => <Testimony match={props.match} />}
+        ></Route>
+        <Route path="/">
+          <SelectConversation />
+        </Route>
+      </Switch>
+    </AnimatePresence>
   );
 }
 

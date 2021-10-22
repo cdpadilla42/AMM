@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import ImageLoader from '../components/ImageLoader';
 import {
   clearItemsFromLocalStorage,
   clearSNotesFromLocalStorage,
@@ -41,7 +42,7 @@ const SelectConversation = () => {
   }
 
   return (
-    <div>
+    <ImageLoader disableLoading>
       <button type="button" onClick={handleClearSNotesClick}>
         Clear Agent S Notes from Inventory
       </button>
@@ -58,7 +59,7 @@ const SelectConversation = () => {
         </span>
       </h1>
       <ul>{renderConversations()}</ul>
-    </div>
+    </ImageLoader>
   );
 };
 
