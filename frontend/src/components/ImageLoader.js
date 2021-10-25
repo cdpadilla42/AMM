@@ -76,7 +76,7 @@ export default ImageLoader;
 
 const StyledImageLoader = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   background: rgb(188, 255, 200);
   z-index: 1000;
   position: absolute;
