@@ -31,6 +31,9 @@ const Inventory = () => {
   const { userItems, userPromptedForEvidence, mapLocations } = useSelector(
     (store) => store.inventory
   );
+  const isInventoryOpen = useSelector(
+    (state) => state.dialogue.isInventoryOpen
+  );
   const animalNotes = useSelector((store) => store.inventory.notes);
   const currentDialogueObj = useCurrentDialogueObj();
 
@@ -177,9 +180,9 @@ const Inventory = () => {
     currentInventoryForItemDetailsDisplay = fullItemsInventory;
   }
 
-  return (
-    <div className="inventory_container">
-      {isDetailsOpen ? (
+  const renderMainDisplay = () => {
+    if (isDetailsOpen) {
+      return (
         <ItemDetailsDisplay
           selectedItem={selectedItem}
           inventory={currentInventoryForItemDetailsDisplay}
@@ -190,29 +193,35 @@ const Inventory = () => {
           loseHealthOnIncorrect={currentDialogueObj.loseHealthOnIncorrect}
           onHealthOut={handleComeBackLaterClick}
         />
-      ) : (
-        <StyledInventory>
-          <div className="inventory_header">
-            <button onClick={showItems}>Items</button>
-            <button onClick={showPeopole}>Animals</button>
-            <button onClick={showMap}>Map</button>
-            <button onClick={toggleShowingAddItem}>Add to inventory</button>
-            {userPromptedForEvidence && (
-              <button
-                onClick={handleComeBackLaterClick}
-                className="come_back_button"
-              >
-                Come Back Later
-              </button>
-            )}
-          </div>
-          {isMapOpen && !isDetailsOpen ? (
-            <Map onRegionClick={displayItemDetails} />
-          ) : (
-            renderInventory()
+      );
+    } else if (isMapOpen) {
+      return <Map onRegionClick={displayItemDetails} />;
+    } else {
+      return renderInventory();
+    }
+  };
+
+  return (
+    <div
+      className={`inventory_container${isInventoryOpen ? '' : ' off_screen'}`}
+    >
+      <StyledInventory>
+        <div className="inventory_header">
+          <button onClick={showItems}>Items</button>
+          <button onClick={showPeopole}>Animals</button>
+          <button onClick={showMap}>Map</button>
+          <button onClick={toggleShowingAddItem}>Add to inventory</button>
+          {userPromptedForEvidence && (
+            <button
+              onClick={handleComeBackLaterClick}
+              className="come_back_button"
+            >
+              Come Back Later
+            </button>
           )}
-        </StyledInventory>
-      )}
+        </div>
+        {renderMainDisplay()}
+      </StyledInventory>
     </div>
   );
 };
@@ -240,12 +249,8 @@ const errorAnimation = keyframes`
 `;
 
 const StyledInventory = styled.div`
-  position: absolute;
-  top: calc(50vh - 290px);
-  left: 50vw;
-  transform: translateX(-50%);
-  width: 679px;
-  height: 350px;
+  width: 100%;
+  height: 100%;
   z-index: 6;
   /* border: 1px solid black; */
   /* padding: 1rem; */
@@ -254,28 +259,23 @@ const StyledInventory = styled.div`
   border-radius: 5px;
 
   @media all and (max-width: 800px) {
-    width: 597px;
-  }
-
-  @media all and (max-width: 420px) {
-    width: 95vw;
-    top: 10vh;
-    height: auto;
-    bottom: calc(50vh - 86px);
-  }
-
-  @media all and (min-height: 900px) and (min-width: 1000px) and (max-width: 1026px) {
-    top: calc(50vh - 478px);
+    width: 100vw;
+    height: calc(var(--vh, 1vh) * 100);
+    padding-top: 3rem;
   }
 
   .addtoinventory_container {
     position: absolute;
-    width: 90%;
-    height: 120px;
+    width: 600px;
+    height: 150px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 5px;
+
+    @media all and (max-width: 800px) {
+      width: 90vw;
+    }
   }
 
   .inventory_header {
@@ -283,10 +283,11 @@ const StyledInventory = styled.div`
     /* border: 1px solid black; */
     text-align: center;
     background: none;
+    padding-top: 2rem;
   }
 
   .inventory_grid_container {
-    height: calc(100% - 2rem - 3px);
+    height: 100%;
     width: 100%;
     overflow-y: scroll;
     padding: 1rem;
@@ -560,13 +561,13 @@ const StyledItemDetailsDisplay = styled.div`
   position: absolute;
   z-index: 6;
   top: calc(50vh - 290px);
-  left: 50vw;
+  left: 50%;
   transform: translateX(-50%);
   width: 679px;
   max-height: 350px;
   display: grid;
   grid-gap: 1rem;
-  padding: 1rem;
+  padding: 1rem !important;
   grid-template-columns: 250px 1fr;
   background-color: var(--cream);
   color: var(--brown-black);
@@ -574,24 +575,23 @@ const StyledItemDetailsDisplay = styled.div`
   font-size: 1.5rem;
   font-weight: 700;
 
-  @media all and (max-width: 800px) {
+  /* @media all and (max-width: 800px) {
     width: 597px;
-  }
+  } */
 
   @media all and (max-width: 420px) {
     width: 95vw;
-    top: 10vh;
+    /* height: calc(var(--vh, 1vh) * 80); */
+    top: 50%;
+    transform: translate(-50%, -50%);
     height: auto;
     /* bottom: calc(50vh - 86px); */
     grid-template-columns: 125px 1fr;
   }
 
-  @media all and (min-height: 900px) and (min-width: 1000px) and (max-width: 1026px) {
+  /* @media all and (min-height: 900px) and (min-width: 1000px) and (max-width: 1026px) {
     top: calc(50vh - 478px);
-  }
-
-  .inventory_container {
-  }
+  } */
 
   .polaroid {
     background: #fff;

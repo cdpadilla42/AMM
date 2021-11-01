@@ -14,7 +14,7 @@ const numOfSprites = sprites.reduce((tally, current) => {
 }, 0);
 
 const ImageLoader = ({ children, disableLoading }) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [transitioning, setTransitioning] = useState(true);
   const counter = useRef(0);
   const startTime = useRef(new Date());
@@ -36,7 +36,10 @@ const ImageLoader = ({ children, disableLoading }) => {
   useEffect(() => {
     if (loading) return;
     setTransitioning(true);
-    setTimeout(() => setTransitioning(false), 0);
+    setTimeout(() => {
+      setTransitioning(false);
+      // setLoading(true);
+    }, 400);
   }, [loading]);
 
   useEffect(() => {

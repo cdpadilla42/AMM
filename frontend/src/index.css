@@ -4,6 +4,10 @@
   --blue: #0c8ecb;
 }
 
+html {
+  position: relative;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

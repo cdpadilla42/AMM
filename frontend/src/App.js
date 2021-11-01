@@ -16,9 +16,15 @@ import { throttle } from 'lodash';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 function App() {
+  console.log('Node env', process.env.NODE_ENV);
+
   const location = useLocation();
   // For handling window resizing and iOS bottom bar
   useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      document.documentElement.style.setProperty('--vh', `1vh`);
+      return;
+    }
     // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
     let vh = window.innerHeight * 0.01;
     // Then we set the value in the --vh custom property to the root of the document

@@ -80,7 +80,9 @@ const Testimony = (props) => {
         <Nav />
         <div className="game_container">
           <AnimalsDisplayController />
-          {isInventoryOpen && <Inventory />}
+          <div className="inventory_wrapper">
+            <Inventory />
+          </div>
           <div className="health_bar_wrapper">
             <div
               className={`health_bar_inset${
@@ -92,7 +94,7 @@ const Testimony = (props) => {
           </div>
           <TestimonyImage />
           <ResponseBox />
-          <TextBox />
+          {!isInventoryOpen && <TextBox />}
         </div>
       </StyledContainer>
     </ImageLoader>

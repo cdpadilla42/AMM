@@ -13,20 +13,26 @@ import { hideHealthBar, loseHealth } from '../store/health';
 
 const StyledMap = styled.div`
   position: relative;
-  width: 100%;
-  height: 466px; // originally 350px
   /* z-index: 6; */
   border: 1px solid black;
   border-radius: 5px;
-  margin: 0;
   padding: 0 !important;
   overflow: scroll;
+  background-color: rgba(0,0,0,0) !important;
   
   /* Use below for seeing click boxes */
   /* & > * {
   } */
+
+  .map_container {
+    padding: 0 !important;
+    width: 676px;
+    height: 466px; // originally 350px
+    margin: 0 auto;
+    background-color: rgba(0,0,0,0);
+  }
   
-  & > .click_boxes_container > .click_box {
+  .click_boxes_container > .click_box {
     background-color: transparent;
     &:hover,
     &:active {
@@ -258,72 +264,74 @@ const Map = ({ onRegionClick }) => {
   return (
     <>
       <StyledMap ref={outerRef}>
-        <div className="click_boxes_container" ref={innerRef}>
-          <div
-            className="click_box julian"
-            data-name="Julian Falls"
-            onClick={onRegionClick}
-          />
-          <div
-            className="click_box ankha"
-            data-name="Ankha's Exhibit"
-            onClick={onRegionClick}
-          />
-          <div
-            className="click_box agent_s"
-            data-name="Agent S's Base"
-            onClick={onRegionClick}
-          />
-          <div
-            className="click_box stitches"
-            data-name="Stitches's Playplace"
-            onClick={onRegionClick}
-          />
-          <div
-            className="click_box elvis"
-            data-name="Elvis's Castle"
-            onClick={onRegionClick}
-          />
-          <div
-            className="click_box sterling"
-            data-name="Sterling's Fort"
-            onClick={onRegionClick}
-          />
-          <div
-            className="click_box lucky"
-            data-name="Lucky's Infirmary"
-            onClick={onRegionClick}
-          />
-          <div
-            className="click_box crime_scene"
-            data-name="Crime Scene"
-            onClick={onRegionClick}
-          />
-          <div
-            className="click_box katt"
-            data-name="Katt's Junkyard"
-            onClick={onRegionClick}
-          />
-          <div
-            className="click_box merengue"
-            data-name="Merengue's Bakery"
-            onClick={onRegionClick}
-          />
-          <div
-            className="click_box chadder"
-            data-name="Chadder's Restaurant"
-            onClick={onRegionClick}
-          />
-          <div
-            className="click_box nenn"
-            data-name="Ñenn's Ring"
-            onClick={onRegionClick}
-          />
-          <div
-            className="click_box mailboxes"
-            data-name="Mailroom"
-            onClick={onRegionClick}
-          />
+        <div className="map_container">
+          <div className="click_boxes_container" ref={innerRef}>
+            <div
+              className="click_box julian"
+              data-name="Julian Falls"
+              onClick={onRegionClick}
+            />
+            <div
+              className="click_box ankha"
+              data-name="Ankha's Exhibit"
+              onClick={onRegionClick}
+            />
+            <div
+              className="click_box agent_s"
+              data-name="Agent S's Base"
+              onClick={onRegionClick}
+            />
+            <div
+              className="click_box stitches"
+              data-name="Stitches's Playplace"
+              onClick={onRegionClick}
+            />
+            <div
+              className="click_box elvis"
+              data-name="Elvis's Castle"
+              onClick={onRegionClick}
+            />
+            <div
+              className="click_box sterling"
+              data-name="Sterling's Fort"
+              onClick={onRegionClick}
+            />
+            <div
+              className="click_box lucky"
+              data-name="Lucky's Infirmary"
+              onClick={onRegionClick}
+            />
+            <div
+              className="click_box crime_scene"
+              data-name="Crime Scene"
+              onClick={onRegionClick}
+            />
+            <div
+              className="click_box katt"
+              data-name="Katt's Junkyard"
+              onClick={onRegionClick}
+            />
+            <div
+              className="click_box merengue"
+              data-name="Merengue's Bakery"
+              onClick={onRegionClick}
+            />
+            <div
+              className="click_box chadder"
+              data-name="Chadder's Restaurant"
+              onClick={onRegionClick}
+            />
+            <div
+              className="click_box nenn"
+              data-name="Ñenn's Ring"
+              onClick={onRegionClick}
+            />
+            <div
+              className="click_box mailboxes"
+              data-name="Mailroom"
+              onClick={onRegionClick}
+            />
+          </div>
         </div>
       </StyledMap>
     </>
