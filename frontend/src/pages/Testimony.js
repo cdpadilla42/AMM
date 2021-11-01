@@ -43,12 +43,12 @@ const Testimony = (props) => {
   );
 
   useEffect(() => {
+    // set place to 0
+    dispatch(resetDialoguePosition());
     dispatch(getDialogue(props.match.params.id));
     dispatch(getBackground(props.match.params.id));
     dispatch(getConversationDetails(props.match.params.id));
     dispatch(getSprites());
-    // set place to 0
-    dispatch(resetDialoguePosition());
 
     return () => {
       dispatch(clearDialogueData());

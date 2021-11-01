@@ -258,7 +258,6 @@ const TextBox = (props) => {
       currentDialogueObj.isFinalDialogue &&
       !isEndOfDialogueWithResponseOption
     ) {
-      props.switchConversation('');
       props.fullRecovery();
       history.push('/');
     } else if (isEndOfDialogue) {
