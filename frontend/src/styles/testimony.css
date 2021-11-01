@@ -106,7 +106,7 @@ nav a {
 
 .game_container__animal_image {
   position: absolute;
-  top: calc(50vh - 372px);
+  top: calc(50vh - 331px);
   width: 437px;
   padding: 1rem;
   right: 0;
@@ -299,7 +299,7 @@ nav a {
 
   .game_container__animal_image {
     width: 280px;
-    top: calc(var(--vh, 1vh) * 50 - 216px);
+    top: calc(var(--vh, 1vh) * 50 - 187px);
   }
   .game_container__animal_image.left {
     left: calc(50vw - 228px);

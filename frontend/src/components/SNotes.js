@@ -137,11 +137,15 @@ const StyledSNotes = styled.div`
   .notepad_sheet {
     background-color: #fff;
     width: 350px;
-    height: 90vh;
+    height: 720px;
     transform: rotate(-3deg);
     position: absolute;
     right: -70px;
     top: 24px;
+    @media all and (max-height: 720px) {
+      height: 90vh; /* Fallback for browsers that do not support Custom Properties */
+      height: calc(var(--vh, 1vh) * 90);
+    }
   }
 
   .notepad_button {
