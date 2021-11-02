@@ -1,24 +1,35 @@
 import React, { useEffect } from 'react';
-import { Provider } from 'react-redux';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useLocation,
-} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import './styles/customToast.css';
 import Testimony from './pages/Testimony';
 import SelectConversation from './pages/SelectConversation';
 import Playground from './pages/Playground';
-import ErrorBoundary from './components/ErrorBoundary';
+import { getSprites } from './store/sprites';
 import { throttle } from 'lodash';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import {
+  getAnimalNotes,
+  getInventoryItems,
+  getMapLocations,
+  getSNotes,
+  initializeUserInventoryFromLocalStorage,
+} from './store/inventory';
 
 function App() {
-  console.log('Node env', process.env.NODE_ENV);
-
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  // Get items for inventory, Animal notes & Agent S Notes, and sprites
+  useEffect(() => {
+    dispatch(getSprites());
+    dispatch(getInventoryItems());
+    dispatch(getAnimalNotes());
+    dispatch(getMapLocations());
+    dispatch(getSNotes());
+    dispatch(initializeUserInventoryFromLocalStorage());
+  }, []);
+
   // For handling window resizing and iOS bottom bar
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {

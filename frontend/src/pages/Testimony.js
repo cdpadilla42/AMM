@@ -48,21 +48,11 @@ const Testimony = (props) => {
     dispatch(getDialogue(props.match.params.id));
     dispatch(getBackground(props.match.params.id));
     dispatch(getConversationDetails(props.match.params.id));
-    dispatch(getSprites());
 
     return () => {
       dispatch(clearDialogueData());
       dispatch(closeSNotes());
     };
-  }, []);
-
-  // Get items for inventory, Animal notes & Agent S Notes
-  useEffect(() => {
-    dispatch(getInventoryItems());
-    dispatch(getAnimalNotes());
-    dispatch(getMapLocations());
-    dispatch(getSNotes());
-    dispatch(initializeUserInventoryFromLocalStorage());
   }, []);
 
   return (
