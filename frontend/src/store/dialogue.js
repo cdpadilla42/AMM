@@ -16,6 +16,7 @@ const initialState = {
           speaker: '',
         },
       ],
+      loading: true,
     },
   ],
   returnToDialoguePositionAfterIncorrect: 0,
@@ -41,6 +42,7 @@ export const toggleMap = createAction('TOGGLE_MAP');
 export const openMap = createAction('OPEN_MAP');
 export const closeMap = createAction('CLOSE_MAP');
 export const switchConversation = createAction('SWITCH_CONVERSATION');
+export const resetDialogue = createAction('RESET_DIALOGUE');
 export const switchConversationFromIncorrect = createAction(
   'SWITCH_CONVERSATION_FROM_INCORRECT'
 );
@@ -113,6 +115,11 @@ function dialogueReducer(state = initialState, action) {
       return {
         ...state,
         dialogue: payload,
+      };
+    case resetDialogue.toString():
+      return {
+        ...state,
+        dialogue: initialState.dialogue,
       };
     case toggleResponseBox.toString():
       return {

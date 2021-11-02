@@ -1,4 +1,4 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import sanityClient from '../client';
 
 const initialState = {
@@ -7,6 +7,7 @@ const initialState = {
 };
 
 // Actions
+export const resetBackground = createAction('RESET_BACKGROUND');
 export const getConversations = createAsyncThunk(
   'GET_CONVERSATIONS',
   async () => {
@@ -61,6 +62,11 @@ export const getConversationDetails = createAsyncThunk(
 function conversationsReducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
+    case resetBackground.toString():
+      return {
+        ...state,
+        backgroundURL: '',
+      };
     case 'GET_CONVERSATIONS/fulfilled':
       return {
         ...state,

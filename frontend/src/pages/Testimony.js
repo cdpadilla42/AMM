@@ -5,6 +5,7 @@ import AnimalDisplay from '../components/AnimalDisplay';
 import {
   clearDialogueData,
   getDialogue,
+  resetDialogue,
   resetDialoguePosition,
 } from '../store/dialogue';
 import {
@@ -15,7 +16,11 @@ import {
   getMapLocations,
 } from '../store/inventory';
 import { getSprites } from '../store/sprites';
-import { getBackground, getConversationDetails } from '../store/conversations';
+import {
+  getBackground,
+  getConversationDetails,
+  resetBackground,
+} from '../store/conversations';
 import TextBox from '../components/TextBox';
 import Nav from '../components/Nav';
 import ResponseBox from '../components/ResponseBox';
@@ -52,6 +57,9 @@ const Testimony = (props) => {
     return () => {
       dispatch(clearDialogueData());
       dispatch(closeSNotes());
+      // offload dialogue, bg, and conversation data
+      dispatch(resetDialogue());
+      dispatch(resetBackground());
     };
   }, []);
 
