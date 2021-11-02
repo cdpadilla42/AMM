@@ -66,7 +66,7 @@ const Testimony = (props) => {
   const sanityImageUrlParams = useMemo(() => {
     const vw = window.innerWidth;
     if (!vw) return;
-    return vw <= 420 ? `?w=420` : `?w=755`;
+    return vw <= 420 ? `` : `?w=755`;
   }, []);
 
   // Extract backgrounds and append sanity params
@@ -75,7 +75,7 @@ const Testimony = (props) => {
     ? backgroundURLs?.desktop?.asset.url + sanityImageUrlParams
     : fallbackBG;
   const phoneBG = backgroundURLs?.phone?.asset.url
-    ? backgroundURLs?.phone?.asset.url + sanityImageUrlParams
+    ? backgroundURLs?.phone?.asset.url
     : desktopBG;
 
   return (
