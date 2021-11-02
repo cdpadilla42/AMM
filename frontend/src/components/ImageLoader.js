@@ -136,7 +136,7 @@ const ImageLoader = ({ children, disableLoading }) => {
       });
 
       // Add in main BG & Patterned BG
-      const sanityBGUrlParams = vw <= 420 ? `?w=420` : `?w=755`;
+      const sanityBGUrlParams = vw <= 420 ? `` : `?w=755`;
 
       const fallbackUrl =
         backgroundURL?.backgroundURL?.image?.asset.url + sanityBGUrlParams;
@@ -144,7 +144,7 @@ const ImageLoader = ({ children, disableLoading }) => {
         ? backgroundURL?.backgroundURL?.desktop?.asset.url + sanityBGUrlParams
         : fallbackUrl;
       const phoneUrl = backgroundURL?.backgroundURL?.phone?.asset.url
-        ? backgroundURL?.backgroundURL?.phone?.asset.url + sanityBGUrlParams
+        ? backgroundURL?.backgroundURL?.phone?.asset.url
         : desktopUrl;
 
       if (vw <= 420) {
