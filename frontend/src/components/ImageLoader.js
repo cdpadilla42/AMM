@@ -50,8 +50,6 @@ const ImageLoader = ({ children, disableLoading }) => {
     return [res, numberOfSprites];
   }, [dialogues, sanityDetailsLoaded]);
 
-  console.log(animalEmotionsForConversation, numOfSprites);
-
   useEffect(() => {
     if (disableLoading) {
       setLoading(false);
@@ -64,7 +62,6 @@ const ImageLoader = ({ children, disableLoading }) => {
     if (disableLoading) return;
     if (backgroundURL && !dialogueLoading) {
       setSanityDetailsLoaded(true);
-      console.log('Sanity data loaded!', new Date());
     }
   }, [dialogueLoading, backgroundURL, disableLoading]);
 
@@ -74,7 +71,6 @@ const ImageLoader = ({ children, disableLoading }) => {
   const rendered = () => {
     //Render complete
     counter.current += 1;
-    console.log(counter.current, '/', numOfSprites);
     if (counter.current >= numOfSprites) {
       setLoading(false);
     }
@@ -105,32 +101,19 @@ const ImageLoader = ({ children, disableLoading }) => {
     (hideBool) => {
       if (numOfSprites === 0) return [];
       const vw = window.innerWidth;
-      console.log('rendering hidden images');
       const imagesToRender = [];
       sprites.forEach((animal) => {
-        console.log(
-          'current animal object',
-          animal.name,
-          animalEmotionsForConversation[animal.name]
-        );
         if (!animalEmotionsForConversation[animal.name]) return;
         return animal.images.forEach((spriteObj) => {
-          console.log(
-            'current emotion',
-            spriteObj.emotion.emotion,
-            animalEmotionsForConversation[animal.name][
-              spriteObj.emotion.emotion
-            ]
-          );
           if (
             !animalEmotionsForConversation[animal.name][
               spriteObj.emotion.emotion
             ]
-          )
+          ) {
             return;
+          }
 
           const optimizedSpriteUrl = `${spriteObj.spriteUrl}${sanityImageUrlParams}`;
-          console.log('Adding', animal.name, spriteObj.emotion.emotion);
           imagesToRender.push(
             <img
               src={optimizedSpriteUrl}
