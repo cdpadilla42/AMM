@@ -138,7 +138,6 @@ const MultipleAnimalDisplay = () => {
   // Handle Sanity Image URL Optimization based on window width
   useEffect(() => {
     const vw = window.innerWidth;
-    console.log('vw', vw);
     if (!vw) return;
     if (vw <= 420) {
       setShowMobileOptimizedImages(true);

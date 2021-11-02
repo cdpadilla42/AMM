@@ -27,8 +27,6 @@ const ImageLoader = ({ children, disableLoading }) => {
     }
   }, []);
   const imageLoaded = (e) => {
-    console.log('Loaded');
-    console.log(e.currentTarget.src, 'Loaded', new Date());
     counter.current += 1;
     if (counter.current >= numOfSprites) {
       setLoading(false);
