@@ -43,6 +43,8 @@ const ImageLoader = ({ children, disableLoading }) => {
     function loaded() {
       requestAnimationFrame(startRender);
     }
+
+    loaded();
   };
 
   useEffect(() => {
@@ -116,8 +118,8 @@ const ImageLoader = ({ children, disableLoading }) => {
       >
         <p>Loading...</p>
       </motion.div>
-      {/* {renderHiddenImages()} */}
-      {loading && renderHiddenImages()}
+      {renderHiddenImages()}
+      {/* {loading && renderHiddenImages()} */}
       {children}
     </>
   );
