@@ -103,6 +103,7 @@ const ImageLoader = ({ children, disableLoading }) => {
   // Select which images to render, then return as an array to load into DOM
   const renderHiddenImages = useMemo(
     (hideBool) => {
+      if (numOfSprites === 0) return [];
       const vw = window.innerWidth;
       console.log('rendering hidden images');
       const imagesToRender = [];
@@ -142,27 +143,33 @@ const ImageLoader = ({ children, disableLoading }) => {
       });
 
       // Add in main BG & Patterned BG
-      const fallbackUrl = backgroundURL?.backgroundURL?.image?.asset.url;
-      const desktopUrl =
-        backgroundURL?.backgroundURL?.desktop?.asset.url || fallbackUrl;
-      const phoneUrl =
-        backgroundURL?.backgroundURL?.phone?.asset.url || desktopUrl;
+      const sanityBGUrlParams = vw <= 420 ? `?w=420` : `?w=755`;
+
+      const fallbackUrl =
+        backgroundURL?.backgroundURL?.image?.asset.url + sanityBGUrlParams;
+      const desktopUrl = backgroundURL?.backgroundURL?.desktop?.asset.url
+        ? backgroundURL?.backgroundURL?.desktop?.asset.url + sanityBGUrlParams
+        : fallbackUrl;
+      const phoneUrl = backgroundURL?.backgroundURL?.phone?.asset.url
+        ? backgroundURL?.backgroundURL?.phone?.asset.url + sanityBGUrlParams
+        : desktopUrl;
+
       if (vw <= 420) {
         imagesToRender.push(
           <img
-            src={`${phoneUrl}${sanityImageUrlParams}`}
+            src={phoneUrl}
             onLoad={imageLoaded}
             className="image_loader_image"
-            key={phoneUrl}
+            key={phoneUrl + sanityImageUrlParams}
           />
         );
       } else {
         imagesToRender.push(
           <img
-            src={`${desktopUrl}${sanityImageUrlParams}`}
+            src={desktopUrl}
             onLoad={imageLoaded}
             className="image_loader_image"
-            key={desktopUrl}
+            key={desktopUrl + sanityImageUrlParams}
           />
         );
         // patterned bg
@@ -191,7 +198,14 @@ const ImageLoader = ({ children, disableLoading }) => {
     }, 400);
   }, [loading]);
 
+  // Edges
   useEffect(() => {
+    // 1. If loading takes longer than 10 seconds, Go on to the dialogue screen
+    setTimeout(() => {
+      setTransitioning(false);
+      setLoading(false);
+    }, 10000);
+    // 2. On unmount, reset loading state
     return () => setLoading(true);
   }, []);
 
@@ -223,8 +237,8 @@ const ImageLoader = ({ children, disableLoading }) => {
       >
         <p>Loading...</p>
       </motion.div>
-      {numOfSprites !== 0 && renderHiddenImages}
-      {/* {loading && renderHiddenImages()} */}
+      {/* {numOfSprites !== 0 && renderHiddenImages} */}
+      {loading && renderHiddenImages}
       {children}
     </>
   );

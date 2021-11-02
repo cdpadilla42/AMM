@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import throttle from 'lodash.throttle';
 import AnimalDisplay from '../components/AnimalDisplay';
@@ -63,14 +63,29 @@ const Testimony = (props) => {
     };
   }, []);
 
+  const sanityImageUrlParams = useMemo(() => {
+    const vw = window.innerWidth;
+    if (!vw) return;
+    return vw <= 420 ? `?w=420` : `?w=755`;
+  }, []);
+
+  // Extract backgrounds and append sanity params
+  const fallbackBG = backgroundURLs?.image?.asset.url + sanityImageUrlParams;
+  const desktopBG = backgroundURLs?.desktop?.asset.url
+    ? backgroundURLs?.desktop?.asset.url + sanityImageUrlParams
+    : fallbackBG;
+  const phoneBG = backgroundURLs?.phone?.asset.url
+    ? backgroundURLs?.phone?.asset.url + sanityImageUrlParams
+    : desktopBG;
+
   return (
     <ImageLoader>
       <SNotes />
       <StyledContainer
         className="container"
-        fallback={backgroundURLs?.image?.asset.url}
-        desktop={backgroundURLs?.desktop?.asset.url}
-        phone={backgroundURLs?.phone?.asset.url}
+        fallback={fallbackBG}
+        desktop={desktopBG}
+        phone={phoneBG}
         PatternedBG={PatternedBG}
       >
         <div className="desktop_main_background" />
