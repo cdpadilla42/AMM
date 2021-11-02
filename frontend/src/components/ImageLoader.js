@@ -68,7 +68,7 @@ const ImageLoader = ({ children, disableLoading }) => {
           <img
             src={optimizedSpriteUrl}
             onLoad={imageLoaded}
-            className="hide"
+            className="image_loader_image"
             key={optimizedSpriteUrl}
           />
         );
