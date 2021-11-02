@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
@@ -15,6 +15,7 @@ const AnimalDisplay = ({
   isCurrentSpeaker,
   direction,
   centered,
+  showMobileOptimizedImages,
 }) => {
   const { sprites } = useSelector((state) => state.sprites);
   const dialogue = useCurrentDialogueObj();
@@ -56,7 +57,14 @@ const AnimalDisplay = ({
   if (direction) {
     className += ` ${direction}_facing`;
   }
-  return <img src={spriteUrl} alt="" className={className} />;
+
+  const optimizedSpriteUrl = useMemo(() =>
+    showMobileOptimizedImages
+      ? `${spriteUrl}?w=258&h=284`
+      : `${spriteUrl}?w=405&h=446`
+  );
+
+  return <img src={optimizedSpriteUrl} alt="" className={className} />;
   // return (
   //   <div className="game_container__animal">
   //     <img src={spriteUrl} alt="" className={className} />
@@ -67,10 +75,12 @@ const AnimalDisplay = ({
 AnimalDisplay.propTypes = {
   isCurrentSpeaker: PropTypes.bool,
   direction: PropTypes.string,
+  showMobileOptimizedImages: PropTypes.bool,
 };
 
 AnimalDisplay.defaultProps = {
   isCurrentSpeaker: true,
+  showMobileOptimizedImages: false,
 };
 
 export default AnimalDisplay;

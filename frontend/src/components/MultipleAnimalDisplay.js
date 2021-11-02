@@ -40,6 +40,8 @@ const MultipleAnimalDisplay = () => {
 
   const [animalsState, setAnimalsState] = useState([]);
   const [centeredView, setCenteredView] = useState(false);
+  const [showMobileOptimizedImages, setShowMobileOptimizedImages] =
+    useState(false);
 
   // dialogue.animals.forEach((animal) => {
   //   console.log({
@@ -133,6 +135,16 @@ const MultipleAnimalDisplay = () => {
     // };
   }, [currentDialoguePosition, emotion, speaker]);
 
+  // Handle Sanity Image URL Optimization based on window width
+  useEffect(() => {
+    const vw = window.innerWidth;
+    console.log('vw', vw);
+    if (!vw) return;
+    if (vw <= 420) {
+      setShowMobileOptimizedImages(true);
+    }
+  }, []);
+
   const renderAnimals = () =>
     animalsState.map((animal, index) => {
       let orientation;
@@ -167,6 +179,7 @@ const MultipleAnimalDisplay = () => {
             direction={animalState.direction ?? (i === 0 ? 'right' : 'left')}
             key={animalState.name}
             centered={animalState.centered}
+            showMobileOptimizedImages={showMobileOptimizedImages}
           />
         </CSSTransition>
       ))}
