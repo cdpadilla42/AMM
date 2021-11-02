@@ -26,24 +26,25 @@ const ImageLoader = ({ children, disableLoading }) => {
       setTransitioning(false);
     }
   }, []);
+
+  function rendered() {
+    //Render complete
+    counter.current += 1;
+    if (counter.current >= numOfSprites) {
+      setLoading(false);
+    }
+  }
+
+  function startRender() {
+    //Rendering start
+    requestAnimationFrame(rendered);
+  }
+
+  function loaded() {
+    requestAnimationFrame(startRender);
+  }
+
   const imageLoaded = (e) => {
-    function rendered() {
-      //Render complete
-      counter.current += 1;
-      if (counter.current >= numOfSprites) {
-        setLoading(false);
-      }
-    }
-
-    function startRender() {
-      //Rendering start
-      requestAnimationFrame(rendered);
-    }
-
-    function loaded() {
-      requestAnimationFrame(startRender);
-    }
-
     loaded();
   };
 
