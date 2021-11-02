@@ -71,7 +71,6 @@ const Testimony = (props) => {
         fallback={backgroundURLs?.image?.asset.url}
         desktop={backgroundURLs?.desktop?.asset.url}
         phone={backgroundURLs?.phone?.asset.url}
-        tablet={backgroundURLs?.tablet?.asset.url}
         PatternedBG={PatternedBG}
       >
         <div className="desktop_main_background" />

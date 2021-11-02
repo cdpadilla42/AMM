@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 import { sprites } from '../lib/sprites';
-import { useSelector } from 'react-redux';
+import PatternedBG from '../imgs/patternedbgs/aabg2.jpg';
 
 const ImageLoader = ({ children, disableLoading }) => {
   const [loading, setLoading] = useState(true);
@@ -12,16 +13,26 @@ const ImageLoader = ({ children, disableLoading }) => {
   const counter = useRef(0);
   const startTime = useRef(new Date());
   const location = useLocation();
+
   const { loading: dialogueLoading, dialogue: dialogues } = useSelector(
     (state) => state.dialogue
   );
   const { backgroundURL } = useSelector((state) => state.conversations);
 
+  // Get data from Sanity / Redux when loaded
   const [animalEmotionsForConversation, numOfSprites] = useMemo(() => {
     if (!sanityDetailsLoaded) return [{}, 0];
 
     const res = {};
     let numberOfSprites = 0;
+    const vw = window.innerWidth;
+
+    // Account for main background and, if desktop, the patterned BG
+    if (vw <= 420) {
+      numberOfSprites = 1;
+    } else {
+      numberOfSprites = 2;
+    }
 
     dialogues.forEach((dialogue) => {
       dialogue.phrase.forEach((phrase) => {
@@ -42,6 +53,14 @@ const ImageLoader = ({ children, disableLoading }) => {
   console.log(animalEmotionsForConversation, numOfSprites);
 
   useEffect(() => {
+    if (disableLoading) {
+      setLoading(false);
+      setTransitioning(false);
+    }
+  }, []);
+
+  // Wait for the data to load from Sanity into Redux.
+  useEffect(() => {
     if (disableLoading) return;
     if (backgroundURL && !dialogueLoading) {
       setSanityDetailsLoaded(true);
@@ -49,20 +68,17 @@ const ImageLoader = ({ children, disableLoading }) => {
     }
   }, [dialogueLoading, backgroundURL, disableLoading]);
 
-  useEffect(() => {
-    if (disableLoading) {
-      setLoading(false);
-      setTransitioning(false);
-    }
-  }, []);
+  // Once it's loaded, we'll handle the image loading based on only images used for this conversation
 
-  function rendered() {
+  // Methods for listening to image rendering
+  const rendered = () => {
     //Render complete
     counter.current += 1;
+    console.log(counter.current, '/', numOfSprites);
     if (counter.current >= numOfSprites) {
       setLoading(false);
     }
-  }
+  };
 
   function startRender() {
     //Rendering start
@@ -77,6 +93,95 @@ const ImageLoader = ({ children, disableLoading }) => {
     loaded();
   };
 
+  // Optimize images with Sanity CDN based on window size
+  const sanityImageUrlParams = useMemo(() => {
+    const vw = window.innerWidth;
+    if (!vw) return;
+    return vw <= 420 ? `?w=258&h=284` : `?w=405&h=446`;
+  }, []);
+
+  // Select which images to render, then return as an array to load into DOM
+  const renderHiddenImages = useMemo(
+    (hideBool) => {
+      const vw = window.innerWidth;
+      console.log('rendering hidden images');
+      const imagesToRender = [];
+      sprites.forEach((animal) => {
+        console.log(
+          'current animal object',
+          animal.name,
+          animalEmotionsForConversation[animal.name]
+        );
+        if (!animalEmotionsForConversation[animal.name]) return;
+        return animal.images.forEach((spriteObj) => {
+          console.log(
+            'current emotion',
+            spriteObj.emotion.emotion,
+            animalEmotionsForConversation[animal.name][
+              spriteObj.emotion.emotion
+            ]
+          );
+          if (
+            !animalEmotionsForConversation[animal.name][
+              spriteObj.emotion.emotion
+            ]
+          )
+            return;
+
+          const optimizedSpriteUrl = `${spriteObj.spriteUrl}${sanityImageUrlParams}`;
+          console.log('Adding', animal.name, spriteObj.emotion.emotion);
+          imagesToRender.push(
+            <img
+              src={optimizedSpriteUrl}
+              onLoad={imageLoaded}
+              className="image_loader_image"
+              key={optimizedSpriteUrl}
+            />
+          );
+        });
+      });
+
+      // Add in main BG & Patterned BG
+      const fallbackUrl = backgroundURL?.backgroundURL?.image?.asset.url;
+      const desktopUrl =
+        backgroundURL?.backgroundURL?.desktop?.asset.url || fallbackUrl;
+      const phoneUrl =
+        backgroundURL?.backgroundURL?.phone?.asset.url || desktopUrl;
+      if (vw <= 420) {
+        imagesToRender.push(
+          <img
+            src={`${phoneUrl}${sanityImageUrlParams}`}
+            onLoad={imageLoaded}
+            className="image_loader_image"
+            key={phoneUrl}
+          />
+        );
+      } else {
+        imagesToRender.push(
+          <img
+            src={`${desktopUrl}${sanityImageUrlParams}`}
+            onLoad={imageLoaded}
+            className="image_loader_image"
+            key={desktopUrl}
+          />
+        );
+        // patterned bg
+        imagesToRender.push(
+          <img
+            src={PatternedBG}
+            onLoad={imageLoaded}
+            className="image_loader_image"
+            key={PatternedBG}
+          />
+        );
+      }
+
+      return imagesToRender;
+    },
+    [numOfSprites, animalEmotionsForConversation]
+  );
+
+  // Hide loader when all loading is complete. Allow some transition time.
   useEffect(() => {
     if (loading) return;
     setTransitioning(true);
@@ -89,36 +194,6 @@ const ImageLoader = ({ children, disableLoading }) => {
   useEffect(() => {
     return () => setLoading(true);
   }, []);
-
-  // useEffect(() => {
-  //   console.log('loading', loading);
-  //   console.log('numOfSprites', numOfSprites);
-  //   if (!loading) {
-  //     console.log('started at', startTime.current, 'ended at', new Date());
-  //   }
-  // }, [loading]);
-  const sanityImageUrlParams = useMemo(() => {
-    const vw = window.innerWidth;
-    if (!vw) return;
-    return vw <= 420 ? `?w=258&h=284` : `?w=405&h=446`;
-  }, []);
-
-  const renderHiddenImages = (hideBool) => {
-    return sprites.map((animal) => {
-      return animal.images.map((spriteObj) => {
-        const optimizedSpriteUrl = `${spriteObj.spriteUrl}${sanityImageUrlParams}`;
-
-        return (
-          <img
-            src={optimizedSpriteUrl}
-            onLoad={imageLoaded}
-            className="image_loader_image"
-            key={optimizedSpriteUrl}
-          />
-        );
-      });
-    });
-  };
 
   const showLoader = loading || transitioning;
 
@@ -148,7 +223,7 @@ const ImageLoader = ({ children, disableLoading }) => {
       >
         <p>Loading...</p>
       </motion.div>
-      {renderHiddenImages()}
+      {numOfSprites !== 0 && renderHiddenImages}
       {/* {loading && renderHiddenImages()} */}
       {children}
     </>
