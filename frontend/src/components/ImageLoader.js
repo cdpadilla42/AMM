@@ -6,6 +6,13 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { sprites } from '../lib/sprites';
 import PatternedBG from '../imgs/patternedbgs/aabg2.jpg';
 
+// TODO Add animals as Jenn does
+const validAnimalSpriteCollections = {
+  Katt: true,
+  Sterling: true,
+  Merengue: true,
+};
+
 const ImageLoader = ({ children, disableLoading }) => {
   const [loading, setLoading] = useState(true);
   const [transitioning, setTransitioning] = useState(true);
@@ -38,6 +45,9 @@ const ImageLoader = ({ children, disableLoading }) => {
       dialogue.phrase.forEach((phrase) => {
         const speaker = phrase.speaker.name;
         const { emotion } = phrase.emotion;
+        // TODO Temporary, remove for release
+        if (!validAnimalSpriteCollections[speaker]) return;
+
         if (!res[speaker]) {
           res[speaker] = { [emotion]: true };
           numberOfSprites++;
