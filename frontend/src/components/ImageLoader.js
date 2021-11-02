@@ -27,9 +27,21 @@ const ImageLoader = ({ children, disableLoading }) => {
     }
   }, []);
   const imageLoaded = (e) => {
-    counter.current += 1;
-    if (counter.current >= numOfSprites) {
-      setLoading(false);
+    function rendered() {
+      //Render complete
+      counter.current += 1;
+      if (counter.current >= numOfSprites) {
+        setLoading(false);
+      }
+    }
+
+    function startRender() {
+      //Rendering start
+      requestAnimationFrame(rendered);
+    }
+
+    function loaded() {
+      requestAnimationFrame(startRender);
     }
   };
 
