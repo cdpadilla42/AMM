@@ -16,7 +16,6 @@ const initialState = {
           speaker: '',
         },
       ],
-      loading: true,
     },
   ],
   returnToDialoguePositionAfterIncorrect: 0,
@@ -25,6 +24,7 @@ const initialState = {
   isInventoryOpen: false,
   inventoryScreen: 'items',
   isMapOpen: false,
+  loading: true,
 };
 
 // Actions
@@ -115,11 +115,13 @@ function dialogueReducer(state = initialState, action) {
       return {
         ...state,
         dialogue: payload,
+        loading: false,
       };
     case resetDialogue.toString():
       return {
         ...state,
         dialogue: initialState.dialogue,
+        loading: true,
       };
     case toggleResponseBox.toString():
       return {

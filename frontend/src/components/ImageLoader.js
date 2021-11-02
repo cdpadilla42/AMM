@@ -3,22 +3,51 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 import { sprites } from '../lib/sprites';
-
-const numOfSprites = sprites.reduce((tally, current) => {
-  return (
-    tally +
-    current.images.reduce((t, c) => {
-      return t + 1;
-    }, 0)
-  );
-}, 0);
+import { useSelector } from 'react-redux';
 
 const ImageLoader = ({ children, disableLoading }) => {
   const [loading, setLoading] = useState(true);
   const [transitioning, setTransitioning] = useState(true);
+  const [sanityDetailsLoaded, setSanityDetailsLoaded] = useState(false);
   const counter = useRef(0);
   const startTime = useRef(new Date());
   const location = useLocation();
+  const { loading: dialogueLoading, dialogue: dialogues } = useSelector(
+    (state) => state.dialogue
+  );
+  const { backgroundURL } = useSelector((state) => state.conversations);
+
+  const [animalEmotionsForConversation, numOfSprites] = useMemo(() => {
+    if (!sanityDetailsLoaded) return [{}, 0];
+
+    const res = {};
+    let numberOfSprites = 0;
+
+    dialogues.forEach((dialogue) => {
+      dialogue.phrase.forEach((phrase) => {
+        const speaker = phrase.speaker.name;
+        const { emotion } = phrase.emotion;
+        if (!res[speaker]) {
+          res[speaker] = { [emotion]: true };
+          numberOfSprites++;
+        } else if (!res[speaker][emotion]) {
+          res[speaker][emotion] = true;
+          numberOfSprites++;
+        }
+      });
+    });
+    return [res, numberOfSprites];
+  }, [dialogues, sanityDetailsLoaded]);
+
+  console.log(animalEmotionsForConversation, numOfSprites);
+
+  useEffect(() => {
+    if (disableLoading) return;
+    if (backgroundURL && !dialogueLoading) {
+      setSanityDetailsLoaded(true);
+      console.log('Sanity data loaded!', new Date());
+    }
+  }, [dialogueLoading, backgroundURL, disableLoading]);
 
   useEffect(() => {
     if (disableLoading) {
