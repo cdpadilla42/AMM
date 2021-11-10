@@ -12,34 +12,8 @@ const MultipleAnimalDisplay = () => {
   const speaker = dialogue.phrase?.[currentDialoguePosition].speaker.name;
   let emotion = dialogue.phrase?.[currentDialoguePosition].emotion.emotion;
   const { ...currentPhraseObj } = dialogue.phrase?.[currentDialoguePosition];
-  const initialState = useMemo(() => {
-    const initialAnimalFromPhrase = [];
-    if (dialogue.phrase[currentDialoguePosition].leftAnimal) {
-      initialAnimalFromPhrase.push(
-        dialogue.phrase[currentDialoguePosition].leftAnimal
-      );
-    } else {
-      initialAnimalFromPhrase.push({ name: speaker });
-    }
-    if (dialogue?.phrase[currentDialoguePosition].rightAnimal) {
-      initialAnimalFromPhrase.push(
-        dialogue?.phrase[currentDialoguePosition].rightAnimal
-      );
-    }
-    return initialAnimalFromPhrase.map((animal) => {
-      const initialAnimal = { ...animal };
-      // set initial emotions
-      if (animal.name === speaker) {
-        initialAnimal.emotion = emotion;
-      } else {
-        initialAnimal.emotion = 'Standing';
-      }
-      return initialAnimal;
-    });
-  }, []);
 
   const [animalsState, setAnimalsState] = useState([]);
-  const [centeredView, setCenteredView] = useState(false);
   const [showMobileOptimizedImages, setShowMobileOptimizedImages] =
     useState(false);
 
@@ -71,7 +45,10 @@ const MultipleAnimalDisplay = () => {
         ) {
           if (!newState[0]) newState[0] = {};
           newState[0].name = currentPhraseObj.leftAnimal.name;
-          if (currentPhraseObj.leftEmotion) {
+          if (currentPhraseObj.leftAnimal.name === animalsState[1]?.name) {
+            newState[0] = { ...animalsState[1] };
+            newState[0].direction = 'right';
+          } else if (currentPhraseObj.leftEmotion) {
             newState[0].emotion = currentPhraseObj.leftEmotion.emotion;
           }
         }
@@ -80,9 +57,14 @@ const MultipleAnimalDisplay = () => {
           newState[1]?.name !== currentPhraseObj.rightAnimal.name
         ) {
           if (!newState[1]) newState[1] = {};
-          newState[1].name = currentPhraseObj.rightAnimal.name;
-          if (currentPhraseObj.rightEmotion) {
-            newState[0].emotion = currentPhraseObj.rightEmotion.emotion;
+          if (currentPhraseObj.rightAnimal.name === animalsState[0]?.name) {
+            newState[1] = { ...animalsState[0] };
+            newState[1].direction = 'left';
+          } else {
+            newState[1].name = currentPhraseObj.rightAnimal.name;
+            if (currentPhraseObj.rightEmotion) {
+              newState[1].emotion = currentPhraseObj.rightEmotion.emotion;
+            }
           }
         }
       }
@@ -102,9 +84,9 @@ const MultipleAnimalDisplay = () => {
           newState[1].centered = true;
           newState[0].centered = false;
         }
-        setCenteredView(true);
+        // setCenteredView(true);
       } else {
-        setCenteredView(false);
+        // setCenteredView(false);
         delete newState[0].centered;
         if (newState[1]) delete newState[1].centered;
       }
@@ -144,20 +126,13 @@ const MultipleAnimalDisplay = () => {
     }
   }, []);
 
-  const renderAnimals = () =>
-    animalsState.map((animal, index) => {
-      let orientation;
-      if (index === 0) orientation = 'left';
-      if (index === 1) orientation = 'right';
-      return (
-        <AnimalDisplay
-          emotion={animal.emotion}
-          speaker={animal.name}
-          orientation={orientation}
-          key={animal.name}
-        />
-      );
-    });
+  const determineTransitionPositioning = (i) => {
+    if (i === 0) {
+      return 'left';
+    } else {
+      return 'right';
+    }
+  };
 
   return (
     <TransitionGroup
@@ -166,7 +141,7 @@ const MultipleAnimalDisplay = () => {
     >
       {animalsState.map((animalState, i) => (
         <CSSTransition
-          classNames={`animal_transition_${i === 0 ? 'left' : 'right'}`}
+          classNames={`animal_transition_${determineTransitionPositioning(i)}`}
           timeout={{ exit: 600, enter: 600 }}
           key={animalState.name}
         >
