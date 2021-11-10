@@ -3,6 +3,7 @@ const itemsInInventory = {
   items: [],
   act: 1,
   sNotes: [],
+  lastConversationID: '',
 };
 
 /*
@@ -15,6 +16,18 @@ const itemsInInventory = {
     ]
   }
 */
+
+export const saveCurrentConversationIdToLocalStorage = (conversationID) => {
+  let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
+  if (!storageData) {
+    initializeLocalStorageInventory();
+    storageData = itemsInInventory;
+  }
+
+  storageData.lastConversationID = conversationID;
+
+  localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
+};
 
 export const addItemToLocalStorageInventory = (item) => {
   let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
@@ -84,6 +97,18 @@ export const updateSNoteInLocalStorageInventory = (sNote, index) => {
   sNotesList[index] = sNote;
 
   localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
+};
+
+export const getLastConversationIDFromLocalStorage = () => {
+  const res = JSON.parse(
+    localStorage.getItem('itemsInInventory')
+  )?.lastConversationID;
+  if (!!res) {
+    return res;
+  } else {
+    initializeLocalStorageInventory();
+    return '';
+  }
 };
 
 export const getUserItemsFromLocalStorage = () => {
