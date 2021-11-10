@@ -78,6 +78,7 @@ export default {
               title: 'Text',
               name: 'text',
               type: 'string',
+              validation: (Rule) => Rule.max(130),
             },
             {
               title: 'Emotion',
