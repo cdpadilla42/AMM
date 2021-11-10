@@ -212,7 +212,7 @@ const ImageLoader = ({ children, disableLoading }) => {
             className="loader"
             transition={{ duration: 0.4, ease: [0.6, 0.01, -0.05, 0.9] }}
             initial={{ transform: 'translateX(0%)' }}
-            exit={{ transform: 'translateX(100%)' }}
+            exit={{ transform: 'translateX(-100%)' }}
             animate={{ transform: 'translateX(0%)' }}
             key={`loader:${location.pathname}`}
           >
@@ -223,9 +223,9 @@ const ImageLoader = ({ children, disableLoading }) => {
       <motion.div
         className="loader"
         transition={{ duration: 0.4, ease: [0.6, 0.01, -0.05, 0.9] }}
-        initial={{ transform: 'translateX(100%)' }}
+        initial={{ transform: 'translateX(-100%)' }}
         exit={{ transform: 'translateX(0%)' }}
-        animate={{ transform: 'translateX(100%)' }}
+        animate={{ transform: 'translateX(-100%)' }}
         key={`loader:${location.pathname}:transition`}
       >
         <p>Loading...</p>
