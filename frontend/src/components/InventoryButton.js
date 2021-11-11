@@ -1,0 +1,62 @@
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import { toggleInventory } from '../store/dialogue';
+
+const InventoryButton = () => {
+  const dispatch = useDispatch();
+  const handleOpenInventoryButtonClick = () => {
+    console.log('open');
+    dispatch(toggleInventory());
+  };
+
+  return (
+    <StyledInventoryButton>
+      <button
+        type="button"
+        className="open_inventory_button"
+        onClick={handleOpenInventoryButtonClick}
+      >
+        🎒
+      </button>
+    </StyledInventoryButton>
+  );
+};
+
+export default InventoryButton;
+
+const StyledInventoryButton = styled.div`
+  position: absolute;
+  transition: background-color 0.8s ease;
+  z-index: 4;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 755px;
+  height: 765px;
+  pointer-events: none;
+  @media all and (max-width: 420px) {
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 100vw;
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
+    font-size: 1.5rem;
+  }
+
+  .open_inventory_button {
+    background-color: var(--blue);
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: none;
+    font-size: 3rem;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    pointer-events: auto;
+    cursor: pointer;
+  }
+`;

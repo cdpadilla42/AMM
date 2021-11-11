@@ -108,11 +108,14 @@ const Inventory = () => {
   }
 
   const handleComeBackLaterClick = () => {
-    // TODO Send user off to leaving dialogue
     dispatch(displayComeBackLaterDialogue());
     dispatch(toggleInventory());
 
     dispatch(markUserNotPromptedForEvidence());
+  };
+
+  const closeInventory = () => {
+    dispatch(toggleInventory());
   };
 
   function renderInventory() {
@@ -211,12 +214,16 @@ const Inventory = () => {
           <button onClick={showPeopole}>Animals</button>
           <button onClick={showMap}>Map</button>
           <button onClick={toggleShowingAddItem}>Add to inventory</button>
-          {userPromptedForEvidence && (
+          {userPromptedForEvidence ? (
             <button
               onClick={handleComeBackLaterClick}
               className="come_back_button"
             >
               Come Back Later
+            </button>
+          ) : (
+            <button onClick={closeInventory} className="close_button">
+              &times;
             </button>
           )}
         </div>
@@ -257,6 +264,7 @@ const StyledInventory = styled.div`
   background: rgb(188, 221, 200)
     url('https://catwithmonocle.com/wp-content/uploads/2020/03/ac-new-horizons-nook-pattern-3840x2160-1.jpg');
   border-radius: 5px;
+  pointer-events: auto;
 
   @media all and (max-width: 800px) {
     width: 100vw;
@@ -385,6 +393,12 @@ const StyledInventory = styled.div`
   .come_back_button {
     background-color: var(--brown-black);
     color: var(--cream);
+  }
+
+  .close_button {
+    background-color: var(--brown-black);
+    color: var(--cream);
+    padding: 0 40px;
   }
 
   .hide {

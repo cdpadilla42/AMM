@@ -430,6 +430,8 @@ span.highlight {
   width: 755px;
   height: 765px;
   overflow: hidden;
+  z-index: 5;
+  pointer-events: none;
 
   @media all and (max-width: 420px) {
     height: 100vh; /* Fallback for browsers that do not support Custom Properties */

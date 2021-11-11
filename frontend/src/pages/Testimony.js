@@ -35,6 +35,7 @@ import SNotes from '../components/SNotes';
 import { closeSNotes } from '../store/notepad';
 import TestimonyImage from '../components/TestimonyImage';
 import { saveCurrentConversationIdToLocalStorage } from '../lib/localStorage';
+import InventoryButton from '../components/InventoryButton';
 
 const Testimony = (props) => {
   const dispatch = useDispatch();
@@ -99,6 +100,7 @@ const Testimony = (props) => {
         <Nav />
         <div className="game_container">
           <AnimalsDisplayController />
+          <InventoryButton />
           <div className="inventory_wrapper">
             <Inventory />
           </div>
@@ -113,7 +115,7 @@ const Testimony = (props) => {
           </div>
           <TestimonyImage />
           <ResponseBox />
-          {!isInventoryOpen && <TextBox />}
+          <TextBox />
         </div>
       </StyledContainer>
     </ImageLoader>
