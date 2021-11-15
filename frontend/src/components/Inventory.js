@@ -295,7 +295,7 @@ const StyledInventory = styled.div`
   }
 
   .inventory_grid_container {
-    height: 100%;
+    height: calc(100% - 80px);
     width: 100%;
     overflow-y: scroll;
     padding: 1rem;
