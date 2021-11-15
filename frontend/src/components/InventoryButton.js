@@ -1,8 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { toggleInventory } from '../store/dialogue';
 import backpack from '../imgs/Bag_NH_Inv_Icon.png';
+import { useLocation, useParams } from 'react-router';
 
 const InventoryButton = () => {
   const dispatch = useDispatch();
@@ -10,6 +11,12 @@ const InventoryButton = () => {
     console.log('open');
     dispatch(toggleInventory());
   };
+
+  // If the intro dialogue, don't show
+  const params = useParams();
+  if (params.id === '729d0b36-6021-4843-8e09-da92c651022f') {
+    return null;
+  }
 
   return (
     <StyledInventoryButton>

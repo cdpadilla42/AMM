@@ -6,6 +6,7 @@ import {
   initializeUserInventoryFromLocalStorage,
 } from '../store/inventory';
 import { closeSNotes, toggleSNotes } from '../store/notepad';
+import { useParams } from 'react-router';
 
 const SNotes = () => {
   const { userSNotes, sNotes } = useSelector((state) => state.inventory);
@@ -38,6 +39,12 @@ const SNotes = () => {
       setSNotesToRender(res);
     }
   }, [sNotesLoaded, sNotesDictLoaded, userSNotes]);
+
+  // If the intro dialogue, don't show
+  const params = useParams();
+  if (params.id === '729d0b36-6021-4843-8e09-da92c651022f') {
+    return null;
+  }
 
   const renderSNotes = () => {
     return sNotesToRender.map((sNote) => (
