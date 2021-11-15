@@ -1,9 +1,12 @@
+import { itemsInInventoryAllButTheProphecy } from './constants';
+
 const { localStorage } = window;
 const itemsInInventory = {
   items: [],
   act: 1,
   sNotes: [],
   lastConversationID: '',
+  userHasFullInventory: false,
 };
 
 /*
@@ -25,6 +28,25 @@ export const saveCurrentConversationIdToLocalStorage = (conversationID) => {
   }
 
   storageData.lastConversationID = conversationID;
+
+  localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
+};
+
+export const setLocalStorageToJustBeforeTrial = () => {
+  localStorage.setItem(
+    'itemsInInventory',
+    JSON.stringify(itemsInInventoryAllButTheProphecy)
+  );
+};
+
+export const saveFullInventoryToLocalSotrage = () => {
+  let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
+  if (!storageData) {
+    initializeLocalStorageInventory();
+    storageData = itemsInInventory;
+  }
+
+  storageData.userHasFullInventory = true;
 
   localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
 };
@@ -128,6 +150,18 @@ export const getUserSNotesFromLocalStorage = () => {
   } else {
     initializeLocalStorageInventory();
     return [];
+  }
+};
+
+export const getUserHasFullInventoryFromLocalStorage = () => {
+  const res = JSON.parse(
+    localStorage.getItem('itemsInInventory')
+  )?.userHasFullInventory;
+  if (!!res) {
+    return res;
+  } else {
+    initializeLocalStorageInventory();
+    return false;
   }
 };
 

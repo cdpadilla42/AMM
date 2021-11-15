@@ -1,14 +1,20 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import {
+  saveCurrentConversationIdToLocalStorage,
+  setLocalStorageToJustBeforeTrial,
+} from '../lib/localStorage';
 import { getConversations } from '../store/conversations';
 
 const ActOneTestimonySelect = () => {
   // 34 items needed to go to the trial
   const dispatch = useDispatch();
+  const { userHasFullInventory } = useSelector((state) => state.inventory);
 
   useEffect(() => {
     dispatch(getConversations());
+    saveCurrentConversationIdToLocalStorage('act-one');
   }, []);
 
   let conversations = useSelector((state) => state.conversations.conversations);
@@ -29,16 +35,25 @@ const ActOneTestimonySelect = () => {
     });
   };
 
+  const handlePreTrialClick = () => {
+    setLocalStorageToJustBeforeTrial();
+  };
+
   return (
     <div>
+      {/* <button onClick={handlePreTrialClick}>
+        Reset to Pre Trial Inventory
+      </button> */}
       <h1>Pick the catchphrase!</h1>
       <ul>
         {renderCatchphraseButtons()}
-        <li key={'trial'} id="d2c9e39a-269d-4e45-9762-43156e860643">
-          <Link to={`/testimony/d2c9e39a-269d-4e45-9762-43156e860643`}>
-            TRIAL!!!
-          </Link>
-        </li>
+        {userHasFullInventory && (
+          <li key={'trial'} id="d2c9e39a-269d-4e45-9762-43156e860643">
+            <Link to={`/testimony/d2c9e39a-269d-4e45-9762-43156e860643`}>
+              TRIAL!!!
+            </Link>
+          </li>
+        )}
       </ul>
     </div>
   );

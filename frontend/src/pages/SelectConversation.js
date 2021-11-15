@@ -48,7 +48,11 @@ const SelectConversation = () => {
     if (!lastConversationID) {
       toast('Something went wrong loading your file!');
     } else {
-      history.push(`/testimony/${lastConversationID}`);
+      if (lastConversationID === 'act-one') {
+        history.push(`/${lastConversationID}`);
+      } else {
+        history.push(`/testimony/${lastConversationID}`);
+      }
     }
   }
 

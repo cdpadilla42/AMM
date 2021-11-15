@@ -54,6 +54,7 @@ const TextBox = (props) => {
   const { showSNotes } = useSelector((state) => state.notepad);
   const { conversation } = useSelector((state) => state.conversations);
   const currentTestimonyID = conversation?.[0]?._id;
+  const currentAct = conversation?.[0]?.act;
 
   const [fromLink, setFromLink] = useState(false);
   const [doneTyping, setDoneTyping] = useState(false);
@@ -262,7 +263,7 @@ const TextBox = (props) => {
       !isEndOfDialogueWithResponseOption
     ) {
       props.fullRecovery();
-      if (currentTestimonyID === gameStartDialogueID) {
+      if (currentTestimonyID === gameStartDialogueID || currentAct === 'a') {
         history.push('/act-one');
       } else {
         history.push('/');

@@ -1,6 +1,7 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import sanityClient from '../client';
 import {
+  getUserHasFullInventoryFromLocalStorage,
   getUserItemsFromLocalStorage,
   getUserSNotesFromLocalStorage,
 } from '../lib/localStorage';
@@ -110,8 +111,9 @@ function inventoryReducer(state = initialState, action) {
       return { ...state, sNotes: payload };
     case initializeUserInventoryFromLocalStorage.toString():
       const userItems = getUserItemsFromLocalStorage();
+      const userHasFullInventory = getUserHasFullInventoryFromLocalStorage();
       const userSNotes = getUserSNotesFromLocalStorage();
-      return { ...state, userItems, userSNotes };
+      return { ...state, userItems, userSNotes, userHasFullInventory };
     case addToInventory.toString():
       const newItems = [...state.userItems, payload];
       return { ...state, userItems: newItems };

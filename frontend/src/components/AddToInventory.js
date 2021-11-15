@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import useForm from '../hooks/useForm';
-import { addItemToLocalStorageInventory } from '../lib/localStorage';
+import {
+  addItemToLocalStorageInventory,
+  saveFullInventoryToLocalSotrage,
+} from '../lib/localStorage';
 import { addToInventory, markUserHasFullInventory } from '../store/inventory';
 
 const AddToInventory = ({
@@ -70,7 +73,7 @@ const AddToInventory = ({
       } else {
         // check inventory size
         let fullInventory = false;
-        if (userItems.length === 33) {
+        if (userItems.length === 31) {
           fullInventory = true;
         }
         // Add to users inventory
@@ -84,6 +87,10 @@ const AddToInventory = ({
         // if full inventory, proceed to updating redux
         if (fullInventory) {
           dispatch(markUserHasFullInventory());
+          saveFullInventoryToLocalSotrage();
+          toast(
+            "You've gathered all the evidence! You can now proceed to the trial!"
+          );
         }
         clearForm();
         close();
