@@ -44,13 +44,16 @@ const SelectConversation = () => {
   }
 
   function loadFromLastSave() {
-    console.log('loading');
     const lastConversationID = getLastConversationIDFromLocalStorage();
     if (!lastConversationID) {
       toast('Something went wrong loading your file!');
     } else {
       history.push(`/testimony/${lastConversationID}`);
     }
+  }
+
+  function startNewGame() {
+    history.push(`/testimony/729d0b36-6021-4843-8e09-da92c651022f`);
   }
 
   return (
@@ -66,6 +69,9 @@ const SelectConversation = () => {
       </button>
       <button type="button" onClick={loadFromLastSave}>
         Load from last Save 💾
+      </button>
+      <button type="button" onClick={startNewGame}>
+        Start new Game 🍃
       </button>
       <h1>
         UGLY SELECT SCREEN{' '}

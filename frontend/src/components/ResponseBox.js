@@ -8,11 +8,15 @@ import {
 } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import { useHistory } from 'react-router-dom';
+import { gameStartDialogueID } from '../lib/constants';
 
 const ResponseBox = () => {
   const { responseBoxIsOpen, currentDialogueID, dialogue } = useSelector(
     (state) => state.dialogue
   );
+  const { conversation } = useSelector((state) => state.conversations);
+  const currentTestimonyID = conversation?.[0]?._id;
+
   const dispatch = useDispatch();
   const currentDialogueObj = useCurrentDialogueObj();
   const history = useHistory();
@@ -50,7 +54,11 @@ const ResponseBox = () => {
   function handleClick(followingDialogueID) {
     if (currentDialogueObj?.isFinalDialogue) {
       dispatch(resetConversationToStart());
-      history.push('/');
+      if (currentTestimonyID === gameStartDialogueID) {
+        history.push('/act-one');
+      } else {
+        history.push('/');
+      }
     } else {
       dispatch(switchConversation(followingDialogueID));
     }

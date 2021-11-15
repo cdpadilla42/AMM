@@ -15,6 +15,7 @@ import {
   getSNotes,
   initializeUserInventoryFromLocalStorage,
 } from './store/inventory';
+import ActOneTestimonySelect from './pages/ActOneTestimonySelect';
 
 function App() {
   const location = useLocation();
@@ -66,6 +67,9 @@ function App() {
           path="/testimony/:id"
           render={(props) => <Testimony match={props.match} />}
         ></Route>
+        <Route path="/act-one">
+          <ActOneTestimonySelect />
+        </Route>
         <Route path="/">
           <SelectConversation />
         </Route>

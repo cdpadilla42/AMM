@@ -30,6 +30,7 @@ import {
   addSNoteToLocalStorageInventory,
   updateSNoteInLocalStorageInventory,
 } from '../lib/localStorage';
+import { gameStartDialogueID } from '../lib/constants';
 
 const TextBox = (props) => {
   const dispatch = useDispatch();
@@ -51,6 +52,8 @@ const TextBox = (props) => {
     userSNotes,
   } = useSelector((state) => state.inventory);
   const { showSNotes } = useSelector((state) => state.notepad);
+  const { conversation } = useSelector((state) => state.conversations);
+  const currentTestimonyID = conversation?.[0]?._id;
 
   const [fromLink, setFromLink] = useState(false);
   const [doneTyping, setDoneTyping] = useState(false);
@@ -259,7 +262,11 @@ const TextBox = (props) => {
       !isEndOfDialogueWithResponseOption
     ) {
       props.fullRecovery();
-      history.push('/');
+      if (currentTestimonyID === gameStartDialogueID) {
+        history.push('/act-one');
+      } else {
+        history.push('/');
+      }
     } else if (isEndOfDialogue) {
       props.toggleResponseBox();
     } else {

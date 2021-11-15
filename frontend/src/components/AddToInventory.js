@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import useForm from '../hooks/useForm';
 import { addItemToLocalStorageInventory } from '../lib/localStorage';
-import { addToInventory } from '../store/inventory';
+import { addToInventory, markUserHasFullInventory } from '../store/inventory';
 
 const AddToInventory = ({
   closeDisplay,
@@ -49,7 +49,7 @@ const AddToInventory = ({
     if (cleanedItemWords.length === 1) {
       return cleanedItem === cleanedInput;
     } else {
-      return cleanedItemWords.includes(cleanedInput);
+      return cleanedItem.includes(cleanedInput);
     }
   };
 
@@ -68,6 +68,11 @@ const AddToInventory = ({
         clearForm();
         return;
       } else {
+        // check inventory size
+        let fullInventory = false;
+        if (userItems.length === 33) {
+          fullInventory = true;
+        }
         // Add to users inventory
         // save to local storage
         addItemToLocalStorageInventory(matchedInGameItem.name);
@@ -76,6 +81,10 @@ const AddToInventory = ({
         toast(
           `🔎  Great! ${matchedInGameItem.name.toUpperCase()} was added to the evidence file.`
         );
+        // if full inventory, proceed to updating redux
+        if (fullInventory) {
+          dispatch(markUserHasFullInventory());
+        }
         clearForm();
         close();
       }

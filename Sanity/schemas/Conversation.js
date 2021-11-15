@@ -29,6 +29,13 @@ export default {
         ],
       },
     },
+    {
+      title: 'Catchphrase',
+      name: 'catchphrase',
+      type: 'string',
+      description: 'Shows on the buttons for the Act One Select Screen',
+      hidden: ({ document }) => !(document?.act === 'a'),
+    },
     // {
     //   title: 'Dialogue',
     //   name: 'dialogue',

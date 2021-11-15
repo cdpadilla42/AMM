@@ -26,6 +26,7 @@ const initialState = {
   userItems: [],
   lastUpdated: null,
   userPromptedForEvidence: false,
+  userHasFullInventory: false,
 };
 
 // Actions
@@ -90,6 +91,9 @@ export const markUserPromptedForEvidence = createAction(
 export const markUserNotPromptedForEvidence = createAction(
   'MARK_USER_NOT_PROMPTED_FOR_EVIDENCE'
 );
+export const markUserHasFullInventory = createAction(
+  'MARK_USER_HAS_FULL_INVENTORY'
+);
 
 // Reducer
 
@@ -126,6 +130,8 @@ function inventoryReducer(state = initialState, action) {
       return { ...state, userPromptedForEvidence: true };
     case markUserNotPromptedForEvidence.toString():
       return { ...state, userPromptedForEvidence: false };
+    case markUserHasFullInventory.toString():
+      return { ...state, userHasFullInventory: true };
     default:
       return state;
   }

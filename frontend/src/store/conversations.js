@@ -13,7 +13,7 @@ export const getConversations = createAsyncThunk(
   async () => {
     const response = await sanityClient.fetch(
       `*[_type == "conversation"]{
-              name, _id
+              name, _id, act, catchphrase,
       }`
     );
     return response;
@@ -50,7 +50,7 @@ export const getConversationDetails = createAsyncThunk(
   async (conversationID) => {
     const response = await sanityClient.fetch(
       `*[_type == "conversation" && conversation._id == "${conversationID}"]{
-        act
+        act, _id,
       }`
     );
     return response;
