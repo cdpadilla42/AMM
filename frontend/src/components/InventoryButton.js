@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { toggleInventory } from '../store/dialogue';
+import backpack from '../imgs/Bag_NH_Inv_Icon.png';
 
 const InventoryButton = () => {
   const dispatch = useDispatch();
@@ -12,13 +13,19 @@ const InventoryButton = () => {
 
   return (
     <StyledInventoryButton>
-      <button
+      {/* <button
         type="button"
         className="open_inventory_button"
         onClick={handleOpenInventoryButtonClick}
       >
         🎒
-      </button>
+      </button> */}
+      <img
+        type="button"
+        className="open_inventory_button"
+        onClick={handleOpenInventoryButtonClick}
+        src={backpack}
+      />
     </StyledInventoryButton>
   );
 };
@@ -47,7 +54,7 @@ const StyledInventoryButton = styled.div`
   }
 
   .open_inventory_button {
-    background-color: var(--blue);
+    /* background-color: var(--blue); */
     width: 64px;
     height: 64px;
     border-radius: 50%;
