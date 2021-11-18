@@ -116,6 +116,25 @@ export default {
               hidden: ({ parent }) => !parent.changePosition,
             },
             {
+              title: 'Cetered Orientation',
+              name: 'centeredOrientation',
+              type: 'string',
+              initialValue: 'left',
+              description:
+                '* Marks default. If nothing selected, default will be used',
+              options: {
+                list: [
+                  { title: 'Left*', value: 'left' },
+                  { title: 'Right', value: 'right' },
+                ],
+                layout: 'radio',
+              },
+              fieldset: 'changePosition',
+              hidden: ({ parent }) =>
+                !parent.changePosition ||
+                (parent.changePosition && !parent.leftAnimalCentered),
+            },
+            {
               title: 'Left Animal',
               name: 'leftAnimal',
               type: 'reference',
