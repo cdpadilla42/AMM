@@ -42,20 +42,22 @@ const ActOneTestimonySelect = () => {
 
   return (
     <StyledActOneTestimonySelect>
-      <button onClick={handlePreTrialClick}>
-        Reset to Pre Trial Inventory
-      </button>
-      <h1>Pick the catchphrase!</h1>
-      <ul>
-        {renderCatchphraseButtons()}
-        {userHasFullInventory && (
-          <li key={'trial'} id="d2c9e39a-269d-4e45-9762-43156e860643">
-            <Link to={`/testimony/d2c9e39a-269d-4e45-9762-43156e860643`}>
-              TRIAL!!!
-            </Link>
-          </li>
-        )}
-      </ul>
+      <div className="page_container">
+        <button onClick={handlePreTrialClick}>
+          Reset to Pre Trial Inventory
+        </button>
+        <h1>Pick the catchphrase!</h1>
+        <ul>
+          {renderCatchphraseButtons()}
+          {userHasFullInventory && (
+            <li key={'trial'} id="d2c9e39a-269d-4e45-9762-43156e860643">
+              <Link to={`/testimony/d2c9e39a-269d-4e45-9762-43156e860643`}>
+                TRIAL!!!
+              </Link>
+            </li>
+          )}
+        </ul>
+      </div>
     </StyledActOneTestimonySelect>
   );
 };
@@ -68,6 +70,15 @@ const StyledActOneTestimonySelect = styled.div`
   width: 100vw;
   background-color: var(--cream);
   color: var(--brown-black);
+
+  .page_container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    padding-left: 1rem;
+  }
 
   ul {
     list-style: none;
