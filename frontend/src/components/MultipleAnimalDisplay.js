@@ -79,6 +79,8 @@ const MultipleAnimalDisplay = () => {
         if (newState[0].name === centeredAnimal) {
           newState[0].centered = true;
           if (newState[1]) newState[1].centered = false;
+          if (currentPhraseObj.centeredOrientation)
+            newState[0].direction = currentPhraseObj.centeredOrientation;
         }
         if (newState[1]?.name === centeredAnimal) {
           newState[1].centered = true;
