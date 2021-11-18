@@ -42,6 +42,7 @@ const ImageLoader = ({ children, disableLoading }) => {
     }
 
     dialogues.forEach((dialogue) => {
+      if (!dialogue.phrase) return [{}, 0];
       dialogue.phrase.forEach((phrase) => {
         const speaker = phrase.speaker.name;
         const { emotion } = phrase.emotion;

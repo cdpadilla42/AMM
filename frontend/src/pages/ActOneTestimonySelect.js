@@ -41,9 +41,9 @@ const ActOneTestimonySelect = () => {
 
   return (
     <div>
-      {/* <button onClick={handlePreTrialClick}>
+      <button onClick={handlePreTrialClick}>
         Reset to Pre Trial Inventory
-      </button> */}
+      </button>
       <h1>Pick the catchphrase!</h1>
       <ul>
         {renderCatchphraseButtons()}
