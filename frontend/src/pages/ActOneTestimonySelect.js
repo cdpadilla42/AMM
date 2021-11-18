@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   saveCurrentConversationIdToLocalStorage,
@@ -9,6 +9,7 @@ import {
 import { getConversations } from '../store/conversations';
 
 const ActOneTestimonySelect = () => {
+  const history = useHistory();
   // 34 items needed to go to the trial
   const dispatch = useDispatch();
   const { userHasFullInventory } = useSelector((state) => state.inventory);
@@ -29,9 +30,9 @@ const ActOneTestimonySelect = () => {
     return actOneConversations.map((convo) => {
       const name = convo.catchphrase || convo.name;
       return (
-        <li key={convo._id} id={convo._id}>
-          <Link to={`/testimony/${convo._id}`}>{name}</Link>
-        </li>
+        <button key={convo._id} data-id={convo._id} onClick={handleButtonClick}>
+          {name}
+        </button>
       );
     });
   };
@@ -40,23 +41,31 @@ const ActOneTestimonySelect = () => {
     setLocalStorageToJustBeforeTrial();
   };
 
+  const handleButtonClick = (e) => {
+    const conversationID = e.currentTarget.dataset.id;
+    history.push(`/testimony/${conversationID}`);
+  };
+
   return (
     <StyledActOneTestimonySelect>
       <div className="page_container">
-        <button onClick={handlePreTrialClick}>
+        {/* <button onClick={handlePreTrialClick}>
           Reset to Pre Trial Inventory
-        </button>
+        </button> */}
         <h1>Pick the catchphrase!</h1>
-        <ul>
+        <div>
           {renderCatchphraseButtons()}
           {userHasFullInventory && (
-            <li key={'trial'} id="d2c9e39a-269d-4e45-9762-43156e860643">
-              <Link to={`/testimony/d2c9e39a-269d-4e45-9762-43156e860643`}>
-                TRIAL!!!
-              </Link>
-            </li>
+            <button
+              key={'trial'}
+              className="trial_button"
+              data-id="d2c9e39a-269d-4e45-9762-43156e860643"
+              onClick={handleButtonClick}
+            >
+              TRIAL!!!
+            </button>
           )}
-        </ul>
+        </div>
       </div>
     </StyledActOneTestimonySelect>
   );
@@ -78,29 +87,36 @@ const StyledActOneTestimonySelect = styled.div`
 
   h1 {
     padding-left: 1rem;
+    margin-top: 0;
+    padding-top: 1rem;
   }
 
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  li {
+  button {
     background-color: #8ccfbb;
     border: 4px solid var(--green);
     display: inline-block;
     border-radius: 15px;
     margin: 1rem;
     padding: 1rem;
-  }
-
-  a {
-    color: var(--cream);
+    color: var(--brown-black);
+    font-weight: 700;
     text-decoration: none;
     font-size: 1.5rem;
+    cursor: pointer;
   }
-  a:hover,
-  a:active {
-    color: var(--brown-black);
+
+  button:hover,
+  button:active {
+    color: var(--cream);
+  }
+
+  .trial_button {
+    width: 100%;
+    background-color: var(--blue);
+    border: 4px solid #0b72a2;
+    color: var(--cream);
+    &:hover {
+      border: 4px solid #17b5ff;
+    }
   }
 `;
