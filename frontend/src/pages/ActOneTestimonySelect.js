@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import {
   saveCurrentConversationIdToLocalStorage,
   setLocalStorageToJustBeforeTrial,
@@ -40,7 +41,7 @@ const ActOneTestimonySelect = () => {
   };
 
   return (
-    <div>
+    <StyledActOneTestimonySelect>
       <button onClick={handlePreTrialClick}>
         Reset to Pre Trial Inventory
       </button>
@@ -55,8 +56,40 @@ const ActOneTestimonySelect = () => {
           </li>
         )}
       </ul>
-    </div>
+    </StyledActOneTestimonySelect>
   );
 };
 
 export default ActOneTestimonySelect;
+
+const StyledActOneTestimonySelect = styled.div`
+  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  height: calc(var(--vh, 1vh) * 100);
+  width: 100vw;
+  background-color: var(--cream);
+  color: var(--brown-black);
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    background-color: #8ccfbb;
+    border: 4px solid var(--green);
+    display: inline-block;
+    border-radius: 15px;
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 1.5rem;
+  }
+  a:hover,
+  a:active {
+    color: var(--brown-black);
+  }
+`;
