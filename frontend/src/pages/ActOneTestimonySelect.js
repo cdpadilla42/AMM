@@ -111,7 +111,7 @@ const StyledActOneTestimonySelect = styled.div`
   }
 
   .trial_button {
-    width: 100%;
+    width: calc(100% - 2rem);
     background-color: var(--blue);
     border: 4px solid #0b72a2;
     color: var(--cream);
