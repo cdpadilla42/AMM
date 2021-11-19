@@ -12,7 +12,9 @@ const ActOneTestimonySelect = () => {
   const history = useHistory();
   // 34 items needed to go to the trial
   const dispatch = useDispatch();
-  const { userHasFullInventory } = useSelector((state) => state.inventory);
+  const { userHasFullInventory, conversationsVisited } = useSelector(
+    (state) => state.inventory
+  );
 
   useEffect(() => {
     dispatch(getConversations());
@@ -29,9 +31,12 @@ const ActOneTestimonySelect = () => {
   const renderCatchphraseButtons = () => {
     return actOneConversations.map((convo) => {
       const name = convo.catchphrase || convo.name;
+      const thisConvoVisited = conversationsVisited[convo._id];
       return (
         <button key={convo._id} data-id={convo._id} onClick={handleButtonClick}>
-          {name}
+          <span className={thisConvoVisited ? 'strike_through' : ''}>
+            {name}
+          </span>
         </button>
       );
     });
@@ -55,6 +60,12 @@ const ActOneTestimonySelect = () => {
         <h1>Pick the catchphrase!</h1>
         <div>
           {renderCatchphraseButtons()}
+          <div className="trial_button_placeholder">
+            <span>Talk to Villagers</span>
+            <span className={userHasFullInventory ? 'strike_through' : ''}>
+              Get Evidence
+            </span>
+          </div>
           {userHasFullInventory && (
             <button
               key={'trial'}
@@ -118,5 +129,34 @@ const StyledActOneTestimonySelect = styled.div`
     &:hover {
       border: 4px solid #17b5ff;
     }
+  }
+
+  .trial_button_placeholder {
+    display: flex;
+    background-color: #8ccfbb;
+    border: 4px solid var(--green);
+    border-radius: 15px;
+    margin: 1rem;
+    padding: 1rem;
+    color: var(--brown-black);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: calc(100% - 2rem);
+    background-color: #e3e3e3;
+    border: 4px dashed #616161;
+    color: #584f41;
+    justify-content: center;
+
+    & > * {
+      flex: 1;
+      text-align: center;
+    }
+  }
+
+  .strike_through {
+    text-decoration: line-through;
+    text-decoration-thickness: 0.3rem;
   }
 `;

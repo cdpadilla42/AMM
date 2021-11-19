@@ -1,6 +1,7 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import sanityClient from '../client';
 import {
+  getConversationsVisitedFromLocalStorage,
   getUserHasFullInventoryFromLocalStorage,
   getUserItemsFromLocalStorage,
   getUserSNotesFromLocalStorage,
@@ -28,6 +29,7 @@ const initialState = {
   lastUpdated: null,
   userPromptedForEvidence: false,
   userHasFullInventory: false,
+  conversationsVisited: {},
 };
 
 // Actions
@@ -95,6 +97,9 @@ export const markUserNotPromptedForEvidence = createAction(
 export const markUserHasFullInventory = createAction(
   'MARK_USER_HAS_FULL_INVENTORY'
 );
+export const addToConversationsVisited = createAction(
+  'ADD_TO_CONVERSATIONS_VISITED'
+);
 
 // Reducer
 
@@ -113,7 +118,14 @@ function inventoryReducer(state = initialState, action) {
       const userItems = getUserItemsFromLocalStorage();
       const userHasFullInventory = getUserHasFullInventoryFromLocalStorage();
       const userSNotes = getUserSNotesFromLocalStorage();
-      return { ...state, userItems, userSNotes, userHasFullInventory };
+      const conversationsVisited = getConversationsVisitedFromLocalStorage();
+      return {
+        ...state,
+        userItems,
+        userSNotes,
+        userHasFullInventory,
+        conversationsVisited,
+      };
     case addToInventory.toString():
       const newItems = [...state.userItems, payload];
       return { ...state, userItems: newItems };
@@ -134,6 +146,12 @@ function inventoryReducer(state = initialState, action) {
       return { ...state, userPromptedForEvidence: false };
     case markUserHasFullInventory.toString():
       return { ...state, userHasFullInventory: true };
+    case addToConversationsVisited.toString():
+      const newConversations = {
+        ...state.conversationsVisited,
+        [payload]: true,
+      };
+      return { ...state, conversationsVisited: newConversations };
     default:
       return state;
   }

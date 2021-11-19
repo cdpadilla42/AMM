@@ -18,6 +18,7 @@ import {
   updateSNote,
   markUserPromptedForEvidence,
   markUserNotPromptedForEvidence,
+  addToConversationsVisited,
 } from '../store/inventory';
 import { fullRecovery, showHealthBar } from '../store/health';
 import { useHighlightFilter } from '../lib/async-typer';
@@ -27,6 +28,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import ReactHtmlParser from 'react-html-parser';
 import {
+  addConversationAsVisitedToLocalStorage,
   addSNoteToLocalStorageInventory,
   updateSNoteInLocalStorageInventory,
 } from '../lib/localStorage';
@@ -263,6 +265,8 @@ const TextBox = (props) => {
       !isEndOfDialogueWithResponseOption
     ) {
       props.fullRecovery();
+      addConversationAsVisitedToLocalStorage(currentTestimonyID);
+      props.addToConversationsVisited(currentTestimonyID);
       if (currentTestimonyID === gameStartDialogueID || currentAct === 'a') {
         history.push('/act-one');
       } else {
@@ -369,6 +373,7 @@ function mapDispatchToProps(dispatch) {
       markUserPromptedForEvidence,
       showHealthBar,
       fullRecovery,
+      addToConversationsVisited,
     },
     dispatch
   );

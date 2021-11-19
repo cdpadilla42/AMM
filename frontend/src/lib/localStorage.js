@@ -7,6 +7,7 @@ const itemsInInventory = {
   sNotes: [],
   lastConversationID: '',
   userHasFullInventory: false,
+  conversationsVisited: {},
 };
 
 /*
@@ -83,6 +84,25 @@ export const addSNoteToLocalStorageInventory = (sNote) => {
   localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
 };
 
+export const addConversationAsVisitedToLocalStorage = (conversationID) => {
+  let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
+  if (!storageData) {
+    initializeLocalStorageInventory();
+    storageData = itemsInInventory;
+  }
+
+  const initialConversationsVisited = storageData?.conversationsVisited;
+
+  const newConversationsVisited = {
+    ...initialConversationsVisited,
+    [conversationID]: true,
+  };
+
+  storageData.conversationsVisited = newConversationsVisited;
+
+  localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
+};
+
 export const clearSNotesFromLocalStorage = () => {
   let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
   if (!storageData) {
@@ -130,6 +150,18 @@ export const getLastConversationIDFromLocalStorage = () => {
   } else {
     initializeLocalStorageInventory();
     return '';
+  }
+};
+
+export const getConversationsVisitedFromLocalStorage = () => {
+  const res = JSON.parse(
+    localStorage.getItem('itemsInInventory')
+  )?.conversationsVisited;
+  if (!!res) {
+    return res;
+  } else {
+    initializeLocalStorageInventory();
+    return {};
   }
 };
 
