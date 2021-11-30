@@ -210,9 +210,15 @@ const Inventory = () => {
     >
       <StyledInventory>
         <div className="inventory_header">
-          <button onClick={showItems}>Items</button>
-          <button onClick={showPeopole}>Animals</button>
-          <button onClick={showMap}>Map</button>
+          <button onClick={showItems} disabled={userPromptedForEvidence}>
+            Items
+          </button>
+          <button onClick={showPeopole} disabled={userPromptedForEvidence}>
+            Animals
+          </button>
+          <button onClick={showMap} disabled={userPromptedForEvidence}>
+            Map
+          </button>
           <button onClick={toggleShowingAddItem}>Add to inventory</button>
           {userPromptedForEvidence ? (
             <button
