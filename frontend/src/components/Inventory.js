@@ -491,6 +491,7 @@ export const ItemDetailsDisplay = ({
   onHealthOut,
 }) => {
   const { current: health } = useSelector((store) => store.health);
+  const { userPromptedForEvidence } = useSelector((store) => store.inventory);
   const itemObj = inventory.find((item) => item.name === selectedItem);
   const dispatch = useDispatch();
   const act = useSelector((store) => store.conversations.conversation?.[0].act);
@@ -562,9 +563,13 @@ export const ItemDetailsDisplay = ({
       <div className="written_details">
         {/* <h4>{itemObj.name}</h4> */}
         {renderDescription()}
-        <button onClick={presentItem} className="present">
-          Present
-        </button>
+        {/* TODO: Hide if not promptedforevidence */}
+        {userPromptedForEvidence && (
+          <button onClick={presentItem} className="present">
+            Present
+          </button>
+        )}
+
         <button onClick={closeDetailsDisplay} className="close">
           &times;
         </button>
