@@ -11,7 +11,7 @@ const AnimalsDisplayController = () => {
   const { currentDialoguePosition } = useSelector((state) => state.dialogue);
   const [isMultiAnimalConvo, setIsMultiAnimalConvo] = useState(
     !!dialogue?.animals?.length ||
-      dialogue.phrase[currentDialoguePosition].leftAnimalCentered
+      dialogue?.phrase[currentDialoguePosition].leftAnimalCentered
   );
 
   useEffect(() => {

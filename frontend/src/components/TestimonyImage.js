@@ -26,10 +26,7 @@ const TestimonyImage = () => {
 
   return (
     <StyledTestimonyImage>
-      <img
-        src="https://cdn.sanity.io/images/qvonp967/production/e47c279cf3b65c919672a8a29225048dbc639f2e-1480x1042.jpg"
-        alt="Shocking Evidence! Image Name Here!"
-      />
+      <img src={currentImage} alt="Shocking Evidence! Image Name Here!" />
     </StyledTestimonyImage>
   );
 };

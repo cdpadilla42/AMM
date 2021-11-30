@@ -28,6 +28,13 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      title: 'Personal Notes',
+      name: 'personalNotes',
+      description: "For your use only, won't show up on the site anywhere",
+      type: 'array',
+      of: [{ type: 'block' }],
+    },
+    {
       title: 'Animals',
       name: 'animals',
       type: 'array',

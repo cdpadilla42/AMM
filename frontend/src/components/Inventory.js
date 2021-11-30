@@ -294,6 +294,10 @@ const StyledInventory = styled.div`
     padding-top: 2rem;
   }
 
+  .inventory_header button {
+    height: 2rem;
+  }
+
   .inventory_grid_container {
     height: calc(100% - 80px);
     width: 100%;

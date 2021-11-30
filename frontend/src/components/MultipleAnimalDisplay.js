@@ -50,6 +50,8 @@ const MultipleAnimalDisplay = () => {
             newState[0].direction = 'right';
           } else if (currentPhraseObj.leftEmotion) {
             newState[0].emotion = currentPhraseObj.leftEmotion.emotion;
+          } else {
+            // TODO if there's an animal that matches in the current state, save emotion
           }
         }
         if (
@@ -64,6 +66,8 @@ const MultipleAnimalDisplay = () => {
             newState[1].name = currentPhraseObj.rightAnimal.name;
             if (currentPhraseObj.rightEmotion) {
               newState[1].emotion = currentPhraseObj.rightEmotion.emotion;
+            } else {
+              // TODO if there's an animal that matches in the current state, save emotion
             }
           }
         }

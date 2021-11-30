@@ -240,10 +240,11 @@ const TextBox = (props) => {
     if (fromLink) setFromLink(false);
     const textEl = textRef.current;
     const prevText = trailedText;
-    setTrailedText('');
     const isEndOfDialogue =
       currentDialoguePosition === currentDialogueObj.phrase.length - 1;
-
+    if (!isEndOfDialogue) {
+      setTrailedText('');
+    }
     const isEndOfDialogueWithResponseOption =
       isEndOfDialogue &&
       currentDialogueObj?.responseOptions?.length &&
