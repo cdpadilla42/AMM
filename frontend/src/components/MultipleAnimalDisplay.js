@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import isEqual from 'lodash.isequal';
@@ -16,6 +16,7 @@ const MultipleAnimalDisplay = () => {
   const [animalsState, setAnimalsState] = useState([]);
   const [showMobileOptimizedImages, setShowMobileOptimizedImages] =
     useState(false);
+  const { current: lastEmotionRef } = useRef({});
 
   // dialogue.animals.forEach((animal) => {
   //   console.log({
@@ -29,6 +30,13 @@ const MultipleAnimalDisplay = () => {
     let indexToChange;
     let newState = [...animalsState];
     const newAnimalsInConvo = dialogue?.animals;
+
+    // Store emotions into ref
+    newState.forEach((animalObj) => {
+      if (animalObj.emotion) {
+        lastEmotionRef[animalObj.name] = animalObj.emotion;
+      }
+    });
 
     if (speaker === 'Everyone') return;
 
@@ -51,7 +59,10 @@ const MultipleAnimalDisplay = () => {
           } else if (currentPhraseObj.leftEmotion) {
             newState[0].emotion = currentPhraseObj.leftEmotion.emotion;
           } else {
-            // TODO if there's an animal that matches in the current state, save emotion
+            // Use ref
+            if (lastEmotionRef[newState[0]?.name]) {
+              newState[0].emotion = lastEmotionRef[newState[0]?.name];
+            }
           }
         }
         if (
@@ -66,8 +77,9 @@ const MultipleAnimalDisplay = () => {
             newState[1].name = currentPhraseObj.rightAnimal.name;
             if (currentPhraseObj.rightEmotion) {
               newState[1].emotion = currentPhraseObj.rightEmotion.emotion;
-            } else {
-              // TODO if there's an animal that matches in the current state, save emotion
+            } else if (lastEmotionRef[newState?.[1]?.name]) {
+              // Use ref
+              newState[1].emotion = lastEmotionRef[newState[1].name];
             }
           }
         }
@@ -118,6 +130,13 @@ const MultipleAnimalDisplay = () => {
       return newState;
     });
 
+    // Store emotions into ref
+    newState.forEach((animalObj) => {
+      if (animalObj.emotion) {
+        lastEmotionRef[animalObj.ref] = animalObj.emotion;
+      }
+    });
+
     // return () => {
     //   setAnimalsState([]);
     // };
@@ -148,7 +167,7 @@ const MultipleAnimalDisplay = () => {
       {animalsState.map((animalState, i) => (
         <CSSTransition
           classNames={`animal_transition_${determineTransitionPositioning(i)}`}
-          timeout={{ exit: 600, enter: 600 }}
+          timeout={{ exit: 6000, enter: 6000 }}
           key={animalState.name}
         >
           <AnimalDisplay
