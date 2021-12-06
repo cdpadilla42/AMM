@@ -69,6 +69,10 @@ const TextBox = (props) => {
 
   let currentDialogueObj = useCurrentDialogueObj();
 
+  useEffect(() => {
+    setTrailedText('');
+  }, [currentDialogueObj]);
+
   const highlightFilter = useHighlightFilter({ items, animals });
 
   const phrases = currentDialogueObj && currentDialogueObj.phrase;
