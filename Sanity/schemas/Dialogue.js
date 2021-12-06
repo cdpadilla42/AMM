@@ -343,6 +343,15 @@ export default {
       description:
         'Reference a dialogue to jump to after answering with this response',
     },
+    {
+      title: 'Prompt Shown In Inventory',
+      name: 'inventoryPrompt',
+      type: 'string',
+      fieldset: 'evidenceSet',
+      hidden: ({ parent }) => !parent.needEvidence,
+      description:
+        'What users see after clicking through the dialogue TOO FAST!!!',
+    },
     // {
     //   title: 'Special Event',
     //   name: 'specialEvent',

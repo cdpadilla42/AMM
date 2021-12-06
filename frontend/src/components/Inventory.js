@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 import BlockContent from '@sanity/block-content-to-react';
@@ -36,6 +36,7 @@ const Inventory = () => {
   );
   const animalNotes = useSelector((store) => store.inventory.notes);
   const currentDialogueObj = useCurrentDialogueObj();
+  const inventoryPrompt = currentDialogueObj.inventoryPrompt;
 
   const requiredEvidence = currentDialogueObj?.requiredEvidence;
   const nextResponseID =
@@ -203,6 +204,9 @@ const Inventory = () => {
       return renderInventory();
     }
   };
+  const promptMessage = useMemo(() => {
+    return userPromptedForEvidence && inventoryPrompt;
+  }, [userPromptedForEvidence, inventoryPrompt]);
 
   return (
     <div
@@ -233,6 +237,7 @@ const Inventory = () => {
             </button>
           )}
         </div>
+        <div className="inventory_prompt">{promptMessage}</div>
         {renderMainDisplay()}
       </StyledInventory>
     </div>
@@ -304,8 +309,17 @@ const StyledInventory = styled.div`
     height: 2rem;
   }
 
+  .inventory_prompt {
+    text-align: center;
+    font-weight: 700;
+    width: 90%;
+    border-radius: 15px;
+    margin: 0 auto;
+    min-height: 35px;
+  }
+
   .inventory_grid_container {
-    height: calc(100% - 80px);
+    height: calc(100% - 80px - 35px);
     width: 100%;
     overflow-y: scroll;
     padding: 1rem;

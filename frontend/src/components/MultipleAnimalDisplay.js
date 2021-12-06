@@ -167,7 +167,7 @@ const MultipleAnimalDisplay = () => {
       {animalsState.map((animalState, i) => (
         <CSSTransition
           classNames={`animal_transition_${determineTransitionPositioning(i)}`}
-          timeout={{ exit: 6000, enter: 6000 }}
+          timeout={{ exit: 600, enter: 600 }}
           key={animalState.name}
         >
           <AnimalDisplay
