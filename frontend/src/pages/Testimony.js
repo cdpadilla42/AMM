@@ -34,7 +34,10 @@ import PatternedBG from '../imgs/patternedbgs/aabg2.jpg';
 import SNotes from '../components/SNotes';
 import { closeSNotes } from '../store/notepad';
 import TestimonyImage from '../components/TestimonyImage';
-import { saveCurrentConversationIdToLocalStorage } from '../lib/localStorage';
+import {
+  saveCurrentConversationIdToLocalStorage,
+  saveLastTrialDialogueIDToLocalStorage,
+} from '../lib/localStorage';
 import InventoryButton from '../components/InventoryButton';
 
 const Testimony = (props) => {
@@ -47,6 +50,10 @@ const Testimony = (props) => {
   );
   const showingHealthBar = useSelector(
     (state) => state.health.showingHealthBar
+  );
+  const { currentDialogueName } = useSelector((state) => state.dialogue);
+  const currentAct = useSelector(
+    (state) => state.conversations?.conversation?.[0]?.act
   );
 
   useEffect(() => {
@@ -70,6 +77,13 @@ const Testimony = (props) => {
       dispatch(resetBackground());
     };
   }, []);
+
+  useEffect(() => {
+    // Listen for changes in dialogue if trial and save to local storage
+    if (currentAct === 'b') {
+      saveLastTrialDialogueIDToLocalStorage(currentDialogueName);
+    }
+  }, [currentDialogueName]);
 
   const sanityImageUrlParams = useMemo(() => {
     const vw = window.innerWidth;

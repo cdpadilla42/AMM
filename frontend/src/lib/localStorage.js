@@ -8,6 +8,7 @@ const itemsInInventory = {
   lastConversationID: '',
   userHasFullInventory: false,
   conversationsVisited: {},
+  trialOneLastDialogueID: '',
 };
 
 /*
@@ -29,6 +30,18 @@ export const saveCurrentConversationIdToLocalStorage = (conversationID) => {
   }
 
   storageData.lastConversationID = conversationID;
+
+  localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
+};
+
+export const saveLastTrialDialogueIDToLocalStorage = (dialogueID) => {
+  let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
+  if (!storageData) {
+    initializeLocalStorageInventory();
+    storageData = itemsInInventory;
+  }
+
+  storageData.trialOneLastDialogueID = dialogueID;
 
   localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
 };
@@ -145,6 +158,18 @@ export const getLastConversationIDFromLocalStorage = () => {
   const res = JSON.parse(
     localStorage.getItem('itemsInInventory')
   )?.lastConversationID;
+  if (!!res) {
+    return res;
+  } else {
+    initializeLocalStorageInventory();
+    return '';
+  }
+};
+
+export const getTrialOneLastDialogueIDFromLocalStorage = () => {
+  const res = JSON.parse(
+    localStorage.getItem('itemsInInventory')
+  )?.trialOneLastDialogueID;
   if (!!res) {
     return res;
   } else {
