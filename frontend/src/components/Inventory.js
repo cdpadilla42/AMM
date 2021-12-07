@@ -36,7 +36,7 @@ const Inventory = () => {
   );
   const animalNotes = useSelector((store) => store.inventory.notes);
   const currentDialogueObj = useCurrentDialogueObj();
-  const inventoryPrompt = currentDialogueObj.inventoryPrompt;
+  const inventoryPrompt = currentDialogueObj?.inventoryPrompt;
 
   const requiredEvidence = currentDialogueObj?.requiredEvidence;
   const nextResponseID =

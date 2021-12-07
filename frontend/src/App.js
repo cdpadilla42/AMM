@@ -16,6 +16,7 @@ import {
   initializeUserInventoryFromLocalStorage,
 } from './store/inventory';
 import ActOneTestimonySelect from './pages/ActOneTestimonySelect';
+import ActThreeTestimonySelect from './pages/ActThreeTestimonySelect';
 
 function App() {
   const location = useLocation();
@@ -69,6 +70,9 @@ function App() {
         ></Route>
         <Route path="/act-one">
           <ActOneTestimonySelect />
+        </Route>
+        <Route path="/act-three">
+          <ActThreeTestimonySelect />
         </Route>
         <Route path="/">
           <SelectConversation />

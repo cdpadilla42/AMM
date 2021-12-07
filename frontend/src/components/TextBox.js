@@ -274,6 +274,11 @@ const TextBox = (props) => {
       props.addToConversationsVisited(currentTestimonyID);
       if (currentTestimonyID === gameStartDialogueID || currentAct === 'a') {
         history.push('/act-one');
+      } else if (
+        currentTestimonyID === gameStartDialogueID ||
+        currentAct === 'c'
+      ) {
+        history.push('/act-three');
       } else {
         history.push('/');
       }
