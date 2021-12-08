@@ -291,6 +291,9 @@ nav {
     @media all and (max-width: 600px) {
       height: 120px;
     }
+    &.grey {
+      color: #c3c3c3;
+    }
   }
 
   &__next_arrow {

@@ -61,7 +61,7 @@ export const getDialogue = createAsyncThunk(
         name, responseOptions, needEvidence, inventoryPrompt, followingDialogueFromEvidence->{_id}, _id, isFinalDialogue, requiredEvidence->{name}, loseHealthOnIncorrect,
 				animals[]->{name},
   			"phrase": phrase[]{
-  				emotion->{emotion}, speaker->{name, color}, text, 
+  				emotion->{emotion}, speaker->{name, color}, text, isGrey,
 					link, sNotesEventRef->{name, count}, sNotesEventTriggered, sNotesEventType, 
           changePosition, leftAnimal->{name}, rightAnimal->{name}, leftOrientation, rightOrientation, leftAnimalCentered, centeredOrientation, leftEmotion->{emotion}, rightEmotion->{emotion},
           showImage,

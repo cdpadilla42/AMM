@@ -187,6 +187,8 @@ const TextBox = (props) => {
   }, [currentPhrase]);
 
   const text = currentPhrase?.text;
+  const isGrey = currentPhrase?.isGrey;
+  console.log('grey', isGrey);
   // On change effect
   useEffect(() => {
     // const textEl = textRef.current;
@@ -341,7 +343,10 @@ const TextBox = (props) => {
       >
         {phrases[currentDialoguePosition]?.speaker.name}
       </div>
-      <div className="text_box__main" onClick={handleTextBoxClick}>
+      <div
+        className={`text_box__main${isGrey ? ' grey' : ''}`}
+        onClick={handleTextBoxClick}
+      >
         {ReactHtmlParser(trailedText)}
         {showFullText ? highlightedTextHTML : renderText(text)}
         <div

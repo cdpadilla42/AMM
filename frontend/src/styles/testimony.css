@@ -271,6 +271,9 @@ nav a {
     height: 120px;
   }
 }
+.text_box__main.grey {
+  color: #c3c3c3;
+}
 .text_box__next_arrow {
   box-sizing: border-box;
   position: absolute;

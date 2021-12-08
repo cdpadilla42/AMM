@@ -107,6 +107,12 @@ export default {
                 'Turn on if you would like the next phrase added to this one',
             },
             {
+              title: 'Grey Text',
+              name: 'isGrey',
+              type: 'boolean',
+              description: 'For whispering and all that',
+            },
+            {
               title: 'Change position',
               name: 'changePosition',
               type: 'boolean',
