@@ -291,6 +291,7 @@ const StyledInventory = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 5px;
+    z-index: 200;
 
     @media all and (max-width: 800px) {
       width: 90vw;

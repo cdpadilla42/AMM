@@ -18,20 +18,24 @@ const StyledMap = styled.div`
   border-radius: 5px;
   padding: 0 !important;
   overflow: scroll;
-  background-color: rgba(0,0,0,0) !important;
-  
+  background-color: rgba(0, 0, 0, 0) !important;
+
   /* Use below for seeing click boxes */
-  /* & > * {
-  } */
+  & > * {
+    border: 1px solid green;
+  }
 
   .map_container {
     padding: 0 !important;
     width: 676px;
     height: 466px; // originally 350px
     margin: 0 auto;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
+    @media all and (max-width: 600px) {
+      height: 350px;
+    }
   }
-  
+
   .click_boxes_container > .click_box {
     background-color: transparent;
     &:hover,
@@ -52,7 +56,7 @@ const StyledMap = styled.div`
       }
     }
   }
-  
+
   .click_boxes_container {
     background-image: url(${newLeafMap});
     background-size: cover;
@@ -65,7 +69,10 @@ const StyledMap = styled.div`
     background-color: transparent;
     @media all and (max-width: 600px) {
       width: 676px;
-      height: 463px:
+      height: 641px;
+    }
+    & > * {
+      border: 1px solid green;
     }
   }
 
@@ -75,6 +82,9 @@ const StyledMap = styled.div`
     left: 99px;
     width: 122px;
     height: 103px;
+    @media all and (max-width: 600px) {
+      top: 160px;
+    }
   }
 
   .ankha {
@@ -83,6 +93,9 @@ const StyledMap = styled.div`
     left: 453px;
     width: 122px;
     height: 121px;
+    @media all and (max-width: 600px) {
+      top: 170px;
+    }
   }
 
   .agent_s {
@@ -91,6 +104,9 @@ const StyledMap = styled.div`
     left: 379px;
     width: 75px;
     height: 50px;
+    @media all and (max-width: 600px) {
+      top: 156px;
+    }
   }
 
   .stitches {
@@ -99,6 +115,9 @@ const StyledMap = styled.div`
     left: 269px;
     width: 92px;
     height: 63px;
+    @media all and (max-width: 600px) {
+      top: 169px;
+    }
   }
 
   .elvis {
@@ -107,6 +126,9 @@ const StyledMap = styled.div`
     left: 105px;
     width: 147px;
     height: 58px;
+    @media all and (max-width: 600px) {
+      top: 290px;
+    }
   }
 
   .sterling {
@@ -115,6 +137,9 @@ const StyledMap = styled.div`
     left: 105px;
     width: 89px;
     height: 51px;
+    @media all and (max-width: 600px) {
+      top: 345px;
+    }
   }
 
   .lucky {
@@ -123,6 +148,9 @@ const StyledMap = styled.div`
     left: 98px;
     width: 92px;
     height: 73px;
+    @media all and (max-width: 600px) {
+      top: 471px;
+    }
   }
 
   .crime_scene {
@@ -131,6 +159,9 @@ const StyledMap = styled.div`
     left: 260px;
     width: 71px;
     height: 48px;
+    @media all and (max-width: 600px) {
+      top: 473px;
+    }
   }
 
   .katt {
@@ -139,6 +170,9 @@ const StyledMap = styled.div`
     left: 477px;
     width: 102px;
     height: 60px;
+    @media all and (max-width: 600px) {
+      top: 478px;
+    }
   }
 
   .merengue {
@@ -147,6 +181,9 @@ const StyledMap = styled.div`
     left: 488px;
     width: 88px;
     height: 34px;
+    @media all and (max-width: 600px) {
+      top: 346px;
+    }
   }
 
   .chadder {
@@ -155,6 +192,9 @@ const StyledMap = styled.div`
     left: 482px;
     width: 93px;
     height: 38px;
+    @media all and (max-width: 600px) {
+      top: 309px;
+    }
   }
 
   .nenn {
@@ -163,6 +203,9 @@ const StyledMap = styled.div`
     left: 252px;
     width: 176px;
     height: 175px;
+    @media all and (max-width: 600px) {
+      top: 263px;
+    }
   }
 
   .mailboxes {
@@ -171,6 +214,9 @@ const StyledMap = styled.div`
     left: 396px;
     width: 43px;
     height: 39px;
+    @media all and (max-width: 600px) {
+      top: 413px;
+    }
   }
 
   /* .inventory_header {
