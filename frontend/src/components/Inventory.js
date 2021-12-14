@@ -237,7 +237,13 @@ const Inventory = () => {
             </button>
           )}
         </div>
-        <div className="inventory_prompt">{promptMessage}</div>
+        <div
+          className={`inventory_prompt${
+            userPromptedForEvidence ? '' : ' transparent'
+          }`}
+        >
+          {promptMessage}
+        </div>
         {renderMainDisplay()}
       </StyledInventory>
     </div>
@@ -317,6 +323,10 @@ const StyledInventory = styled.div`
     border-radius: 15px;
     margin: 0 auto;
     min-height: 35px;
+
+    &.transparent {
+      background-color: rgba(0, 0, 0, 0) !important;
+    }
   }
 
   .inventory_grid_container {
