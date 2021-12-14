@@ -18,6 +18,7 @@ const initialState = {
       ],
     },
   ],
+  inquiry: [null],
   returnToDialoguePositionAfterIncorrect: 0,
   responseBoxIsOpen: false,
   dialogueFromSanity: 'apples',
@@ -78,6 +79,26 @@ export const getDialogue = createAsyncThunk(
   }
 );
 
+export const getInquiryDialogues = createAsyncThunk(
+  'GET_INQUIRY_DIAOLOGUES',
+  async (conversationID) => {
+    const response = await sanityClient.fetch(
+      `*[_type == "inquiry" && conversation._ref == "${conversationID}"]{
+        name, defaultResponse, 
+        "presentedEvidence": requiredEvidence[]->{name, _type},
+  			"phrase": phrase[]{
+  				emotion->{emotion}, speaker->{name, color}, text, isGrey,
+					link, sNotesEventRef->{name, count}, sNotesEventTriggered, sNotesEventType, 
+          changePosition, leftAnimal->{name}, rightAnimal->{name}, leftOrientation, rightOrientation, leftAnimalCentered, centeredOrientation, leftEmotion->{emotion}, rightEmotion->{emotion},
+          showImage,
+          "imageUrl": image.asset->url
+				},
+      }`
+    );
+    return response;
+  }
+);
+
 // Reducer
 
 function dialogueReducer(state = initialState, action) {
@@ -115,6 +136,12 @@ function dialogueReducer(state = initialState, action) {
       return {
         ...state,
         dialogue: payload,
+        loading: false,
+      };
+    case 'GET_INQUIRY_DIAOLOGUES/fulfilled':
+      return {
+        ...state,
+        inquiry: payload,
         loading: false,
       };
     case resetDialogue.toString():

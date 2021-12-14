@@ -9,6 +9,7 @@ import {
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import { useHistory } from 'react-router-dom';
 import { gameStartDialogueID } from '../lib/constants';
+import { inquiryModeResponses } from '../lib/inquiryModeResponses';
 
 const ResponseBox = () => {
   const { responseBoxIsOpen, currentDialogueID, dialogue } = useSelector(
@@ -16,6 +17,7 @@ const ResponseBox = () => {
   );
   const { conversation } = useSelector((state) => state.conversations);
   const currentTestimonyID = conversation?.[0]?._id;
+  const act = conversation?.[0]?.act;
 
   const dispatch = useDispatch();
   const currentDialogueObj = useCurrentDialogueObj();
@@ -33,6 +35,22 @@ const ResponseBox = () => {
   const responseOptions = currentDialogue?.responseOptions;
 
   function renderResponseOptions() {
+    if (!responseOptions && act === 'c') {
+      return inquiryModeResponses.map((optionObj) => {
+        const responseOnClick = () => {
+          if (optionObj.openInventoryForInquiry) {
+            // open inventory
+          } else if (optionObj.switchToFarewellDialogue) {
+            // find and switch to that dialogue
+          }
+        };
+        return (
+          <li key={optionObj.text} onClick={responseOnClick}>
+            <span>{optionObj.text}</span>
+          </li>
+        );
+      });
+    }
     if (!responseOptions) return;
     return responseOptions.map((optionObj) => {
       const blankSpacerTextForHighlight = optionObj.text.replace(

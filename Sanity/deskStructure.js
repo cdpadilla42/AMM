@@ -25,5 +25,25 @@ export default () =>
                 .params({ conversationID })
             )
         ),
+      S.listItem()
+        .title('Inquiry by Conversation')
+        .child(
+          // List out the categories
+          S.documentTypeList('conversation')
+            .title('Inquiry by Conversation')
+            // When a category is selected, pass its id down to the next pane
+            .child((conversationID) =>
+              // load a new document list
+              S.documentList()
+                .title('Projects')
+                // Use a GROQ filter to get documents.
+                // This filter checks for sampleProjects that has the
+                // categoryId in its array of references
+                .filter(
+                  '_type == "inquiry" && $conversationID == conversation._ref'
+                )
+                .params({ conversationID })
+            )
+        ),
       ...S.documentTypeListItems(),
     ]);

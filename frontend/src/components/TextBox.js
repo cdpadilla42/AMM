@@ -280,7 +280,8 @@ const TextBox = (props) => {
         currentTestimonyID === gameStartDialogueID ||
         currentAct === 'c'
       ) {
-        history.push('/act-three');
+        props.toggleResponseBox();
+        // history.push('/act-three');
       } else {
         history.push('/');
       }

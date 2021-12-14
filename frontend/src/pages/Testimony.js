@@ -5,6 +5,7 @@ import AnimalDisplay from '../components/AnimalDisplay';
 import {
   clearDialogueData,
   getDialogue,
+  getInquiryDialogues,
   resetDialogue,
   resetDialoguePosition,
 } from '../store/dialogue';
@@ -60,6 +61,7 @@ const Testimony = (props) => {
     // set place to 0
     dispatch(resetDialoguePosition());
     dispatch(getDialogue(props.match.params.id));
+    dispatch(getInquiryDialogues(props.match.params.id));
     dispatch(getBackground(props.match.params.id));
     dispatch(getConversationDetails(props.match.params.id));
 
