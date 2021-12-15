@@ -46,6 +46,7 @@ const TextBox = (props) => {
     prevDialogueID,
     responseBoxIsOpen,
     isInventoryOpen,
+    isLeaving,
     returnToDialoguePositionAfterIncorrect,
   } = useSelector((state) => state.dialogue);
   const {
@@ -280,8 +281,11 @@ const TextBox = (props) => {
         currentTestimonyID === gameStartDialogueID ||
         currentAct === 'c'
       ) {
-        props.toggleResponseBox();
-        // history.push('/act-three');
+        if (isLeaving) {
+          history.push('/act-three');
+        } else {
+          props.toggleResponseBox();
+        }
       } else {
         history.push('/');
       }

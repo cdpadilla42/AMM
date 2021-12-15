@@ -26,6 +26,7 @@ const initialState = {
   inventoryScreen: 'items',
   isMapOpen: false,
   loading: true,
+  isLeaving: false,
 };
 
 // Actions
@@ -44,6 +45,7 @@ export const openMap = createAction('OPEN_MAP');
 export const closeMap = createAction('CLOSE_MAP');
 export const switchConversation = createAction('SWITCH_CONVERSATION');
 export const resetDialogue = createAction('RESET_DIALOGUE');
+export const setLeaving = createAction('SER_LEAVING');
 export const switchConversationFromIncorrect = createAction(
   'SWITCH_CONVERSATION_FROM_INCORRECT'
 );
@@ -149,6 +151,7 @@ function dialogueReducer(state = initialState, action) {
         ...state,
         dialogue: initialState.dialogue,
         loading: true,
+        isLeaving: false,
       };
     case toggleResponseBox.toString():
       return {
@@ -213,6 +216,11 @@ function dialogueReducer(state = initialState, action) {
         currentDialogueID: 'Come Back Later',
         prevDialogueID: state.currentDialogueID,
         currentDialoguePosition: 0,
+      };
+    case setLeaving.toString():
+      return {
+        ...state,
+        isLeaving: true,
       };
     default:
       return state;

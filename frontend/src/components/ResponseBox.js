@@ -5,6 +5,7 @@ import {
   switchConversation,
   resetConversationToStart,
   toggleResponseBox,
+  setLeaving,
 } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import { useHistory } from 'react-router-dom';
@@ -42,6 +43,11 @@ const ResponseBox = () => {
             // open inventory
           } else if (optionObj.switchToFarewellDialogue) {
             // find and switch to that dialogue
+            const farewellDialogue = dialogue.find(
+              (phrases) => phrases.name === 'Bye'
+            );
+            dispatch(switchConversation(farewellDialogue._id));
+            dispatch(setLeaving());
           }
         };
         return (
