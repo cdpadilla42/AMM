@@ -6,11 +6,14 @@ import {
   resetConversationToStart,
   toggleResponseBox,
   setLeaving,
+  openInventory,
 } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import { useHistory } from 'react-router-dom';
 import { gameStartDialogueID } from '../lib/constants';
 import { inquiryModeResponses } from '../lib/inquiryModeResponses';
+import { markUserPromptedForEvidence } from '../store/inventory';
+import { startInquiryMode } from '../store/app';
 
 const ResponseBox = () => {
   const { responseBoxIsOpen, currentDialogueID, dialogue } = useSelector(
@@ -41,6 +44,8 @@ const ResponseBox = () => {
         const responseOnClick = () => {
           if (optionObj.openInventoryForInquiry) {
             // open inventory
+            dispatch(openInventory());
+            dispatch(startInquiryMode());
           } else if (optionObj.switchToFarewellDialogue) {
             // find and switch to that dialogue
             const farewellDialogue = dialogue.find(

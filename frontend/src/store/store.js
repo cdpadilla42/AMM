@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
+import appReducer from './app';
 import dialogueReducer from './dialogue';
 import conversationsReducer from './conversations';
 import inventoryReducer from './inventory';
@@ -9,6 +10,7 @@ import notepadReducer from './notepad';
 import loadedReducer from './loaded';
 
 const reducer = combineReducers({
+  app: appReducer,
   dialogue: dialogueReducer,
   conversations: conversationsReducer,
   inventory: inventoryReducer,

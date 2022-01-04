@@ -16,6 +16,7 @@ import Map from './Map';
 import AddToInventory from './AddToInventory';
 import { markUserNotPromptedForEvidence } from '../store/inventory';
 import { hideHealthBar, loseHealth } from '../store/health';
+import { endInquiryMode } from '../store/app';
 
 const Inventory = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -522,6 +523,7 @@ export const ItemDetailsDisplay = ({
   onHealthOut,
 }) => {
   const { current: health } = useSelector((store) => store.health);
+  const { inquiryMode } = useSelector((store) => store.app);
   const { userPromptedForEvidence } = useSelector((store) => store.inventory);
   const itemObj = inventory.find((item) => item.name === selectedItem);
   const dispatch = useDispatch();
@@ -533,6 +535,13 @@ export const ItemDetailsDisplay = ({
 
   function presentItem() {
     let matchedEvidence;
+    if (inquiryMode) {
+      dispatch(endInquiryMode());
+      dispatch(toggleInventory());
+      closeDetailsDisplay();
+      return;
+    }
+
     if (Array.isArray(requiredEvidence)) {
       matchedEvidence = requiredEvidence.find(
         (item) => item.name === itemObj.name
@@ -595,7 +604,7 @@ export const ItemDetailsDisplay = ({
         {/* <h4>{itemObj.name}</h4> */}
         {renderDescription()}
         {/* TODO: Hide if not promptedforevidence */}
-        {userPromptedForEvidence && (
+        {(userPromptedForEvidence || inquiryMode) && (
           <button onClick={presentItem} className="present">
             Present
           </button>
