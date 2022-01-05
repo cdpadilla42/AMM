@@ -87,7 +87,7 @@ export const getInquiryDialogues = createAsyncThunk(
     const response = await sanityClient.fetch(
       `*[_type == "inquiry" && conversation._ref == "${conversationID}"]{
         name, defaultResponse, 
-        "presentedEvidence": requiredEvidence[]->{name, _type},
+        "presentedEvidence": presentedEvidence[]->{name, _type},
   			"phrase": phrase[]{
   				emotion->{emotion}, speaker->{name, color}, text, isGrey,
 					link, sNotesEventRef->{name, count}, sNotesEventTriggered, sNotesEventType, 

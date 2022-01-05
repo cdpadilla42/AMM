@@ -5,9 +5,20 @@ const useCurrentDialogueObj = () => {
     currentDialogueID,
     prevDialogueID,
     dialogue: dialogueList,
+    inquiry: inquiryList,
   } = useSelector((state) => state.dialogue);
+  const { inquiryDialogue } = useSelector((state) => state.app);
+  const { currentInquiryDialogue } = useSelector((state) => state.inquiry);
 
   let currentDialogueObj;
+
+  if (inquiryDialogue) {
+    // currentDialogueObj set to inquiry object
+    currentDialogueObj = inquiryList.find(
+      (inquiryObj) => inquiryObj.name === currentInquiryDialogue
+    );
+    return currentDialogueObj;
+  }
 
   if (!currentDialogueID) {
     currentDialogueObj = dialogueList.find((dialogue) =>

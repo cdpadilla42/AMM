@@ -9,6 +9,7 @@ import {
   displayInvalidEvidenceDialogue,
   openMap,
   displayComeBackLaterDialogue,
+  toggleResponseBox,
 } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import urlFor from '../lib/imageUrlBuilder';
@@ -16,7 +17,8 @@ import Map from './Map';
 import AddToInventory from './AddToInventory';
 import { markUserNotPromptedForEvidence } from '../store/inventory';
 import { hideHealthBar, loseHealth } from '../store/health';
-import { endInquiryMode } from '../store/app';
+import { endInquiryMode, startInquiryDialogue } from '../store/app';
+import { setCurrentInquiryDialogue } from '../store/inquiry';
 
 const Inventory = () => {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -525,6 +527,7 @@ export const ItemDetailsDisplay = ({
   const { current: health } = useSelector((store) => store.health);
   const { inquiryMode } = useSelector((store) => store.app);
   const { userPromptedForEvidence } = useSelector((store) => store.inventory);
+  const { inquiry: inquiryDialogues } = useSelector((store) => store.dialogue);
   const itemObj = inventory.find((item) => item.name === selectedItem);
   const dispatch = useDispatch();
   const act = useSelector((store) => store.conversations.conversation?.[0].act);
@@ -536,10 +539,28 @@ export const ItemDetailsDisplay = ({
   function presentItem() {
     let matchedEvidence;
     if (inquiryMode) {
-      dispatch(endInquiryMode());
-      dispatch(toggleInventory());
-      closeDetailsDisplay();
-      return;
+      const matchedInquiry = inquiryDialogues.find((inquiryObj) => {
+        const presentedEvidence = inquiryObj.presentedEvidence;
+        const matchedEvidence = presentedEvidence.find(
+          (evidenceObj) => evidenceObj.name === selectedItem
+        );
+        return matchedEvidence;
+      });
+      if (matchedInquiry) {
+        dispatch(endInquiryMode());
+        dispatch(toggleInventory());
+        closeDetailsDisplay();
+        // Redux action for switching to the inquiry here
+        dispatch(startInquiryDialogue());
+        dispatch(setCurrentInquiryDialogue(matchedInquiry.name));
+        dispatch(toggleResponseBox());
+        return;
+      } else {
+        dispatch(endInquiryMode());
+        dispatch(toggleInventory());
+        closeDetailsDisplay();
+        return;
+      }
     }
 
     if (Array.isArray(requiredEvidence)) {
@@ -549,6 +570,7 @@ export const ItemDetailsDisplay = ({
     } else {
       matchedEvidence = requiredEvidence;
     }
+
     if (selectedItem === matchedEvidence?.name) {
       dispatch(switchConversation(nextResponseID));
       dispatch(markUserNotPromptedForEvidence());

@@ -8,6 +8,7 @@ import healthReducer from './health';
 import spritesReducer from './sprites';
 import notepadReducer from './notepad';
 import loadedReducer from './loaded';
+import inquiryReducer from './inquiry';
 
 const reducer = combineReducers({
   app: appReducer,
@@ -18,6 +19,7 @@ const reducer = combineReducers({
   sprites: spritesReducer,
   notepad: notepadReducer,
   loaded: loadedReducer,
+  inquiry: inquiryReducer,
 });
 
 const store = configureStore({ reducer });

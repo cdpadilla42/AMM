@@ -2,14 +2,17 @@ import { createAction } from '@reduxjs/toolkit';
 
 const initialState = {
   inquiryMode: false,
+  inquiryDialogue: false,
 };
 
 export const startInquiryMode = createAction('START_INQUIRY_MODE');
 export const endInquiryMode = createAction('END_INQUIRY_MODE');
+export const startInquiryDialogue = createAction('START_INQUIRY_DIALOGUE');
+export const endInquiryDialogue = createAction('END_INQUIRY_DIALOGUE');
 
 // Reducer
 
-function healthReducer(state = initialState, action) {
+function appReducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case startInquiryMode.toString():
@@ -22,9 +25,19 @@ function healthReducer(state = initialState, action) {
         ...state,
         inquiryMode: false,
       };
+    case startInquiryDialogue.toString():
+      return {
+        ...state,
+        inquiryDialogue: true,
+      };
+    case endInquiryDialogue.toString():
+      return {
+        ...state,
+        inquiryDialogue: false,
+      };
     default:
       return state;
   }
 }
 
-export default healthReducer;
+export default appReducer;

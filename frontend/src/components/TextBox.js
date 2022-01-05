@@ -33,6 +33,7 @@ import {
   updateSNoteInLocalStorageInventory,
 } from '../lib/localStorage';
 import { gameStartDialogueID } from '../lib/constants';
+import { endInquiryDialogue } from '../store/app';
 
 const TextBox = (props) => {
   const dispatch = useDispatch();
@@ -56,6 +57,7 @@ const TextBox = (props) => {
   } = useSelector((state) => state.inventory);
   const { showSNotes } = useSelector((state) => state.notepad);
   const { conversation } = useSelector((state) => state.conversations);
+  const { inquiryDialogue } = useSelector((state) => state.app);
   const currentTestimonyID = conversation?.[0]?._id;
   const currentAct = conversation?.[0]?.act;
 
@@ -267,6 +269,9 @@ const TextBox = (props) => {
       handleOpenInventory();
     } else if (isEndOfDialogue && currentDialogueObj.needEvidence) {
       handleOpenInventory();
+    } else if (isEndOfDialogue && inquiryDialogue) {
+      props.endInquiryDialogue();
+      props.toggleResponseBox();
     } else if (
       isEndOfDialogue &&
       currentDialogueObj.isFinalDialogue &&
@@ -394,6 +399,7 @@ function mapDispatchToProps(dispatch) {
       showHealthBar,
       fullRecovery,
       addToConversationsVisited,
+      endInquiryDialogue,
     },
     dispatch
   );
