@@ -15,7 +15,7 @@ export default {
       name: 'name',
       type: 'string',
       description:
-        "Named either 'Start' or the response text from the previous dialogue",
+        "Named either 'Start' or the response text from the previous dialogue. OR name 'Bye' (case sensitive) if this is leaving a dialogue in Act 3",
       validation: (Rule) => Rule.required(),
     },
     {
