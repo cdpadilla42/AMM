@@ -7,7 +7,7 @@ export default {
       title: 'Name',
       name: 'name',
       type: 'string',
-      description: "Name after piece of evidence presented or 'default",
+      description: "Name after piece of evidence presented or 'Default'",
       validation: (Rule) => Rule.required(),
     },
     {

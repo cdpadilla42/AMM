@@ -541,26 +541,25 @@ export const ItemDetailsDisplay = ({
     if (inquiryMode) {
       const matchedInquiry = inquiryDialogues.find((inquiryObj) => {
         const presentedEvidence = inquiryObj.presentedEvidence;
-        const matchedEvidence = presentedEvidence.find(
-          (evidenceObj) => evidenceObj.name === selectedItem
-        );
+        const matchedEvidence = presentedEvidence
+          ? presentedEvidence.find(
+              (evidenceObj) => evidenceObj.name === selectedItem
+            )
+          : null;
         return matchedEvidence;
       });
+      dispatch(endInquiryMode());
+      dispatch(toggleInventory());
+      closeDetailsDisplay();
+      // Redux action for switching to the inquiry here
+      dispatch(startInquiryDialogue());
+      dispatch(toggleResponseBox());
       if (matchedInquiry) {
-        dispatch(endInquiryMode());
-        dispatch(toggleInventory());
-        closeDetailsDisplay();
-        // Redux action for switching to the inquiry here
-        dispatch(startInquiryDialogue());
         dispatch(setCurrentInquiryDialogue(matchedInquiry.name));
-        dispatch(toggleResponseBox());
-        return;
       } else {
-        dispatch(endInquiryMode());
-        dispatch(toggleInventory());
-        closeDetailsDisplay();
-        return;
+        dispatch(setCurrentInquiryDialogue('Default'));
       }
+      return;
     }
 
     if (Array.isArray(requiredEvidence)) {
