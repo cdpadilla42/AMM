@@ -270,7 +270,7 @@ const TextBox = (props) => {
     } else if (isEndOfDialogue && currentDialogueObj.needEvidence) {
       handleOpenInventory();
     } else if (isEndOfDialogue && inquiryDialogue) {
-      props.endInquiryDialogue();
+      // props.endInquiryDialogue();
       props.toggleResponseBox();
     } else if (
       isEndOfDialogue &&
