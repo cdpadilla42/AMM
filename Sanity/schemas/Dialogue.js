@@ -320,10 +320,19 @@ export default {
       fieldset: 'evidenceSet',
     },
     {
+      title: 'Multi Branch Evidence?',
+      name: 'multiBranchEvidence',
+      type: 'boolean',
+      description:
+        'Switch on if each evidence triggers a different following dialogue path',
+      fieldset: 'evidenceSet',
+    },
+    {
       title: 'Required Evidence',
       name: 'requiredEvidence',
       fieldset: 'evidenceSet',
-      hidden: ({ parent }) => !parent.needEvidence,
+      hidden: ({ parent }) =>
+        !parent.needEvidence || parent.multiBranchEvidence,
       description: 'Must reference an item, animal note, or map location',
       type: 'array',
       of: [
@@ -340,12 +349,53 @@ export default {
       ],
     },
     {
+      title: 'Possible Evidence Paths',
+      name: 'evidenceWithPaths',
+      fieldset: 'evidenceSet',
+      hidden: ({ parent }) => !parent.multiBranchEvidence,
+      description: 'Must reference an item, animal note, or map location',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              title: 'Possible Evidence',
+              name: 'possibleEvidence',
+              type: 'reference',
+              to: [
+                { type: 'item' },
+                { type: 'animalNotes' },
+                { type: 'mapLocation' },
+              ],
+            },
+            {
+              title: 'Following Dialogue',
+              name: 'followingDialogueFromEvidence',
+              type: 'reference',
+              to: [{ type: 'dialogue' }],
+              description:
+                'Reference a dialogue to jump to after answering with this evidence',
+            },
+          ],
+          preview: {
+            select: {
+              title: 'possibleEvidence.name',
+              subtitle: 'followingDialogueFromEvidence.name',
+              media: 'possibleEvidence.image',
+            },
+          },
+        },
+      ],
+    },
+    {
       title: 'Following Dialogue',
       name: 'followingDialogueFromEvidence',
       type: 'reference',
       to: [{ type: 'dialogue' }],
       fieldset: 'evidenceSet',
-      hidden: ({ parent }) => !parent.needEvidence,
+      hidden: ({ parent }) =>
+        !parent.needEvidence || parent.multiBranchEvidence,
       description:
         'Reference a dialogue to jump to after answering with this response',
     },
