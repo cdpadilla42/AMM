@@ -1,7 +1,7 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
   nextDialogue,
@@ -21,6 +21,7 @@ import {
   addToConversationsVisited,
 } from '../store/inventory';
 import { fullRecovery, showHealthBar } from '../store/health';
+import { updateScenes } from '../store/act3Scenes';
 import { useHighlightFilter } from '../lib/async-typer';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import Typist from 'react-typist';
@@ -30,15 +31,17 @@ import ReactHtmlParser from 'react-html-parser';
 import {
   addConversationAsVisitedToLocalStorage,
   addSNoteToLocalStorageInventory,
+  saveNewAct3SceneToLocalStorage,
   updateSNoteInLocalStorageInventory,
 } from '../lib/localStorage';
-import { gameStartDialogueID } from '../lib/constants';
+import { act3Scenes, gameStartDialogueID } from '../lib/constants';
 import { endInquiryDialogue } from '../store/app';
 
 const TextBox = (props) => {
   const dispatch = useDispatch();
   const textRef = useRef(null);
   const history = useHistory();
+  const { id: conversationID } = useParams();
   const {
     dialogue,
     currentDialoguePosition,
@@ -58,6 +61,7 @@ const TextBox = (props) => {
   const { showSNotes } = useSelector((state) => state.notepad);
   const { conversation } = useSelector((state) => state.conversations);
   const { inquiryDialogue } = useSelector((state) => state.app);
+  const playersAct3Scenes = useSelector((state) => state.act3Scenes);
   const currentTestimonyID = conversation?.[0]?._id;
   const currentAct = conversation?.[0]?.act;
 
@@ -66,6 +70,16 @@ const TextBox = (props) => {
   const [showFullText, setShowFullText] = useState(false);
   const [trailedText, setTrailedText] = useState('');
 
+  const currentAct3SceneObject = playersAct3Scenes[conversationID];
+  const conversationSceneOrder = act3Scenes[conversationID]?.sceneOrder;
+  const currentSceneIndex = useMemo(() => {
+    if (conversationSceneOrder) {
+      return conversationSceneOrder.findIndex(
+        (scene) => scene.dialogueID === currentAct3SceneObject?.scene.dialogueID
+      );
+    }
+    return 0;
+  }, [conversationSceneOrder]);
   const onTypingDone = () => {
     setDoneTyping(true);
   };
@@ -282,14 +296,25 @@ const TextBox = (props) => {
       props.addToConversationsVisited(currentTestimonyID);
       if (currentTestimonyID === gameStartDialogueID || currentAct === 'a') {
         history.push('/act-one');
-      } else if (
-        currentTestimonyID === gameStartDialogueID ||
-        currentAct === 'c'
-      ) {
-        if (isLeaving) {
-          history.push('/act-three');
+      } else if (currentAct === 'c') {
+        // if current scene state is free mode
+        if (currentAct3SceneObject?.name === 'Freemode') {
+          if (isLeaving) {
+            history.push('/act-three');
+          } else {
+            props.toggleResponseBox();
+          }
         } else {
-          props.toggleResponseBox();
+          // normal leaving procedure. Save new scene state here
+          history.push('/act-three');
+          saveNewAct3SceneToLocalStorage(
+            conversationID,
+            conversationSceneOrder[currentSceneIndex + 1]
+          );
+          props.updateScenes({
+            conversationID,
+            upcomingScene: conversationSceneOrder[currentSceneIndex + 1],
+          });
         }
       } else {
         history.push('/');
@@ -400,6 +425,7 @@ function mapDispatchToProps(dispatch) {
       fullRecovery,
       addToConversationsVisited,
       endInquiryDialogue,
+      updateScenes,
     },
     dispatch
   );

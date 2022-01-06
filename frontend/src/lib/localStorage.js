@@ -1,3 +1,4 @@
+import { act3ScenesInitialState } from '../store/act3Scenes';
 import { itemsInInventoryAllButTheProphecy } from './constants';
 
 const { localStorage } = window;
@@ -9,6 +10,7 @@ const itemsInInventory = {
   userHasFullInventory: false,
   conversationsVisited: {},
   trialOneLastDialogueID: '',
+  act3Scenes: act3ScenesInitialState,
 };
 
 /*
@@ -51,6 +53,29 @@ export const setLocalStorageToJustBeforeTrial = () => {
     'itemsInInventory',
     JSON.stringify(itemsInInventoryAllButTheProphecy)
   );
+};
+
+export const saveNewAct3SceneToLocalStorage = (
+  conversationID,
+  upcomingScene
+) => {
+  let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
+  if (!storageData) {
+    initializeLocalStorageInventory();
+    storageData = itemsInInventory;
+  }
+
+  const initialScenes = storageData?.act3Scenes ?? act3ScenesInitialState;
+
+  const initialSceneToChange = initialScenes[conversationID];
+
+  const newScene = { ...initialSceneToChange, scene: upcomingScene };
+
+  const newScenes = { ...initialScenes, [conversationID]: newScene };
+
+  storageData.act3Scenes = newScenes;
+
+  localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
 };
 
 export const saveFullInventoryToLocalSotrage = () => {
