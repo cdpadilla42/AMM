@@ -10,7 +10,7 @@ function getRandomBetween(min = 10, max = 25, randomNumber = Math.random()) {
 
 export const useHighlightFilter = ({ items = [], animals = [] }) => {
   const highlightFilter = (string) => {
-    let newString = string;
+    let newString = string || '';
     items.forEach((item) => {
       newString = newString.replaceAll(
         `${item.name}`,

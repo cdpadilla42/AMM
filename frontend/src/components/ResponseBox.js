@@ -9,37 +9,44 @@ import {
   openInventory,
 } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { gameStartDialogueID } from '../lib/constants';
 import { inquiryModeResponses } from '../lib/inquiryModeResponses';
 import { markUserPromptedForEvidence } from '../store/inventory';
 import { startInquiryMode } from '../store/app';
+import { useMemo } from 'react';
 
 const ResponseBox = () => {
+  const params = useParams();
   const { responseBoxIsOpen, currentDialogueID, dialogue } = useSelector(
     (state) => state.dialogue
   );
   const { conversation } = useSelector((state) => state.conversations);
+  const playersAct3Scenes = useSelector((state) => state.act3Scenes);
   const currentTestimonyID = conversation?.[0]?._id;
   const act = conversation?.[0]?.act;
+  const currentAct3SceneObject = playersAct3Scenes[params.id];
 
   const dispatch = useDispatch();
   const currentDialogueObj = useCurrentDialogueObj();
   const history = useHistory();
-  let currentDialogue;
-  if (!currentDialogueID) {
-    currentDialogue = dialogue.find((phrases) =>
-      phrases.name.includes('Start')
-    );
-  } else {
-    currentDialogue = dialogue.find(
-      (phrases) => phrases._id === currentDialogueID
-    );
-  }
+  const currentDialogue = useMemo(() => {
+    if (!currentDialogueID) {
+      return dialogue.find((phrases) => phrases.name.includes('Start'));
+    } else {
+      return dialogue.find((phrases) => phrases._id === currentDialogueID);
+    }
+  }, [currentDialogueID, dialogue]);
+
   const responseOptions = currentDialogue?.responseOptions;
+  console.log({ responseOptions, currentDialogue });
 
   function renderResponseOptions() {
-    if (!responseOptions && act === 'c') {
+    if (
+      !responseOptions &&
+      act === 'c' &&
+      currentAct3SceneObject?.name === 'Freemode'
+    ) {
       return inquiryModeResponses.map((optionObj) => {
         const responseOnClick = () => {
           if (optionObj.openInventoryForInquiry) {
@@ -62,7 +69,7 @@ const ResponseBox = () => {
         );
       });
     }
-    if (!responseOptions) return;
+    if (!responseOptions) return null;
     return responseOptions.map((optionObj) => {
       const blankSpacerTextForHighlight = optionObj.text.replace(
         /[\s\S]*/,
@@ -98,7 +105,8 @@ const ResponseBox = () => {
     function handleKeydown(e) {
       if (
         (e.code === 'ArrowRight' || e.code === 'Enter') &&
-        responseBoxIsOpen
+        responseBoxIsOpen &&
+        responseOptions?.[0]?.followingDialogue?._id
       ) {
         handleClick(responseOptions[0]?.followingDialogue?._id);
       }

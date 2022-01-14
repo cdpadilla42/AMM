@@ -73,7 +73,7 @@ const TextBox = (props) => {
   const currentAct3SceneObject = playersAct3Scenes[conversationID];
   const conversationSceneOrder = act3Scenes[conversationID]?.sceneOrder;
   const currentSceneIndex = useMemo(() => {
-    if (conversationSceneOrder) {
+    if (conversationSceneOrder && currentAct3SceneObject?.scene) {
       return conversationSceneOrder.findIndex(
         (scene) => scene.dialogueID === currentAct3SceneObject?.scene.dialogueID
       );
@@ -291,6 +291,7 @@ const TextBox = (props) => {
       currentDialogueObj.isFinalDialogue &&
       !isEndOfDialogueWithResponseOption
     ) {
+      console.log('Made it HERE');
       props.fullRecovery();
       addConversationAsVisitedToLocalStorage(currentTestimonyID);
       props.addToConversationsVisited(currentTestimonyID);
@@ -299,6 +300,7 @@ const TextBox = (props) => {
       } else if (currentAct === 'c') {
         // if current scene state is free mode
         if (currentAct3SceneObject?.name === 'Freemode') {
+          console.log('FREEMODE');
           if (isLeaving) {
             history.push('/act-three');
           } else {
@@ -307,14 +309,15 @@ const TextBox = (props) => {
         } else {
           // normal leaving procedure. Save new scene state here
           history.push('/act-three');
-          saveNewAct3SceneToLocalStorage(
-            conversationID,
-            conversationSceneOrder[currentSceneIndex + 1]
-          );
-          props.updateScenes({
-            conversationID,
-            upcomingScene: conversationSceneOrder[currentSceneIndex + 1],
-          });
+          const nextScene = conversationSceneOrder[currentSceneIndex + 1];
+          console.log({ nextScene, conversationSceneOrder });
+          if (nextScene) {
+            saveNewAct3SceneToLocalStorage(conversationID, nextScene);
+            props.updateScenes({
+              conversationID,
+              upcomingScene: nextScene,
+            });
+          }
         }
       } else {
         history.push('/');
@@ -373,10 +376,10 @@ const TextBox = (props) => {
         className="text_box__name"
         style={{
           backgroundColor:
-            phrases?.[currentDialoguePosition]?.speaker.color?.hex || 'grey',
+            phrases?.[currentDialoguePosition]?.speaker?.color?.hex || 'grey',
         }}
       >
-        {phrases[currentDialoguePosition]?.speaker.name}
+        {phrases?.[currentDialoguePosition]?.speaker.name}
       </div>
       <div
         className={`text_box__main${isGrey ? ' grey' : ''}`}

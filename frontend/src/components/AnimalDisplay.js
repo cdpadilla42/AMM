@@ -24,7 +24,7 @@ const AnimalDisplay = ({
     speakerFromProps || dialogue?.phrase[currentDialoguePosition]?.speaker.name;
   let emotion =
     emotionFromProps ||
-    dialogue?.phrase[currentDialoguePosition]?.emotion.emotion;
+    dialogue?.phrase?.[currentDialoguePosition]?.emotion?.emotion;
 
   const spriteObj = sprites?.find((sprite) => sprite.name === speaker);
   const spriteUrl =

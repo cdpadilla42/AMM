@@ -42,6 +42,7 @@ const Inventory = () => {
   const inventoryPrompt = currentDialogueObj?.inventoryPrompt;
 
   const requiredEvidence = currentDialogueObj?.requiredEvidence;
+  const evidenceWithPaths = currentDialogueObj?.evidenceWithPaths;
   const nextResponseID =
     currentDialogueObj.followingDialogueFromEvidence?._id ||
     currentDialogueObj.responseOptions?.[0]?.followingDialogue._id;
@@ -195,6 +196,7 @@ const Inventory = () => {
           inventory={currentInventoryForItemDetailsDisplay}
           setIsDetailsOpen={setIsDetailsOpen}
           requiredEvidence={requiredEvidence}
+          evidenceWithPaths={evidenceWithPaths}
           nextResponseID={nextResponseID}
           isMapOpen={isMapOpen}
           loseHealthOnIncorrect={currentDialogueObj.loseHealthOnIncorrect}
@@ -519,6 +521,7 @@ export const ItemDetailsDisplay = ({
   inventory,
   setIsDetailsOpen,
   requiredEvidence,
+  evidenceWithPaths,
   nextResponseID,
   isMapOpen,
   loseHealthOnIncorrect,
@@ -559,6 +562,26 @@ export const ItemDetailsDisplay = ({
       } else {
         dispatch(setCurrentInquiryDialogue('Default'));
       }
+      return;
+    }
+
+    if (evidenceWithPaths) {
+      matchedEvidence = evidenceWithPaths.find(
+        (item) => item.possibleEvidence.name === itemObj.name
+      );
+      if (selectedItem === matchedEvidence?.possibleEvidence?.name) {
+        console.log({ matchedEvidence });
+        console.log(matchedEvidence?.followingDialogue?._id);
+        dispatch(
+          switchConversation(
+            matchedEvidence?.followingDialogueFromEvidence?._id
+          )
+        );
+      } else {
+        dispatch(displayInvalidEvidenceDialogue());
+      }
+      closeDetailsDisplay();
+      dispatch(toggleInventory());
       return;
     }
 

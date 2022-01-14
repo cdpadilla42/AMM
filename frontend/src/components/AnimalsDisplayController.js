@@ -10,31 +10,31 @@ const AnimalsDisplayController = () => {
   const animalsFromDialouge = dialogue?.animals;
   const { currentDialoguePosition } = useSelector((state) => state.dialogue);
 
-  const [isMultiAnimalConvo, setIsMultiAnimalConvo] = useState(
-    !!dialogue?.animals?.length ||
-      dialogue?.phrase[currentDialoguePosition]?.leftAnimalCentered
-  );
+  // const [isMultiAnimalConvo, setIsMultiAnimalConvo] = useState(
+  //   !!dialogue?.animals?.length ||
+  //     dialogue?.phrase[currentDialoguePosition]?.leftAnimalCentered
+  // );
 
-  useEffect(() => {
-    // if (!animalsFromDialouge) return;
-    if (
-      animalsFromDialouge &&
-      isMultiAnimalConvo !== !!dialogue.animals?.length
-    ) {
-      setIsMultiAnimalConvo(!!dialogue.animals?.length);
-    }
-    if (dialogue.phrase[currentDialoguePosition].changePosition) {
-      // If set on the phrase, defer to letting the multi animal component handle
-      if (dialogue.phrase[currentDialoguePosition].leftAnimalCentered) {
-        return;
-      }
-      if (!dialogue.phrase[currentDialoguePosition].rightAnimal) {
-        setIsMultiAnimalConvo(false);
-      } else {
-        setIsMultiAnimalConvo(true);
-      }
-    }
-  }, [dialogue, currentDialoguePosition]);
+  // useEffect(() => {
+  //   // if (!animalsFromDialouge) return;
+  //   if (
+  //     animalsFromDialouge &&
+  //     isMultiAnimalConvo !== !!dialogue.animals?.length
+  //   ) {
+  //     setIsMultiAnimalConvo(!!dialogue.animals?.length);
+  //   }
+  //   if (dialogue.phrase[currentDialoguePosition].changePosition) {
+  //     // If set on the phrase, defer to letting the multi animal component handle
+  //     if (dialogue.phrase[currentDialoguePosition].leftAnimalCentered) {
+  //       return;
+  //     }
+  //     if (!dialogue.phrase[currentDialoguePosition].rightAnimal) {
+  //       setIsMultiAnimalConvo(false);
+  //     } else {
+  //       setIsMultiAnimalConvo(true);
+  //     }
+  //   }
+  // }, [dialogue, currentDialoguePosition]);
 
   // if (isMultiAnimalConvo) {
   // control the changing of speaker emotion

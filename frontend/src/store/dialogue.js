@@ -36,6 +36,9 @@ export const resetDialoguePosition = createAction('RESET_DIALOUGE_POSITION');
 export const resetConversationToStart = createAction(
   'RESET_CONVERSATION_TO_START'
 );
+export const updateCurrentDialogueID = createAction(
+  'UPDATE_CURRENT_DIALOGUE_ID'
+);
 export const clearDialogueData = createAction('CLEAR_DIALOGUE_DATA');
 export const toggleResponseBox = createAction('TOGGLE_RESPONSE_BOX');
 export const toggleInventory = createAction('TOGGLE_INVENTORY');
@@ -129,6 +132,11 @@ function dialogueReducer(state = initialState, action) {
         currentDialogueID: null,
         prevDialogueID: null,
         responseBoxIsOpen: false,
+      };
+    case updateCurrentDialogueID.toString():
+      return {
+        ...state,
+        currentDialogueID: null,
       };
     case clearDialogueData.toString():
       return {

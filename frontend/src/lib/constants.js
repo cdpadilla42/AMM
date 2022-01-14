@@ -68,4 +68,13 @@ export const act3Scenes = {
       },
     ],
   },
+  '52451f96-2c42-43bd-ac65-b351d7198d6c': {
+    name: 'Sterling',
+    sceneOrder: [
+      {
+        name: 'Freemode',
+        dialogueID: '903a056e-0838-4034-b5bd-099144ab773e',
+      },
+    ],
+  },
 };

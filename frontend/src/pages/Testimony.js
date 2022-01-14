@@ -108,42 +108,40 @@ const Testimony = (props) => {
     ? backgroundURLs?.phone?.asset.url
     : desktopBG;
 
+  if (!dialogue) return <ImageLoader />;
+
   return (
     <ImageLoader>
-      {!dialogue ? null : (
-        <>
-          <SNotes />
-          <StyledContainer
-            className="container"
-            fallback={fallbackBG}
-            desktop={desktopBG}
-            phone={phoneBG}
-            PatternedBG={PatternedBG}
-          >
-            <div className="desktop_main_background" />
-            <Nav />
-            <div className="game_container">
-              <AnimalsDisplayController />
-              <InventoryButton />
-              <div className="inventory_wrapper">
-                <Inventory />
-              </div>
-              <div className="health_bar_wrapper">
-                <div
-                  className={`health_bar_inset${
-                    showingHealthBar ? '' : ' offscreen'
-                  }`}
-                >
-                  <HealthBar />
-                </div>
-              </div>
-              <TestimonyImage />
-              <ResponseBox />
-              <TextBox />
+      <SNotes />
+      <StyledContainer
+        className="container"
+        fallback={fallbackBG}
+        desktop={desktopBG}
+        phone={phoneBG}
+        PatternedBG={PatternedBG}
+      >
+        <div className="desktop_main_background" />
+        <Nav />
+        <div className="game_container">
+          <AnimalsDisplayController />
+          <InventoryButton />
+          <div className="inventory_wrapper">
+            <Inventory />
+          </div>
+          <div className="health_bar_wrapper">
+            <div
+              className={`health_bar_inset${
+                showingHealthBar ? '' : ' offscreen'
+              }`}
+            >
+              <HealthBar />
             </div>
-          </StyledContainer>
-        </>
-      )}
+          </div>
+          <TestimonyImage />
+          <ResponseBox />
+          <TextBox />
+        </div>
+      </StyledContainer>
     </ImageLoader>
   );
 };
