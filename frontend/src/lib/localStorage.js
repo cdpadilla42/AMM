@@ -247,6 +247,16 @@ export const getUserHasFullInventoryFromLocalStorage = () => {
   }
 };
 
+export const getAct3ScenesFromLocalStorage = () => {
+  const res = JSON.parse(localStorage.getItem('itemsInInventory'))?.act3Scenes;
+  if (!!res) {
+    return res;
+  } else {
+    initializeLocalStorageInventory();
+    return false;
+  }
+};
+
 export const initializeLocalStorageInventory = () => {
   if (!localStorage.getItem('itemsInInventory')) {
     localStorage.setItem('itemsInInventory', JSON.stringify(itemsInInventory));

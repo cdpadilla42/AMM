@@ -11,7 +11,8 @@ const MultipleAnimalDisplay = () => {
   const { currentDialoguePosition } = useSelector((state) => state.dialogue);
   const speaker = dialogue.phrase?.[currentDialoguePosition].speaker.name;
   let emotion = dialogue.phrase?.[currentDialoguePosition].emotion.emotion;
-  const { ...currentPhraseObj } = dialogue.phrase?.[currentDialoguePosition];
+  const { ...currentPhraseObj } =
+    dialogue.phrase?.[currentDialoguePosition] || {};
 
   const [animalsState, setAnimalsState] = useState([]);
   const [showMobileOptimizedImages, setShowMobileOptimizedImages] =
@@ -31,6 +32,7 @@ const MultipleAnimalDisplay = () => {
     let newState = [...animalsState];
     const newAnimalsInConvo = dialogue?.animals;
 
+    if (!Object.keys(currentPhraseObj).length) return;
     // Store emotions into ref
     newState.forEach((animalObj) => {
       if (animalObj.emotion) {

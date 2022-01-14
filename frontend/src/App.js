@@ -17,6 +17,7 @@ import {
 } from './store/inventory';
 import ActOneTestimonySelect from './pages/ActOneTestimonySelect';
 import ActThreeTestimonySelect from './pages/ActThreeTestimonySelect';
+import { initializeUserAct3ScensFromLocalStorage } from './store/act3Scenes';
 
 function App() {
   const location = useLocation();
@@ -30,6 +31,7 @@ function App() {
     dispatch(getMapLocations());
     dispatch(getSNotes());
     dispatch(initializeUserInventoryFromLocalStorage());
+    dispatch(initializeUserAct3ScensFromLocalStorage());
   }, []);
 
   // For handling window resizing and iOS bottom bar

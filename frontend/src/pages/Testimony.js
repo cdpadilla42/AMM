@@ -8,6 +8,7 @@ import {
   getInquiryDialogues,
   resetDialogue,
   resetDialoguePosition,
+  switchConversation,
 } from '../store/dialogue';
 import {
   getInventoryItems,
@@ -40,9 +41,11 @@ import {
   saveLastTrialDialogueIDToLocalStorage,
 } from '../lib/localStorage';
 import InventoryButton from '../components/InventoryButton';
+import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 
 const Testimony = (props) => {
   const dispatch = useDispatch();
+  const dialogue = useCurrentDialogueObj();
   const isInventoryOpen = useSelector(
     (state) => state.dialogue.isInventoryOpen
   );
@@ -58,15 +61,18 @@ const Testimony = (props) => {
   );
 
   useEffect(() => {
+    const conversationID = props.match.params?.id;
+
+    // Act Three Returning Conversation check
+
     // set place to 0
     dispatch(resetDialoguePosition());
-    dispatch(getDialogue(props.match.params.id));
-    dispatch(getInquiryDialogues(props.match.params.id));
-    dispatch(getBackground(props.match.params.id));
-    dispatch(getConversationDetails(props.match.params.id));
+    dispatch(getDialogue(conversationID));
+    dispatch(getInquiryDialogues(conversationID));
+    dispatch(getBackground(conversationID));
+    dispatch(getConversationDetails(conversationID));
 
     // Save current conversationID to local storage
-    const conversationID = props.match.params?.id;
     if (conversationID) {
       saveCurrentConversationIdToLocalStorage(conversationID);
     }
@@ -104,36 +110,40 @@ const Testimony = (props) => {
 
   return (
     <ImageLoader>
-      <SNotes />
-      <StyledContainer
-        className="container"
-        fallback={fallbackBG}
-        desktop={desktopBG}
-        phone={phoneBG}
-        PatternedBG={PatternedBG}
-      >
-        <div className="desktop_main_background" />
-        <Nav />
-        <div className="game_container">
-          <AnimalsDisplayController />
-          <InventoryButton />
-          <div className="inventory_wrapper">
-            <Inventory />
-          </div>
-          <div className="health_bar_wrapper">
-            <div
-              className={`health_bar_inset${
-                showingHealthBar ? '' : ' offscreen'
-              }`}
-            >
-              <HealthBar />
+      {!dialogue ? null : (
+        <>
+          <SNotes />
+          <StyledContainer
+            className="container"
+            fallback={fallbackBG}
+            desktop={desktopBG}
+            phone={phoneBG}
+            PatternedBG={PatternedBG}
+          >
+            <div className="desktop_main_background" />
+            <Nav />
+            <div className="game_container">
+              <AnimalsDisplayController />
+              <InventoryButton />
+              <div className="inventory_wrapper">
+                <Inventory />
+              </div>
+              <div className="health_bar_wrapper">
+                <div
+                  className={`health_bar_inset${
+                    showingHealthBar ? '' : ' offscreen'
+                  }`}
+                >
+                  <HealthBar />
+                </div>
+              </div>
+              <TestimonyImage />
+              <ResponseBox />
+              <TextBox />
             </div>
-          </div>
-          <TestimonyImage />
-          <ResponseBox />
-          <TextBox />
-        </div>
-      </StyledContainer>
+          </StyledContainer>
+        </>
+      )}
     </ImageLoader>
   );
 };

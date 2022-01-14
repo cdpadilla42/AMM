@@ -32,6 +32,7 @@ const ActThreeTestimonySelect = () => {
     return actOneConversations.map((convo) => {
       const name = convo.catchphrase || convo.name;
       const thisConvoVisited = conversationsVisited[convo._id];
+      // TODO This is where you'll use the constant to look up conversation ids and merge with user's state
       return (
         <button key={convo._id} data-id={convo._id} onClick={handleButtonClick}>
           <span className={thisConvoVisited ? 'strike_through' : ''}>

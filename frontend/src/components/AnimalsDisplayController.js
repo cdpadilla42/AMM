@@ -9,9 +9,10 @@ const AnimalsDisplayController = () => {
   const dialogue = useCurrentDialogueObj();
   const animalsFromDialouge = dialogue?.animals;
   const { currentDialoguePosition } = useSelector((state) => state.dialogue);
+
   const [isMultiAnimalConvo, setIsMultiAnimalConvo] = useState(
     !!dialogue?.animals?.length ||
-      dialogue?.phrase[currentDialoguePosition].leftAnimalCentered
+      dialogue?.phrase[currentDialoguePosition]?.leftAnimalCentered
   );
 
   useEffect(() => {
@@ -34,6 +35,7 @@ const AnimalsDisplayController = () => {
       }
     }
   }, [dialogue, currentDialoguePosition]);
+
   // if (isMultiAnimalConvo) {
   // control the changing of speaker emotion
   return <MultipleAnimalDisplay />;

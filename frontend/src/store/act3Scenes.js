@@ -1,4 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
+import { getAct3ScenesFromLocalStorage } from '../lib/localStorage';
 
 export const act3ScenesInitialState = {
   '65c247c3-947b-4444-bf08-b7aed9c4c89b': {
@@ -11,6 +12,9 @@ export const act3ScenesInitialState = {
 };
 
 export const updateScenes = createAction('UPDATE_SCENES');
+export const initializeUserAct3ScensFromLocalStorage = createAction(
+  'INITIALIZE_ACT3_SCENES_FROM_LOCAL_STORAGE'
+);
 
 // Reducer
 
@@ -24,6 +28,13 @@ function act3ScenesReducer(state = act3ScenesInitialState, action) {
         ...state,
         [conversationID]: upcomingScene,
       };
+    case initializeUserAct3ScensFromLocalStorage.toString():
+      const scenes = getAct3ScenesFromLocalStorage();
+      if (scenes) {
+        return scenes;
+      } else {
+        return act3ScenesInitialState;
+      }
     default:
       return state;
   }
