@@ -9,10 +9,12 @@ import AnimalDisplay from './AnimalDisplay';
 const MultipleAnimalDisplay = () => {
   const dialogue = useCurrentDialogueObj() || {};
   const { currentDialoguePosition } = useSelector((state) => state.dialogue);
-  const speaker = dialogue.phrase?.[currentDialoguePosition].speaker.name;
-  let emotion = dialogue.phrase?.[currentDialoguePosition].emotion.emotion;
+  const speaker = dialogue.phrase?.[currentDialoguePosition]?.speaker?.name;
+  let emotion = dialogue.phrase?.[currentDialoguePosition]?.emotion?.emotion;
   const { ...currentPhraseObj } =
     dialogue.phrase?.[currentDialoguePosition] || {};
+
+  console.log({ speaker, emotion });
 
   const [animalsState, setAnimalsState] = useState([]);
   const [showMobileOptimizedImages, setShowMobileOptimizedImages] =

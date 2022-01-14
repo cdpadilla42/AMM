@@ -25,7 +25,6 @@ export const useHighlightFilter = ({ items = [], animals = [] }) => {
       if (animal.nickname) {
         animal.nickname.forEach((nickname) => {
           const query = nickname;
-          console.log(nickname);
 
           newString = newString.replaceAll(
             query,
