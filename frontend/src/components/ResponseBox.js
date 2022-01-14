@@ -39,7 +39,6 @@ const ResponseBox = () => {
   }, [currentDialogueID, dialogue]);
 
   const responseOptions = currentDialogue?.responseOptions;
-  console.log({ responseOptions, currentDialogue });
 
   function renderResponseOptions() {
     if (

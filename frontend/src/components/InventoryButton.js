@@ -8,7 +8,6 @@ import { useLocation, useParams } from 'react-router';
 const InventoryButton = () => {
   const dispatch = useDispatch();
   const handleOpenInventoryButtonClick = () => {
-    console.log('open');
     dispatch(toggleInventory());
   };
 

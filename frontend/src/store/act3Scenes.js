@@ -23,7 +23,6 @@ function act3ScenesReducer(state = act3ScenesInitialState, action) {
   switch (type) {
     case updateScenes.toString():
       const { conversationID, upcomingScene } = payload;
-
       return {
         ...state,
         [conversationID]: upcomingScene,

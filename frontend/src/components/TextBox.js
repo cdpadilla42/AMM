@@ -205,7 +205,6 @@ const TextBox = (props) => {
 
   const text = currentPhrase?.text;
   const isGrey = currentPhrase?.isGrey;
-  console.log('grey', isGrey);
   // On change effect
   useEffect(() => {
     // const textEl = textRef.current;
@@ -291,7 +290,6 @@ const TextBox = (props) => {
       currentDialogueObj.isFinalDialogue &&
       !isEndOfDialogueWithResponseOption
     ) {
-      console.log('Made it HERE');
       props.fullRecovery();
       addConversationAsVisitedToLocalStorage(currentTestimonyID);
       props.addToConversationsVisited(currentTestimonyID);
@@ -300,7 +298,6 @@ const TextBox = (props) => {
       } else if (currentAct === 'c') {
         // if current scene state is free mode
         if (currentAct3SceneObject?.name === 'Freemode') {
-          console.log('FREEMODE');
           if (isLeaving) {
             history.push('/act-three');
           } else {
@@ -310,7 +307,6 @@ const TextBox = (props) => {
           // normal leaving procedure. Save new scene state here
           history.push('/act-three');
           const nextScene = conversationSceneOrder[currentSceneIndex + 1];
-          console.log({ nextScene, conversationSceneOrder });
           if (nextScene) {
             saveNewAct3SceneToLocalStorage(conversationID, nextScene);
             props.updateScenes({

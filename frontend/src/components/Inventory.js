@@ -570,8 +570,6 @@ export const ItemDetailsDisplay = ({
         (item) => item.possibleEvidence.name === itemObj.name
       );
       if (selectedItem === matchedEvidence?.possibleEvidence?.name) {
-        console.log({ matchedEvidence });
-        console.log(matchedEvidence?.followingDialogue?._id);
         dispatch(
           switchConversation(
             matchedEvidence?.followingDialogueFromEvidence?._id

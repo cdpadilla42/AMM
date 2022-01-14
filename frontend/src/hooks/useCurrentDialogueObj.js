@@ -39,7 +39,6 @@ const useCurrentDialogueObj = () => {
     }
 
     if (!currentDialogueID) {
-      console.log('HELLO!');
       setCurrentDialogueObj(
         dialogueList.find((dialogue) => dialogue.name.includes('Start'))
       );
@@ -49,8 +48,6 @@ const useCurrentDialogueObj = () => {
           params.id
         );
 
-        console.log(currentUserSceneObject);
-
         if (
           currentUserSceneObject?.name &&
           currentUserSceneObject?.name !== 'Start'
@@ -58,7 +55,6 @@ const useCurrentDialogueObj = () => {
           dispatch(switchConversation(currentUserSceneObject.dialogueID));
         }
       }
-      console.log({ currentDialogueObj, dialogueList });
     } else if (currentDialogueID === 'Incorrect') {
       setCurrentDialogueObj({
         animals: [{ name: 'Agent S' }],
