@@ -44,7 +44,7 @@ const ResponseBox = () => {
     if (
       !responseOptions &&
       act === 'c' &&
-      currentAct3SceneObject?.name === 'Freemode'
+      currentAct3SceneObject?.scene?.name === 'Freemode'
     ) {
       return inquiryModeResponses.map((optionObj) => {
         const responseOnClick = () => {
@@ -68,6 +68,7 @@ const ResponseBox = () => {
         );
       });
     }
+    console.log('defaulting to response options');
     if (!responseOptions) return null;
     return responseOptions.map((optionObj) => {
       const blankSpacerTextForHighlight = optionObj.text.replace(

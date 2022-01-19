@@ -77,4 +77,17 @@ export const act3Scenes = {
       },
     ],
   },
+  '339510d1-abf9-44ce-8426-d34f623eef2f': {
+    name: 'Lucky',
+    sceneOrder: [
+      {
+        name: 'Start',
+        dialogueID: 'c416e426-c35d-4027-9b5b-872f50ca3267',
+      },
+      {
+        name: 'Freemode',
+        dialogueID: '152c62ca-3401-4ff0-a80a-e32cefb4a5c9',
+      },
+    ],
+  },
 };

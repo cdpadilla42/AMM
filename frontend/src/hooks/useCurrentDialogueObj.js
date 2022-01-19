@@ -27,6 +27,8 @@ const useCurrentDialogueObj = () => {
     return scene;
   };
 
+  console.log(currentAct);
+
   useEffect(() => {
     if (inquiryDialogue) {
       // currentDialogueObj set to inquiry object
@@ -38,23 +40,29 @@ const useCurrentDialogueObj = () => {
       return;
     }
 
+    if (currentAct === 'c' && params.id) {
+      const currentUserSceneObject = getActThreeConversationSceneObject(
+        params.id
+      );
+      if (
+        currentUserSceneObject?.name &&
+        currentUserSceneObject?.name !== 'Start' &&
+        dialogueList
+      ) {
+        dispatch(switchConversation(currentUserSceneObject.dialogueID));
+        const startingScene = dialogueList.find((dialogue) =>
+          dialogue?._id?.includes(currentUserSceneObject.dialogueID)
+        );
+        setCurrentDialogueObj(startingScene);
+        // return startingScene;
+        return;
+      }
+    }
+
     if (!currentDialogueID) {
       setCurrentDialogueObj(
         dialogueList.find((dialogue) => dialogue.name.includes('Start'))
       );
-
-      if (currentAct === 'c' && params.id) {
-        const currentUserSceneObject = getActThreeConversationSceneObject(
-          params.id
-        );
-
-        if (
-          currentUserSceneObject?.name &&
-          currentUserSceneObject?.name !== 'Start'
-        ) {
-          dispatch(switchConversation(currentUserSceneObject.dialogueID));
-        }
-      }
     } else if (currentDialogueID === 'Incorrect') {
       setCurrentDialogueObj({
         animals: [{ name: 'Agent S' }],
@@ -95,6 +103,7 @@ const useCurrentDialogueObj = () => {
         isFinalDialogue: true,
       });
     } else {
+      console.log('HITTING DEFAULT');
       setCurrentDialogueObj(
         dialogueList.find((dialogue) => dialogue._id === currentDialogueID)
       );
@@ -108,8 +117,10 @@ const useCurrentDialogueObj = () => {
     actThreeScenes,
     inquiryDialogue,
     currentInquiryDialogue,
-    params,
+    params.id,
   ]);
+
+  console.log({ currentDialogueObj });
 
   return currentDialogueObj;
 };

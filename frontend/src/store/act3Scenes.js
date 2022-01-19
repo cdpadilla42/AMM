@@ -25,7 +25,7 @@ function act3ScenesReducer(state = act3ScenesInitialState, action) {
       const { conversationID, upcomingScene } = payload;
       return {
         ...state,
-        [conversationID]: upcomingScene,
+        [conversationID]: { scene: upcomingScene },
       };
     case initializeUserAct3ScensFromLocalStorage.toString():
       const scenes = getAct3ScenesFromLocalStorage();
