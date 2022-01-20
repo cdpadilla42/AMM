@@ -10,6 +10,7 @@ import {
   openMap,
   displayComeBackLaterDialogue,
   toggleResponseBox,
+  saveAsLastEvidenceList,
 } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import urlFor from '../lib/imageUrlBuilder';
@@ -43,6 +44,8 @@ const Inventory = () => {
 
   const requiredEvidence = currentDialogueObj?.requiredEvidence;
   const evidenceWithPaths = currentDialogueObj?.evidenceWithPaths;
+  const useLastAvailableEvidenceList =
+    currentDialogueObj?.useLastAvailableEvidenceList;
   const nextResponseID =
     currentDialogueObj.followingDialogueFromEvidence?._id ||
     currentDialogueObj.responseOptions?.[0]?.followingDialogue._id;
@@ -58,6 +61,10 @@ const Inventory = () => {
       return;
     }
   }, [inventoryScreen]);
+
+  useEffect(() => {
+    dispatch(saveAsLastEvidenceList(requiredEvidence || evidenceWithPaths));
+  }, [evidenceWithPaths, requiredEvidence]);
 
   useEffect(() => {
     return () => dispatch(hideHealthBar());
@@ -201,6 +208,7 @@ const Inventory = () => {
           isMapOpen={isMapOpen}
           loseHealthOnIncorrect={currentDialogueObj.loseHealthOnIncorrect}
           onHealthOut={handleComeBackLaterClick}
+          useLastAvailableEvidenceList={useLastAvailableEvidenceList}
         />
       );
     } else if (isMapOpen) {
@@ -526,6 +534,7 @@ export const ItemDetailsDisplay = ({
   isMapOpen,
   loseHealthOnIncorrect,
   onHealthOut,
+  useLastAvailableEvidenceList,
 }) => {
   const { current: health } = useSelector((store) => store.health);
   const { inquiryMode } = useSelector((store) => store.app);
@@ -534,12 +543,59 @@ export const ItemDetailsDisplay = ({
   const itemObj = inventory.find((item) => item.name === selectedItem);
   const dispatch = useDispatch();
   const act = useSelector((store) => store.conversations.conversation?.[0].act);
+  const { lastEvidenceList } = useSelector((store) => store.dialogue);
 
   function closeDetailsDisplay() {
     setIsDetailsOpen(false);
   }
 
   function presentItem() {
+    const setMatchedEvidenceFromSinglePathEvidence = (passedEvidenceList) => {
+      const evidenceList = passedEvidenceList || evidenceWithPaths;
+      if (Array.isArray(evidenceList)) {
+        matchedEvidence = evidenceList.find(
+          (item) => item.name === itemObj.name
+        );
+      } else {
+        matchedEvidence = evidenceList;
+      }
+      if (selectedItem === matchedEvidence?.name) {
+        dispatch(switchConversation(nextResponseID));
+        dispatch(markUserNotPromptedForEvidence());
+        dispatch(hideHealthBar());
+      } else {
+        dispatch(displayInvalidEvidenceDialogue());
+        if (loseHealthOnIncorrect) {
+          if (health === 1) {
+            onHealthOut();
+            dispatch(hideHealthBar());
+            dispatch(toggleInventory());
+          }
+          dispatch(loseHealth());
+        }
+      }
+      closeDetailsDisplay();
+      dispatch(toggleInventory());
+    };
+
+    const setMatchedEvidenceFromMultiBranchEvidence = (passedEvidenceList) => {
+      const evidenceList = passedEvidenceList || evidenceWithPaths;
+      matchedEvidence = evidenceList.find(
+        (item) => item.possibleEvidence.name === itemObj.name
+      );
+      if (selectedItem === matchedEvidence?.possibleEvidence?.name) {
+        dispatch(
+          switchConversation(
+            matchedEvidence?.followingDialogueFromEvidence?._id
+          )
+        );
+      } else {
+        dispatch(displayInvalidEvidenceDialogue());
+      }
+      closeDetailsDisplay();
+      dispatch(toggleInventory());
+    };
+
     let matchedEvidence;
     if (inquiryMode) {
       const matchedInquiry = inquiryDialogues.find((inquiryObj) => {
@@ -565,49 +621,22 @@ export const ItemDetailsDisplay = ({
       return;
     }
 
-    if (evidenceWithPaths) {
-      matchedEvidence = evidenceWithPaths.find(
-        (item) => item.possibleEvidence.name === itemObj.name
-      );
-      if (selectedItem === matchedEvidence?.possibleEvidence?.name) {
-        dispatch(
-          switchConversation(
-            matchedEvidence?.followingDialogueFromEvidence?._id
-          )
-        );
+    if (useLastAvailableEvidenceList) {
+      // check that list in the way you did below
+      if (lastEvidenceList[0].followingDialogueFromEvidence) {
+        // to it the paths way
+        setMatchedEvidenceFromMultiBranchEvidence(lastEvidenceList);
       } else {
-        dispatch(displayInvalidEvidenceDialogue());
+        // do it the other way
+        setMatchedEvidenceFromSinglePathEvidence(lastEvidenceList);
       }
-      closeDetailsDisplay();
-      dispatch(toggleInventory());
-      return;
-    }
-
-    if (Array.isArray(requiredEvidence)) {
-      matchedEvidence = requiredEvidence.find(
-        (item) => item.name === itemObj.name
-      );
     } else {
-      matchedEvidence = requiredEvidence;
-    }
-
-    if (selectedItem === matchedEvidence?.name) {
-      dispatch(switchConversation(nextResponseID));
-      dispatch(markUserNotPromptedForEvidence());
-      dispatch(hideHealthBar());
-    } else {
-      dispatch(displayInvalidEvidenceDialogue());
-      if (loseHealthOnIncorrect) {
-        if (health === 1) {
-          onHealthOut();
-          dispatch(hideHealthBar());
-          dispatch(toggleInventory());
-        }
-        dispatch(loseHealth());
+      if (evidenceWithPaths) {
+        setMatchedEvidenceFromMultiBranchEvidence();
+        return;
       }
+      setMatchedEvidenceFromSinglePathEvidence();
     }
-    closeDetailsDisplay();
-    dispatch(toggleInventory());
   }
 
   const serializers = {

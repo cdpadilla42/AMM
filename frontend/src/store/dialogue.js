@@ -27,6 +27,7 @@ const initialState = {
   isMapOpen: false,
   loading: true,
   isLeaving: false,
+  lastEvidenceList: [],
 };
 
 // Actions
@@ -49,6 +50,9 @@ export const closeMap = createAction('CLOSE_MAP');
 export const switchConversation = createAction('SWITCH_CONVERSATION');
 export const resetDialogue = createAction('RESET_DIALOGUE');
 export const setLeaving = createAction('SER_LEAVING');
+export const saveAsLastEvidenceList = createAction(
+  'SAVE_AS_LAST_EVIDENCE_LIST'
+);
 export const switchConversationFromIncorrect = createAction(
   'SWITCH_CONVERSATION_FROM_INCORRECT'
 );
@@ -64,7 +68,7 @@ export const getDialogue = createAsyncThunk(
   async (conversationID) => {
     const response = await sanityClient.fetch(
       `*[_type == "dialogue" && conversation._ref == "${conversationID}"]{
-        name, responseOptions, needEvidence, multiBranchEvidence, inventoryPrompt, followingDialogueFromEvidence->{_id}, _id, isFinalDialogue, requiredEvidence->{name}, loseHealthOnIncorrect,
+        name, responseOptions, needEvidence, multiBranchEvidence, useLastAvailableEvidenceList, inventoryPrompt, followingDialogueFromEvidence->{_id}, _id, isFinalDialogue, requiredEvidence->{name}, loseHealthOnIncorrect,
 				animals[]->{name},
   			"phrase": phrase[]{
   				emotion->{emotion}, speaker->{name, color}, text, isGrey,
@@ -230,6 +234,12 @@ function dialogueReducer(state = initialState, action) {
       return {
         ...state,
         isLeaving: true,
+      };
+    case saveAsLastEvidenceList.toString():
+      if (!payload) return state;
+      return {
+        ...state,
+        lastEvidenceList: payload,
       };
     default:
       return state;

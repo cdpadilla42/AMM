@@ -304,10 +304,13 @@ export default {
       ],
     },
     {
-      title: 'Prompt for Evidence?',
+      title: 'Prompt for Single Peice of Evidence?',
       name: 'needEvidence',
       type: 'boolean',
-      description: 'Switch on if you need to present someone or something',
+      description:
+        'Switch on if you need to present someone or something for one next step dialogue',
+      hidden: ({ parent }) =>
+        parent.multiBranchEvidence || parent.useLastAvailableEvidenceList,
       fieldset: 'evidenceSet',
     },
     {
@@ -316,7 +319,8 @@ export default {
       type: 'boolean',
       description:
         'User will lose health when answering incorrectly if this is toggle to on.',
-      hidden: ({ parent }) => !parent.needEvidence,
+      hidden: ({ parent }) =>
+        !parent.needEvidence || parent.useLastAvailableEvidenceList,
       fieldset: 'evidenceSet',
     },
     {
@@ -325,6 +329,17 @@ export default {
       type: 'boolean',
       description:
         'Switch on if each evidence triggers a different following dialogue path',
+      hidden: ({ parent }) =>
+        parent.needEvidence || parent.useLastAvailableEvidenceList,
+      fieldset: 'evidenceSet',
+    },
+    {
+      title: 'Use Last Available Evidence List?',
+      name: 'useLastAvailableEvidenceList',
+      type: 'boolean',
+      hidden: ({ parent }) => parent.needEvidence || parent.multiBranchEvidence,
+      description:
+        'Example: Present a one liner dialogue that needs to prompt for the same evidence again. Not incorrect, but also not correct.',
       fieldset: 'evidenceSet',
     },
     {
@@ -332,7 +347,9 @@ export default {
       name: 'requiredEvidence',
       fieldset: 'evidenceSet',
       hidden: ({ parent }) =>
-        !parent.needEvidence || parent.multiBranchEvidence,
+        !parent.needEvidence ||
+        parent.multiBranchEvidence ||
+        parent.useLastAvailableEvidenceList,
       description: 'Must reference an item, animal note, or map location',
       type: 'array',
       of: [
@@ -352,7 +369,8 @@ export default {
       title: 'Possible Evidence Paths',
       name: 'evidenceWithPaths',
       fieldset: 'evidenceSet',
-      hidden: ({ parent }) => !parent.multiBranchEvidence,
+      hidden: ({ parent }) =>
+        !parent.multiBranchEvidence || parent.useLastAvailableEvidenceList,
       description: 'Must reference an item, animal note, or map location',
       type: 'array',
       of: [
@@ -395,7 +413,9 @@ export default {
       to: [{ type: 'dialogue' }],
       fieldset: 'evidenceSet',
       hidden: ({ parent }) =>
-        !parent.needEvidence || parent.multiBranchEvidence,
+        !parent.needEvidence ||
+        parent.multiBranchEvidence ||
+        parent.useLastAvailableEvidenceList,
       description:
         'Reference a dialogue to jump to after answering with this response',
     },
@@ -404,7 +424,9 @@ export default {
       name: 'inventoryPrompt',
       type: 'string',
       fieldset: 'evidenceSet',
-      hidden: ({ parent }) => !parent.needEvidence,
+      hidden: ({ parent }) =>
+        !(parent.needEvidence || parent.multiBranchEvidence) ||
+        parent.useLastAvailableEvidenceList,
       description:
         'What users see after clicking through the dialogue TOO FAST!!!',
     },

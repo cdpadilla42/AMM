@@ -44,18 +44,20 @@ const useCurrentDialogueObj = () => {
       const currentUserSceneObject = getActThreeConversationSceneObject(
         params.id
       );
-      if (
-        currentUserSceneObject?.name &&
-        currentUserSceneObject?.name !== 'Start' &&
-        dialogueList
-      ) {
-        dispatch(switchConversation(currentUserSceneObject.dialogueID));
-        const startingScene = dialogueList.find((dialogue) =>
-          dialogue?._id?.includes(currentUserSceneObject.dialogueID)
-        );
-        setCurrentDialogueObj(startingScene);
-        // return startingScene;
-        return;
+      if (!currentDialogueID) {
+        if (
+          currentUserSceneObject?.name &&
+          currentUserSceneObject?.name !== 'Start' &&
+          dialogueList
+        ) {
+          dispatch(switchConversation(currentUserSceneObject.dialogueID));
+          const startingScene = dialogueList.find((dialogue) =>
+            dialogue?._id?.includes(currentUserSceneObject.dialogueID)
+          );
+          setCurrentDialogueObj(startingScene);
+          // return startingScene;
+          return;
+        }
       }
     }
 

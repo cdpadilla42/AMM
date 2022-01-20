@@ -86,6 +86,9 @@ const TextBox = (props) => {
 
   let currentDialogueObj = useCurrentDialogueObj();
 
+  const useLastAvailableEvidenceList =
+    currentDialogueObj?.useLastAvailableEvidenceList;
+
   useEffect(() => {
     setTrailedText('');
   }, [currentDialogueObj]);
@@ -318,6 +321,8 @@ const TextBox = (props) => {
       } else {
         history.push('/');
       }
+    } else if (isEndOfDialogue && useLastAvailableEvidenceList) {
+      handleOpenInventory();
     } else if (isEndOfDialogue) {
       props.toggleResponseBox();
     } else {
