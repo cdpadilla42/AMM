@@ -35,7 +35,11 @@ import {
   updateSNoteInLocalStorageInventory,
 } from '../lib/localStorage';
 import { act3Scenes, gameStartDialogueID } from '../lib/constants';
-import { endInquiryDialogue } from '../store/app';
+import {
+  endInquiryDialogue,
+  startInquiryMode,
+  startFreeMode,
+} from '../store/app';
 
 const TextBox = (props) => {
   const dispatch = useDispatch();
@@ -60,7 +64,7 @@ const TextBox = (props) => {
   } = useSelector((state) => state.inventory);
   const { showSNotes } = useSelector((state) => state.notepad);
   const { conversation } = useSelector((state) => state.conversations);
-  const { inquiryDialogue } = useSelector((state) => state.app);
+  const { inquiryDialogue, freeMode } = useSelector((state) => state.app);
   const playersAct3Scenes = useSelector((state) => state.act3Scenes);
   const currentTestimonyID = conversation?.[0]?._id;
   const currentAct = conversation?.[0]?.act;
@@ -84,10 +88,12 @@ const TextBox = (props) => {
     setDoneTyping(true);
   };
 
-  let currentDialogueObj = useCurrentDialogueObj();
+  const currentDialogueObj = useCurrentDialogueObj();
 
   const useLastAvailableEvidenceList =
     currentDialogueObj?.useLastAvailableEvidenceList;
+
+  const switchToInquiryMode = currentDialogueObj?.switchToInquiryMode;
 
   useEffect(() => {
     setTrailedText('');
@@ -300,10 +306,11 @@ const TextBox = (props) => {
         history.push('/act-one');
       } else if (currentAct === 'c') {
         // if current scene state is free mode
-        if (currentAct3SceneObject?.name === 'Freemode') {
+        if (currentAct3SceneObject?.name === 'Freemode' || freeMode) {
           if (isLeaving) {
             history.push('/act-three');
           } else {
+            console.log({ isLeaving });
             props.toggleResponseBox();
           }
         } else {
@@ -323,6 +330,17 @@ const TextBox = (props) => {
       }
     } else if (isEndOfDialogue && useLastAvailableEvidenceList) {
       handleOpenInventory();
+    } else if (isEndOfDialogue && switchToInquiryMode) {
+      props.toggleResponseBox();
+      props.startFreeMode();
+      const nextScene = conversationSceneOrder[currentSceneIndex + 1];
+      if (nextScene) {
+        saveNewAct3SceneToLocalStorage(conversationID, nextScene);
+        props.updateScenes({
+          conversationID,
+          upcomingScene: nextScene,
+        });
+      }
     } else if (isEndOfDialogue) {
       props.toggleResponseBox();
     } else {
@@ -430,6 +448,8 @@ function mapDispatchToProps(dispatch) {
       addToConversationsVisited,
       endInquiryDialogue,
       updateScenes,
+      startInquiryMode,
+      startFreeMode,
     },
     dispatch
   );

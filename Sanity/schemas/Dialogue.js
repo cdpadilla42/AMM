@@ -455,6 +455,12 @@ export default {
       description:
         'Switch on if you want to leave this scene after this portion of dialouge.',
     },
+    {
+      title: 'Switch to Inquiry / Free mode',
+      name: 'switchToInquiryMode',
+      type: 'boolean',
+      description: 'Switch on if you are about to ask about a bunch of STUFF.',
+    },
     // {
     //   title: 'Following Dialogue',
     //   name: 'followingDialogue',

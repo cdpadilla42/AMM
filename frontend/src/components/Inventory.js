@@ -20,8 +20,10 @@ import { markUserNotPromptedForEvidence } from '../store/inventory';
 import { hideHealthBar, loseHealth } from '../store/health';
 import { endInquiryMode, startInquiryDialogue } from '../store/app';
 import { setCurrentInquiryDialogue } from '../store/inquiry';
+import useIsFreeMode from '../hooks/useIsFreeMode';
 
 const Inventory = () => {
+  const isFreeMode = useIsFreeMode();
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState('');
   const [isShowingPeople, setIsShowingPeople] = useState(false);
@@ -237,7 +239,7 @@ const Inventory = () => {
             Map
           </button>
           <button onClick={toggleShowingAddItem}>Add to inventory</button>
-          {userPromptedForEvidence ? (
+          {userPromptedForEvidence && !isFreeMode ? (
             <button
               onClick={handleComeBackLaterClick}
               className="come_back_button"

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -23,6 +23,7 @@ const ResponseBox = () => {
   );
   const { conversation } = useSelector((state) => state.conversations);
   const playersAct3Scenes = useSelector((state) => state.act3Scenes);
+  const { freeMode } = useSelector((state) => state.app);
   const currentTestimonyID = conversation?.[0]?._id;
   const act = conversation?.[0]?.act;
   const currentAct3SceneObject = playersAct3Scenes[params.id];
@@ -44,7 +45,7 @@ const ResponseBox = () => {
     if (
       !responseOptions &&
       act === 'c' &&
-      currentAct3SceneObject?.scene?.name === 'Freemode'
+      (currentAct3SceneObject?.scene?.name === 'Freemode' || freeMode)
     ) {
       return inquiryModeResponses.map((optionObj) => {
         const responseOnClick = () => {
