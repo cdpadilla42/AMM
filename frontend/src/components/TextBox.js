@@ -39,6 +39,7 @@ import {
   endInquiryDialogue,
   startInquiryMode,
   startFreeMode,
+  endInquiryMode,
 } from '../store/app';
 
 const TextBox = (props) => {
@@ -64,7 +65,9 @@ const TextBox = (props) => {
   } = useSelector((state) => state.inventory);
   const { showSNotes } = useSelector((state) => state.notepad);
   const { conversation } = useSelector((state) => state.conversations);
-  const { inquiryDialogue, freeMode } = useSelector((state) => state.app);
+  const { inquiryDialogue, freeMode, inquiryMode } = useSelector(
+    (state) => state.app
+  );
   const playersAct3Scenes = useSelector((state) => state.act3Scenes);
   const currentTestimonyID = conversation?.[0]?._id;
   const currentAct = conversation?.[0]?.act;
@@ -292,7 +295,7 @@ const TextBox = (props) => {
     } else if (isEndOfDialogue && currentDialogueObj.needEvidence) {
       handleOpenInventory();
     } else if (isEndOfDialogue && inquiryDialogue) {
-      props.endInquiryDialogue();
+      // props.endInquiryDialogue();
       props.toggleResponseBox();
     } else if (
       isEndOfDialogue &&
@@ -450,6 +453,7 @@ function mapDispatchToProps(dispatch) {
       updateScenes,
       startInquiryMode,
       startFreeMode,
+      endInquiryMode,
     },
     dispatch
   );
