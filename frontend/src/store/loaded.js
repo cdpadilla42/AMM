@@ -9,6 +9,7 @@ const initialState = {
   animalNotes: false,
   sNotes: false,
   userInventoryFromLocalStorage: false,
+  userActThreeScenesLoaded: false,
 };
 
 export const setToLoaded = createAction('SET_TO_LOADED');

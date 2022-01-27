@@ -5,9 +5,11 @@ import isEqual from 'lodash.isequal';
 import { v4 as uuidv4 } from 'uuid';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import AnimalDisplay from './AnimalDisplay';
+import useCurrentSceneObj from '../hooks/useCurrentSceneObj';
 
 const MultipleAnimalDisplay = () => {
   const dialogue = useCurrentDialogueObj() || {};
+  const currentConversationUserScene = useCurrentSceneObj();
   const { currentDialoguePosition } = useSelector((state) => state.dialogue);
   const speaker = dialogue.phrase?.[currentDialoguePosition]?.speaker?.name;
   let emotion = dialogue.phrase?.[currentDialoguePosition]?.emotion?.emotion;
@@ -30,6 +32,31 @@ const MultipleAnimalDisplay = () => {
 
   // Handles emotions per phrase and animal swaps by dialogue
   useEffect(() => {
+    if (currentConversationUserScene.name !== 'Start') {
+      setAnimalsState([]);
+    }
+    handleChangeFromPhrase();
+    // return () => {
+    //   setAnimalsState([]);
+    // };
+  }, [
+    currentDialoguePosition,
+    emotion,
+    speaker,
+    currentConversationUserScene,
+    dialogue,
+  ]);
+
+  // Handle Sanity Image URL Optimization based on window width
+  useEffect(() => {
+    const vw = window.innerWidth;
+    if (!vw) return;
+    if (vw <= 420) {
+      setShowMobileOptimizedImages(true);
+    }
+  }, []);
+
+  const handleChangeFromPhrase = () => {
     let indexToChange;
     let newState = [...animalsState];
     const newAnimalsInConvo = dialogue?.animals;
@@ -140,20 +167,7 @@ const MultipleAnimalDisplay = () => {
         lastEmotionRef[animalObj.ref] = animalObj.emotion;
       }
     });
-
-    // return () => {
-    //   setAnimalsState([]);
-    // };
-  }, [currentDialoguePosition, emotion, speaker]);
-
-  // Handle Sanity Image URL Optimization based on window width
-  useEffect(() => {
-    const vw = window.innerWidth;
-    if (!vw) return;
-    if (vw <= 420) {
-      setShowMobileOptimizedImages(true);
-    }
-  }, []);
+  };
 
   const determineTransitionPositioning = (i) => {
     if (i === 0) {

@@ -25,6 +25,9 @@ const ImageLoader = ({ children, disableLoading }) => {
     (state) => state.dialogue
   );
   const { backgroundURL } = useSelector((state) => state.conversations);
+  const { isLoadedFromLocalStorage: act3ScenesDataLoaded } = useSelector(
+    (state) => state.act3Scenes
+  );
 
   // Get data from Sanity / Redux when loaded
   const [animalEmotionsForConversation, numOfSprites] = useMemo(() => {
@@ -71,10 +74,10 @@ const ImageLoader = ({ children, disableLoading }) => {
   // Wait for the data to load from Sanity into Redux.
   useEffect(() => {
     if (disableLoading) return;
-    if (backgroundURL && !dialogueLoading) {
+    if (backgroundURL && !dialogueLoading && act3ScenesDataLoaded) {
       setSanityDetailsLoaded(true);
     }
-  }, [dialogueLoading, backgroundURL, disableLoading]);
+  }, [dialogueLoading, backgroundURL, disableLoading, act3ScenesDataLoaded]);
 
   // Once it's loaded, we'll handle the image loading based on only images used for this conversation
 
