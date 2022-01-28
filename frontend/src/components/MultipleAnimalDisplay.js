@@ -1,16 +1,20 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import isEqual from 'lodash.isequal';
 import { v4 as uuidv4 } from 'uuid';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import AnimalDisplay from './AnimalDisplay';
 import useCurrentSceneObj from '../hooks/useCurrentSceneObj';
+import { setSceneShifted } from '../store/app';
 
 const MultipleAnimalDisplay = () => {
+  const dispatch = useDispatch();
   const dialogue = useCurrentDialogueObj() || {};
   const currentConversationUserScene = useCurrentSceneObj();
   const { currentDialoguePosition } = useSelector((state) => state.dialogue);
+  const { userActThreeScenesLoaded } = useSelector((state) => state.loaded);
+  const { sceneShifted } = useSelector((state) => state.app);
   const speaker = dialogue.phrase?.[currentDialoguePosition]?.speaker?.name;
   let emotion = dialogue.phrase?.[currentDialoguePosition]?.emotion?.emotion;
   const { ...currentPhraseObj } =
@@ -22,6 +26,7 @@ const MultipleAnimalDisplay = () => {
   const [showMobileOptimizedImages, setShowMobileOptimizedImages] =
     useState(false);
   const { current: lastEmotionRef } = useRef({});
+  const [isInitialPhrase, setIsInitialPhrase] = useState(true);
 
   // dialogue.animals.forEach((animal) => {
   //   console.log({
@@ -30,22 +35,40 @@ const MultipleAnimalDisplay = () => {
   //   });
   // });
 
+  useEffect(() => {
+    console.log({ animalsState });
+  }, [animalsState]);
+
+  useEffect(() => {
+    if (isInitialPhrase) {
+      if (currentDialoguePosition !== 0) setIsInitialPhrase(false);
+    }
+    return () => setIsInitialPhrase(true);
+  }, []);
+
   // Handles emotions per phrase and animal swaps by dialogue
   useEffect(() => {
-    if (currentConversationUserScene.name !== 'Start') {
-      setAnimalsState([]);
+    let initialState = animalsState;
+    if (sceneShifted) {
+      initialState = [];
+      dispatch(setSceneShifted(false));
     }
-    handleChangeFromPhrase();
+    handleChangeFromPhrase(initialState);
     // return () => {
     //   setAnimalsState([]);
     // };
-  }, [
-    currentDialoguePosition,
-    emotion,
-    speaker,
-    currentConversationUserScene,
-    dialogue,
-  ]);
+  }, [currentDialoguePosition, emotion, speaker, sceneShifted]);
+
+  useEffect(() => {
+    let initialState = animalsState;
+    let manualChange = false;
+    if (isInitialPhrase) {
+      initialState = [];
+      lastEmotionRef.current = {};
+      manualChange = true;
+      handleChangeFromPhrase(initialState, manualChange);
+    }
+  }, [userActThreeScenesLoaded]);
 
   // Handle Sanity Image URL Optimization based on window width
   useEffect(() => {
@@ -56,9 +79,9 @@ const MultipleAnimalDisplay = () => {
     }
   }, []);
 
-  const handleChangeFromPhrase = () => {
+  const handleChangeFromPhrase = (initialState, manualChange) => {
     let indexToChange;
-    let newState = [...animalsState];
+    let newState = [...initialState];
     const newAnimalsInConvo = dialogue?.animals;
 
     if (!Object.keys(currentPhraseObj).length) return;
@@ -71,7 +94,8 @@ const MultipleAnimalDisplay = () => {
 
     if (speaker === 'Everyone') return;
 
-    if (currentPhraseObj.changePosition) {
+    if (currentPhraseObj.changePosition || manualChange) {
+      console.log({ manualChange });
       // set the speakers
 
       // Handle new animals

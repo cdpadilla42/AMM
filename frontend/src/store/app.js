@@ -4,6 +4,7 @@ const initialState = {
   inquiryMode: false,
   inquiryDialogue: false,
   freeMode: false,
+  sceneShifted: false,
 };
 
 export const startFreeMode = createAction('START_FREE_MODE');
@@ -12,6 +13,7 @@ export const startInquiryMode = createAction('START_INQUIRY_MODE');
 export const endInquiryMode = createAction('END_INQUIRY_MODE');
 export const startInquiryDialogue = createAction('START_INQUIRY_DIALOGUE');
 export const endInquiryDialogue = createAction('END_INQUIRY_DIALOGUE');
+export const setSceneShifted = createAction('SET_SCENE_SHIFTED');
 
 // Reducer
 
@@ -47,6 +49,11 @@ function appReducer(state = initialState, action) {
       return {
         ...state,
         inquiryDialogue: false,
+      };
+    case setSceneShifted.toString():
+      return {
+        ...state,
+        sceneShifted: payload,
       };
     default:
       return state;

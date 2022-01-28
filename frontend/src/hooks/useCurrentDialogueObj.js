@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { setSceneShifted } from '../store/app';
 import { switchConversation, updateCurrentDialogueID } from '../store/dialogue';
 
 const useCurrentDialogueObj = () => {
@@ -55,6 +56,7 @@ const useCurrentDialogueObj = () => {
             dialogue?._id?.includes(currentUserSceneObject.dialogueID)
           );
           setCurrentDialogueObj(startingScene);
+          dispatch(setSceneShifted(true));
           // return startingScene;
           return;
         }
