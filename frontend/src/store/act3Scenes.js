@@ -10,6 +10,15 @@ export const act3ScenesInitialState = {
       dialogueID: 'd24e6cef-f067-4330-9cdf-bf780af06446',
     },
   },
+  'e1688c5f-218a-4656-ad96-df9a1c33b8f8': {
+    name: 'Chadder',
+    sceneOrder: [
+      {
+        name: 'Freemode',
+        dialogueID: '8f8508d9-7517-4767-b731-a6f42427d436',
+      },
+    ],
+  },
 };
 
 export const updateScenes = createAction('UPDATE_SCENES');

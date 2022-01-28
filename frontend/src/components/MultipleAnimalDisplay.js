@@ -54,6 +54,7 @@ const MultipleAnimalDisplay = () => {
       dispatch(setSceneShifted(false));
     }
     handleChangeFromPhrase(initialState);
+    console.log({ currentDialoguePosition, emotion, speaker, sceneShifted });
     // return () => {
     //   setAnimalsState([]);
     // };
@@ -101,6 +102,7 @@ const MultipleAnimalDisplay = () => {
       // Handle new animals
       if (currentPhraseObj.leftAnimalCentered) {
         newState = [{ name: speaker }];
+        console.log({ newState });
       } else {
         if (
           currentPhraseObj.leftAnimal &&
@@ -177,7 +179,7 @@ const MultipleAnimalDisplay = () => {
 
     indexToChange = newState?.findIndex((animal) => animal.name === speaker);
     if (indexToChange === -1) indexToChange = 0;
-
+    console.log({ indexToChange, newState });
     if (!newState[indexToChange]) return;
     // if (isEqual(newState, animalsState)) return;
     setAnimalsState(() => {

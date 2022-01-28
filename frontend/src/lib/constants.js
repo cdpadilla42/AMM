@@ -90,4 +90,26 @@ export const act3Scenes = {
       },
     ],
   },
+  '4d010f4f-21db-4f11-b427-d4d99e55df0c': {
+    name: 'Katt',
+    sceneOrder: [
+      {
+        name: 'Start',
+        dialogueID: '56f90b3a-993b-4982-af3e-dc83f582493d',
+      },
+      {
+        name: 'Freemode',
+        dialogueID: '76508ca2-2cdd-4d7e-a334-f6ba21f8646e',
+      },
+    ],
+  },
+  'e1688c5f-218a-4656-ad96-df9a1c33b8f8': {
+    name: 'Chadder',
+    sceneOrder: [
+      {
+        name: 'Freemode',
+        dialogueID: '8f8508d9-7517-4767-b731-a6f42427d436',
+      },
+    ],
+  },
 };
