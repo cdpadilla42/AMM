@@ -21,6 +21,7 @@ import { hideHealthBar, loseHealth } from '../store/health';
 import { endInquiryMode, startInquiryDialogue } from '../store/app';
 import { setCurrentInquiryDialogue } from '../store/inquiry';
 import useIsFreeMode from '../hooks/useIsFreeMode';
+import { useParams } from 'react-router-dom';
 
 const Inventory = () => {
   const isFreeMode = useIsFreeMode();
@@ -538,6 +539,8 @@ export const ItemDetailsDisplay = ({
   onHealthOut,
   useLastAvailableEvidenceList,
 }) => {
+  const params = useParams();
+  const isFreemode = useIsFreeMode();
   const { current: health } = useSelector((store) => store.health);
   const { inquiryMode } = useSelector((store) => store.app);
   const { userPromptedForEvidence } = useSelector((store) => store.inventory);
@@ -581,6 +584,11 @@ export const ItemDetailsDisplay = ({
     };
 
     const setMatchedEvidenceFromMultiBranchEvidence = (passedEvidenceList) => {
+      const payload =
+        params.id === 'd44a5dac-b32a-46b9-b86e-45e84e4dd106' && !isFreemode
+          ? 'Incorrect Elvis3'
+          : '';
+
       const evidenceList = passedEvidenceList || evidenceWithPaths;
       matchedEvidence = evidenceList.find(
         (item) => item.possibleEvidence.name === itemObj.name
@@ -592,7 +600,7 @@ export const ItemDetailsDisplay = ({
           )
         );
       } else {
-        dispatch(displayInvalidEvidenceDialogue());
+        dispatch(displayInvalidEvidenceDialogue(payload));
       }
       closeDetailsDisplay();
       dispatch(toggleInventory());

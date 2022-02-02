@@ -218,7 +218,7 @@ function dialogueReducer(state = initialState, action) {
     case displayInvalidEvidenceDialogue.toString():
       return {
         ...state,
-        currentDialogueID: 'Incorrect',
+        currentDialogueID: payload || 'Incorrect',
         prevDialogueID: state.currentDialogueID,
         returnToDialoguePositionAfterIncorrect: state.currentDialoguePosition,
         currentDialoguePosition: 0,

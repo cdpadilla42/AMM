@@ -86,6 +86,11 @@ const useCurrentDialogueObj = () => {
         ],
         name: 'Incorrect',
       });
+    } else if (currentDialogueID === 'Incorrect Elvis3') {
+      const incorrectScene = dialogueList.find((dialogue) =>
+        dialogue?._id?.includes('d5e6e234-a8b9-4dfd-87fe-7fa8f00467ab')
+      );
+      setCurrentDialogueObj(incorrectScene);
     } else if (currentDialogueID === 'Come Back Later') {
       setCurrentDialogueObj({
         animals: [{ name: 'Agent S' }],

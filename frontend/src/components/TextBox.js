@@ -292,7 +292,11 @@ const TextBox = (props) => {
     } else if (isEndOfDialogue && currentDialogueObj.name === 'Incorrect') {
       props.switchConversationFromIncorrect(prevDialogueID);
       handleOpenInventory();
-    } else if (isEndOfDialogue && currentDialogueObj.needEvidence) {
+    } else if (
+      isEndOfDialogue &&
+      (currentDialogueObj.needEvidence ||
+        currentDialogueObj.multiBranchEvidence)
+    ) {
       handleOpenInventory();
     } else if (isEndOfDialogue && inquiryDialogue) {
       // props.endInquiryDialogue();

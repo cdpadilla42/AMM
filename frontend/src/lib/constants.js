@@ -112,6 +112,27 @@ export const act3Scenes = {
       },
     ],
   },
+  'd44a5dac-b32a-46b9-b86e-45e84e4dd106': {
+    name: 'Elvis',
+    sceneOrder: [
+      {
+        name: 'Start',
+        dialogueID: '40f2841b-1a74-48d8-a569-ea4e684fe8cc',
+      },
+      {
+        name: 'Before Warmup',
+        dialogueID: '2fdb72e1-2448-4f6e-b3bd-bd158108c682',
+      },
+      // {
+      //   name: 'Before Warmup Incorrect',
+      //   dialogueID: 'd5e6e234-a8b9-4dfd-87fe-7fa8f00467ab',
+      // },
+      {
+        name: 'Freemode',
+        dialogueID: 'e3bd7c19-386a-4c47-8b51-8f586b978ab4',
+      },
+    ],
+  },
   '32bbe59e-42d3-4295-8c23-f6018ed28bb1': {
     name: 'Sterling',
     sceneOrder: [
