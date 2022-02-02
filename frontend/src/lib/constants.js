@@ -112,4 +112,25 @@ export const act3Scenes = {
       },
     ],
   },
+  '32bbe59e-42d3-4295-8c23-f6018ed28bb1': {
+    name: 'Sterling',
+    sceneOrder: [
+      {
+        name: 'Start',
+        dialogueID: '51079547-4ead-4bab-ab69-f373d5a5da01',
+      },
+      {
+        name: 'After Elvis',
+        dialogueID: '1abf4596-9c2a-4d3c-ae88-23ea2e9a291d',
+      },
+      {
+        name: 'Before Cake',
+        dialogueID: '027da17b-68aa-4ff9-80b6-f7e55ded9f1b',
+      },
+      {
+        name: 'Freemode',
+        dialogueID: '07c0f587-36df-4481-a992-173c6f0389d0',
+      },
+    ],
+  },
 };
