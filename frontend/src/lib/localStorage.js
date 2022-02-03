@@ -1,4 +1,5 @@
 import { act3ScenesInitialState } from '../store/act3Scenes';
+import { specialEventsInitialState } from '../store/specialEvents';
 import { itemsInInventoryAllButTheProphecy } from './constants';
 
 const { localStorage } = window;
@@ -11,6 +12,7 @@ const itemsInInventory = {
   conversationsVisited: {},
   trialOneLastDialogueID: '',
   act3Scenes: act3ScenesInitialState,
+  specialEvents: specialEventsInitialState,
 };
 
 /*
@@ -74,6 +76,22 @@ export const saveNewAct3SceneToLocalStorage = (
   const newScenes = { ...initialScenes, [conversationID]: newScene };
 
   storageData.act3Scenes = newScenes;
+
+  localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
+};
+
+export const saveNewSpecialEventToLocalStorage = (payload) => {
+  let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
+  if (!storageData) {
+    initializeLocalStorageInventory();
+    storageData = itemsInInventory;
+  }
+
+  const initialEvents = storageData?.specialEvents ?? specialEventsInitialState;
+
+  const newEvents = { ...initialEvents, ...payload };
+
+  storageData.specialEvents = newEvents;
 
   localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
 };
@@ -249,6 +267,18 @@ export const getUserHasFullInventoryFromLocalStorage = () => {
 
 export const getAct3ScenesFromLocalStorage = () => {
   const res = JSON.parse(localStorage.getItem('itemsInInventory'))?.act3Scenes;
+  if (!!res) {
+    return res;
+  } else {
+    initializeLocalStorageInventory();
+    return false;
+  }
+};
+
+export const getSpecialEventsFromLocalStorage = () => {
+  const res = JSON.parse(
+    localStorage.getItem('itemsInInventory')
+  )?.specialEvents;
   if (!!res) {
     return res;
   } else {

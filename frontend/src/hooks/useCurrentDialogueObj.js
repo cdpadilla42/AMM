@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { specialDialoguesObject } from '../lib/constants';
 import { setSceneShifted } from '../store/app';
 import { switchConversation, updateCurrentDialogueID } from '../store/dialogue';
 
@@ -89,6 +90,20 @@ const useCurrentDialogueObj = () => {
     } else if (currentDialogueID === 'Incorrect Elvis3') {
       const incorrectScene = dialogueList.find((dialogue) =>
         dialogue?._id?.includes('d5e6e234-a8b9-4dfd-87fe-7fa8f00467ab')
+      );
+      setCurrentDialogueObj(incorrectScene);
+    } else if (currentDialogueID === 'Incorrect Elvis3 third time') {
+      const incorrectScene = dialogueList.find((dialogue) =>
+        dialogue?._id?.includes(
+          specialDialoguesObject['ELVIS3 BEFORE WARMUP 2 wrong third time']
+        )
+      );
+      setCurrentDialogueObj(incorrectScene);
+    } else if (currentDialogueID === 'Incorrect Elvis3 sixth time') {
+      const incorrectScene = dialogueList.find((dialogue) =>
+        dialogue?._id?.includes(
+          specialDialoguesObject['ELVIS3 BEFORE WARMUP 2 wrong sixth time']
+        )
       );
       setCurrentDialogueObj(incorrectScene);
     } else if (currentDialogueID === 'Come Back Later') {

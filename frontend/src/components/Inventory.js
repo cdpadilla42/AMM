@@ -22,6 +22,8 @@ import { endInquiryMode, startInquiryDialogue } from '../store/app';
 import { setCurrentInquiryDialogue } from '../store/inquiry';
 import useIsFreeMode from '../hooks/useIsFreeMode';
 import { useParams } from 'react-router-dom';
+import { incrementElvisAct3EvidenceCount } from '../store/specialEvents';
+import { useSaveSpecialEvent } from '../hooks/useSaveUtility';
 
 const Inventory = () => {
   const isFreeMode = useIsFreeMode();
@@ -540,7 +542,9 @@ export const ItemDetailsDisplay = ({
   useLastAvailableEvidenceList,
 }) => {
   const params = useParams();
+  const saveSpecialEvent = useSaveSpecialEvent();
   const isFreemode = useIsFreeMode();
+  const { elvisAct3EvidenceCount } = useSelector((store) => store.specialEvent);
   const { current: health } = useSelector((store) => store.health);
   const { inquiryMode } = useSelector((store) => store.app);
   const { userPromptedForEvidence } = useSelector((store) => store.inventory);
@@ -584,11 +588,6 @@ export const ItemDetailsDisplay = ({
     };
 
     const setMatchedEvidenceFromMultiBranchEvidence = (passedEvidenceList) => {
-      const payload =
-        params.id === 'd44a5dac-b32a-46b9-b86e-45e84e4dd106' && !isFreemode
-          ? 'Incorrect Elvis3'
-          : '';
-
       const evidenceList = passedEvidenceList || evidenceWithPaths;
       matchedEvidence = evidenceList.find(
         (item) => item.possibleEvidence.name === itemObj.name
@@ -600,7 +599,27 @@ export const ItemDetailsDisplay = ({
           )
         );
       } else {
-        dispatch(displayInvalidEvidenceDialogue(payload));
+        if (params.id === 'd44a5dac-b32a-46b9-b86e-45e84e4dd106') {
+          // send to one of the special events if currently equals 2 or 5
+          if (elvisAct3EvidenceCount == 2) {
+            dispatch(
+              displayInvalidEvidenceDialogue('Incorrect Elvis3 third time')
+            );
+          } else if (elvisAct3EvidenceCount == 5) {
+            dispatch(
+              displayInvalidEvidenceDialogue('Incorrect Elvis3 sixth time')
+            );
+          } else {
+            // normal incorrect elvis, do this
+            dispatch(displayInvalidEvidenceDialogue('Incorrect Elvis3'));
+          }
+          saveSpecialEvent({
+            elvisAct3EvidenceCount: (initialState) =>
+              initialState.elvisAct3EvidenceCount + 1,
+          });
+        } else {
+          dispatch(displayInvalidEvidenceDialogue());
+        }
       }
       closeDetailsDisplay();
       dispatch(toggleInventory());

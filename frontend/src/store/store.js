@@ -10,6 +10,7 @@ import notepadReducer from './notepad';
 import loadedReducer from './loaded';
 import inquiryReducer from './inquiry';
 import act3ScenesReducer from './act3Scenes';
+import specialEventReducer from './specialEvents';
 
 const reducer = combineReducers({
   app: appReducer,
@@ -22,6 +23,7 @@ const reducer = combineReducers({
   loaded: loadedReducer,
   inquiry: inquiryReducer,
   act3Scenes: act3ScenesReducer,
+  specialEvent: specialEventReducer,
 });
 
 const store = configureStore({ reducer });

@@ -155,3 +155,10 @@ export const act3Scenes = {
     ],
   },
 };
+
+export const specialDialoguesObject = {
+  'ELVIS3 BEFORE WARMUP 2 wrong sixth time':
+    'bc05a0be-4dc1-439e-9d29-2b729e0644f8',
+  'ELVIS3 BEFORE WARMUP 2 wrong third time':
+    '5f6f4987-dc99-4850-8984-ea1c665835e3',
+};
