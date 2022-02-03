@@ -154,6 +154,19 @@ export const act3Scenes = {
       },
     ],
   },
+  '664db36f-6324-4828-a8ad-35c78f5180f1': {
+    name: 'Ankha',
+    sceneOrder: [
+      {
+        name: 'Start',
+        dialogueID: '6e1faf85-06a0-452c-953a-0e4a3988dd66',
+      },
+      {
+        name: 'Freemode',
+        dialogueID: '25766a9f-440f-4464-9f79-bfb49ad684fc',
+      },
+    ],
+  },
 };
 
 export const specialDialoguesObject = {
