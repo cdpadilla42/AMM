@@ -167,6 +167,41 @@ export const act3Scenes = {
       },
     ],
   },
+  'b4f841cb-0b75-4d6e-b76f-e2bc3fddbaf5': {
+    name: 'Nenn',
+    sceneOrder: [
+      {
+        name: 'Start',
+        dialogueID: 'fabdef5e-fd4a-489b-92f0-375195b5e6ba',
+      },
+      {
+        name: 'Freemode',
+        dialogueID: 'c3d6e35a-1838-4986-829a-ab57926e3c8f',
+      },
+    ],
+  },
+  '4ff83976-69df-4123-86a8-e764f671d0f7': {
+    name: 'Stitches',
+    sceneOrder: [
+      {
+        name: 'Start',
+        dialogueID: 'd02f7cb4-7550-477c-bc14-0df30fcc48ce',
+      },
+      {
+        name: 'Pre-Photos',
+        dialogueID: 'e0eef3ca-a54f-4d23-9d45-8a308beaba6b',
+        haltMovingSceneForwardAtEndOfDialogue: true,
+      },
+      {
+        name: 'Photos',
+        dialogueID: '5a208552-f524-46c7-aefc-8eaabc09c9c8',
+      },
+      {
+        name: 'Freemode',
+        dialogueID: '42917e6c-f37d-46c9-895f-d1320f214ace',
+      },
+    ],
+  },
 };
 
 export const specialDialoguesObject = {

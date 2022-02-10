@@ -41,6 +41,7 @@ import {
   startFreeMode,
   endInquiryMode,
 } from '../store/app';
+import sceneUnlockingHandler from '../lib/sceneUnlockingHandler';
 
 const TextBox = (props) => {
   const dispatch = useDispatch();
@@ -76,6 +77,7 @@ const TextBox = (props) => {
   const [doneTyping, setDoneTyping] = useState(false);
   const [showFullText, setShowFullText] = useState(false);
   const [trailedText, setTrailedText] = useState('');
+  const [currentDialogueIDState, setCurrentDialogueIDState] = useState('');
 
   const currentAct3SceneObject = playersAct3Scenes[conversationID];
   const conversationSceneOrder = act3Scenes[conversationID]?.sceneOrder;
@@ -101,6 +103,17 @@ const TextBox = (props) => {
   useEffect(() => {
     setTrailedText('');
   }, [currentDialogueObj]);
+
+  useEffect(() => {
+    if (currentDialogueID) {
+      setCurrentDialogueIDState(currentDialogueID);
+    } else {
+      const startingScene = dialogue.find((dialogue) =>
+        dialogue?.name?.includes('Start')
+      );
+      setCurrentDialogueIDState(startingScene._id);
+    }
+  }, [currentDialogueID, dialogue]);
 
   const highlightFilter = useHighlightFilter({ items, animals });
 
@@ -322,15 +335,26 @@ const TextBox = (props) => {
           }
         } else {
           // normal leaving procedure. Save new scene state here
-          history.push('/act-three');
+          const currentScene = conversationSceneOrder[currentSceneIndex];
           const nextScene = conversationSceneOrder[currentSceneIndex + 1];
-          if (nextScene) {
+          if (
+            nextScene &&
+            !currentScene.haltMovingSceneForwardAtEndOfDialogue
+          ) {
             saveNewAct3SceneToLocalStorage(conversationID, nextScene);
             props.updateScenes({
               conversationID,
               upcomingScene: nextScene,
             });
           }
+          const sceneUnlockingHandlerObj = sceneUnlockingHandler(
+            currentDialogueIDState
+          );
+          if (sceneUnlockingHandlerObj) {
+            const { updateReduxSceneObj } = sceneUnlockingHandlerObj;
+            if (updateReduxSceneObj) props.updateScenes(updateReduxSceneObj);
+          }
+          history.push('/act-three');
         }
       } else {
         history.push('/');

@@ -62,6 +62,7 @@ const SelectConversation = () => {
 
   return (
     <ImageLoader disableLoading>
+      <a href="/act-three">Act Three Select</a>
       <button type="button" onClick={handleClearSNotesClick}>
         Clear Agent S Notes from Inventory
       </button>

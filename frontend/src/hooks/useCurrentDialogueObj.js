@@ -68,6 +68,7 @@ const useCurrentDialogueObj = () => {
       setCurrentDialogueObj(
         dialogueList.find((dialogue) => dialogue.name.includes('Start'))
       );
+      // In redux, save the current Dialogue ID
     } else if (currentDialogueID === 'Incorrect') {
       setCurrentDialogueObj({
         animals: [{ name: 'Agent S' }],
