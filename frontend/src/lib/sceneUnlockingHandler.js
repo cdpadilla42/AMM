@@ -1,7 +1,6 @@
 import { saveNewAct3SceneToLocalStorage } from './localStorage';
 
 const sceneUnlockingHandler = (dialogueID) => {
-  console.log({ dialogueID });
   switch (dialogueID) {
     case 'fabdef5e-fd4a-489b-92f0-375195b5e6ba': // NENN3 Start
       saveNewAct3SceneToLocalStorage('4ff83976-69df-4123-86a8-e764f671d0f7', {

@@ -202,6 +202,23 @@ export const act3Scenes = {
       },
     ],
   },
+  '27f4be58-38f3-4321-bbc9-c76e0c675c36': {
+    name: 'Merengue',
+    sceneOrder: [
+      {
+        name: 'Start',
+        dialogueID: 'f819341d-5552-418d-89d4-ebbe55bc2abd',
+      },
+      {
+        name: 'Post Cake',
+        dialogueID: '28aa1fe4-94bd-441f-a870-3bb8b50b73ba',
+      },
+      {
+        name: 'Freemode',
+        dialogueID: '9dbae51b-6d40-4796-83ef-8a9ec1315d29',
+      },
+    ],
+  },
 };
 
 export const specialDialoguesObject = {
@@ -209,4 +226,46 @@ export const specialDialoguesObject = {
     'bc05a0be-4dc1-439e-9d29-2b729e0644f8',
   'ELVIS3 BEFORE WARMUP 2 wrong third time':
     '5f6f4987-dc99-4850-8984-ea1c665835e3',
+};
+
+export const deadEndDialoguesObject = {
+  'b7412543-540f-4f11-a1ec-9e3109f8b6ff': true, // MERENGUE3 post cake 2 no
+  '387c03d0-4c59-4fa5-8ddd-32cdc85f1e77': true, // JUL3 COMEBACK2 not yet
+};
+
+export const multiSelectDialogueIDs = {
+  '41870214-5b4d-4e09-b08a-d7c78f2652a4': true, // Merengue ACT3 initial question
+  'e64bbed3-2a4f-49f1-bfa3-ad99db263aa7': true, // Merengue ACT3 incorrect
+};
+
+export const correctResponseToMultiSelect = {
+  '41870214-5b4d-4e09-b08a-d7c78f2652a4':
+    'de4053e3-a6e2-437e-95ef-6e429e0188cb', // Merengue ACT3
+  'e64bbed3-2a4f-49f1-bfa3-ad99db263aa7':
+    'de4053e3-a6e2-437e-95ef-6e429e0188cb', // Merengue ACT3 incorrect
+};
+
+export const incorrectResponseToMultiSelect = {
+  '41870214-5b4d-4e09-b08a-d7c78f2652a4':
+    'e64bbed3-2a4f-49f1-bfa3-ad99db263aa7', // Merengue ACT3
+  'e64bbed3-2a4f-49f1-bfa3-ad99db263aa7':
+    'e64bbed3-2a4f-49f1-bfa3-ad99db263aa7', // Merengue ACT3 incorrect
+};
+
+export const initiallyLockedConversations = {
+  '32bbe59e-42d3-4295-8c23-f6018ed28bb1': true, // ACT3 Sterling,
+  'd44a5dac-b32a-46b9-b86e-45e84e4dd106': true, // ACT3 Elvis,
+  'e1688c5f-218a-4656-ad96-df9a1c33b8f8': true, // ACT3 Chadder,
+  'b4f841cb-0b75-4d6e-b76f-e2bc3fddbaf5': true, // ACT3 Nenn,
+};
+
+export const dialoguesThatUnlockConversations = {
+  '339cbdb8-230b-4453-a218-28015b32bc5c':
+    '32bbe59e-42d3-4295-8c23-f6018ed28bb1', // MERENGUE3 initial convo 2  => Sterling
+  '51079547-4ead-4bab-ab69-f373d5a5da01':
+    'd44a5dac-b32a-46b9-b86e-45e84e4dd106', // STERLING3 Start => Elvis
+  'de4053e3-a6e2-437e-95ef-6e429e0188cb':
+    'e1688c5f-218a-4656-ad96-df9a1c33b8f8', // MERENGUE3 post cake 3 correct items => Chadder
+  'd02f7cb4-7550-477c-bc14-0df30fcc48ce':
+    'b4f841cb-0b75-4d6e-b76f-e2bc3fddbaf5', // STITCHES3 Start => Nenn
 };

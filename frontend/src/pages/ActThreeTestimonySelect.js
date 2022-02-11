@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import { initiallyLockedConversations } from '../lib/constants';
 import {
   saveCurrentConversationIdToLocalStorage,
   setLocalStorageToJustBeforeTrial,
@@ -12,9 +13,8 @@ const ActThreeTestimonySelect = () => {
   const history = useHistory();
   // 34 items needed to go to the trial
   const dispatch = useDispatch();
-  const { userHasFullInventory, conversationsVisited } = useSelector(
-    (state) => state.inventory
-  );
+  const { userHasFullInventory, conversationsVisited, unlockedConversations } =
+    useSelector((state) => state.inventory);
 
   useEffect(() => {
     dispatch(getConversations());
@@ -24,15 +24,21 @@ const ActThreeTestimonySelect = () => {
   let conversations = useSelector((state) => state.conversations.conversations);
   // Above does not return a true array, below converts data to an array with the map method available to it
   conversations = [...conversations];
-  const actOneConversations = conversations.filter((conversation) => {
+  const actThreeConversations = conversations.filter((conversation) => {
     return conversation.act === 'c';
   });
 
   const renderCatchphraseButtons = () => {
-    return actOneConversations.map((convo) => {
+    return actThreeConversations.map((convo) => {
       const name = convo.catchphrase || convo.name;
       const thisConvoVisited = conversationsVisited[convo._id];
       // TODO This is where you'll use the constant to look up conversation ids and merge with user's state
+      if (
+        initiallyLockedConversations[convo._id] &&
+        !unlockedConversations[convo._id]
+      ) {
+        return '';
+      }
       return (
         <button key={convo._id} data-id={convo._id} onClick={handleButtonClick}>
           <span className={thisConvoVisited ? 'strike_through' : ''}>

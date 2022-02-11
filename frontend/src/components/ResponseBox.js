@@ -69,7 +69,6 @@ const ResponseBox = () => {
         );
       });
     }
-    console.log('defaulting to response options');
     if (!responseOptions) return null;
     return responseOptions.map((optionObj) => {
       const blankSpacerTextForHighlight = optionObj.text.replace(
@@ -89,6 +88,7 @@ const ResponseBox = () => {
   }
 
   function handleClick(followingDialogueID) {
+    console.log(followingDialogueID);
     if (currentDialogueObj?.isFinalDialogue) {
       dispatch(resetConversationToStart());
       if (currentTestimonyID === gameStartDialogueID) {

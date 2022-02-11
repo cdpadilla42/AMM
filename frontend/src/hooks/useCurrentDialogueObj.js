@@ -29,8 +29,6 @@ const useCurrentDialogueObj = () => {
     return scene;
   };
 
-  console.log(currentAct);
-
   useEffect(() => {
     if (inquiryDialogue) {
       // currentDialogueObj set to inquiry object
@@ -128,7 +126,6 @@ const useCurrentDialogueObj = () => {
         isFinalDialogue: true,
       });
     } else {
-      console.log('HITTING DEFAULT');
       setCurrentDialogueObj(
         dialogueList.find((dialogue) => dialogue._id === currentDialogueID)
       );
@@ -144,8 +141,6 @@ const useCurrentDialogueObj = () => {
     currentInquiryDialogue,
     params.id,
   ]);
-
-  console.log({ currentDialogueObj });
 
   return currentDialogueObj;
 };

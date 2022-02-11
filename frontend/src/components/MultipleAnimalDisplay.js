@@ -20,8 +20,6 @@ const MultipleAnimalDisplay = () => {
   const { ...currentPhraseObj } =
     dialogue.phrase?.[currentDialoguePosition] || {};
 
-  console.log({ speaker, emotion });
-
   const [animalsState, setAnimalsState] = useState([]);
   const [showMobileOptimizedImages, setShowMobileOptimizedImages] =
     useState(false);
@@ -35,9 +33,9 @@ const MultipleAnimalDisplay = () => {
   //   });
   // });
 
-  useEffect(() => {
-    console.log({ animalsState });
-  }, [animalsState]);
+  // useEffect(() => {
+  //   console.log({ animalsState });
+  // }, [animalsState]);
 
   useEffect(() => {
     if (isInitialPhrase) {
@@ -54,7 +52,6 @@ const MultipleAnimalDisplay = () => {
       dispatch(setSceneShifted(false));
     }
     handleChangeFromPhrase(initialState);
-    console.log({ currentDialoguePosition, emotion, speaker, sceneShifted });
     // return () => {
     //   setAnimalsState([]);
     // };
@@ -96,13 +93,11 @@ const MultipleAnimalDisplay = () => {
     if (speaker === 'Everyone') return;
 
     if (currentPhraseObj.changePosition || manualChange) {
-      console.log({ manualChange });
       // set the speakers
 
       // Handle new animals
       if (currentPhraseObj.leftAnimalCentered) {
         newState = [{ name: speaker }];
-        console.log({ newState });
       } else {
         if (
           currentPhraseObj.leftAnimal &&
@@ -179,7 +174,6 @@ const MultipleAnimalDisplay = () => {
 
     indexToChange = newState?.findIndex((animal) => animal.name === speaker);
     if (indexToChange === -1) indexToChange = 0;
-    console.log({ indexToChange, newState });
     if (!newState[indexToChange]) return;
     // if (isEqual(newState, animalsState)) return;
     setAnimalsState(() => {

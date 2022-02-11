@@ -42,9 +42,12 @@ import {
 } from '../lib/localStorage';
 import InventoryButton from '../components/InventoryButton';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
+import { useUnlockConversation } from '../hooks/useSaveUtility';
+import { dialoguesThatUnlockConversations } from '../lib/constants';
 
 const Testimony = (props) => {
   const dispatch = useDispatch();
+
   const dialogue = useCurrentDialogueObj();
   const isInventoryOpen = useSelector(
     (state) => state.dialogue.isInventoryOpen

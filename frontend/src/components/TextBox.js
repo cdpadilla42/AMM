@@ -34,7 +34,11 @@ import {
   saveNewAct3SceneToLocalStorage,
   updateSNoteInLocalStorageInventory,
 } from '../lib/localStorage';
-import { act3Scenes, gameStartDialogueID } from '../lib/constants';
+import {
+  act3Scenes,
+  dialoguesThatUnlockConversations,
+  gameStartDialogueID,
+} from '../lib/constants';
 import {
   endInquiryDialogue,
   startInquiryMode,
@@ -42,9 +46,12 @@ import {
   endInquiryMode,
 } from '../store/app';
 import sceneUnlockingHandler from '../lib/sceneUnlockingHandler';
+import { isDeadEndDialogue } from '../lib/util';
+import { useUnlockConversation } from '../hooks/useSaveUtility';
 
 const TextBox = (props) => {
   const dispatch = useDispatch();
+  const unlockConversation = useUnlockConversation();
   const textRef = useRef(null);
   const history = useHistory();
   const { id: conversationID } = useParams();
@@ -79,6 +86,8 @@ const TextBox = (props) => {
   const [trailedText, setTrailedText] = useState('');
   const [currentDialogueIDState, setCurrentDialogueIDState] = useState('');
 
+  console.log(currentDialogueIDState);
+
   const currentAct3SceneObject = playersAct3Scenes[conversationID];
   const conversationSceneOrder = act3Scenes[conversationID]?.sceneOrder;
   const currentSceneIndex = useMemo(() => {
@@ -104,15 +113,26 @@ const TextBox = (props) => {
     setTrailedText('');
   }, [currentDialogueObj]);
 
-  useEffect(() => {
-    if (currentDialogueID) {
-      setCurrentDialogueIDState(currentDialogueID);
-    } else {
-      const startingScene = dialogue.find((dialogue) =>
-        dialogue?.name?.includes('Start')
-      );
-      setCurrentDialogueIDState(startingScene._id);
+  const checkForUnlockedDialogue = () => {
+    const unlockedDialogue =
+      dialoguesThatUnlockConversations[currentDialogueIDState];
+    console.log({ currentDialogueIDState, unlockedDialogue });
+    if (unlockedDialogue) {
+      unlockConversation(unlockedDialogue);
     }
+  };
+
+  useEffect(() => {
+    let newDialogueID;
+    if (currentDialogueID) {
+      newDialogueID = currentDialogueID;
+    } else {
+      newDialogueID = dialogue.find((dialogue) =>
+        dialogue?.name?.includes('Start')
+      )?._id;
+    }
+    setCurrentDialogueIDState(newDialogueID);
+    checkForUnlockedDialogue();
   }, [currentDialogueID, dialogue]);
 
   const highlightFilter = useHighlightFilter({ items, animals });
@@ -330,7 +350,6 @@ const TextBox = (props) => {
           if (isLeaving) {
             history.push('/act-three');
           } else {
-            console.log({ isLeaving });
             props.toggleResponseBox();
           }
         } else {
@@ -339,7 +358,8 @@ const TextBox = (props) => {
           const nextScene = conversationSceneOrder[currentSceneIndex + 1];
           if (
             nextScene &&
-            !currentScene.haltMovingSceneForwardAtEndOfDialogue
+            !currentScene.haltMovingSceneForwardAtEndOfDialogue &&
+            !isDeadEndDialogue(currentDialogueID)
           ) {
             saveNewAct3SceneToLocalStorage(conversationID, nextScene);
             props.updateScenes({
@@ -347,6 +367,7 @@ const TextBox = (props) => {
               upcomingScene: nextScene,
             });
           }
+
           const sceneUnlockingHandlerObj = sceneUnlockingHandler(
             currentDialogueIDState
           );
@@ -354,6 +375,9 @@ const TextBox = (props) => {
             const { updateReduxSceneObj } = sceneUnlockingHandlerObj;
             if (updateReduxSceneObj) props.updateScenes(updateReduxSceneObj);
           }
+
+          checkForUnlockedDialogue();
+
           history.push('/act-three');
         }
       } else {

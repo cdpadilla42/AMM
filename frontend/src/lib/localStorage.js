@@ -13,6 +13,7 @@ const itemsInInventory = {
   trialOneLastDialogueID: '',
   act3Scenes: act3ScenesInitialState,
   specialEvents: specialEventsInitialState,
+  unlockedConversations: {},
 };
 
 /*
@@ -76,6 +77,24 @@ export const saveNewAct3SceneToLocalStorage = (
   const newScenes = { ...initialScenes, [conversationID]: newScene };
 
   storageData.act3Scenes = newScenes;
+
+  localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
+};
+
+export const unlockConversation = (conversationID) => {
+  let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
+  if (!storageData) {
+    initializeLocalStorageInventory();
+    storageData = itemsInInventory;
+  }
+
+  const initialUnlockedConversations = storageData?.unlockedConversations;
+
+  const newUnlockedConversations = { ...initialUnlockedConversations };
+
+  newUnlockedConversations[conversationID] = true;
+
+  storageData.unlockedConversations = newUnlockedConversations;
 
   localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
 };
@@ -267,6 +286,18 @@ export const getUserHasFullInventoryFromLocalStorage = () => {
 
 export const getAct3ScenesFromLocalStorage = () => {
   const res = JSON.parse(localStorage.getItem('itemsInInventory'))?.act3Scenes;
+  if (!!res) {
+    return res;
+  } else {
+    initializeLocalStorageInventory();
+    return false;
+  }
+};
+
+export const getUnlockedConversationsFromLocalStorage = () => {
+  const res = JSON.parse(
+    localStorage.getItem('itemsInInventory')
+  )?.unlockedConversations;
   if (!!res) {
     return res;
   } else {

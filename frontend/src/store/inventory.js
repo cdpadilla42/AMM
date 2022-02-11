@@ -2,6 +2,7 @@ import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import sanityClient from '../client';
 import {
   getConversationsVisitedFromLocalStorage,
+  getUnlockedConversationsFromLocalStorage,
   getUserHasFullInventoryFromLocalStorage,
   getUserItemsFromLocalStorage,
   getUserSNotesFromLocalStorage,
@@ -30,6 +31,7 @@ const initialState = {
   userPromptedForEvidence: false,
   userHasFullInventory: false,
   conversationsVisited: {},
+  unlockedConversations: {},
 };
 
 // Actions
@@ -100,6 +102,7 @@ export const markUserHasFullInventory = createAction(
 export const addToConversationsVisited = createAction(
   'ADD_TO_CONVERSATIONS_VISITED'
 );
+export const unlockConversation = createAction('UNLOCK_CONVERSATION');
 
 // Reducer
 
@@ -119,12 +122,14 @@ function inventoryReducer(state = initialState, action) {
       const userHasFullInventory = getUserHasFullInventoryFromLocalStorage();
       const userSNotes = getUserSNotesFromLocalStorage();
       const conversationsVisited = getConversationsVisitedFromLocalStorage();
+      const unlockedConversations = getUnlockedConversationsFromLocalStorage();
       return {
         ...state,
         userItems,
         userSNotes,
         userHasFullInventory,
         conversationsVisited,
+        unlockedConversations,
       };
     case addToInventory.toString():
       const newItems = [...state.userItems, payload];
@@ -152,6 +157,12 @@ function inventoryReducer(state = initialState, action) {
         [payload]: true,
       };
       return { ...state, conversationsVisited: newConversations };
+    case unlockConversation.toString():
+      const newUnlockedConversations = {
+        ...state.unlockedConversations,
+        [payload]: true,
+      };
+      return { ...state, unlockedConversations: newUnlockedConversations };
     default:
       return state;
   }

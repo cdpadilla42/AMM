@@ -24,17 +24,26 @@ import useIsFreeMode from '../hooks/useIsFreeMode';
 import { useParams } from 'react-router-dom';
 import { incrementElvisAct3EvidenceCount } from '../store/specialEvents';
 import { useSaveSpecialEvent } from '../hooks/useSaveUtility';
+import {
+  correctResponseToMultiSelect,
+  incorrectResponseToMultiSelect,
+  multiSelectDialogueIDs,
+} from '../lib/constants';
 
 const Inventory = () => {
+  const dispatch = useDispatch();
   const isFreeMode = useIsFreeMode();
+
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState('');
   const [isShowingPeople, setIsShowingPeople] = useState(false);
   const [isShowingAddItem, setIsShowingAddItem] = useState(false);
   const [errorClass, setErroClass] = useState('');
-  const dispatch = useDispatch();
+  const [itemsSelected, setItemsSelected] = useState({});
 
-  const isMapOpen = useSelector((state) => state.dialogue.isMapOpen);
+  const { isMapOpen, currentDialogueID } = useSelector(
+    (state) => state.dialogue
+  );
   const fullItemsInventory = useSelector((store) => store.inventory.items);
   const { inventoryScreen } = useSelector((store) => store.dialogue);
   const { userItems, userPromptedForEvidence, mapLocations } = useSelector(
@@ -47,13 +56,23 @@ const Inventory = () => {
   const currentDialogueObj = useCurrentDialogueObj();
   const inventoryPrompt = currentDialogueObj?.inventoryPrompt;
 
+  const { lastEvidenceList } = useSelector((store) => store.dialogue);
+
   const requiredEvidence = currentDialogueObj?.requiredEvidence;
   const evidenceWithPaths = currentDialogueObj?.evidenceWithPaths;
   const useLastAvailableEvidenceList =
     currentDialogueObj?.useLastAvailableEvidenceList;
   const nextResponseID =
     currentDialogueObj.followingDialogueFromEvidence?._id ||
-    currentDialogueObj.responseOptions?.[0]?.followingDialogue._id;
+    currentDialogueObj.responseOptions?.[0]?.followingDialogue?._id;
+
+  const isMultiSelect = useMemo(() => {
+    return multiSelectDialogueIDs[currentDialogueID];
+  }, [currentDialogueID]);
+
+  const multiSelectEvidence = useMemo(() => {
+    return useLastAvailableEvidenceList ? lastEvidenceList : requiredEvidence;
+  }, [useLastAvailableEvidenceList, lastEvidenceList, requiredEvidence]);
 
   useEffect(() => {
     if (inventoryScreen === 'animalNotes') {
@@ -74,6 +93,27 @@ const Inventory = () => {
   useEffect(() => {
     return () => dispatch(hideHealthBar());
   }, []);
+
+  function handleItemClick(e) {
+    if (isMultiSelect) {
+      // handle multiclick
+      handleMultiClick(e);
+    } else {
+      displayItemDetails(e);
+    }
+  }
+
+  function handleMultiClick(e) {
+    const newItemsSelected = { ...itemsSelected };
+    const selectedItemName = e.currentTarget.dataset.name;
+    // add or remove to state
+    if (itemsSelected[selectedItemName]) {
+      delete newItemsSelected[selectedItemName];
+    } else {
+      newItemsSelected[selectedItemName] = true;
+    }
+    setItemsSelected(newItemsSelected);
+  }
 
   function displayItemDetails(e) {
     const itemName = e.currentTarget.dataset.name;
@@ -135,6 +175,30 @@ const Inventory = () => {
     dispatch(toggleInventory());
   };
 
+  const handleMultiPresent = () => {
+    const incorrectDialogue = incorrectResponseToMultiSelect[currentDialogueID];
+    const correctDialogue = correctResponseToMultiSelect[currentDialogueID];
+    if (Object.keys(itemsSelected).length === multiSelectEvidence.length) {
+      const matchedItemsCount = multiSelectEvidence.reduce((count, item) => {
+        if (itemsSelected[item.name]) count++;
+        return count;
+      }, 0);
+      if (matchedItemsCount === multiSelectEvidence.length) {
+        dispatch(switchConversation(correctDialogue));
+        dispatch(toggleInventory());
+        // dispatch(markUserNotPromptedForEvidence());
+        dispatch(hideHealthBar());
+        setItemsSelected({});
+        return;
+      }
+    }
+    // Else, wrong response
+    dispatch(switchConversation(incorrectDialogue));
+    dispatch(toggleInventory());
+    // dispatch(markUserNotPromptedForEvidence());
+    dispatch(hideHealthBar());
+  };
+
   function renderInventory() {
     // Below is where you can swap in and out fullItemsInventory and the inventory based on the user inventory
     const selectedItems = isShowingPeople
@@ -175,7 +239,8 @@ const Inventory = () => {
         <div
           key={item.name}
           data-name={item.name}
-          onClick={displayItemDetails}
+          data-selected={itemsSelected[item.name]}
+          onClick={handleItemClick}
           className="inventory_item"
         >
           <div className="image_wrapper">
@@ -226,21 +291,41 @@ const Inventory = () => {
     return userPromptedForEvidence && inventoryPrompt;
   }, [userPromptedForEvidence, inventoryPrompt]);
 
+  const renderPromptMessage = () => {
+    if (
+      isMultiSelect &&
+      Object.keys(itemsSelected).length === multiSelectEvidence?.length
+    ) {
+      return (
+        <button
+          className={`inventory_prompt present`}
+          onClick={handleMultiPresent}
+        >
+          Present
+        </button>
+      );
+    } else {
+      return (
+        <div
+          className={`inventory_prompt${
+            userPromptedForEvidence ? '' : ' transparent'
+          }`}
+        >
+          {promptMessage}
+        </div>
+      );
+    }
+  };
+
   return (
     <div
       className={`inventory_container${isInventoryOpen ? '' : ' off_screen'}`}
     >
       <StyledInventory>
         <div className="inventory_header">
-          <button onClick={showItems} disabled={userPromptedForEvidence}>
-            Items
-          </button>
-          <button onClick={showPeopole} disabled={userPromptedForEvidence}>
-            Animals
-          </button>
-          <button onClick={showMap} disabled={userPromptedForEvidence}>
-            Map
-          </button>
+          <button onClick={showItems}>Items</button>
+          <button onClick={showPeopole}>Animals</button>
+          <button onClick={showMap}>Map</button>
           <button onClick={toggleShowingAddItem}>Add to inventory</button>
           {userPromptedForEvidence && !isFreeMode ? (
             <button
@@ -255,13 +340,7 @@ const Inventory = () => {
             </button>
           )}
         </div>
-        <div
-          className={`inventory_prompt${
-            userPromptedForEvidence ? '' : ' transparent'
-          }`}
-        >
-          {promptMessage}
-        </div>
+        {renderPromptMessage()}
         {renderMainDisplay()}
       </StyledInventory>
     </div>
@@ -345,6 +424,13 @@ const StyledInventory = styled.div`
     &.transparent {
       background-color: rgba(0, 0, 0, 0) !important;
     }
+
+    &.present {
+      margin: 0 auto;
+      background-color: #34b3a5;
+      color: var(--cream);
+      display: inherit;
+    }
   }
 
   .inventory_grid_container {
@@ -393,6 +479,11 @@ const StyledInventory = styled.div`
     cursor: pointer;
     &:hover {
       color: #34b3a5;
+    }
+
+    &[data-selected='true'] {
+      background-color: #34b3a5;
+      color: var(--cream);
     }
   }
 
@@ -560,7 +651,7 @@ export const ItemDetailsDisplay = ({
 
   function presentItem() {
     const setMatchedEvidenceFromSinglePathEvidence = (passedEvidenceList) => {
-      const evidenceList = passedEvidenceList || evidenceWithPaths;
+      const evidenceList = passedEvidenceList || requiredEvidence;
       if (Array.isArray(evidenceList)) {
         matchedEvidence = evidenceList.find(
           (item) => item.name === itemObj.name
