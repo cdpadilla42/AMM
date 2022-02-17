@@ -269,6 +269,14 @@ export default {
               fieldset: 'imageFieldset',
               hidden: ({ parent }) => !parent.showImage,
             },
+            {
+              title: 'Objection Dialogue',
+              name: 'objectionDialogue',
+              type: 'reference',
+              to: [{ type: 'dialogue' }],
+              description:
+                'Filling out this field makes the objection button appear. Reference a dialogue to jump to.',
+            },
           ],
         },
       ],

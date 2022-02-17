@@ -44,6 +44,7 @@ import InventoryButton from '../components/InventoryButton';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import { useUnlockConversation } from '../hooks/useSaveUtility';
 import { dialoguesThatUnlockConversations } from '../lib/constants';
+import ObjectionButton from '../components/ObjectionButton';
 
 const Testimony = (props) => {
   const dispatch = useDispatch();
@@ -142,6 +143,7 @@ const Testimony = (props) => {
           </div>
           <TestimonyImage />
           <ResponseBox />
+          <ObjectionButton />
           <TextBox />
         </div>
       </StyledContainer>

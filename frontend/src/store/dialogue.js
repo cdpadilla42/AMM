@@ -28,6 +28,7 @@ const initialState = {
   loading: true,
   isLeaving: false,
   lastEvidenceList: [],
+  storedDialoguePosition: null,
 };
 
 // Actions
@@ -50,6 +51,13 @@ export const closeMap = createAction('CLOSE_MAP');
 export const switchConversation = createAction('SWITCH_CONVERSATION');
 export const resetDialogue = createAction('RESET_DIALOGUE');
 export const setLeaving = createAction('SER_LEAVING');
+export const jumpToDialoguePosition = createAction('JUMP_TO_DIALOGUE_POSITION');
+export const jumpToDialoguePositionAndConversation = createAction(
+  'JUMP_TO_DIALOGUE_POSITION_AND_CONVERSATION'
+);
+export const storeDialoguePositionForLater = createAction(
+  'STORE_DIALOGUE_POSITION_FOR_LATER'
+);
 export const saveAsLastEvidenceList = createAction(
   'SAVE_AS_LAST_EVIDENCE_LIST'
 );
@@ -75,6 +83,7 @@ export const getDialogue = createAsyncThunk(
 					link, sNotesEventRef->{name, count}, sNotesEventTriggered, sNotesEventType, 
           changePosition, leftAnimal->{name}, rightAnimal->{name}, leftOrientation, rightOrientation, leftAnimalCentered, centeredOrientation, leftEmotion->{emotion}, rightEmotion->{emotion},
           showImage,
+          objectionDialogue->{_id},
           "imageUrl": image.asset->url
 				},
 				"responseOptions": responseOptions[]{
@@ -123,6 +132,18 @@ function dialogueReducer(state = initialState, action) {
       return {
         ...state,
         currentDialoguePosition: state.currentDialoguePosition - 1,
+      };
+    case jumpToDialoguePosition.toString():
+      return {
+        ...state,
+        currentDialoguePosition: payload,
+      };
+    case jumpToDialoguePositionAndConversation.toString():
+      const { position, dialogueID } = payload;
+      return {
+        ...state,
+        currentDialogueID: dialogueID,
+        currentDialoguePosition: position,
       };
     case resetDialoguePosition.toString():
       return {
@@ -240,6 +261,11 @@ function dialogueReducer(state = initialState, action) {
       return {
         ...state,
         lastEvidenceList: payload,
+      };
+    case storeDialoguePositionForLater.toString():
+      return {
+        ...state,
+        storedDialoguePosition: payload,
       };
     default:
       return state;

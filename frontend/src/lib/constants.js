@@ -269,3 +269,19 @@ export const dialoguesThatUnlockConversations = {
   'd02f7cb4-7550-477c-bc14-0df30fcc48ce':
     'b4f841cb-0b75-4d6e-b76f-e2bc3fddbaf5', // STITCHES3 Start => Nenn
 };
+
+// Key is conversationID. Value is returning DialogueID
+export const trialTestimonyConversationIDs = {
+  'cea264b4-3530-4521-8fc2-f6c0e92b1745':
+    '966777cd-6fe8-4306-94b6-6cbdff81039e', // ACT2 Julian
+};
+
+// Key is starting conversationID. Value is leading to conversationID
+export const connectedConversations = {
+  // act2 Trial 1 => 2
+  'd2c9e39a-269d-4e45-9762-43156e860643':
+    'cea264b4-3530-4521-8fc2-f6c0e92b1745',
+  // act2 Trial 2 => 3
+  'cea264b4-3530-4521-8fc2-f6c0e92b1745':
+    '0dbabd60-007b-45a6-83bb-f7616d341a15',
+};

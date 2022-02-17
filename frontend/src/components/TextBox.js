@@ -12,6 +12,7 @@ import {
   switchConversation,
   switchConversationFromIncorrect,
   resetConversationToStart,
+  jumpToDialoguePositionAndConversation,
 } from '../store/dialogue';
 import {
   addToSNotesList,
@@ -36,8 +37,10 @@ import {
 } from '../lib/localStorage';
 import {
   act3Scenes,
+  connectedConversations,
   dialoguesThatUnlockConversations,
   gameStartDialogueID,
+  trialTestimonyConversationIDs,
 } from '../lib/constants';
 import {
   endInquiryDialogue,
@@ -65,6 +68,7 @@ const TextBox = (props) => {
     isInventoryOpen,
     isLeaving,
     returnToDialoguePositionAfterIncorrect,
+    storedDialoguePosition,
   } = useSelector((state) => state.dialogue);
   const {
     items,
@@ -106,6 +110,8 @@ const TextBox = (props) => {
 
   const useLastAvailableEvidenceList =
     currentDialogueObj?.useLastAvailableEvidenceList;
+
+  const responseOptions = currentDialogueObj?.responseOptions;
 
   const switchToInquiryMode = currentDialogueObj?.switchToInquiryMode;
 
@@ -316,6 +322,11 @@ const TextBox = (props) => {
       isEndOfDialogue &&
       currentDialogueObj?.responseOptions?.length &&
       currentDialogueObj?.isFinalDialogue;
+
+    const trialTestimonyReturningDialogueID =
+      trialTestimonyConversationIDs[conversationID];
+    const isEndOfDialogueInTrialTestimony =
+      isEndOfDialogue && trialTestimonyReturningDialogueID;
     // if there is trailing dialogue...
     if (!isEndOfDialogue && phrases[currentDialoguePosition].link) {
       // add on to the end of the current text and change emotions
@@ -325,6 +336,24 @@ const TextBox = (props) => {
     } else if (isEndOfDialogue && currentDialogueObj.name === 'Incorrect') {
       props.switchConversationFromIncorrect(prevDialogueID);
       handleOpenInventory();
+    } else if (isEndOfDialogueInTrialTestimony) {
+      if (
+        currentDialogueID === '966777cd-6fe8-4306-94b6-6cbdff81039e' ||
+        currentDialogueID === null
+      ) {
+        // handle diverging paths, either agent S loop
+        props.switchConversation('75f01638-63e4-4cc7-8e7d-f39a1f3e9036');
+        // Or moving forward
+        const nextConversationID = connectedConversations[conversationID];
+        history.push(`/testimony/${nextConversationID}`);
+      } else {
+        // switch back to prev dialogue and position
+        const returningDialoguePosition = storedDialoguePosition + 1;
+        props.jumpToDialoguePositionAndConversation({
+          position: returningDialoguePosition,
+          dialogueID: trialTestimonyReturningDialogueID,
+        });
+      }
     } else if (
       isEndOfDialogue &&
       (currentDialogueObj.needEvidence ||
@@ -342,7 +371,12 @@ const TextBox = (props) => {
       props.fullRecovery();
       addConversationAsVisitedToLocalStorage(currentTestimonyID);
       props.addToConversationsVisited(currentTestimonyID);
-      if (currentTestimonyID === gameStartDialogueID || currentAct === 'a') {
+      if (isEndOfDialogue && connectedConversations[conversationID]) {
+        history.push(`/testimony/${connectedConversations[conversationID]}`);
+      } else if (
+        currentTestimonyID === gameStartDialogueID ||
+        currentAct === 'a'
+      ) {
         history.push('/act-one');
       } else if (currentAct === 'c') {
         // if current scene state is free mode
@@ -396,7 +430,7 @@ const TextBox = (props) => {
           upcomingScene: nextScene,
         });
       }
-    } else if (isEndOfDialogue) {
+    } else if (isEndOfDialogue && responseOptions) {
       props.toggleResponseBox();
     } else {
       setDoneTyping(false);
@@ -451,9 +485,11 @@ const TextBox = (props) => {
         style={{
           backgroundColor:
             phrases?.[currentDialoguePosition]?.speaker?.color?.hex || 'grey',
+          height: '48px',
+          boxSizing: 'border-box',
         }}
       >
-        {phrases?.[currentDialoguePosition]?.speaker.name}
+        {phrases?.[currentDialoguePosition]?.speaker.name || '?????'}
       </div>
       <div
         className={`text_box__main${isGrey ? ' grey' : ''}`}
@@ -506,6 +542,7 @@ function mapDispatchToProps(dispatch) {
       startInquiryMode,
       startFreeMode,
       endInquiryMode,
+      jumpToDialoguePositionAndConversation,
     },
     dispatch
   );
