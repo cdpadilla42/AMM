@@ -221,6 +221,10 @@ export const act3Scenes = {
   },
 };
 
+export const conversationIDConstants = {
+  ACT2_TRIAL_2: 'cea264b4-3530-4521-8fc2-f6c0e92b1745',
+};
+
 export const specialDialoguesObject = {
   'ELVIS3 BEFORE WARMUP 2 wrong sixth time':
     'bc05a0be-4dc1-439e-9d29-2b729e0644f8',
@@ -272,16 +276,19 @@ export const dialoguesThatUnlockConversations = {
 
 // Key is conversationID. Value is returning DialogueID
 export const trialTestimonyConversationIDs = {
-  'cea264b4-3530-4521-8fc2-f6c0e92b1745':
+  [conversationIDConstants.ACT2_TRIAL_2]:
     '966777cd-6fe8-4306-94b6-6cbdff81039e', // ACT2 Julian
 };
 
 // Key is starting conversationID. Value is leading to conversationID
 export const connectedConversations = {
   // act2 Trial 1 => 2
-  'd2c9e39a-269d-4e45-9762-43156e860643':
-    'cea264b4-3530-4521-8fc2-f6c0e92b1745',
+  'd2c9e39a-269d-4e45-9762-43156e860643': conversationIDConstants.ACT2_TRIAL_2,
   // act2 Trial 2 => 3
-  'cea264b4-3530-4521-8fc2-f6c0e92b1745':
+  [conversationIDConstants.ACT2_TRIAL_2]:
     '0dbabd60-007b-45a6-83bb-f7616d341a15',
+};
+
+export const requiredDialoguesInJulianTrial2 = {
+  '7aa8f2af-07ba-490a-8932-be11e2e53a6a': 'dark and stormy',
 };

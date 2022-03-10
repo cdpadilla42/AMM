@@ -22,6 +22,7 @@ import {
   addToConversationsVisited,
 } from '../store/inventory';
 import { fullRecovery, showHealthBar } from '../store/health';
+import { addAct2TrialJuliantestimonyDialogue } from '../store/specialEvents';
 import { updateScenes } from '../store/act3Scenes';
 import { useHighlightFilter } from '../lib/async-typer';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
@@ -40,6 +41,7 @@ import {
   connectedConversations,
   dialoguesThatUnlockConversations,
   gameStartDialogueID,
+  requiredDialoguesInJulianTrial2,
   trialTestimonyConversationIDs,
 } from '../lib/constants';
 import {
@@ -79,6 +81,9 @@ const TextBox = (props) => {
   const { conversation } = useSelector((state) => state.conversations);
   const { inquiryDialogue, freeMode, inquiryMode } = useSelector(
     (state) => state.app
+  );
+  const { act2TrialJulianTestimonyDialoguesPassed } = useSelector(
+    (state) => state.specialEvent
   );
   const playersAct3Scenes = useSelector((state) => state.act3Scenes);
   const currentTestimonyID = conversation?.[0]?._id;
@@ -341,12 +346,32 @@ const TextBox = (props) => {
         currentDialogueID === '966777cd-6fe8-4306-94b6-6cbdff81039e' ||
         currentDialogueID === null
       ) {
-        // handle diverging paths, either agent S loop
-        props.switchConversation('75f01638-63e4-4cc7-8e7d-f39a1f3e9036');
-        // Or moving forward
-        const nextConversationID = connectedConversations[conversationID];
-        history.push(`/testimony/${nextConversationID}`);
+        // check if the objects match keys
+        let hasUserPassedAllRequiredDialoguesTrial2 = true;
+        Object.keys(requiredDialoguesInJulianTrial2).forEach((dialogue) => {
+          if (!act2TrialJulianTestimonyDialoguesPassed[dialogue]) {
+            hasUserPassedAllRequiredDialoguesTrial2 = false;
+          }
+        });
+        if (!hasUserPassedAllRequiredDialoguesTrial2) {
+          // handle diverging paths, either agent S loop
+          props.jumpToDialoguePositionAndConversation({
+            position: 0,
+            dialogueID: '75f01638-63e4-4cc7-8e7d-f39a1f3e9036',
+          });
+        } else {
+          // Or moving forward
+          const nextConversationID = connectedConversations[conversationID];
+          history.push(`/testimony/${nextConversationID}`);
+        }
       } else {
+        // Save dialogue if needed as passed
+        if (requiredDialoguesInJulianTrial2[currentDialogueID]) {
+          props.addAct2TrialJuliantestimonyDialogue({
+            [currentDialogueID]:
+              requiredDialoguesInJulianTrial2[currentDialogueID],
+          });
+        }
         // switch back to prev dialogue and position
         const returningDialoguePosition = storedDialoguePosition + 1;
         props.jumpToDialoguePositionAndConversation({
@@ -543,6 +568,7 @@ function mapDispatchToProps(dispatch) {
       startFreeMode,
       endInquiryMode,
       jumpToDialoguePositionAndConversation,
+      addAct2TrialJuliantestimonyDialogue,
     },
     dispatch
   );
