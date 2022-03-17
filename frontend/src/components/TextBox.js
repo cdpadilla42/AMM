@@ -343,6 +343,12 @@ const TextBox = (props) => {
       handleOpenInventory();
     } else if (isEndOfDialogueInTrialTestimony) {
       if (
+        currentDialogueObj.needEvidence ||
+        currentDialogueObj.multiBranchEvidence
+      ) {
+        handleOpenInventory();
+      } else if (
+        // Act 2 Julian
         currentDialogueID === '966777cd-6fe8-4306-94b6-6cbdff81039e' ||
         currentDialogueID === null
       ) {
@@ -373,7 +379,10 @@ const TextBox = (props) => {
           });
         }
         // switch back to prev dialogue and position
-        const returningDialoguePosition = storedDialoguePosition + 1;
+        let returningDialoguePosition = storedDialoguePosition + 1;
+        if (currentDialogueID === '75f01638-63e4-4cc7-8e7d-f39a1f3e9036') {
+          returningDialoguePosition--;
+        }
         props.jumpToDialoguePositionAndConversation({
           position: returningDialoguePosition,
           dialogueID: trialTestimonyReturningDialogueID,

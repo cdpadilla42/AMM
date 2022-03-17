@@ -86,9 +86,35 @@ const useCurrentDialogueObj = () => {
         ],
         name: 'Incorrect',
       });
+    } else if (currentDialogueID === 'Julian Trial 2 Forfit') {
+      setCurrentDialogueObj({
+        animals: [{ name: 'Julian' }],
+        phrase: [
+          {
+            emotion: {
+              emotion: 'Smirking',
+            },
+            speaker: {
+              name: 'Julian',
+              color: {
+                hex: '#1e28e1',
+              },
+            },
+            text: 'Not so clever, are you detectives?',
+          },
+        ],
+        name: 'Julian Trial 2 Forfit Incorrect',
+      });
     } else if (currentDialogueID === 'Incorrect Elvis3') {
       const incorrectScene = dialogueList.find((dialogue) =>
         dialogue?._id?.includes('d5e6e234-a8b9-4dfd-87fe-7fa8f00467ab')
+      );
+      setCurrentDialogueObj(incorrectScene);
+    } else if (currentDialogueID === 'Julian Trial 2 Forfit') {
+      const incorrectScene = dialogueList.find((dialogue) =>
+        dialogue?._id?.includes(
+          specialDialoguesObject['ACT2 JULIAN TRIAL TAUNT']
+        )
       );
       setCurrentDialogueObj(incorrectScene);
     } else if (currentDialogueID === 'Incorrect Elvis3 third time') {

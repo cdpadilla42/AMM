@@ -230,6 +230,7 @@ export const specialDialoguesObject = {
     'bc05a0be-4dc1-439e-9d29-2b729e0644f8',
   'ELVIS3 BEFORE WARMUP 2 wrong third time':
     '5f6f4987-dc99-4850-8984-ea1c665835e3',
+  'ACT2 JULIAN TRIAL TAUNT': 'bb659b86-fb10-47e9-8b94-3f693ed53196',
 };
 
 export const deadEndDialoguesObject = {
@@ -290,5 +291,6 @@ export const connectedConversations = {
 };
 
 export const requiredDialoguesInJulianTrial2 = {
-  '7aa8f2af-07ba-490a-8932-be11e2e53a6a': 'dark and stormy',
+  '39448cc8-dfd4-484f-9037-fbaf3c7c8d4d': 'dark and stormy',
+  'cae65585-487b-438f-92b3-8e99092f4a55': 'and before he could say anything',
 };

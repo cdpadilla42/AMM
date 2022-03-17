@@ -202,7 +202,7 @@ const ImageLoader = ({ children, disableLoading }) => {
     setTimeout(() => {
       setTransitioning(false);
       setLoading(false);
-    }, 10000);
+    }, 2000);
     // 2. On unmount, reset loading state
     return () => setLoading(true);
   }, []);
