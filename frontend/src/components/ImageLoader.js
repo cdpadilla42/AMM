@@ -47,7 +47,7 @@ const ImageLoader = ({ children, disableLoading }) => {
     dialogues.forEach((dialogue) => {
       if (!dialogue.phrase) return [{}, 0];
       dialogue.phrase.forEach((phrase) => {
-        const speaker = phrase.speaker.name;
+        const speaker = phrase?.speaker?.name;
         const { emotion } = phrase.emotion;
         // TODO Temporary, remove for release
         if (!validAnimalSpriteCollections[speaker]) return;
@@ -198,7 +198,7 @@ const ImageLoader = ({ children, disableLoading }) => {
 
   // Edges
   useEffect(() => {
-    // 1. If loading takes longer than 10 seconds, Go on to the dialogue screen
+    // 1. If loading takes longer than 2 seconds, Go on to the dialogue screen
     setTimeout(() => {
       setTransitioning(false);
       setLoading(false);
