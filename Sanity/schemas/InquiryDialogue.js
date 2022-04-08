@@ -48,6 +48,13 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      title: 'Prereq Ref',
+      name: 'prereqRef',
+      type: 'reference',
+      description: 'If required, reference the prereq by name',
+      to: [{ type: 'prereq' }],
+    },
+    {
       title: 'Personal Notes',
       name: 'personalNotes',
       description: "For your use only, won't show up on the site anywhere",

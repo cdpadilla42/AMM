@@ -19,6 +19,7 @@ const useCurrentDialogueObj = () => {
   const actThreeScenes = useSelector((state) => state.act3Scenes);
   const { inquiryDialogue } = useSelector((state) => state.app);
   const { currentInquiryDialogue } = useSelector((state) => state.inquiry);
+  const { prereqs } = useSelector((state) => state.inventory);
   const params = useParams();
 
   const [currentDialogueObj, setCurrentDialogueObj] = useState({});
@@ -32,11 +33,37 @@ const useCurrentDialogueObj = () => {
   useEffect(() => {
     if (inquiryDialogue) {
       // currentDialogueObj set to inquiry object
-      setCurrentDialogueObj(
-        inquiryList.find(
-          (inquiryObj) => inquiryObj.name === currentInquiryDialogue
-        )
+      const currentInquiryObj = inquiryList.find(
+        (inquiryObj) => inquiryObj.name === currentInquiryDialogue
       );
+
+      if (currentInquiryObj?.prereqRef?.name) {
+        if (!prereqs[currentInquiryObj.prereqRef.name]) {
+          setCurrentDialogueObj(
+            // false one
+            {
+              animals: [{ name: 'Agent S' }],
+              phrase: [
+                {
+                  emotion: {
+                    emotion: 'normal',
+                  },
+                  speaker: {
+                    name: 'Agent S',
+                    color: {
+                      hex: '#1e28e1',
+                    },
+                  },
+                  text: 'Oh! We should ask about that later....',
+                },
+              ],
+              name: 'Prereq',
+            }
+          );
+          return;
+        }
+      }
+      setCurrentDialogueObj(currentInquiryObj);
       return;
     }
 
@@ -150,6 +177,7 @@ const useCurrentDialogueObj = () => {
         ],
         name: 'Come Back Later',
         isFinalDialogue: true,
+        switchToInquiryMode: true,
       });
     } else {
       setCurrentDialogueObj(

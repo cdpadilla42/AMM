@@ -1,4 +1,5 @@
 export const gameStartDialogueID = '729d0b36-6021-4843-8e09-da92c651022f';
+export const lastActTwoDialogueID = 'a55bde30-352d-430f-b86e-85cb2f662c2a';
 
 export const itemsInInventoryAllButTheProphecy = {
   items: [
@@ -293,4 +294,17 @@ export const connectedConversations = {
 export const requiredDialoguesInJulianTrial2 = {
   '39448cc8-dfd4-484f-9037-fbaf3c7c8d4d': 'dark and stormy',
   'cae65585-487b-438f-92b3-8e99092f4a55': 'and before he could say anything',
+};
+
+export const requiredConversationsVisitedBeforeTrial2 = {
+  '09b9f6f2-59f8-4858-a38d-4503977dbb89': true,
+  '10350fa4-4c5a-4128-962e-008511bd9bc3': true,
+  '2e8e6a1d-6267-4e58-8ef2-2d50edab7d28': true,
+  '7aa1ca81-9a27-4d5c-a75b-3624ca6522be': true,
+  '98b647a0-bb03-4e5c-b34f-bbdecaa6445d': true,
+  'a81fb6a7-d450-45e8-a942-e5c82fb1a812': true,
+  'b3e19861-c61c-43ec-b48d-51ae7eacbd14': true,
+  'd008519f-16c0-4ef0-b790-f5eb0cb3b0b4': true,
+  'dc7bef1f-856e-4b3d-bd79-159d321aa813': true,
+  'e6443c66-4692-4033-926f-eebdf5100efb': true,
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
@@ -20,6 +20,7 @@ const ActThreeTestimonySelect = () => {
     dispatch(getConversations());
     saveCurrentConversationIdToLocalStorage('act-one');
   }, []);
+  const [showAll, setShowAll] = useState(false);
 
   let conversations = useSelector((state) => state.conversations.conversations);
   // Above does not return a true array, below converts data to an array with the map method available to it
@@ -34,6 +35,7 @@ const ActThreeTestimonySelect = () => {
       const thisConvoVisited = conversationsVisited[convo._id];
       // TODO This is where you'll use the constant to look up conversation ids and merge with user's state
       if (
+        !showAll &&
         initiallyLockedConversations[convo._id] &&
         !unlockedConversations[convo._id]
       ) {
@@ -65,6 +67,7 @@ const ActThreeTestimonySelect = () => {
           Reset to Pre Trial Inventory
         </button> */}
         <h1>Pick a villager!</h1>
+        <button onClick={() => setShowAll(true)}>Show All</button>
         <div>
           {renderCatchphraseButtons()}
           <div className="trial_button_placeholder">

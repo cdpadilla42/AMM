@@ -9,6 +9,7 @@ import {
   saveFullInventoryToLocalSotrage,
 } from '../lib/localStorage';
 import { addToInventory, markUserHasFullInventory } from '../store/inventory';
+import isEqual from 'lodash.isequal';
 
 const AddToInventory = ({
   closeDisplay,
@@ -62,7 +63,10 @@ const AddToInventory = ({
       // (item) => item?.name.toLowerCase() === inputs.item.trim().toLowerCase()
       (item) => isItemMatch(item?.name, inputs.item)
     );
-    if (!!matchedInGameItem) {
+    if (
+      !!matchedInGameItem &&
+      (!matchedInGameItem.restrictUserAddingToInventory || true)
+    ) {
       if (userItems.includes(matchedInGameItem.name)) {
         showMessage({
           type: 'success',
@@ -76,6 +80,23 @@ const AddToInventory = ({
         if (userItems.length === 31) {
           fullInventory = true;
         }
+        const tempUserInventoryForCheckingIfFull = [...userItems];
+        tempUserInventoryForCheckingIfFull.push(matchedInGameItem.name);
+
+        const requiredEvidence = [
+          'Star Fragment',
+          'Sewing Machine',
+          'Paint Set',
+        ];
+
+        fullInventory = true;
+
+        requiredEvidence.forEach((evidence) => {
+          if (!tempUserInventoryForCheckingIfFull.includes(evidence)) {
+            fullInventory = false;
+          }
+        });
+
         // Add to users inventory
         // save to local storage
         addItemToLocalStorageInventory(matchedInGameItem.name);

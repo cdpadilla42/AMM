@@ -14,6 +14,7 @@ const itemsInInventory = {
   act3Scenes: act3ScenesInitialState,
   specialEvents: specialEventsInitialState,
   unlockedConversations: {},
+  prereqs: {}, // for inquiry mode
 };
 
 /*
@@ -143,6 +144,26 @@ export const addItemToLocalStorageInventory = (item) => {
   localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
 };
 
+export const removeItemToLocalStorageInventory = (item) => {
+  let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
+  if (!storageData) {
+    initializeLocalStorageInventory();
+    storageData = itemsInInventory;
+  }
+
+  const initialInventory = storageData?.items ?? [];
+
+  const index = initialInventory.indexOf(item);
+
+  const newInventory = [...initialInventory];
+
+  newInventory.splice(index, 1);
+
+  storageData.items = newInventory;
+
+  localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
+};
+
 export const addSNoteToLocalStorageInventory = (sNote) => {
   let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
   if (!storageData) {
@@ -178,6 +199,25 @@ export const addConversationAsVisitedToLocalStorage = (conversationID) => {
   localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
 };
 
+export const addPrereqToLocalStorage = (prereq) => {
+  let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
+  if (!storageData) {
+    initializeLocalStorageInventory();
+    storageData = itemsInInventory;
+  }
+
+  const initialPrereqs = storageData?.prereqs;
+
+  const newPrereqs = {
+    ...initialPrereqs,
+    [prereq]: true,
+  };
+
+  storageData.prereqs = newPrereqs;
+
+  localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
+};
+
 export const clearSNotesFromLocalStorage = () => {
   let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
   if (!storageData) {
@@ -204,6 +244,24 @@ export const clearItemsFromLocalStorage = () => {
   storageData.items = newInventory;
 
   localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
+};
+
+export const clearConversationHistory = () => {
+  let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
+  if (!storageData) {
+    initializeLocalStorageInventory();
+    storageData = itemsInInventory;
+  }
+
+  const newConversationsVisited = {};
+
+  storageData.conversationsVisited = newConversationsVisited;
+
+  localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
+};
+
+export const clearAllSaveData = () => {
+  localStorage.setItem('itemsInInventory', JSON.stringify(itemsInInventory));
 };
 
 export const updateSNoteInLocalStorageInventory = (sNote, index) => {
@@ -286,6 +344,16 @@ export const getUserHasFullInventoryFromLocalStorage = () => {
 
 export const getAct3ScenesFromLocalStorage = () => {
   const res = JSON.parse(localStorage.getItem('itemsInInventory'))?.act3Scenes;
+  if (!!res) {
+    return res;
+  } else {
+    initializeLocalStorageInventory();
+    return false;
+  }
+};
+
+export const getPrereqsFromLocalStorage = () => {
+  const res = JSON.parse(localStorage.getItem('itemsInInventory'))?.prereqs;
   if (!!res) {
     return res;
   } else {

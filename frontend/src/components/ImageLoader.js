@@ -48,7 +48,7 @@ const ImageLoader = ({ children, disableLoading }) => {
       if (!dialogue.phrase) return [{}, 0];
       dialogue.phrase.forEach((phrase) => {
         const speaker = phrase?.speaker?.name;
-        const { emotion } = phrase.emotion;
+        const emotion = phrase?.emotion?.emotion;
         // TODO Temporary, remove for release
         if (!validAnimalSpriteCollections[speaker]) return;
 

@@ -20,6 +20,9 @@ import {
   markUserPromptedForEvidence,
   markUserNotPromptedForEvidence,
   addToConversationsVisited,
+  removeFromInventory,
+  addToInventory,
+  addToPrereqs,
 } from '../store/inventory';
 import { fullRecovery, showHealthBar } from '../store/health';
 import { addAct2TrialJuliantestimonyDialogue } from '../store/specialEvents';
@@ -32,7 +35,10 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import ReactHtmlParser from 'react-html-parser';
 import {
   addConversationAsVisitedToLocalStorage,
+  addItemToLocalStorageInventory,
+  addPrereqToLocalStorage,
   addSNoteToLocalStorageInventory,
+  removeItemToLocalStorageInventory,
   saveNewAct3SceneToLocalStorage,
   updateSNoteInLocalStorageInventory,
 } from '../lib/localStorage';
@@ -41,6 +47,7 @@ import {
   connectedConversations,
   dialoguesThatUnlockConversations,
   gameStartDialogueID,
+  lastActTwoDialogueID,
   requiredDialoguesInJulianTrial2,
   trialTestimonyConversationIDs,
 } from '../lib/constants';
@@ -169,6 +176,41 @@ const TextBox = (props) => {
   const handleSNotesEvent = () => {
     // If currentPhrase data available
     if (currentPhrase && Object.keys(currentPhrase).length) {
+      // Prereq handling
+      if (
+        currentPhrase?.prereqEventTriggered &&
+        currentPhrase.prereqEventRef?.name
+      ) {
+        addPrereqToLocalStorage(currentPhrase.prereqEventRef?.name);
+        // add to redux
+        dispatch(addToPrereqs(currentPhrase.prereqEventRef.name));
+        toast(
+          `🎉  Great! ${currentPhrase.prereqEventRef.name.toUpperCase()} was added to Prereqs.`
+        );
+      }
+      // Item handling
+      if (
+        currentPhrase?.itemEventTriggered &&
+        currentPhrase.itemEventType &&
+        currentPhrase.itemEventRef?.name
+      ) {
+        const {
+          itemEventType,
+          itemEventRef: { name },
+        } = currentPhrase;
+        if (itemEventType === 'Add') {
+          addItemToLocalStorageInventory(name);
+          // add to redux
+          dispatch(addToInventory(name));
+          toast(
+            `🔎  Great! ${name.toUpperCase()} was added to the evidence file.`
+          );
+        } else {
+          // REMOVE ITEM
+          removeItemToLocalStorageInventory(name);
+          dispatch(removeFromInventory(name));
+        }
+      }
       // If we have all the necessary event data
       if (
         currentPhrase?.sNotesEventTriggered &&
@@ -381,7 +423,7 @@ const TextBox = (props) => {
         // switch back to prev dialogue and position
         let returningDialoguePosition = storedDialoguePosition + 1;
         if (currentDialogueID === '75f01638-63e4-4cc7-8e7d-f39a1f3e9036') {
-          returningDialoguePosition--;
+          returningDialoguePosition = 0;
         }
         props.jumpToDialoguePositionAndConversation({
           position: returningDialoguePosition,
@@ -395,7 +437,7 @@ const TextBox = (props) => {
     ) {
       handleOpenInventory();
     } else if (isEndOfDialogue && inquiryDialogue) {
-      // props.endInquiryDialogue();
+      props.endInquiryDialogue();
       props.toggleResponseBox();
     } else if (
       isEndOfDialogue &&
@@ -412,6 +454,11 @@ const TextBox = (props) => {
         currentAct === 'a'
       ) {
         history.push('/act-one');
+      } else if (
+        currentTestimonyID === lastActTwoDialogueID ||
+        currentAct === 'b'
+      ) {
+        history.push('/act-three');
       } else if (currentAct === 'c') {
         // if current scene state is free mode
         if (currentAct3SceneObject?.name === 'Freemode' || freeMode) {

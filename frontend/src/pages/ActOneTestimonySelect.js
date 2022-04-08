@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import { requiredConversationsVisitedBeforeTrial2 } from '../lib/constants';
 import {
   saveCurrentConversationIdToLocalStorage,
   setLocalStorageToJustBeforeTrial,
@@ -20,6 +21,15 @@ const ActOneTestimonySelect = () => {
     dispatch(getConversations());
     saveCurrentConversationIdToLocalStorage('act-one');
   }, []);
+
+  const userHasTalkedToAllAnimals = useMemo(() => {
+    let res = true;
+    Object.keys(requiredConversationsVisitedBeforeTrial2).forEach((convoID) => {
+      if (!conversationsVisited[convoID]) res = false;
+    });
+
+    return res;
+  }, [conversationsVisited]);
 
   let conversations = useSelector((state) => state.conversations.conversations);
   // Above does not return a true array, below converts data to an array with the map method available to it
@@ -61,12 +71,14 @@ const ActOneTestimonySelect = () => {
         <div>
           {renderCatchphraseButtons()}
           <div className="trial_button_placeholder">
-            <span>Talk to Villagers</span>
+            <span className={userHasTalkedToAllAnimals ? 'strike_through' : ''}>
+              Talk to Villagers
+            </span>
             <span className={userHasFullInventory ? 'strike_through' : ''}>
               Get Evidence
             </span>
           </div>
-          {userHasFullInventory && (
+          {userHasFullInventory && userHasTalkedToAllAnimals && (
             <button
               key={'trial'}
               className="trial_button"

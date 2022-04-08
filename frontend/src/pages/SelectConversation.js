@@ -4,6 +4,8 @@ import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import ImageLoader from '../components/ImageLoader';
 import {
+  clearAllSaveData,
+  clearConversationHistory,
   clearItemsFromLocalStorage,
   clearSNotesFromLocalStorage,
   getLastConversationIDFromLocalStorage,
@@ -29,9 +31,19 @@ const SelectConversation = () => {
     ));
   }
 
+  const handleClearConversationHistory = () => {
+    toast('Inventory Cleared');
+    clearConversationHistory();
+  };
+
   const handleClearInventoryClick = () => {
     toast('Inventory Cleared');
     clearItemsFromLocalStorage();
+  };
+
+  const handleClearAllSaveData = () => {
+    toast('Inventory Cleared');
+    clearAllSaveData();
   };
 
   const handleClearSNotesClick = () => {
@@ -63,6 +75,12 @@ const SelectConversation = () => {
   return (
     <ImageLoader disableLoading>
       <a href="/act-three">Act Three Select</a>
+      <button type="button" onClick={handleClearAllSaveData}>
+        Clear All Save Data
+      </button>
+      <button type="button" onClick={handleClearConversationHistory}>
+        Clear Conversation History
+      </button>
       <button type="button" onClick={handleClearSNotesClick}>
         Clear Agent S Notes from Inventory
       </button>

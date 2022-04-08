@@ -26,6 +26,12 @@ export default {
       type: 'image',
     },
     {
+      title: 'Restrict User from adding to inventory?',
+      name: 'restrictUserAddingToInventory',
+      type: 'boolean',
+      description: 'If this is an item that is explicitly given, turn this on',
+    },
+    {
       title: 'Part A',
       name: 'descriptionA',
       type: 'array',

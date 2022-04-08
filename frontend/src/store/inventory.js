@@ -2,6 +2,7 @@ import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import sanityClient from '../client';
 import {
   getConversationsVisitedFromLocalStorage,
+  getPrereqsFromLocalStorage,
   getUnlockedConversationsFromLocalStorage,
   getUserHasFullInventoryFromLocalStorage,
   getUserItemsFromLocalStorage,
@@ -32,6 +33,7 @@ const initialState = {
   userHasFullInventory: false,
   conversationsVisited: {},
   unlockedConversations: {},
+  prereqs: {},
 };
 
 // Actions
@@ -41,7 +43,7 @@ export const getInventoryItems = createAsyncThunk(
   async () => {
     const response = await sanityClient.fetch(
       `*[_type == "item"]{
-        name, description, descriptionA, descriptionB, descriptionC, descriptionD,
+        name, description, restrictUserAddingToInventory, descriptionA, descriptionB, descriptionC, descriptionD,
         "imageUrl": image.asset->url
  
 }`
@@ -83,10 +85,21 @@ export const getSNotes = createAsyncThunk('GET_SNOTES', async () => {
   return response;
 });
 
+export const getPrereqs = createAsyncThunk('GET_PREREQS', async () => {
+  const response = await sanityClient.fetch(
+    `*[_type == "prereq"]{
+        name, description
+}`
+  );
+  return response;
+});
+
 export const initializeUserInventoryFromLocalStorage = createAction(
   'INITIALIZAE_USER_INVENTORY_FROM_LOCAL_STORAGE'
 );
 export const addToInventory = createAction('ADD_TO_INVENTORY');
+export const addToPrereqs = createAction('ADD_TO_PREREQS');
+export const removeFromInventory = createAction('REMOVE_FROM_INVENTORY');
 export const addToSNotesList = createAction('ADD_TO_SNOTES_LIST');
 export const updateSNote = createAction('UPDATE_SNOTE');
 export const markInventoryUpdated = createAction('MARK_INVENTORY_UPDATED');
@@ -123,6 +136,7 @@ function inventoryReducer(state = initialState, action) {
       const userSNotes = getUserSNotesFromLocalStorage();
       const conversationsVisited = getConversationsVisitedFromLocalStorage();
       const unlockedConversations = getUnlockedConversationsFromLocalStorage();
+      const prereqs = getPrereqsFromLocalStorage();
       return {
         ...state,
         userItems,
@@ -130,10 +144,16 @@ function inventoryReducer(state = initialState, action) {
         userHasFullInventory,
         conversationsVisited,
         unlockedConversations,
+        prereqs,
       };
     case addToInventory.toString():
       const newItems = [...state.userItems, payload];
       return { ...state, userItems: newItems };
+    case removeFromInventory.toString():
+      const newItemsList = [...state.userItems];
+      const indexToRemove = newItemsList.indexOf(payload);
+      newItemsList.splice(indexToRemove, 1);
+      return { ...state, userItems: newItemsList };
     case addToSNotesList.toString():
       const newSNotes = [...state.userSNotes, payload];
       return { ...state, userSNotes: newSNotes };
@@ -157,6 +177,12 @@ function inventoryReducer(state = initialState, action) {
         [payload]: true,
       };
       return { ...state, conversationsVisited: newConversations };
+    case addToPrereqs.toString():
+      const newPrereqs = {
+        ...state.prereqs,
+        [payload]: true,
+      };
+      return { ...state, prereqs: newPrereqs };
     case unlockConversation.toString():
       const newUnlockedConversations = {
         ...state.unlockedConversations,

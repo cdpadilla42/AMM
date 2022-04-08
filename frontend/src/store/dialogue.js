@@ -83,6 +83,7 @@ export const getDialogue = createAsyncThunk(
 					link, sNotesEventRef->{name, count}, sNotesEventTriggered, sNotesEventType, 
           changePosition, leftAnimal->{name}, rightAnimal->{name}, leftOrientation, rightOrientation, leftAnimalCentered, centeredOrientation, leftEmotion->{emotion}, rightEmotion->{emotion},
           showImage,
+          itemEventTriggered, itemEventType, itemEventRef->{name}, prereqEventTriggered, prereqEventRef->{name},
           objectionDialogue->{_id},
           "imageUrl": image.asset->url
 				},
@@ -104,9 +105,10 @@ export const getInquiryDialogues = createAsyncThunk(
     const response = await sanityClient.fetch(
       `*[_type == "inquiry" && conversation._ref == "${conversationID}"]{
         name, defaultResponse, 
+        prereqRef->{name},
         "presentedEvidence": presentedEvidence[]->{name, _type},
   			"phrase": phrase[]{
-  				emotion->{emotion}, speaker->{name, color}, text, isGrey,
+  				emotion->{emotion}, speaker->{name, color}, text, isGrey, prereq->{name},
 					link, sNotesEventRef->{name, count}, sNotesEventTriggered, sNotesEventType, 
           changePosition, leftAnimal->{name}, rightAnimal->{name}, leftOrientation, rightOrientation, leftAnimalCentered, centeredOrientation, leftEmotion->{emotion}, rightEmotion->{emotion},
           showImage,
