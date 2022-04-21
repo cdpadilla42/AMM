@@ -220,7 +220,7 @@ const TextBox = (props) => {
         // Handle the event
         const {
           sNotesEventType,
-          sNotesEventRef: { name, count },
+          sNotesEventRef: { name, count, successMessage, hidden, achievement },
         } = currentPhrase;
         const userSNote = getUserSNote(name);
         if (sNotesEventType === 'Add') {
@@ -240,7 +240,9 @@ const TextBox = (props) => {
           // store into local storage
           addSNoteToLocalStorageInventory(sNote);
           // show event message
-          toast(`Added ${name} to Agent S's Notes! 📓`);
+          if (!hidden && !achievement) {
+            toast(`Added ${name} to Agent S's Notes! 📓`);
+          }
           // If this is a completion event and the user has the note and it has not been completed
         } else if (
           sNotesEventType === 'Complete' &&
@@ -262,7 +264,7 @@ const TextBox = (props) => {
             // update userSNotes
             updateSNoteByIndex(updatedSNote, userSNoteIndex);
             // show message
-            toast(`HOORAY! You can check off ${name}!`);
+            toast(successMessage || `HOORAY! You can check off ${name}!`);
             // if there IS a total count
           } else {
             const updatedSNote = { ...userSNotes[userSNoteIndex] };
@@ -282,7 +284,9 @@ const TextBox = (props) => {
 
             // show message
             if (newCountForNote === count) {
-              toast(`NICE! You checked off all items for ${name}!`);
+              toast(
+                successMessage || `NICE! You checked off all items for ${name}!`
+              );
               updatedSNote.completed = true;
             } else {
               toast(

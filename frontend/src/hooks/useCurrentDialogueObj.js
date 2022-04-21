@@ -34,7 +34,9 @@ const useCurrentDialogueObj = () => {
     if (inquiryDialogue) {
       // currentDialogueObj set to inquiry object
       const currentInquiryObj = inquiryList.find(
-        (inquiryObj) => inquiryObj.name === currentInquiryDialogue
+        (inquiryObj) =>
+          inquiryObj.name === currentInquiryDialogue ||
+          inquiryObj.name.match(new RegExp(currentInquiryDialogue, 'gi'))
       );
 
       if (currentInquiryObj?.prereqRef?.name) {
