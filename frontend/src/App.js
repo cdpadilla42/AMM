@@ -6,6 +6,7 @@ import './styles/customToast.css';
 import Testimony from './pages/Testimony';
 import SelectConversation from './pages/SelectConversation';
 import Playground from './pages/Playground';
+import LandingPage from './pages/LandingPage';
 import { getSprites } from './store/sprites';
 import { throttle } from 'lodash';
 import {
@@ -75,6 +76,12 @@ function App() {
         </Route>
         <Route path="/act-three">
           <ActThreeTestimonySelect />
+        </Route>
+        <Route path="/landing">
+          <LandingPage />
+        </Route>
+        <Route path="/play">
+          <SelectConversation />
         </Route>
         <Route path="/">
           <SelectConversation />
