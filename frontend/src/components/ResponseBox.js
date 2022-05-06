@@ -15,13 +15,18 @@ import { inquiryModeResponses } from '../lib/inquiryModeResponses';
 import { markUserPromptedForEvidence } from '../store/inventory';
 import { startInquiryMode } from '../store/app';
 import { useMemo } from 'react';
+import { storeReturnDialogue } from '../store/inquiry';
 
 const ResponseBox = () => {
   const params = useParams();
-  const { responseBoxIsOpen, currentDialogueID, dialogue } = useSelector(
-    (state) => state.dialogue
-  );
+  const {
+    responseBoxIsOpen,
+    currentDialogueID,
+    dialogue,
+    currentDialoguePosition,
+  } = useSelector((state) => state.dialogue);
   const { conversation } = useSelector((state) => state.conversations);
+  const { returnDialogue } = useSelector((state) => state.inquiry);
   const playersAct3Scenes = useSelector((state) => state.act3Scenes);
   const { freeMode } = useSelector((state) => state.app);
   const currentTestimonyID = conversation?.[0]?._id;
@@ -53,6 +58,15 @@ const ResponseBox = () => {
             // open inventory
             dispatch(openInventory());
             dispatch(startInquiryMode());
+            // If no previous dialogue saved,
+            if (!returnDialogue) {
+              dispatch(
+                storeReturnDialogue({
+                  currentDialogueID,
+                  currentDialoguePosition,
+                })
+              );
+            }
           } else if (optionObj.switchToFarewellDialogue) {
             // find and switch to that dialogue
             const farewellDialogue = dialogue.find(

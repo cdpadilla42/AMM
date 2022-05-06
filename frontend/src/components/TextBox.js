@@ -89,6 +89,7 @@ const TextBox = (props) => {
   const { inquiryDialogue, freeMode, inquiryMode } = useSelector(
     (state) => state.app
   );
+  const { returnDialogue } = useSelector((state) => state.inquiry);
   const { act2TrialJulianTestimonyDialoguesPassed } = useSelector(
     (state) => state.specialEvent
   );
@@ -443,6 +444,10 @@ const TextBox = (props) => {
     } else if (isEndOfDialogue && inquiryDialogue) {
       props.endInquiryDialogue();
       props.toggleResponseBox();
+      props.jumpToDialoguePositionAndConversation({
+        position: returnDialogue.currentDialogueID,
+        dialogueID: returnDialogue.currentDialoguePosition,
+      });
     } else if (
       isEndOfDialogue &&
       currentDialogueObj.isFinalDialogue &&
