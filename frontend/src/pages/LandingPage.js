@@ -400,7 +400,7 @@ const StyledLanding = styled.main`
     transform: translateY(3rem);
   }
 
-  .about h2,
+  /* .about h2, */
   .work h2,
   .uses h2,
   .contact h2,
@@ -409,7 +409,8 @@ const StyledLanding = styled.main`
   .social_icons,
   .hero h1 {
     color: #75ddc6;
-    text-shadow: 2px 1px 0 #fcf6f3, 4px 3px 0 #ff8f7c;
+    /* text-shadow: 2px 1px 0 #fcf6f3, 4px 3px 0 #ff8f7c; */
+    text-shadow: 2px 1px 0 #fcf6f3;
   }
 
   .hero h1 {
@@ -478,7 +479,7 @@ const StyledLanding = styled.main`
 
   hr {
     border: none;
-    border-top: 5px dotted #ffcb75;
+    border-top: 5px dashed rgba(79, 201, 204, 0.6);
   }
 
   ::selection {
@@ -571,6 +572,7 @@ const StyledLanding = styled.main`
     max-width: 1200px;
     margin: 0 auto;
     padding-bottom: 3rem;
+    background-color: var(--cream);
   }
 
   .about__credits {
@@ -586,7 +588,7 @@ const StyledLanding = styled.main`
 
   .about h2,
   .work h2 {
-    color: #4d4762;
+    color: var(--brown-black);
   }
 
   .contact h2,
@@ -609,6 +611,8 @@ const StyledLanding = styled.main`
   @media all and (max-width: 960px) {
     .about {
       flex-direction: column;
+      font-size: 1.3rem;
+      line-height: 2.5rem;
     }
 
     .about__credits {
@@ -849,5 +853,13 @@ const StyledLanding = styled.main`
   footer {
     padding: 1rem 0;
     text-align: center;
+    background-color: var(--brown-black);
+    color: var(--cream);
+  }
+
+  @media all and (max-width: 996px) {
+    footer {
+      font-size: 1.2rem;
+    }
   }
 `;
