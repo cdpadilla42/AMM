@@ -19,6 +19,7 @@ import {
 import ActOneTestimonySelect from './pages/ActOneTestimonySelect';
 import ActThreeTestimonySelect from './pages/ActThreeTestimonySelect';
 import { initializeUserAct3ScensFromLocalStorage } from './store/act3Scenes';
+import Letter from './pages/Letter';
 
 function App() {
   const location = useLocation();
@@ -79,6 +80,9 @@ function App() {
         </Route>
         <Route path="/landing">
           <LandingPage />
+        </Route>
+        <Route path="/letter">
+          <Letter />
         </Route>
         <Route path="/play">
           <SelectConversation />
