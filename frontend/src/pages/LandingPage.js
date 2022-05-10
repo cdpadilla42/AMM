@@ -11,7 +11,7 @@ const LandingPage = () => {
             <h1>Time for a NEW MURDER!!!</h1>
             <h2>An Animal Crossing Murder Mystery Fan Game</h2>
             <div className="hero__cta_container">
-              <a href="/play" className="hero__cta_button secondary">
+              <a href="/letter" className="hero__cta_button secondary">
                 Read Ñen's Letter
               </a>
               <a href="/play" className="hero__cta_button">
