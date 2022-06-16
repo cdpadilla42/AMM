@@ -1,7 +1,9 @@
 import { createAction } from '@reduxjs/toolkit';
 
+const initialHealth = 10;
+
 const initialState = {
-  current: 5,
+  current: initialHealth,
   showingHealthBar: false,
 };
 
@@ -24,7 +26,7 @@ function healthReducer(state = initialState, action) {
     case fullRecovery.toString():
       return {
         ...state,
-        current: 5,
+        current: initialHealth,
       };
     case showHealthBar.toString():
       return {
