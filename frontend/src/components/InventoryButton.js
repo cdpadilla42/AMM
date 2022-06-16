@@ -11,11 +11,11 @@ const InventoryButton = () => {
     dispatch(toggleInventory());
   };
 
-  // If the intro dialogue, don't show
-  const params = useParams();
-  if (params.id === '729d0b36-6021-4843-8e09-da92c651022f') {
-    return null;
-  }
+  // // If the intro dialogue, don't show
+  // const params = useParams();
+  // if (params.id === '729d0b36-6021-4843-8e09-da92c651022f') {
+  //   return null;
+  // }
 
   return (
     <StyledInventoryButton>
