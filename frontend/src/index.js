@@ -13,7 +13,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ErrorBoundary>
-        <ToastContainer />
+        <ToastContainer autoClose={10000} />
         <Router>
           <App />
         </Router>
