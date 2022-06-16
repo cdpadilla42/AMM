@@ -21,9 +21,9 @@ const StyledMap = styled.div`
   background-color: rgba(0, 0, 0, 0) !important;
 
   /* Use below for seeing click boxes */
-  & > * {
+  /* & > * {
     border: 1px solid green;
-  }
+  } */
 
   .map_container {
     padding: 0 !important;
@@ -71,9 +71,9 @@ const StyledMap = styled.div`
       width: 676px;
       height: 641px;
     }
-    & > * {
+    /* & > * {
       border: 1px solid green;
-    }
+    } */
   }
 
   .julian {
