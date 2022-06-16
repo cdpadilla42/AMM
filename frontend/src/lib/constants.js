@@ -1,5 +1,6 @@
 export const gameStartDialogueID = '729d0b36-6021-4843-8e09-da92c651022f';
 export const lastActTwoDialogueID = 'a55bde30-352d-430f-b86e-85cb2f662c2a';
+export const dreamAddress = 'DA-5197-5510-7359';
 
 export const itemsInInventoryAllButTheProphecy = {
   items: [

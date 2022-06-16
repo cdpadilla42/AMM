@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { initiallyLockedConversations } from '../lib/constants';
+import { dreamAddress, initiallyLockedConversations } from '../lib/constants';
 import {
   saveCurrentConversationIdToLocalStorage,
   setLocalStorageToJustBeforeTrial,
@@ -84,6 +84,9 @@ const ActThreeTestimonySelect = () => {
               TRIAL!!!
             </button>
           )}
+          <div className="dream-code">
+            <span>Dream Address:</span> <span>{dreamAddress}</span>
+          </div>
         </div>
       </div>
     </StyledActOneTestimonySelect>
@@ -166,5 +169,10 @@ const StyledActOneTestimonySelect = styled.div`
   .strike_through {
     text-decoration: line-through;
     text-decoration-thickness: 0.3rem;
+  }
+
+  .dream-code {
+    font-size: 1.5rem;
+    margin-left: 1rem;
   }
 `;
