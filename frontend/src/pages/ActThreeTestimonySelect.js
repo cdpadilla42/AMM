@@ -43,9 +43,7 @@ const ActThreeTestimonySelect = () => {
       }
       return (
         <button key={convo._id} data-id={convo._id} onClick={handleButtonClick}>
-          <span className={thisConvoVisited ? 'strike_through' : ''}>
-            {name}
-          </span>
+          <span>{name}</span>
         </button>
       );
     });
