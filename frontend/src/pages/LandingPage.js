@@ -50,288 +50,46 @@ const LandingPage = () => {
           <hr />
           <ul class="credits__list">
             <li>
-              <a href="https://twitter.com/jennpadillart">Jenn Padilla</a>
+              <h4>Art/Story</h4>
+              <span>Jenn Padilla</span>
               <br />
-              <span>All things story and illustration</span>
+              <a href="https://twitter.com/jennpadillart">@jennpadillart</a>
+              <br />
+              <a href="https://www.jennpadilla.com/">jennpadilla.com</a>
+              <br />
             </li>
             <li>
-              <a href="https://chrisdpadilla.com/">Chris Padilla</a>
+              <h4>Software/Development</h4>
+              <span>Chris Padilla</span>
               <br />
-              <span>All things software and development</span>
+              <a href="https://twitter.com/letsgokris">@letsgokris</a>
+              <br />
+              <a href="https://chrisdpadilla.com">chrisdpadilla.com</a>
+              <br />
+            </li>
+            <li>
+              <h4>Agent S's Art</h4>
+              <span>Kelly McCraw</span>
+              <br />
+              <a href="https://twitter.com/mccraw_kelly">@mccraw_kelly</a>
+              <br />
+            </li>
+            <li>
+              <h4>Beta Testers</h4>
+              <span>Lorenzo Estrada</span>
+              <br />
+              <span>Kelly McCraw</span>
+              <br />
             </li>
           </ul>
         </aside>
       </section>
-      {/* <section class="uses">
-        <div class="container">
-          <h4>What I Use</h4>
-          <h2 class="section_heading">Skills & Tools</h2>
-          <hr />
-          <div class="uses__icons">
-            <div class="icons__icon">
-              <i class="fab fa-html5"></i>
-              <span class="icon__title">HTML 5</span>
-            </div>
-            <div class="icons__icon">
-              <i class="fab fa-css3-alt"></i>
-              <span class="icon__title">CSS 3</span>
-            </div>
-            <div class="icons__icon">
-              <i class="fab fa-sass"></i>
-              <span class="icon__title">Sass</span>
-            </div>
-            <div class="icons__icon">
-              <i class="fab fa-js-square"></i>
-              <span class="icon__title">JavaScript</span>
-            </div>
-            <div class="icons__icon">
-              <i class="fab fa-react"></i>
-              <span class="icon__title">React</span>
-            </div>
-            <div class="icons__icon">
-              <i class="fab fa-git-alt"></i>
-              <span class="icon__title">Git/Github</span>
-            </div>
-            <div class="icons__icon">
-              <i class="fas fa-universal-access"></i>
-              <span class="icon__title">Accessibility</span>
-            </div>
-            <div class="icons__icon">
-              <i class="fas fa-mobile-alt"></i>
-              <span class="icon__title">Responsive</span>
-            </div>
-            <div class="icons__icon">
-              <img
-                class="firebase_icon"
-                src="/assets/icons8-firebase.svg"
-                alt=""
-              />
-              <span class="icon__title">Firebase</span>
-            </div>
-            <div class="icons__icon">
-              <span class="devicons devicons-visualstudio"></span>
-              <span class="icon__title">Visual Studio</span>
-            </div>
-            <div class="icons__icon">
-              <i class="fab fa-node-js"></i>
-              <span class="icon__title">NodeJS</span>
-            </div>
-            <div class="icons__icon">
-              <span class="devicons devicons-mongodb"></span>
-              <span class="icon__title">MongoDB</span>
-            </div>
-          </div>
-        </div>
-      </section> */}
-      {/* <section class="work">
-        <div class="container">
-          <h4>What I've Made</h4>
-          <h2 class="section_heading">Featured Projects</h2>
-          <hr />
-          <div class="work__info">
-            <div class="work__preview">
-              <img src="/assets/tacotimepreview600.png" alt="" />
-            </div>
-            <div class="work__description">
-              <h5>🌮 Taco Time!</h5>
-              <p>
-                Taco Time is a fictional restaurant taking inspiration from Taco
-                Deli here in Austin, TX. With the need to showcase and allow
-                customers to order an array of breakfast and lunch tacos, this
-                application dynamically renders item pages and maintains a
-                detailed cart that stores their orders and customizations. This
-                intricate project employs multiple modern web development tools
-                and techniques, including Server Side Rendering, interacting
-                with a GraphQL API, running server-less functions, and
-                dynamically rendering individual item pages with Next JS’s
-                dynamic routes.
-              </p>
-              <ul class="work__text_used">
-                <li>Next.js & React</li>
-                <li>Redux</li>
-                <li>GraphQL</li>
-                <li>MongoDB & Mongoose</li>
-                <li>Apollo Client & Micro Server</li>
-                <li>Styled Components</li>
-                <li>React Transition Group for Animations</li>
-                <li>Deployed to Vercel</li>
-              </ul>
-              <div class="work__links">
-                <a
-                  href="https://taco-time-nextjs.vercel.app/"
-                  class="links_button"
-                  target="_blank"
-                >
-                  Live Link
-                </a>
-                <a
-                  href="https://github.com/cdpadilla42/taco-time-nextjs"
-                  class="links_button"
-                  target="_blank"
-                >
-                  Github
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="work__info flipped">
-            <div class="work__preview">
-              <img src="./assets/mct-preview.png" alt="" />
-            </div>
-            <div class="work__description">
-              <h5>🎟 Mystery Cowboy Theater</h5>
-              <p>
-                Mystery Cowboy Theater is a fictional single screen theater that
-                loves showing exclusively Mystery Science Theater 3000 films and
-                episodes! This full-stack application fulfills CRUD operations,
-                demonstrates responsive design, and utilizes secure
-                authorization measures on both the client and server side.
-              </p>
-              <ul class="work__text_used">
-                <li>React</li>
-                <li>MongoDB & Mongoose</li>
-                <li>NodeJS & Express</li>
-                <li>SCSS</li>
-                <li>Passport</li>
-                <li>Deployed to Heroku</li>
-              </ul>
-              <div class="work__links">
-                <a
-                  href="https://mystery-cowboy-theater.herokuapp.com/theater/The-Domain"
-                  class="links_button"
-                  target="_blank"
-                >
-                  Live Link
-                </a>
-                <a
-                  href="https://github.com/cdpadilla42/mystery-cowboy-theater-fullstack"
-                  class="links_button"
-                  target="_blank"
-                >
-                  Github
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="work__info">
-            <div class="work__preview">
-              <img src="./assets/sps-preview.png" alt="" />
-            </div>
-            <div class="work__description">
-              <h5>💀 Secret Poets Society</h5>
-              <p>
-                The Secret Poets Society is a club of artists sharing work
-                purely for arts sake. Not for fame or glory! As part of the
-                practice, the authors names are unlisted to visitors. The site
-                has tiered membership permissions, the ability to sign up for an
-                account, and fulfills CRUD operations
-              </p>
-              <ul class="work__text_used">
-                <li>Templating with Handlebars.js</li>
-                <li>JavaScript</li>
-                <li>NodeJS & Express</li>
-                <li>MongoDB & Mongoose</li>
-                <li>Passport</li>
-                <li>CSS</li>
-              </ul>
-              <div class="work__links">
-                <a
-                  href="https://cryptic-oasis-68949.herokuapp.com/"
-                  target="_blank"
-                  class="links_button"
-                >
-                  Live Link
-                </a>
-                <a
-                  href="https://github.com/cdpadilla42/secret-poets-society"
-                  target="_blank"
-                  class="links_button"
-                >
-                  Github
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="contact">
-        <div class="container">
-          <h4>Say Hello</h4>
-          <h2 class="section_heading">Stay In Touch</h2>
-          <hr />
-          <div class="connect__flex_wrap">
-            <div class="connect_flex__text_prompt">
-              <h6>Connect With Me</h6>
-              <p>Thanks for visiting!</p>
-              <p>
-                If you're interested in collborating on a project or looking to
-                chat further, please feel free to contact me. I'd love to hear
-                from you!
-              </p>
-              <ul class="social_icons">
-                <li class="social_icon">
-                  <a href="mailto:cdpadilla42@gmail.com">
-                    <i class="far fa-envelope"></i>
-                  </a>
-                </li>
-
-                <li class="social_icon">
-                  <a href="https://github.com/cdpadilla42" target="_blank">
-                    <i class="fab fa-github"></i>
-                  </a>
-                </li>
-                <li class="social_icon">
-                  <a
-                    href="https://www.linkedin.com/in/chris-padilla-b30441121/"
-                    target="_blank"
-                  >
-                    <i class="fab fa-linkedin-in"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="connect_flex__form_section">
-              <h6>Message Me</h6>
-              <form
-                action="https://formspree.io/xleppven"
-                method="POST"
-                class="contact_form"
-              >
-                <div class="flex-wrap">
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Your Name*"
-                    required
-                  />
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Your Email*"
-                    required
-                  />
-                </div>
-                <input
-                  type="text"
-                  name="subject"
-                  placeholder="Your Subject*"
-                  required
-                />
-                <textarea
-                  name="message"
-                  cols="30"
-                  rows="10"
-                  placeholder="Your Message*"
-                ></textarea>
-
-                <button type="submit">Send</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section> */}
       <footer>
         <p>Made with ❤️ by Jenn & Chris Padilla</p>
+        <p>
+          Animal Crossing: New Horizons is published by Nintendo® All characters
+          and rights belong to them.
+        </p>
       </footer>
     </StyledLanding>
   );
@@ -343,9 +101,14 @@ const StyledLanding = styled.main`
   body,
   ul,
   li,
-  h1 {
+  h1,
+  h4 {
     margin: 0;
     padding: 0;
+  }
+
+  h4 {
+    margin: 0.5rem 0;
   }
 
   button {
