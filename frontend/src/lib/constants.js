@@ -309,3 +309,7 @@ export const requiredConversationsVisitedBeforeTrial2 = {
   'dc7bef1f-856e-4b3d-bd79-159d321aa813': true,
   'e6443c66-4692-4033-926f-eebdf5100efb': true,
 };
+
+export const alwaysShowHealthBarConversations = {
+  'e5b470ca-5b8e-4f2e-a6b0-8743cfcb0c59': true,
+};

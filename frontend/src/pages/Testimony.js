@@ -43,7 +43,10 @@ import {
 import InventoryButton from '../components/InventoryButton';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import { useUnlockConversation } from '../hooks/useSaveUtility';
-import { dialoguesThatUnlockConversations } from '../lib/constants';
+import {
+  alwaysShowHealthBarConversations,
+  dialoguesThatUnlockConversations,
+} from '../lib/constants';
 import ObjectionButton from '../components/ObjectionButton';
 
 const Testimony = (props) => {
@@ -56,7 +59,7 @@ const Testimony = (props) => {
   const backgroundURLs = useSelector(
     (state) => state.conversations?.backgroundURL?.backgroundURL
   );
-  const showingHealthBar = useSelector(
+  const showingHealthBarFromRedux = useSelector(
     (state) => state.health.showingHealthBar
   );
   const { currentDialogueName } = useSelector((state) => state.dialogue);
@@ -64,9 +67,9 @@ const Testimony = (props) => {
     (state) => state.conversations?.conversation?.[0]?.act
   );
 
-  useEffect(() => {
-    const conversationID = props.match.params?.id;
+  const conversationID = props.match.params?.id;
 
+  useEffect(() => {
     // Act Three Returning Conversation check
 
     // set place to 0
@@ -112,6 +115,10 @@ const Testimony = (props) => {
     ? backgroundURLs?.phone?.asset.url
     : desktopBG;
 
+  const showHealthBar =
+    alwaysShowHealthBarConversations[conversationID] ||
+    showingHealthBarFromRedux;
+
   if (!dialogue) return <ImageLoader />;
 
   return (
@@ -134,9 +141,7 @@ const Testimony = (props) => {
           </div>
           <div className="health_bar_wrapper">
             <div
-              className={`health_bar_inset${
-                showingHealthBar ? '' : ' offscreen'
-              }`}
+              className={`health_bar_inset${showHealthBar ? '' : ' offscreen'}`}
             >
               <HealthBar />
             </div>
