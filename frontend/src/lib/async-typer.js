@@ -39,6 +39,13 @@ export const useHighlightFilter = ({ items = [], animals = [] }) => {
           `<img class="highlighted_text_icon" src="${animal.imageUrl}?h=18" /> <span class="highlight" ${animalHighlightStyle}>Sterlin'</span>`
         );
       }
+
+      if (animal.name === 'Ankha' && animals.length === 0) {
+        newString = newString.replaceAll(
+          new RegExp('Ankhaaaa', 'gi'),
+          `<img class="highlighted_text_icon" src="${animal.imageUrl}?h=18" /> <span class="highlight" ${animalHighlightStyle}>Ankhaaaa</span>`
+        );
+      }
     });
     // animal name
     animals.forEach((animal) => {
@@ -62,118 +69,3 @@ export const useHighlightFilter = ({ items = [], animals = [] }) => {
 
   return highlightFilter;
 };
-
-// export const useDraw = ({ items = [], animals = [] }) => {
-//   async function draw(el, text, options = { isTrailing: false }) {
-//     function handleHtmlEl(letter) {
-//       htmlString.push(letter);
-//       if (letter === '>') {
-//         // exit
-//       }
-//     }
-//     console.log(text, 'text');
-//     let showText = '';
-//     if (options.isTrailing) {
-//       console.log('Trailing...');
-//       showText = document.querySelector('.text_box__text .show').textContent;
-//     }
-//     console.log('Drawing!');
-//     // const text = el.dataset.text;
-//     const html = `
-//       <span class="show"></span><span class="hide" style="color: rgba(0,0,0,0);"></span>`;
-//     el.innerHTML = html;
-//     const showField = el.querySelector('.show');
-//     const hideField = el.querySelector('.hide');
-//     console.log(showField);
-//     let hideInnerHtmlContent = text;
-//     const iterationText = highlightFilter(text);
-
-//     // for parsing html
-//     let htmlString = '';
-//     let readingHTMLString = false;
-//     let interpolatingInsideHtmlTag = false;
-//     let skippingClosingTag = false;
-//     let listeningForTag = false;
-//     let tag = '';
-//     let interpolationTarget = null;
-
-//     for (const letter of iterationText) {
-//       console.log(showText);
-//       if (letter === '>' && skippingClosingTag) {
-//         skippingClosingTag = false;
-//         tag = '';
-//         continue;
-//       }
-//       if (skippingClosingTag) continue;
-//       if (letter === ' ' && listeningForTag) {
-//         listeningForTag = false;
-//         htmlString += letter;
-//         continue;
-//       }
-//       if (listeningForTag) {
-//         htmlString += letter;
-//         tag += letter;
-//         continue;
-//       }
-//       if (letter === '<' && !interpolatingInsideHtmlTag) {
-//         readingHTMLString = true;
-//         listeningForTag = true;
-//         htmlString += letter;
-//         continue;
-//       }
-//       if (letter === '<' && interpolatingInsideHtmlTag) {
-//         skippingClosingTag = true;
-//         interpolatingInsideHtmlTag = false;
-//         continue;
-//       }
-//       if (letter === '>' && !skippingClosingTag) {
-//         // TODO ALMOST THERE!!! Figure out how to interpolate within a span. Probs need to use query selector here.
-//         // store an element that you add in the to stream as a JS DOM element, then refference it to add your inner text
-//         htmlString += letter;
-//         if (tag !== 'img') {
-//           htmlString += `</${tag}>`;
-//           interpolatingInsideHtmlTag = true;
-//         }
-//         showText += htmlString;
-//         showField.innerHTML = showText;
-//         if (tag !== 'spanimg')
-//           interpolationTarget = showField.querySelector(tag);
-//         console.log(showField);
-//         console.log(interpolationTarget);
-//         htmlString = '';
-//         readingHTMLString = false;
-//         continue;
-//       }
-//       if (interpolatingInsideHtmlTag) {
-//         console.log('letter', letter);
-//         console.log(interpolationTarget);
-//         interpolationTarget.textContent =
-//           interpolationTarget.textContent + letter;
-//         continue;
-//       }
-//       if (readingHTMLString) {
-//         htmlString += letter;
-//         continue;
-//       }
-//       if (!readingHTMLString) {
-//         showText += letter;
-//       }
-//       hideInnerHtmlContent = hideInnerHtmlContent.slice(1);
-//       showField.innerHTML = showText;
-//       hideField.textContent = hideInnerHtmlContent;
-//       const { typeMin, typeMax } = el.dataset;
-//       const amountOfTimeToWait = getRandomBetween(typeMin, typeMax);
-//       await wait(amountOfTimeToWait);
-//     }
-//   }
-
-//   return draw;
-// };
-
-// const draw = useDraw();
-
-// const text = document.querySelector('.text_box__text');
-// const buttons = document.querySelectorAll('button');
-// buttons.forEach((button) => {
-//   button.addEventListener('click', () => draw(text));
-// });
