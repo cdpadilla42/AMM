@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { fullRecovery, loseHealth } from '../store/health';
 
 const HealthBar = () => {
   const dispatch = useDispatch();
   const { current: health } = useSelector((state) => state.health);
+  const [errorClass, setErroClass] = useState('');
+  const healthRef = useRef({ current: 10 });
 
   useEffect(() => {
     if (health === 0) {
@@ -13,6 +15,11 @@ const HealthBar = () => {
         onFullRecover();
       }, 2000);
     }
+    if (health < healthRef.current) {
+      showErrorAnimation();
+    }
+
+    healthRef.current = health;
   }, [health]);
 
   const onLoseHealthClick = () => {
@@ -29,11 +36,18 @@ const HealthBar = () => {
     dispatch(fullRecovery());
   };
 
-  const precentage = (health / 5) * 100;
+  const showErrorAnimation = () => {
+    setErroClass('ahashakeheartache');
+    setTimeout(() => {
+      setErroClass('');
+    }, 2000);
+  };
+
+  const precentage = (health / 10) * 100;
   const calcWidth = `${Math.floor(precentage)}%`;
 
   return (
-    <StyledHealthBar>
+    <StyledHealthBar className={errorClass}>
       <div className="meter">
         <span style={{ width: calcWidth }} />
       </div>
@@ -49,13 +63,39 @@ const HealthBar = () => {
 
 export default HealthBar;
 
+const errorAnimation = keyframes`
+
+  0% {
+      transform: translate(calc(0px + 30px), 0px);
+    }
+    20% {
+      transform: translate(calc(0px - 30px ), 0px);
+    }
+    40% {
+      transform: translate(calc(0px + 15px), 0px);
+    }
+    60% {
+      transform: translate(calc(0px - 15px ), 0px);
+    }
+    80% {
+      transform: translate(calc(0px + 8px), 0px);
+    }
+    100% {
+      transform: translate(0px, 0px);
+    }
+`;
+
 const StyledHealthBar = styled.div`
   width: 200px;
+  &.ahashakeheartache {
+    animation-name: ${errorAnimation};
+    animation-duration: 0.4s;
+    animation-iteration-count: 1;
+  }
   .meter {
     box-sizing: content-box;
-    height: 10px; /* Can be anything */
+    height: 10px;
     position: relative;
-    /* margin: 60px 0 20px 0; Just for demo spacing */
     background: var(--cream);
     border-radius: 25px;
     padding: 4px;
