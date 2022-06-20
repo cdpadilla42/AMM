@@ -18,9 +18,11 @@ const AddToInventory = ({
   showErrorAnimation,
 }) => {
   const { inputs, handleChange, resetForm, clearForm } = useForm({ item: '' });
-  const { items: fullItemsList, userItems } = useSelector(
-    (state) => state.inventory
-  );
+  const {
+    items: fullItemsList,
+    userItems,
+    userHasFullInventory,
+  } = useSelector((state) => state.inventory);
   const dispatch = useDispatch();
   const [message, setMessage] = useState(null);
   const containerRef = useRef(null);
@@ -97,7 +99,7 @@ const AddToInventory = ({
           }
         });
 
-        // Add to users inventory
+        // ADD TO USERS INVENTORY
         // save to local storage
         addItemToLocalStorageInventory(matchedInGameItem.name);
         // add to redux
@@ -106,7 +108,7 @@ const AddToInventory = ({
           `🔎  Great! ${matchedInGameItem.name.toUpperCase()} was added to the evidence file.`
         );
         // if full inventory, proceed to updating redux
-        if (fullInventory) {
+        if (fullInventory && !userHasFullInventory) {
           dispatch(markUserHasFullInventory());
           saveFullInventoryToLocalSotrage();
           toast(

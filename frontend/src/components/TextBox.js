@@ -210,6 +210,7 @@ const TextBox = (props) => {
           // REMOVE ITEM
           removeItemToLocalStorageInventory(name);
           dispatch(removeFromInventory(name));
+          toast(`${name.toUpperCase()} was taken!`);
         }
       }
       // If we have all the necessary event data
