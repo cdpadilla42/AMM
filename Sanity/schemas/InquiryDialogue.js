@@ -86,6 +86,10 @@ export default {
               name: 'sNote',
             },
             {
+              title: 'Item Event',
+              name: 'itemEvent',
+            },
+            {
               title: 'Image',
               name: 'imageFieldset',
             },
