@@ -11,6 +11,7 @@ import {
   displayComeBackLaterDialogue,
   toggleResponseBox,
   saveAsLastEvidenceList,
+  resetDialoguePosition,
 } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import urlFor from '../lib/imageUrlBuilder';
@@ -732,6 +733,7 @@ export const ItemDetailsDisplay = ({
       closeDetailsDisplay();
       // Redux action for switching to the inquiry here
       dispatch(startInquiryDialogue());
+      dispatch(resetDialoguePosition());
       dispatch(toggleResponseBox());
       if (matchedInquiry) {
         dispatch(setCurrentInquiryDialogue(matchedInquiry.name));

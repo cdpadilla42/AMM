@@ -103,8 +103,6 @@ const TextBox = (props) => {
   const [trailedText, setTrailedText] = useState('');
   const [currentDialogueIDState, setCurrentDialogueIDState] = useState('');
 
-  console.log(currentDialogueIDState);
-
   const currentAct3SceneObject = playersAct3Scenes[conversationID];
   const conversationSceneOrder = act3Scenes[conversationID]?.sceneOrder;
   const currentSceneIndex = useMemo(() => {
@@ -443,12 +441,12 @@ const TextBox = (props) => {
     ) {
       handleOpenInventory();
     } else if (isEndOfDialogue && inquiryDialogue) {
-      props.endInquiryDialogue();
       props.toggleResponseBox();
       props.jumpToDialoguePositionAndConversation({
-        position: returnDialogue.currentDialogueID,
-        dialogueID: returnDialogue.currentDialoguePosition,
+        dialogueID: returnDialogue.currentDialogueID,
+        position: returnDialogue.currentDialoguePosition,
       });
+      props.endInquiryDialogue();
     } else if (
       isEndOfDialogue &&
       currentDialogueObj.isFinalDialogue &&
