@@ -33,11 +33,15 @@ const useCurrentDialogueObj = () => {
   useEffect(() => {
     if (inquiryDialogue) {
       // currentDialogueObj set to inquiry object
-      const currentInquiryObj = inquiryList.find(
-        (inquiryObj) =>
-          inquiryObj.name === currentInquiryDialogue ||
-          inquiryObj.name.match(new RegExp(currentInquiryDialogue, 'gi'))
+      let currentInquiryObj = inquiryList.find(
+        (inquiryObj) => inquiryObj.name === currentInquiryDialogue
       );
+
+      if (!currentInquiryObj) {
+        currentInquiryObj = inquiryList.find((inquiryObj) =>
+          inquiryObj.name.match(new RegExp(currentInquiryDialogue, 'gi'))
+        );
+      }
 
       if (currentInquiryObj?.prereqRef?.name) {
         if (!prereqs[currentInquiryObj.prereqRef.name]) {
