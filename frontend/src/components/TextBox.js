@@ -477,29 +477,35 @@ const TextBox = (props) => {
           }
         } else {
           // normal leaving procedure. Save new scene state here
-          const currentScene = conversationSceneOrder[currentSceneIndex];
-          const nextScene = conversationSceneOrder[currentSceneIndex + 1];
-          if (
-            nextScene &&
-            !currentScene.haltMovingSceneForwardAtEndOfDialogue &&
-            !isDeadEndDialogue(currentDialogueID)
-          ) {
-            saveNewAct3SceneToLocalStorage(conversationID, nextScene);
-            props.updateScenes({
-              conversationID,
-              upcomingScene: nextScene,
-            });
-          }
 
-          const sceneUnlockingHandlerObj = sceneUnlockingHandler(
-            currentDialogueIDState
-          );
-          if (sceneUnlockingHandlerObj) {
-            const { updateReduxSceneObj } = sceneUnlockingHandlerObj;
-            if (updateReduxSceneObj) props.updateScenes(updateReduxSceneObj);
-          }
+          // if you didn't make it here by leaving
+          if (currentDialogueID !== 'Come Back Later') {
+            // move scene state to next scene
+            const currentScene = conversationSceneOrder[currentSceneIndex];
+            const nextScene = conversationSceneOrder[currentSceneIndex + 1];
+            if (
+              nextScene &&
+              !currentScene.haltMovingSceneForwardAtEndOfDialogue &&
+              !isDeadEndDialogue(currentDialogueID)
+            ) {
+              saveNewAct3SceneToLocalStorage(conversationID, nextScene);
+              props.updateScenes({
+                conversationID,
+                upcomingScene: nextScene,
+              });
+            }
 
-          checkForUnlockedDialogue();
+            const sceneUnlockingHandlerObj = sceneUnlockingHandler(
+              currentDialogueIDState
+            );
+            if (sceneUnlockingHandlerObj) {
+              const { updateReduxSceneObj } = sceneUnlockingHandlerObj;
+              if (updateReduxSceneObj) props.updateScenes(updateReduxSceneObj);
+            }
+
+            // Unlock dialogue
+            checkForUnlockedDialogue();
+          }
 
           history.push('/act-three');
         }
