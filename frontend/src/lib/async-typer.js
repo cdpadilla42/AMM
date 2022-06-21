@@ -19,16 +19,13 @@ export const useHighlightFilter = ({ items = [], animals = [] }) => {
     });
     // animal nickname
     animals.forEach((animal) => {
-      const animalHighlightStyle = animal.animalRef
-        ? `style="color: ${animal.animalRef.color.hex};"`
-        : '';
       if (animal.nickname) {
         animal.nickname.forEach((nickname) => {
           const query = nickname;
 
           newString = newString.replaceAll(
             query,
-            `<img class="highlighted_text_icon" src="${animal.imageUrl}?h=18" /> <span class="highlight" ${animalHighlightStyle}>${nickname}</span>`
+            `<img class="highlighted_text_icon" src="${animal.imageUrl}?h=18" /> <span class="highlight">${nickname}</span>`
           );
         });
       }
@@ -36,14 +33,14 @@ export const useHighlightFilter = ({ items = [], animals = [] }) => {
       if (animal.name === 'Sterling' && animals.length === 0) {
         newString = newString.replaceAll(
           new RegExp("Sterlin'", 'gi'),
-          `<img class="highlighted_text_icon" src="${animal.imageUrl}?h=18" /> <span class="highlight" ${animalHighlightStyle}>Sterlin'</span>`
+          `<img class="highlighted_text_icon" src="${animal.imageUrl}?h=18" /> <span class="highlight">Sterlin'</span>`
         );
       }
 
       if (animal.name === 'Ankha' && animals.length === 0) {
         newString = newString.replaceAll(
           new RegExp('Ankhaaaa', 'gi'),
-          `<img class="highlighted_text_icon" src="${animal.imageUrl}?h=18" /> <span class="highlight" ${animalHighlightStyle}>Ankhaaaa</span>`
+          `<img class="highlighted_text_icon" src="${animal.imageUrl}?h=18" /> <span class="highlight">Ankhaaaa</span>`
         );
       }
     });
@@ -60,7 +57,7 @@ export const useHighlightFilter = ({ items = [], animals = [] }) => {
       }
       newString = newString.replaceAll(
         query,
-        `<img class="highlighted_text_icon" src="${animal.imageUrl}?h=18" /> <span class="highlight" ${animalHighlightStyle}>${animal.name}</span>`
+        `<img class="highlighted_text_icon" src="${animal.imageUrl}?h=18" /> <span class="highlight">${animal.name}</span>`
       );
     });
 
