@@ -109,8 +109,12 @@ export const act3Scenes = {
     name: 'Chadder',
     sceneOrder: [
       {
-        name: 'Freemode',
+        name: 'Start',
         dialogueID: '8f8508d9-7517-4767-b731-a6f42427d436',
+      },
+      {
+        name: 'Freemode',
+        dialogueID: '71c1dd0d-cbd2-47d6-972d-0775d6c15e44',
       },
     ],
   },
