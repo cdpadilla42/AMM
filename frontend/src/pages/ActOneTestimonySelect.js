@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import {
   dreamAddress,
@@ -33,6 +34,14 @@ const ActOneTestimonySelect = () => {
 
     return res;
   }, [conversationsVisited]);
+
+  useEffect(() => {
+    if (userHasTalkedToAllAnimals && userHasFullInventory) {
+      toast(
+        '⚖️ TRIAL TIME BABY!!! You collected all the evidence and gathered all the testimonies!'
+      );
+    }
+  }, [userHasTalkedToAllAnimals]);
 
   let conversations = useSelector((state) => state.conversations.conversations);
   // Above does not return a true array, below converts data to an array with the map method available to it

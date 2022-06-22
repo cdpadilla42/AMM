@@ -87,8 +87,8 @@ const AddToInventory = ({
 
         const requiredEvidence = [
           'Star Fragment',
-          'Sewing Machine',
-          'Paint Set',
+          'Sturdy Sewing Box',
+          'Painting Set',
         ];
 
         fullInventory = true;
@@ -112,7 +112,7 @@ const AddToInventory = ({
           dispatch(markUserHasFullInventory());
           saveFullInventoryToLocalSotrage();
           toast(
-            "You've gathered enough evidence! One step closer to the trial!"
+            "🎉 You've gathered enough evidence! One step closer to the trial!"
           );
         }
         clearForm();
