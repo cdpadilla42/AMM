@@ -133,7 +133,6 @@ const TextBox = (props) => {
   const checkForUnlockedDialogue = () => {
     const unlockedDialogue =
       dialoguesThatUnlockConversations[currentDialogueIDState];
-    console.log({ currentDialogueIDState, unlockedDialogue });
     if (unlockedDialogue) {
       unlockConversation(unlockedDialogue);
     }
@@ -173,6 +172,29 @@ const TextBox = (props) => {
   };
 
   const handleSNotesEvent = () => {
+    const handleSNoteItemEvent = (itemEventOptions = {}) => {
+      const { itemEventRef, itemEventType, itemEventTriggered } =
+        itemEventOptions;
+
+      if (itemEventTriggered && itemEventType && itemEventRef?.name) {
+        if (itemEventType === 'Add') {
+          // save to local storage
+          addItemToLocalStorageInventory(itemEventRef.name);
+          // add to redux
+          dispatch(addToInventory(itemEventRef.name));
+          toast(
+            `🔎  Great! ${itemEventRef.name.toUpperCase()} was added to the evidence file.`
+          );
+        } else if (itemEventType === 'Remove') {
+          // save to local storage
+          removeItemToLocalStorageInventory(itemEventRef.name);
+          // remove from redux
+          dispatch(removeFromInventory(itemEventRef.name));
+          toast(`🙊  ${itemEventRef.name.toUpperCase()} was taken!`);
+        }
+      }
+    };
+
     // If currentPhrase data available
     if (currentPhrase && Object.keys(currentPhrase).length) {
       // Prereq handling
@@ -220,8 +242,22 @@ const TextBox = (props) => {
         // Handle the event
         const {
           sNotesEventType,
-          sNotesEventRef: { name, count, successMessage, hidden, achievement },
+          sNotesEventRef: {
+            name,
+            count,
+            successMessage,
+            hidden,
+            achievement,
+            itemEventTriggered,
+            itemEventType,
+            itemEventRef,
+          },
         } = currentPhrase;
+        const itemEventOptions = {
+          itemEventTriggered,
+          itemEventType,
+          itemEventRef,
+        };
         const userSNote = getUserSNote(name);
         if (sNotesEventType === 'Add') {
           // Construct the sNote object
@@ -265,6 +301,8 @@ const TextBox = (props) => {
             updateSNoteByIndex(updatedSNote, userSNoteIndex);
             // show message
             toast(successMessage || `HOORAY! You can check off ${name}!`);
+            // pass to itemEvent handler
+            handleSNoteItemEvent(itemEventOptions);
             // if there IS a total count
           } else {
             const updatedSNote = { ...userSNotes[userSNoteIndex] };
@@ -288,6 +326,8 @@ const TextBox = (props) => {
                 successMessage || `NICE! You checked off all items for ${name}!`
               );
               updatedSNote.completed = true;
+              // pass to itemEvent handler
+              handleSNoteItemEvent(itemEventOptions);
             } else {
               toast(
                 `Alright! ${newCountForNote} out of ${count} items checked off for ${name}!`

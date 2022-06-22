@@ -2,6 +2,12 @@ export default {
   title: "Agent S's Notes",
   name: 'snotes',
   type: 'document',
+  fieldsets: [
+    {
+      title: 'Item Event',
+      name: 'itemEvent',
+    },
+  ],
   fields: [
     {
       title: 'Name',
@@ -40,6 +46,34 @@ export default {
       type: 'boolean',
       description:
         'Internal use only, no notification given to the player on succeeding',
+    },
+    {
+      title: 'Item Event',
+      name: 'itemEventTriggered',
+      type: 'boolean',
+      description: 'On if this dialogue triggers an item event',
+      fieldset: 'itemEvent',
+    },
+    {
+      title: 'Item Event Type',
+      name: 'itemEventType',
+      type: 'string',
+      description: 'Adding or completing a note',
+      options: {
+        list: ['Add', 'Remove'],
+        layout: 'radio',
+      },
+      fieldset: 'itemEvent',
+      hidden: ({ parent }) => !parent.itemEventTriggered,
+    },
+    {
+      title: 'Item Event Reference',
+      name: 'itemEventRef',
+      type: 'reference',
+      to: [{ type: 'item' }],
+      description: 'Reference to the item.',
+      fieldset: 'itemEvent',
+      hidden: ({ parent }) => !parent.itemEventTriggered,
     },
     {
       title: 'Notes',

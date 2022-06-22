@@ -79,7 +79,7 @@ export const getMapLocations = createAsyncThunk(
 export const getSNotes = createAsyncThunk('GET_SNOTES', async () => {
   const response = await sanityClient.fetch(
     `*[_type == "snotes"]{
-        name, description, count, hidden, achievement, successMessage
+        name, description, count, hidden, achievement, successMessage, itemEventTriggered, itemEventType, itemEventRef->{name},
 }`
   );
   return response;

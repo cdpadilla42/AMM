@@ -80,7 +80,7 @@ export const getDialogue = createAsyncThunk(
 				animals[]->{name},
   			"phrase": phrase[]{
   				emotion->{emotion}, speaker->{name, color}, text, isGrey,
-					link, sNotesEventRef->{name, count}, sNotesEventTriggered, sNotesEventType, 
+					link, sNotesEventRef->{name, count, successMessage, hidden, achievement, itemEventTriggered, itemEventType, itemEventRef->{name, _id}}, sNotesEventTriggered, sNotesEventType, 
           changePosition, leftAnimal->{name}, rightAnimal->{name}, leftOrientation, rightOrientation, leftAnimalCentered, centeredOrientation, leftEmotion->{emotion}, rightEmotion->{emotion},
           showImage,
           itemEventTriggered, itemEventType, itemEventRef->{name}, prereqEventTriggered, prereqEventRef->{name},
@@ -109,7 +109,7 @@ export const getInquiryDialogues = createAsyncThunk(
         "presentedEvidence": presentedEvidence[]->{name, _type},
   			"phrase": phrase[]{
   				emotion->{emotion}, speaker->{name, color}, text, isGrey, prereq->{name},
-					link, sNotesEventRef->{name, count}, sNotesEventTriggered, sNotesEventType, 
+					link, sNotesEventRef->{name, count, successMessage, hidden, achievement, itemEventTriggered, itemEventType, itemEventRef->{name, _id}}, sNotesEventTriggered, sNotesEventType, 
           changePosition, leftAnimal->{name}, rightAnimal->{name}, leftOrientation, rightOrientation, leftAnimalCentered, centeredOrientation, leftEmotion->{emotion}, rightEmotion->{emotion},
           showImage,
           "imageUrl": image.asset->url
