@@ -112,7 +112,7 @@ const AddToInventory = ({
           dispatch(markUserHasFullInventory());
           saveFullInventoryToLocalSotrage();
           toast(
-            "You've gathered all the evidence! You can now proceed to the trial!"
+            "You've gathered enough evidence! One step closer to the trial!"
           );
         }
         clearForm();
