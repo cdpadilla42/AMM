@@ -316,4 +316,5 @@ export const requiredConversationsVisitedBeforeTrial2 = {
 
 export const alwaysShowHealthBarConversations = {
   'e5b470ca-5b8e-4f2e-a6b0-8743cfcb0c59': true,
+  '1aad77e1-bbbf-4fad-bf79-fae82ebbdd0e': true,
 };
