@@ -268,6 +268,7 @@ export const initiallyLockedConversations = {
   'd44a5dac-b32a-46b9-b86e-45e84e4dd106': true, // ACT3 Elvis,
   'e1688c5f-218a-4656-ad96-df9a1c33b8f8': true, // ACT3 Chadder,
   'b4f841cb-0b75-4d6e-b76f-e2bc3fddbaf5': true, // ACT3 Nenn,
+  '65c247c3-947b-4444-bf08-b7aed9c4c89b': true, // ACT3 Julian,
 };
 
 export const dialoguesThatUnlockConversations = {
@@ -279,6 +280,8 @@ export const dialoguesThatUnlockConversations = {
     'e1688c5f-218a-4656-ad96-df9a1c33b8f8', // MERENGUE3 post cake 3 correct items => Chadder
   'd02f7cb4-7550-477c-bc14-0df30fcc48ce':
     'b4f841cb-0b75-4d6e-b76f-e2bc3fddbaf5', // STITCHES3 Start => Nenn
+  '26a4fc7e-0c9c-4707-85a7-29389d485f6e':
+    '65c247c3-947b-4444-bf08-b7aed9c4c89b', // LUCKY Cake FB => Julian
 };
 
 // Key is conversationID. Value is returning DialogueID
