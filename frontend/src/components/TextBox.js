@@ -495,11 +495,16 @@ const TextBox = (props) => {
       props.fullRecovery();
       addConversationAsVisitedToLocalStorage(currentTestimonyID);
       props.addToConversationsVisited(currentTestimonyID);
-      if (isEndOfDialogue && connectedConversations[conversationID]) {
+      if (
+        isEndOfDialogue &&
+        connectedConversations[conversationID] &&
+        currentDialogueID !== 'Come Back Later'
+      ) {
         history.push(`/testimony/${connectedConversations[conversationID]}`);
       } else if (
         currentTestimonyID === gameStartDialogueID ||
-        currentAct === 'a'
+        currentAct === 'a' ||
+        (currentAct === 'b' && currentDialogueID === 'Come Back Later')
       ) {
         history.push('/act-one');
       } else if (
@@ -513,6 +518,11 @@ const TextBox = (props) => {
           if (isLeaving) {
             history.push('/act-three');
           } else {
+            console.log(
+              'freemode and not leaving???',
+              freeMode,
+              currentAct3SceneObject
+            );
             props.toggleResponseBox();
           }
         } else {
