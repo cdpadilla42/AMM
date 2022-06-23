@@ -87,7 +87,7 @@ const AddToInventory = ({
 
         const requiredEvidence = [
           'Star Fragment',
-          'Sturdy Sewing Box',
+          'Sewing Machine',
           'Painting Set',
         ];
 
