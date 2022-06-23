@@ -168,4 +168,10 @@ const StyledSNotes = styled.div`
       cursor: pointer;
     }
   }
+
+  .note {
+    margin: 1rem 0;
+    /* font-family: sans-serif; */
+    /* font- */
+  }
 `;
