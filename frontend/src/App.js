@@ -20,6 +20,7 @@ import ActOneTestimonySelect from './pages/ActOneTestimonySelect';
 import ActThreeTestimonySelect from './pages/ActThreeTestimonySelect';
 import { initializeUserAct3ScensFromLocalStorage } from './store/act3Scenes';
 import Letter from './pages/Letter';
+import PortfolioSelect from './pages/PortfolioSelect';
 
 function App() {
   const location = useLocation();
@@ -83,6 +84,9 @@ function App() {
         </Route>
         <Route path="/letter">
           <Letter />
+        </Route>
+        <Route path="/portfolio">
+          <PortfolioSelect />
         </Route>
         <Route path="/play">
           <SelectConversation />
