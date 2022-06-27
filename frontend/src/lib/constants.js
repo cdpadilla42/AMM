@@ -292,6 +292,8 @@ export const trialTestimonyConversationIDs = {
 
 // Key is starting conversationID. Value is leading to conversationID
 export const connectedConversations = {
+  // ACT 2
+  // ================
   // act2 Trial 1 => 2
   'd2c9e39a-269d-4e45-9762-43156e860643': conversationIDConstants.ACT2_TRIAL_2,
   // act2 Trial 2 => 3
@@ -300,6 +302,16 @@ export const connectedConversations = {
   // act2 Trial 3 => Crime Scene
   '0dbabd60-007b-45a6-83bb-f7616d341a15':
     '1bb0bef9-dee9-415f-beaa-8570240b8d27',
+  // ACT 4
+  // ================
+  // ACT4 1Trial Time! → ACT4 2Game Time!
+  '10a0bd5d-70a1-422a-a02e-11e1078f7000':
+    'e5b470ca-5b8e-4f2e-a6b0-8743cfcb0c59',
+  // ACT4 2Game Time! => ACT4 3POST
+  'e5b470ca-5b8e-4f2e-a6b0-8743cfcb0c59':
+    '1aad77e1-bbbf-4fad-bf79-fae82ebbdd0e',
+  // ACT4 3POST => credits slideshow
+  '1aad77e1-bbbf-4fad-bf79-fae82ebbdd0e': 'credits',
 };
 
 export const requiredDialoguesInJulianTrial2 = {
