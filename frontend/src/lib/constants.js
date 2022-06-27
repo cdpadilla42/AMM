@@ -1,5 +1,5 @@
 export const gameStartDialogueID = '729d0b36-6021-4843-8e09-da92c651022f';
-export const lastActTwoDialogueID = 'a55bde30-352d-430f-b86e-85cb2f662c2a';
+export const lastActTwoDialogueID = '1bb0bef9-dee9-415f-beaa-8570240b8d27';
 export const dreamAddress = 'DA-5197-5510-7359';
 
 export const itemsInInventoryAllButTheProphecy = {
@@ -297,6 +297,9 @@ export const connectedConversations = {
   // act2 Trial 2 => 3
   [conversationIDConstants.ACT2_TRIAL_2]:
     '0dbabd60-007b-45a6-83bb-f7616d341a15',
+  // act2 Trial 3 => Crime Scene
+  '0dbabd60-007b-45a6-83bb-f7616d341a15':
+    '1bb0bef9-dee9-415f-beaa-8570240b8d27',
 };
 
 export const requiredDialoguesInJulianTrial2 = {
