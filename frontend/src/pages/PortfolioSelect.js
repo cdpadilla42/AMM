@@ -71,8 +71,13 @@ const PortfolioSelect = () => {
     setLocalStorageToJustBeforeTrial();
   };
 
-  const handleButtonClick = (e) => {
+  const handleThankYouClick = (e) => {
     window.open('https://www.jennpadilla.com/');
+  };
+
+  const handleButtonClick = (e) => {
+    const conversationID = e.currentTarget.dataset.id;
+    history.push(`/testimony/${conversationID}`);
   };
 
   return (
@@ -97,7 +102,7 @@ const PortfolioSelect = () => {
               key={'trial'}
               className="trial_button"
               data-id="d2c9e39a-269d-4e45-9762-43156e860643"
-              onClick={handleButtonClick}
+              onClick={handleThankYouClick}
             >
               Thans for playing!
             </button>
