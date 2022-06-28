@@ -104,12 +104,9 @@ const PortfolioSelect = () => {
               data-id="d2c9e39a-269d-4e45-9762-43156e860643"
               onClick={handleThankYouClick}
             >
-              Thans for playing!
+              Thanks for playing!
             </button>
           )}
-          <div className="dream-code">
-            <span>Dream Address:</span> <span>{dreamAddress}</span>
-          </div>
         </div>
       </div>
     </StyledPortfolioSelect>
