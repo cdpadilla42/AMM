@@ -265,6 +265,7 @@ nav a {
   font-weight: 700;
   position: relative;
   z-index: -1;
+  overflow-wrap: break-word;
 }
 @media all and (max-width: 600px) {
   .text_box__main {
