@@ -139,6 +139,7 @@ const StyledSNotes = styled.div`
     top: 24px;
     max-height: 85vh;
     overflow-y: auto;
+    font-family: 'Gaegu', cursive;
   }
 
   .notepad_sheet {

@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import './styles/customToast.css';
+import './styles/gaegu_font.css';
 import Testimony from './pages/Testimony';
 import SelectConversation from './pages/SelectConversation';
 import Playground from './pages/Playground';
