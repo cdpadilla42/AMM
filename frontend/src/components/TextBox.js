@@ -3,6 +3,7 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { throttle } from 'lodash';
 import {
   nextDialogue,
   prevDialogue,
@@ -386,9 +387,11 @@ const TextBox = (props) => {
       }
     }
 
-    document.addEventListener('keyup', handleKeydown);
+    const handleKeyDownButChill = throttle(handleKeydown, 100);
 
-    return () => document.removeEventListener('keyup', handleKeydown);
+    document.addEventListener('keydown', handleKeyDownButChill);
+
+    return () => document.removeEventListener('keydown', handleKeyDownButChill);
   });
 
   const handleOpenInventory = () => {
