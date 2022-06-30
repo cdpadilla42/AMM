@@ -138,7 +138,7 @@ const StyledSNotes = styled.div`
     padding: 1rem;
     top: 24px;
     max-height: 85vh;
-    overflow: scroll;
+    overflow-y: auto;
   }
 
   .notepad_sheet {

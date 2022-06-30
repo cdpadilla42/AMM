@@ -17,7 +17,7 @@ const StyledMap = styled.div`
   border: 1px solid black;
   border-radius: 5px;
   padding: 0 !important;
-  overflow: scroll;
+  overflow-y: auto;
   background-color: rgba(0, 0, 0, 0) !important;
 
   /* Use below for seeing click boxes */

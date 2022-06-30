@@ -445,7 +445,7 @@ const StyledInventory = styled.div`
   .inventory_grid_container {
     height: calc(100% - 80px - 35px);
     width: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding: 1rem;
     background: none;
     @media all and (max-width: 800px) {
@@ -791,6 +791,10 @@ export const ItemDetailsDisplay = ({
     }
   };
 
+  console.log(itemObj);
+
+  if (!itemObj) return '';
+
   return (
     <StyledItemDetailsDisplay>
       <div className="left_grid_container">
@@ -891,7 +895,7 @@ const StyledItemDetailsDisplay = styled.div`
     max-height: 318px;
     p:first-child,
     div:first-child {
-      overflow: scroll;
+      overflow-y: auto;
       max-height: 239px;
     }
   }
