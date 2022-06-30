@@ -90,6 +90,14 @@ export const act3Scenes = {
         name: 'Freemode',
         dialogueID: '152c62ca-3401-4ff0-a80a-e32cefb4a5c9',
       },
+      {
+        name: 'LuckyNeedsSpace',
+        dialogueID: '038a3775-c3f8-412e-b56b-47f973e46453',
+      },
+      {
+        name: 'Freemode',
+        dialogueID: '152c62ca-3401-4ff0-a80a-e32cefb4a5c9',
+      },
     ],
   },
   '4d010f4f-21db-4f11-b427-d4d99e55df0c': {
@@ -335,4 +343,12 @@ export const requiredConversationsVisitedBeforeTrial2 = {
 export const alwaysShowHealthBarConversations = {
   'e5b470ca-5b8e-4f2e-a6b0-8743cfcb0c59': true,
   '1aad77e1-bbbf-4fad-bf79-fae82ebbdd0e': true,
+};
+
+export const specialSceneHandling = {
+  // if this scene object appears, move the scene forward
+  'ooommm LUCKY thomas': {
+    name: 'LuckyNeedsSpace',
+    dialogueID: '038a3775-c3f8-412e-b56b-47f973e46453',
+  },
 };

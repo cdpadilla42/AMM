@@ -49,6 +49,7 @@ import {
   gameStartDialogueID,
   lastActTwoDialogueID,
   requiredDialoguesInJulianTrial2,
+  specialSceneHandling,
   trialTestimonyConversationIDs,
 } from '../lib/constants';
 import {
@@ -89,7 +90,9 @@ const TextBox = (props) => {
   const { inquiryDialogue, freeMode, inquiryMode } = useSelector(
     (state) => state.app
   );
-  const { returnDialogue } = useSelector((state) => state.inquiry);
+  const { returnDialogue, currentInquiryDialogue } = useSelector(
+    (state) => state.inquiry
+  );
   const { act2TrialJulianTestimonyDialoguesPassed } = useSelector(
     (state) => state.specialEvent
   );
@@ -481,12 +484,26 @@ const TextBox = (props) => {
     ) {
       handleOpenInventory();
     } else if (isEndOfDialogue && inquiryDialogue) {
-      props.toggleResponseBox();
-      props.jumpToDialoguePositionAndConversation({
-        dialogueID: returnDialogue.currentDialogueID,
-        position: returnDialogue.currentDialoguePosition,
-      });
-      props.endInquiryDialogue();
+      console.log(currentInquiryDialogue);
+      if (specialSceneHandling[currentInquiryDialogue]) {
+        saveNewAct3SceneToLocalStorage(
+          conversationID,
+          specialSceneHandling[currentInquiryDialogue]
+        );
+        props.updateScenes({
+          conversationID,
+          upcomingScene: specialSceneHandling[currentInquiryDialogue],
+        });
+        props.endInquiryDialogue();
+        history.push('/act-three');
+      } else {
+        props.toggleResponseBox();
+        props.jumpToDialoguePositionAndConversation({
+          dialogueID: returnDialogue.currentDialogueID,
+          position: returnDialogue.currentDialoguePosition,
+        });
+        props.endInquiryDialogue();
+      }
     } else if (
       isEndOfDialogue &&
       currentDialogueObj.isFinalDialogue &&
@@ -536,7 +553,8 @@ const TextBox = (props) => {
             if (
               nextScene &&
               !currentScene.haltMovingSceneForwardAtEndOfDialogue &&
-              !isDeadEndDialogue(currentDialogueID)
+              !isDeadEndDialogue(currentDialogueID) &&
+              currentScene.name !== 'Freemode'
             ) {
               saveNewAct3SceneToLocalStorage(conversationID, nextScene);
               props.updateScenes({
