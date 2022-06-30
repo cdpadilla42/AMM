@@ -56,6 +56,7 @@ const PortfolioSelect = () => {
   const renderCatchphraseButtons = () => {
     return actOneConversations.map((convo) => {
       const name = convo.catchphrase || convo.name;
+      if (name === '🎒') return '';
       const thisConvoVisited = conversationsVisited[convo._id];
       return (
         <button key={convo._id} data-id={convo._id} onClick={handleButtonClick}>
