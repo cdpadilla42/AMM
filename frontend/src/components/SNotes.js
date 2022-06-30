@@ -51,7 +51,7 @@ const SNotes = () => {
       if (!sNote.hidden) {
         return (
           <div className="note" key={sNote.name} dataset-key={sNote.name}>
-            {sNote.completed ? '&#10004;' : '☐'} {sNote.description}
+            {sNote.completed ? '✓' : '☐'} {sNote.description}
           </div>
         );
       } else {
