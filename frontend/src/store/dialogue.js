@@ -28,6 +28,7 @@ const initialState = {
   loading: true,
   isLeaving: false,
   lastEvidenceList: [],
+  lastEvidencePrompt: '',
   storedDialoguePosition: null,
 };
 
@@ -60,6 +61,9 @@ export const storeDialoguePositionForLater = createAction(
 );
 export const saveAsLastEvidenceList = createAction(
   'SAVE_AS_LAST_EVIDENCE_LIST'
+);
+export const saveAsLastEvidencePrompt = createAction(
+  'SAVE_AS_LAST_EVIDENCE_PROMPT'
 );
 export const switchConversationFromIncorrect = createAction(
   'SWITCH_CONVERSATION_FROM_INCORRECT'
@@ -263,6 +267,12 @@ function dialogueReducer(state = initialState, action) {
       return {
         ...state,
         lastEvidenceList: payload,
+      };
+    case saveAsLastEvidencePrompt.toString():
+      if (!payload) return state;
+      return {
+        ...state,
+        lastEvidencePrompt: payload,
       };
     case storeDialoguePositionForLater.toString():
       return {

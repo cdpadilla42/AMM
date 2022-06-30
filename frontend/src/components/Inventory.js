@@ -11,6 +11,7 @@ import {
   displayComeBackLaterDialogue,
   toggleResponseBox,
   saveAsLastEvidenceList,
+  saveAsLastEvidencePrompt,
   resetDialoguePosition,
 } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
@@ -57,7 +58,9 @@ const Inventory = () => {
   const currentDialogueObj = useCurrentDialogueObj();
   const inventoryPrompt = currentDialogueObj?.inventoryPrompt;
 
-  const { lastEvidenceList } = useSelector((store) => store.dialogue);
+  const { lastEvidenceList, lastEvidencePrompt } = useSelector(
+    (store) => store.dialogue
+  );
 
   const requiredEvidence = currentDialogueObj?.requiredEvidence;
   const evidenceWithPaths = currentDialogueObj?.evidenceWithPaths;
@@ -289,7 +292,12 @@ const Inventory = () => {
     }
   };
   const promptMessage = useMemo(() => {
-    return userPromptedForEvidence && inventoryPrompt;
+    if (useLastAvailableEvidenceList) {
+      return lastEvidencePrompt;
+    } else if (userPromptedForEvidence && inventoryPrompt) {
+      dispatch(saveAsLastEvidencePrompt(inventoryPrompt));
+      return inventoryPrompt;
+    }
   }, [userPromptedForEvidence, inventoryPrompt]);
 
   const renderPromptMessage = () => {
