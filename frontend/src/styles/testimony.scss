@@ -288,7 +288,8 @@ nav {
     font-weight: 700;
     position: relative;
     z-index: -1;
-    overflow-wrap: break-word;
+    // Jenn special requested that text not wrap, don't @ me!
+    // overflow-wrap: break-word;
     @media all and (max-width: 600px) {
       height: 120px;
     }
