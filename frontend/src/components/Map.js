@@ -8,7 +8,7 @@ import {
   displayInvalidEvidenceDialogue,
 } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
-import newLeafMap from '../imgs/newLeafMap.jpg';
+import newLeafMap from '../imgs/newLeafMap.png';
 import { hideHealthBar, loseHealth } from '../store/health';
 
 const StyledMap = styled.div`
