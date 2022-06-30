@@ -48,6 +48,7 @@ import {
   dialoguesThatUnlockConversations,
 } from '../lib/constants';
 import ObjectionButton from '../components/ObjectionButton';
+import { endInquiryDialogue } from '../store/app';
 
 const Testimony = (props) => {
   const dispatch = useDispatch();
@@ -90,6 +91,7 @@ const Testimony = (props) => {
       // offload dialogue, bg, and conversation data
       dispatch(resetDialogue());
       dispatch(resetBackground());
+      dispatch(endInquiryDialogue());
     };
   }, []);
 
