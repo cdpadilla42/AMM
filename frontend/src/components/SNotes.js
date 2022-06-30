@@ -49,7 +49,7 @@ const SNotes = () => {
   const renderSNotes = () => {
     return sNotesToRender.map((sNote) => (
       <div className="note" key={sNote.name} dataset-key={sNote.name}>
-        {sNote.completed ? '👍' : '☐'} {sNote.description}
+        {sNote.completed ? '✅' : '☐'} {sNote.description}
       </div>
     ));
   };
