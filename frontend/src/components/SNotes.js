@@ -137,7 +137,11 @@ const StyledSNotes = styled.div`
     right: 0;
     padding: 1rem;
     top: 24px;
-    max-height: 85vh;
+    max-height: 560px;
+    @media all and (max-height: 720px) {
+      height: 80vh; /* Fallback for browsers that do not support Custom Properties */
+      height: calc(var(--vh, 1vh) * 80);
+    }
     overflow-y: auto;
     font-family: 'Gaegu', cursive;
   }
