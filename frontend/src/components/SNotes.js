@@ -144,7 +144,7 @@ const StyledSNotes = styled.div`
     padding: 1rem;
     top: 24px;
     max-height: 560px;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     @media all and (max-height: 720px) {
       height: 80vh; /* Fallback for browsers that do not support Custom Properties */
       height: calc(var(--vh, 1vh) * 80);
