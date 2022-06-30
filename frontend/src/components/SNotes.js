@@ -47,11 +47,17 @@ const SNotes = () => {
   }
 
   const renderSNotes = () => {
-    return sNotesToRender.map((sNote) => (
-      <div className="note" key={sNote.name} dataset-key={sNote.name}>
-        {sNote.completed ? '✅' : '☐'} {sNote.description}
-      </div>
-    ));
+    return sNotesToRender.map((sNote) => {
+      if (!sNote.hidden) {
+        return (
+          <div className="note" key={sNote.name} dataset-key={sNote.name}>
+            {sNote.completed ? '&#10004;' : '☐'} {sNote.description}
+          </div>
+        );
+      } else {
+        return '';
+      }
+    });
   };
 
   const toggleNotes = () => dispatch(toggleSNotes());
