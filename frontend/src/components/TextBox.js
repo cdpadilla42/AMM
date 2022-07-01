@@ -146,6 +146,7 @@ const TextBox = (props) => {
     const unlockedDialogue =
       dialoguesThatUnlockConversations[id] ||
       dialoguesThatUnlockConversations[currentDialogueIDState];
+    console.log(dialoguesThatUnlockConversations, id, unlockedDialogue);
     if (unlockedDialogue) {
       unlockConversation(unlockedDialogue);
     }
@@ -497,6 +498,7 @@ const TextBox = (props) => {
       handleOpenInventory();
     } else if (isEndOfDialogue && inquiryDialogue) {
       console.log(currentInquiryDialogue);
+      checkForUnlockedDialogue(currentInquiryDialogue);
       if (specialSceneHandling[currentInquiryDialogue]) {
         saveNewAct3SceneToLocalStorage(
           conversationID,
@@ -515,7 +517,6 @@ const TextBox = (props) => {
           position: returnDialogue.currentDialoguePosition,
         });
         props.endInquiryDialogue();
-        checkForUnlockedDialogue(currentInquiryDialogue);
       }
     } else if (
       isEndOfDialogue &&
