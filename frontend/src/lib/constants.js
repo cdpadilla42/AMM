@@ -89,6 +89,7 @@ export const act3Scenes = {
       {
         name: 'Freemode',
         dialogueID: '152c62ca-3401-4ff0-a80a-e32cefb4a5c9',
+        haltMovingSceneForwardAtEndOfDialogue: true,
       },
       {
         name: 'LuckyNeedsSpace',
