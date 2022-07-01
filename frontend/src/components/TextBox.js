@@ -599,8 +599,9 @@ const TextBox = (props) => {
     } else if (isEndOfDialogue && switchToInquiryMode) {
       props.toggleResponseBox();
       props.startFreeMode();
+      const currentScene = conversationSceneOrder[currentSceneIndex];
       const nextScene = conversationSceneOrder[currentSceneIndex + 1];
-      if (nextScene) {
+      if (nextScene && !currentScene.haltMovingSceneForwardAtEndOfDialogue) {
         saveNewAct3SceneToLocalStorage(conversationID, nextScene);
         props.updateScenes({
           conversationID,
