@@ -142,8 +142,9 @@ const TextBox = (props) => {
     setTrailedText('');
   }, [currentDialogueObj]);
 
-  const checkForUnlockedDialogue = () => {
+  const checkForUnlockedDialogue = (id) => {
     const unlockedDialogue =
+      dialoguesThatUnlockConversations[id] ||
       dialoguesThatUnlockConversations[currentDialogueIDState];
     if (unlockedDialogue) {
       unlockConversation(unlockedDialogue);
@@ -514,6 +515,7 @@ const TextBox = (props) => {
           position: returnDialogue.currentDialoguePosition,
         });
         props.endInquiryDialogue();
+        checkForUnlockedDialogue(currentInquiryDialogue);
       }
     } else if (
       isEndOfDialogue &&
