@@ -114,6 +114,15 @@ export const act3Scenes = {
       },
     ],
   },
+  '656278f2-8610-4a94-93e8-c75acafce071': {
+    name: 'Bag Check',
+    sceneOrder: [
+      {
+        name: 'Start',
+        dialogueID: 'b557814b-e4b2-4356-942a-7be806457ec8',
+      },
+    ],
+  },
   'e1688c5f-218a-4656-ad96-df9a1c33b8f8': {
     name: 'Chadder',
     sceneOrder: [
