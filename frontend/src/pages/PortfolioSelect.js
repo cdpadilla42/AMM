@@ -11,6 +11,7 @@ import {
   saveCurrentConversationIdToLocalStorage,
   setLocalStorageToJustBeforeTrial,
 } from '../lib/localStorage';
+import { setIsPortfolio } from '../store/app';
 import { getConversations } from '../store/conversations';
 
 const PortfolioSelect = () => {
@@ -42,6 +43,10 @@ const PortfolioSelect = () => {
       );
     }
   }, [userHasTalkedToAllAnimals]);
+
+  useEffect(() => {
+    dispatch(setIsPortfolio(true));
+  }, []);
 
   let conversations = useSelector((state) => state.conversations.conversations);
   // Above does not return a true array, below converts data to an array with the map method available to it
@@ -78,7 +83,7 @@ const PortfolioSelect = () => {
 
   const handleButtonClick = (e) => {
     const conversationID = e.currentTarget.dataset.id;
-    history.push(`/testimony/${conversationID}`);
+    history.push(`/testimony/${conversationID}?portfolio=true`);
   };
 
   return (

@@ -5,6 +5,7 @@ const initialState = {
   inquiryDialogue: false,
   freeMode: false,
   sceneShifted: false,
+  isPortfolio: false,
 };
 
 export const startFreeMode = createAction('START_FREE_MODE');
@@ -14,6 +15,7 @@ export const endInquiryMode = createAction('END_INQUIRY_MODE');
 export const startInquiryDialogue = createAction('START_INQUIRY_DIALOGUE');
 export const endInquiryDialogue = createAction('END_INQUIRY_DIALOGUE');
 export const setSceneShifted = createAction('SET_SCENE_SHIFTED');
+export const setIsPortfolio = createAction('SET_IS_PORTFOLIO');
 
 // Reducer
 
@@ -54,6 +56,11 @@ function appReducer(state = initialState, action) {
       return {
         ...state,
         sceneShifted: payload,
+      };
+    case setIsPortfolio.toString():
+      return {
+        ...state,
+        isPortfolio: payload,
       };
     default:
       return state;

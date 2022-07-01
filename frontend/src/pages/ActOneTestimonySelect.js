@@ -11,6 +11,7 @@ import {
   saveCurrentConversationIdToLocalStorage,
   setLocalStorageToJustBeforeTrial,
 } from '../lib/localStorage';
+import { setIsPortfolio } from '../store/app';
 import { getConversations } from '../store/conversations';
 
 const ActOneTestimonySelect = () => {
@@ -42,6 +43,10 @@ const ActOneTestimonySelect = () => {
       );
     }
   }, [userHasTalkedToAllAnimals]);
+
+  useEffect(() => {
+    dispatch(setIsPortfolio(false));
+  }, []);
 
   let conversations = useSelector((state) => state.conversations.conversations);
   // Above does not return a true array, below converts data to an array with the map method available to it

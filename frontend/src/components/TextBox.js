@@ -88,7 +88,7 @@ const TextBox = (props) => {
   } = useSelector((state) => state.inventory);
   const { showSNotes } = useSelector((state) => state.notepad);
   const { conversation } = useSelector((state) => state.conversations);
-  const { inquiryDialogue, freeMode, inquiryMode } = useSelector(
+  const { inquiryDialogue, freeMode, inquiryMode, isPortfolio } = useSelector(
     (state) => state.app
   );
   const { returnDialogue, currentInquiryDialogue } = useSelector(
@@ -129,6 +129,14 @@ const TextBox = (props) => {
   const responseOptions = currentDialogueObj?.responseOptions;
 
   const switchToInquiryMode = currentDialogueObj?.switchToInquiryMode;
+
+  const returnToActOneHub = () => {
+    if (isPortfolio) {
+      history.push('/portfolio');
+    } else {
+      history.push('/act-one');
+    }
+  };
 
   useEffect(() => {
     setTrailedText('');
@@ -526,7 +534,7 @@ const TextBox = (props) => {
         currentAct === 'a' ||
         (currentAct === 'b' && currentDialogueID === 'Come Back Later')
       ) {
-        history.push('/act-one');
+        returnToActOneHub();
       } else if (
         currentTestimonyID === lastActTwoDialogueID ||
         currentAct === 'b'
@@ -581,7 +589,7 @@ const TextBox = (props) => {
           history.push('/act-three');
         }
       } else {
-        history.push('/');
+        returnToActOneHub();
       }
     } else if (isEndOfDialogue && useLastAvailableEvidenceList) {
       handleOpenInventory();
