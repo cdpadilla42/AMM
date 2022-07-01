@@ -29,7 +29,7 @@ const AnimalDisplay = ({
   const spriteObj = sprites?.find((sprite) => sprite.name === speaker);
   const spriteUrl =
     spriteObj?.images.find((image) => image.emotion.emotion === emotion)
-      ?.spriteUrl || normal;
+      ?.spriteUrl || ''; // Previously big chungus. RIP buddy.
 
   const animalImages = {
     normal,
