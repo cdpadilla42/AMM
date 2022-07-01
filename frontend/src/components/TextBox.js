@@ -314,7 +314,9 @@ const TextBox = (props) => {
             // update userSNotes
             updateSNoteByIndex(updatedSNote, userSNoteIndex);
             // show message
-            toast(successMessage || `HOORAY! You can check off ${name}!`);
+            if (!hidden) {
+              toast(successMessage || `HOORAY! You can check off ${name}!`);
+            }
             // pass to itemEvent handler
             handleSNoteItemEvent(itemEventOptions);
             // if there IS a total count
