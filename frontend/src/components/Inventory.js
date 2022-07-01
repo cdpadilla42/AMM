@@ -61,6 +61,7 @@ const Inventory = () => {
   const { lastEvidenceList, lastEvidencePrompt } = useSelector(
     (store) => store.dialogue
   );
+  const act = useSelector((store) => store.conversations.conversation?.[0].act);
 
   const requiredEvidence = currentDialogueObj?.requiredEvidence;
   const evidenceWithPaths = currentDialogueObj?.evidenceWithPaths;
@@ -326,6 +327,8 @@ const Inventory = () => {
     }
   };
 
+  const isTrial = act === 'b' || act === 'd';
+
   return (
     <div
       className={`inventory_container${isInventoryOpen ? '' : ' off_screen'}`}
@@ -337,12 +340,14 @@ const Inventory = () => {
           <button onClick={showMap}>Map</button>
           <button onClick={toggleShowingAddItem}>Add to inventory</button>
           {userPromptedForEvidence && !isFreeMode ? (
-            <button
-              onClick={handleComeBackLaterClick}
-              className="come_back_button"
-            >
-              Come Back Later
-            </button>
+            !isTrial && (
+              <button
+                onClick={handleComeBackLaterClick}
+                className="come_back_button"
+              >
+                Come Back Later
+              </button>
+            )
           ) : (
             <button onClick={closeInventory} className="close_button">
               &times;
