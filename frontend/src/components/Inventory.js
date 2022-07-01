@@ -284,6 +284,7 @@ const Inventory = () => {
           loseHealthOnIncorrect={currentDialogueObj.loseHealthOnIncorrect}
           onHealthOut={handleComeBackLaterClick}
           useLastAvailableEvidenceList={useLastAvailableEvidenceList}
+          isShowingPeople={isShowingPeople}
         />
       );
     } else if (isMapOpen) {
@@ -645,6 +646,7 @@ export const ItemDetailsDisplay = ({
   loseHealthOnIncorrect,
   onHealthOut,
   useLastAvailableEvidenceList,
+  isShowingPeople,
 }) => {
   const params = useParams();
   const saveSpecialEvent = useSaveSpecialEvent();
@@ -784,7 +786,7 @@ export const ItemDetailsDisplay = ({
 
   const renderDescription = () => {
     let renderingAct = act;
-    if (act === 'b') {
+    if (act === 'b' && !isShowingPeople) {
       renderingAct = 'a';
     }
     if (!act) {
