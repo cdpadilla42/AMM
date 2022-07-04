@@ -52,7 +52,6 @@ import { endInquiryDialogue } from '../store/app';
 
 const Testimony = (props) => {
   const dispatch = useDispatch();
-
   const dialogue = useCurrentDialogueObj();
   const isInventoryOpen = useSelector(
     (state) => state.dialogue.isInventoryOpen
