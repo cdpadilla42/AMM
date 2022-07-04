@@ -590,9 +590,8 @@ const TextBox = (props) => {
             // Unlock dialogue
             checkForUnlockedDialogue();
           }
-
-          history.push('/act-three');
         }
+        history.push('/act-three');
       } else {
         returnToActOneHub();
       }
