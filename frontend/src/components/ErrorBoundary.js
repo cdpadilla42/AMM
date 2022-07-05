@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { setHasError } from '../store/app';
 
-export default class ErrorBoundary extends React.Component {
+class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false, error: '' };
@@ -20,17 +22,27 @@ export default class ErrorBoundary extends React.Component {
   }
 
   render() {
-    if (this.state.hasError) {
-      // You can render any custom fallback UI
-      return (
-        <>
-          <h1>Something went wrong.</h1>
-          <p>If this keeps happening, show Chris this gnarly stuff:</p>
-          <p>{this.state.error}</p>
-        </>
-      );
-    }
+    // if (this.state.hasError || this.props.hasError) {
+    //   // You can render any custom fallback UI
+    //   return (
+    //     <>
+    //       <h1>Something went wrong.</h1>
+    //       <p>If this keeps happening, show Chris this gnarly stuff:</p>
+    //       <p>{this.state.error}</p>
+    //     </>
+    //   );
+    // }
 
     return this.props.children;
   }
 }
+
+const mapStateToProps = (state) => ({
+  hasError: state.app.hasError,
+});
+
+const mapDispatchToProps = {
+  setHasError,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ErrorBoundary);

@@ -9,6 +9,19 @@ import store from './store/store';
 import { ToastContainer } from 'react-toastify';
 import ErrorBoundary from './components/ErrorBoundary';
 
+setTimeout(() => {
+  const errorElm = document.createElement('div');
+  const errorHeader = document.createElement('h1');
+  errorHeader.innerText = 'Woops! Something went wrong.';
+  const errorText = document.createElement('p');
+  errorText.innerText = 'Try refreshing and give it anorther whirl!';
+  errorElm.appendChild(errorHeader);
+  errorElm.appendChild(errorText);
+  errorElm.class = 'error';
+
+  document.body.appendChild(errorElm);
+}, 5000);
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

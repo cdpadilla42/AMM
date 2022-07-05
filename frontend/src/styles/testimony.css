@@ -22,6 +22,12 @@ body {
   font-weight: 600;
 }
 
+.error {
+  position: absolute;
+  z-index: -1;
+  display: none;
+}
+
 input {
   font-family: "Open Sans", sans-serif;
   font-weight: 600;

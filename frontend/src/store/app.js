@@ -6,6 +6,7 @@ const initialState = {
   freeMode: false,
   sceneShifted: false,
   isPortfolio: false,
+  hasError: false,
 };
 
 export const startFreeMode = createAction('START_FREE_MODE');
@@ -16,6 +17,7 @@ export const startInquiryDialogue = createAction('START_INQUIRY_DIALOGUE');
 export const endInquiryDialogue = createAction('END_INQUIRY_DIALOGUE');
 export const setSceneShifted = createAction('SET_SCENE_SHIFTED');
 export const setIsPortfolio = createAction('SET_IS_PORTFOLIO');
+export const setHasError = createAction('SET_HAS_ERROR');
 
 // Reducer
 
@@ -61,6 +63,11 @@ function appReducer(state = initialState, action) {
       return {
         ...state,
         isPortfolio: payload,
+      };
+    case setHasError.toString():
+      return {
+        ...state,
+        hasError: payload,
       };
     default:
       return state;
