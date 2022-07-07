@@ -32,8 +32,10 @@ const creditsData = [
     <li>
       <h2>Beta Testers</h2>
       <h3>Lorenzo Estrada</h3>
+      <a href="https://twitter.com/Lozoescartoons">@Lozoescartoons</a>
       <br />
       <h3>Kelly McCraw</h3>
+      <a href="https://twitter.com/mccraw_kelly">@mccraw_kelly</a>
       <br />
     </li>
   </ul>,
