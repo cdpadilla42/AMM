@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setHasError } from '../store/app';
+import Error from './Error';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -22,17 +23,14 @@ class ErrorBoundary extends React.Component {
   }
 
   render() {
-    // if (this.state.hasError || this.props.hasError) {
-    //   // You can render any custom fallback UI
-    //   return (
-    //     <>
-    //       <h1>Something went wrong.</h1>
-    //       <p>If this keeps happening, show Chris this gnarly stuff:</p>
-    //       <p>{this.state.error}</p>
-    //     </>
-    //   );
-    // }
-
+    if (this.state.hasError || this.props.hasError) {
+      // You can render any custom fallback UI
+      return (
+        <>
+          <Error />
+        </>
+      );
+    }
     return this.props.children;
   }
 }
