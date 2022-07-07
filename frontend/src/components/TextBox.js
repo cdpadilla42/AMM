@@ -62,8 +62,10 @@ import {
 import sceneUnlockingHandler from '../lib/sceneUnlockingHandler';
 import { isDeadEndDialogue } from '../lib/util';
 import { useUnlockConversation } from '../hooks/useSaveUtility';
+import { useErrorHandler } from 'react-error-boundary';
 
 const TextBox = (props) => {
+  const handleError = useErrorHandler();
   const dispatch = useDispatch();
   const unlockConversation = useUnlockConversation();
   const textRef = useRef(null);
@@ -416,205 +418,211 @@ const TextBox = (props) => {
   };
 
   const handleNextClick = (e) => {
-    if (e) {
-      e.stopPropagation();
-    }
-    if (fromLink) setFromLink(false);
-    const textEl = textRef.current;
-    const prevText = trailedText;
-    const isEndOfDialogue =
-      currentDialoguePosition === currentDialogueObj.phrase.length - 1;
-    if (!isEndOfDialogue) {
-      setTrailedText('');
-    }
-    const isEndOfDialogueWithResponseOption =
-      isEndOfDialogue &&
-      currentDialogueObj?.responseOptions?.length &&
-      currentDialogueObj?.isFinalDialogue;
+    try {
+      if (e) {
+        e.stopPropagation();
+      }
+      if (fromLink) setFromLink(false);
+      const textEl = textRef.current;
+      const prevText = trailedText;
+      const isEndOfDialogue =
+        currentDialoguePosition === currentDialogueObj.phrase.length - 1;
+      if (!isEndOfDialogue) {
+        setTrailedText('');
+      }
+      const isEndOfDialogueWithResponseOption =
+        isEndOfDialogue &&
+        currentDialogueObj?.responseOptions?.length &&
+        currentDialogueObj?.isFinalDialogue;
 
-    const trialTestimonyReturningDialogueID =
-      trialTestimonyConversationIDs[conversationID];
-    const isEndOfDialogueInTrialTestimony =
-      isEndOfDialogue && trialTestimonyReturningDialogueID;
-    // if there is trailing dialogue...
-    if (!isEndOfDialogue && phrases[currentDialoguePosition].link) {
-      // add on to the end of the current text and change emotions
-      setFromLink(true);
-      setTrailedText(prevText + highlightedTextString + ' ');
-      props.nextDialogue();
-    } else if (isEndOfDialogue && currentDialogueObj.name === 'Incorrect') {
-      props.switchConversationFromIncorrect(prevDialogueID);
-      handleOpenInventory();
-    } else if (isEndOfDialogueInTrialTestimony) {
-      if (
-        currentDialogueObj.needEvidence ||
-        currentDialogueObj.multiBranchEvidence
+      const trialTestimonyReturningDialogueID =
+        trialTestimonyConversationIDs[conversationID];
+      const isEndOfDialogueInTrialTestimony =
+        isEndOfDialogue && trialTestimonyReturningDialogueID;
+      // if there is trailing dialogue...
+      if (!isEndOfDialogue && phrases[currentDialoguePosition].link) {
+        // add on to the end of the current text and change emotions
+        setFromLink(true);
+        setTrailedText(prevText + highlightedTextString + ' ');
+        props.nextDialogue();
+      } else if (isEndOfDialogue && currentDialogueObj.name === 'Incorrect') {
+        props.switchConversationFromIncorrect(prevDialogueID);
+        handleOpenInventory();
+      } else if (isEndOfDialogueInTrialTestimony) {
+        if (
+          currentDialogueObj.needEvidence ||
+          currentDialogueObj.multiBranchEvidence
+        ) {
+          handleOpenInventory();
+        } else if (
+          // Act 2 Julian
+          currentDialogueID === '966777cd-6fe8-4306-94b6-6cbdff81039e' ||
+          currentDialogueID === null
+        ) {
+          // check if the objects match keys
+          let hasUserPassedAllRequiredDialoguesTrial2 = true;
+          Object.keys(requiredDialoguesInJulianTrial2).forEach((dialogue) => {
+            if (!act2TrialJulianTestimonyDialoguesPassed[dialogue]) {
+              hasUserPassedAllRequiredDialoguesTrial2 = false;
+            }
+          });
+          if (!hasUserPassedAllRequiredDialoguesTrial2) {
+            // handle diverging paths, either agent S loop
+            props.jumpToDialoguePositionAndConversation({
+              position: 0,
+              dialogueID: '75f01638-63e4-4cc7-8e7d-f39a1f3e9036',
+            });
+          } else {
+            // Or moving forward
+            const nextConversationID = connectedConversations[conversationID];
+            history.push(`/testimony/${nextConversationID}`);
+          }
+        } else {
+          // Save dialogue if needed as passed
+          if (requiredDialoguesInJulianTrial2[currentDialogueID]) {
+            props.addAct2TrialJuliantestimonyDialogue({
+              [currentDialogueID]:
+                requiredDialoguesInJulianTrial2[currentDialogueID],
+            });
+          }
+          // switch back to prev dialogue and position
+          let returningDialoguePosition = storedDialoguePosition + 1;
+          if (currentDialogueID === '75f01638-63e4-4cc7-8e7d-f39a1f3e9036') {
+            returningDialoguePosition = 0;
+          }
+          props.jumpToDialoguePositionAndConversation({
+            position: returningDialoguePosition,
+            dialogueID: trialTestimonyReturningDialogueID,
+          });
+        }
+      } else if (
+        isEndOfDialogue &&
+        (currentDialogueObj.needEvidence ||
+          currentDialogueObj.multiBranchEvidence)
       ) {
         handleOpenInventory();
-      } else if (
-        // Act 2 Julian
-        currentDialogueID === '966777cd-6fe8-4306-94b6-6cbdff81039e' ||
-        currentDialogueID === null
-      ) {
-        // check if the objects match keys
-        let hasUserPassedAllRequiredDialoguesTrial2 = true;
-        Object.keys(requiredDialoguesInJulianTrial2).forEach((dialogue) => {
-          if (!act2TrialJulianTestimonyDialoguesPassed[dialogue]) {
-            hasUserPassedAllRequiredDialoguesTrial2 = false;
-          }
-        });
-        if (!hasUserPassedAllRequiredDialoguesTrial2) {
-          // handle diverging paths, either agent S loop
+      } else if (isEndOfDialogue && inquiryDialogue) {
+        console.log(currentInquiryDialogue);
+        checkForUnlockedDialogue(currentInquiryDialogue);
+        if (specialSceneHandling[currentInquiryDialogue]) {
+          saveNewAct3SceneToLocalStorage(
+            conversationID,
+            specialSceneHandling[currentInquiryDialogue]
+          );
+          props.updateScenes({
+            conversationID,
+            upcomingScene: specialSceneHandling[currentInquiryDialogue],
+          });
+          props.endInquiryDialogue();
+          history.push('/act-three');
+        } else {
+          props.toggleResponseBox();
           props.jumpToDialoguePositionAndConversation({
-            position: 0,
-            dialogueID: '75f01638-63e4-4cc7-8e7d-f39a1f3e9036',
+            dialogueID: returnDialogue.currentDialogueID,
+            position: returnDialogue.currentDialoguePosition,
           });
-        } else {
-          // Or moving forward
-          const nextConversationID = connectedConversations[conversationID];
-          history.push(`/testimony/${nextConversationID}`);
+          props.endInquiryDialogue();
         }
-      } else {
-        // Save dialogue if needed as passed
-        if (requiredDialoguesInJulianTrial2[currentDialogueID]) {
-          props.addAct2TrialJuliantestimonyDialogue({
-            [currentDialogueID]:
-              requiredDialoguesInJulianTrial2[currentDialogueID],
-          });
-        }
-        // switch back to prev dialogue and position
-        let returningDialoguePosition = storedDialoguePosition + 1;
-        if (currentDialogueID === '75f01638-63e4-4cc7-8e7d-f39a1f3e9036') {
-          returningDialoguePosition = 0;
-        }
-        props.jumpToDialoguePositionAndConversation({
-          position: returningDialoguePosition,
-          dialogueID: trialTestimonyReturningDialogueID,
-        });
-      }
-    } else if (
-      isEndOfDialogue &&
-      (currentDialogueObj.needEvidence ||
-        currentDialogueObj.multiBranchEvidence)
-    ) {
-      handleOpenInventory();
-    } else if (isEndOfDialogue && inquiryDialogue) {
-      console.log(currentInquiryDialogue);
-      checkForUnlockedDialogue(currentInquiryDialogue);
-      if (specialSceneHandling[currentInquiryDialogue]) {
-        saveNewAct3SceneToLocalStorage(
-          conversationID,
-          specialSceneHandling[currentInquiryDialogue]
-        );
-        props.updateScenes({
-          conversationID,
-          upcomingScene: specialSceneHandling[currentInquiryDialogue],
-        });
-        props.endInquiryDialogue();
-        history.push('/act-three');
-      } else {
-        props.toggleResponseBox();
-        props.jumpToDialoguePositionAndConversation({
-          dialogueID: returnDialogue.currentDialogueID,
-          position: returnDialogue.currentDialoguePosition,
-        });
-        props.endInquiryDialogue();
-      }
-    } else if (
-      isEndOfDialogue &&
-      currentDialogueObj.isFinalDialogue &&
-      !isEndOfDialogueWithResponseOption
-    ) {
-      props.fullRecovery();
-      addConversationAsVisitedToLocalStorage(currentTestimonyID);
-      props.addToConversationsVisited(currentTestimonyID);
-      if (
+      } else if (
         isEndOfDialogue &&
-        connectedConversations[conversationID] &&
-        currentDialogueID !== 'Come Back Later'
+        currentDialogueObj.isFinalDialogue &&
+        !isEndOfDialogueWithResponseOption
       ) {
-        history.push(`/testimony/${connectedConversations[conversationID]}`);
-      } else if (
-        currentTestimonyID === gameStartDialogueID ||
-        currentAct === 'a' ||
-        (currentAct === 'b' && currentDialogueID === 'Come Back Later')
-      ) {
-        returnToActOneHub();
-      } else if (
-        currentTestimonyID === lastActTwoDialogueID ||
-        currentAct === 'b'
-      ) {
-        history.push('/act-three');
-      } else if (currentAct === 'c') {
-        // if current scene state is free mode
-        if (currentAct3SceneObject?.name === 'Freemode' || freeMode) {
-          if (isLeaving) {
-            history.push('/act-three');
+        props.fullRecovery();
+        addConversationAsVisitedToLocalStorage(currentTestimonyID);
+        props.addToConversationsVisited(currentTestimonyID);
+        if (
+          isEndOfDialogue &&
+          connectedConversations[conversationID] &&
+          currentDialogueID !== 'Come Back Later'
+        ) {
+          history.push(`/testimony/${connectedConversations[conversationID]}`);
+        } else if (
+          currentTestimonyID === gameStartDialogueID ||
+          currentAct === 'a' ||
+          (currentAct === 'b' && currentDialogueID === 'Come Back Later')
+        ) {
+          returnToActOneHub();
+        } else if (
+          currentTestimonyID === lastActTwoDialogueID ||
+          currentAct === 'b'
+        ) {
+          history.push('/act-three');
+        } else if (currentAct === 'c') {
+          // if current scene state is free mode
+          if (currentAct3SceneObject?.name === 'Freemode' || freeMode) {
+            if (isLeaving) {
+              history.push('/act-three');
+            } else {
+              console.log(
+                'freemode and not leaving???',
+                freeMode,
+                currentAct3SceneObject
+              );
+              props.toggleResponseBox();
+            }
           } else {
-            console.log(
-              'freemode and not leaving???',
-              freeMode,
-              currentAct3SceneObject
-            );
-            props.toggleResponseBox();
+            // normal leaving procedure. Save new scene state here
+
+            // if you didn't make it here by leaving
+            if (currentDialogueID !== 'Come Back Later') {
+              // move scene state to next scene
+              const currentScene = conversationSceneOrder[currentSceneIndex];
+              const nextScene = conversationSceneOrder[currentSceneIndex + 1];
+              console.log('assessing scene moving...', currentScene, nextScene);
+              if (
+                nextScene &&
+                !currentScene.haltMovingSceneForwardAtEndOfDialogue &&
+                !isDeadEndDialogue(currentDialogueID) &&
+                currentScene?.name !== 'Freemode'
+              ) {
+                saveNewAct3SceneToLocalStorage(conversationID, nextScene);
+                props.updateScenes({
+                  conversationID,
+                  upcomingScene: nextScene,
+                });
+              }
+
+              const sceneUnlockingHandlerObj = sceneUnlockingHandler(
+                currentDialogueIDState
+              );
+              if (sceneUnlockingHandlerObj) {
+                const { updateReduxSceneObj } = sceneUnlockingHandlerObj;
+                if (updateReduxSceneObj)
+                  props.updateScenes(updateReduxSceneObj);
+              }
+
+              // Unlock dialogue
+              checkForUnlockedDialogue();
+            }
           }
+          history.push('/act-three');
         } else {
-          // normal leaving procedure. Save new scene state here
-
-          // if you didn't make it here by leaving
-          if (currentDialogueID !== 'Come Back Later') {
-            // move scene state to next scene
-            const currentScene = conversationSceneOrder[currentSceneIndex];
-            const nextScene = conversationSceneOrder[currentSceneIndex + 1];
-            if (
-              nextScene &&
-              !currentScene.haltMovingSceneForwardAtEndOfDialogue &&
-              !isDeadEndDialogue(currentDialogueID) &&
-              currentScene.name !== 'Freemode'
-            ) {
-              saveNewAct3SceneToLocalStorage(conversationID, nextScene);
-              props.updateScenes({
-                conversationID,
-                upcomingScene: nextScene,
-              });
-            }
-
-            const sceneUnlockingHandlerObj = sceneUnlockingHandler(
-              currentDialogueIDState
-            );
-            if (sceneUnlockingHandlerObj) {
-              const { updateReduxSceneObj } = sceneUnlockingHandlerObj;
-              if (updateReduxSceneObj) props.updateScenes(updateReduxSceneObj);
-            }
-
-            // Unlock dialogue
-            checkForUnlockedDialogue();
-          }
+          returnToActOneHub();
         }
-        history.push('/act-three');
+      } else if (isEndOfDialogue && useLastAvailableEvidenceList) {
+        handleOpenInventory();
+      } else if (isEndOfDialogue && switchToInquiryMode) {
+        props.toggleResponseBox();
+        props.startFreeMode();
+        const currentScene = conversationSceneOrder[currentSceneIndex];
+        const nextScene = conversationSceneOrder[currentSceneIndex + 1];
+        if (nextScene && !currentScene.haltMovingSceneForwardAtEndOfDialogue) {
+          saveNewAct3SceneToLocalStorage(conversationID, nextScene);
+          props.updateScenes({
+            conversationID,
+            upcomingScene: nextScene,
+          });
+        }
+      } else if (isEndOfDialogue && responseOptions) {
+        props.toggleResponseBox();
       } else {
-        returnToActOneHub();
+        setDoneTyping(false);
+        setShowFullText(false);
+        props.nextDialogue();
       }
-    } else if (isEndOfDialogue && useLastAvailableEvidenceList) {
-      handleOpenInventory();
-    } else if (isEndOfDialogue && switchToInquiryMode) {
-      props.toggleResponseBox();
-      props.startFreeMode();
-      const currentScene = conversationSceneOrder[currentSceneIndex];
-      const nextScene = conversationSceneOrder[currentSceneIndex + 1];
-      if (nextScene && !currentScene.haltMovingSceneForwardAtEndOfDialogue) {
-        saveNewAct3SceneToLocalStorage(conversationID, nextScene);
-        props.updateScenes({
-          conversationID,
-          upcomingScene: nextScene,
-        });
-      }
-    } else if (isEndOfDialogue && responseOptions) {
-      props.toggleResponseBox();
-    } else {
-      setDoneTyping(false);
-      setShowFullText(false);
-      props.nextDialogue();
+    } catch (e) {
+      handleError(e);
     }
   };
 
