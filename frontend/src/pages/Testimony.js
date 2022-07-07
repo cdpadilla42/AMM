@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import throttle from 'lodash.throttle';
 import AnimalDisplay from '../components/AnimalDisplay';
@@ -49,6 +49,7 @@ import {
 } from '../lib/constants';
 import ObjectionButton from '../components/ObjectionButton';
 import { endInquiryDialogue } from '../store/app';
+import Error from '../components/Error';
 
 const Testimony = (props) => {
   const dispatch = useDispatch();
@@ -66,6 +67,7 @@ const Testimony = (props) => {
   const currentAct = useSelector(
     (state) => state.conversations?.conversation?.[0]?.act
   );
+  const [loading, setLoading] = useState(true);
 
   const conversationID = props.match.params?.id;
 
@@ -120,10 +122,10 @@ const Testimony = (props) => {
     alwaysShowHealthBarConversations[conversationID] ||
     showingHealthBarFromRedux;
 
-  if (!dialogue) return <ImageLoader />;
+  if (!dialogue && !loading) return <Error />;
 
   return (
-    <ImageLoader>
+    <ImageLoader loading={loading} setLoading={setLoading}>
       <SNotes />
       <StyledContainer
         className="container"
