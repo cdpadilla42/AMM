@@ -2,15 +2,23 @@ import React from 'react';
 import styled from 'styled-components';
 import Shocked from '../imgs/shocked.png';
 
-const Error = () => {
+const Error = ({ error }) => {
+  const showStack =
+    !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
   return (
-    <StyledError>
+    <StyledError showStack={showStack}>
       <img src={Shocked} />
       <h1>Woops!</h1>
       <p>
         Something went wrong.
         <br />
         Try refreshing and give it another whirl!
+        {error && (
+          <>
+            <p className="error_stack">{error?.message}</p>
+            <p className="error_stack">{error?.stack}</p>
+          </>
+        )}
       </p>
     </StyledError>
   );
@@ -35,5 +43,12 @@ const StyledError = styled.section`
   }
   p {
     font-size: 1rem;
+  }
+
+  .error_stack {
+    /* display: ${(props) => (props.showStack ? 'block' : 'none')}; */
+    display: block;
+    text-align: left;
+    max-width: 800px;
   }
 `;
