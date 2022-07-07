@@ -23,6 +23,7 @@ import { initializeUserAct3ScensFromLocalStorage } from './store/act3Scenes';
 import Letter from './pages/Letter';
 import PortfolioSelect from './pages/PortfolioSelect';
 import Credits from './pages/Credits';
+import Error from './components/Error';
 
 function App() {
   const location = useLocation();
@@ -95,6 +96,9 @@ function App() {
         </Route>
         <Route path="/play">
           <SelectConversation />
+        </Route>
+        <Route path="/error">
+          <Error />
         </Route>
         <Route path="/">
           <SelectConversation />
