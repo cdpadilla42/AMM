@@ -7,17 +7,19 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import { ToastContainer } from 'react-toastify';
-import ErrorBoundary from './components/ErrorBoundary';
+// import ErrorBoundary from './components/ErrorBoundary';
+import { ErrorBoundary } from 'react-error-boundary';
+import Error from './components/Error';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ErrorBoundary>
-        <ToastContainer autoClose={10000} />
-        <Router>
+      <ToastContainer autoClose={10000} />
+      <Router>
+        <ErrorBoundary FallbackComponent={Error}>
           <App />
-        </Router>
-      </ErrorBoundary>
+        </ErrorBoundary>
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

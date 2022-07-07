@@ -19,6 +19,7 @@
     "lodash.throttle": "^4.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-error-boundary": "^3.1.4",
     "react-html-parser": "^2.0.2",
     "react-onclickoutside": "^6.11.2",
     "react-proptypes": "^1.0.0",
