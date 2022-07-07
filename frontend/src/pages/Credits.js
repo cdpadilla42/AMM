@@ -26,7 +26,6 @@ const creditsData = [
     <li>
       <h2>Agent S's Art</h2>
       <h3>Kelly McCraw</h3>
-      <br />
       <a href="https://twitter.com/mccraw_kelly">@mccraw_kelly</a>
       <br />
     </li>
