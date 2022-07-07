@@ -4,7 +4,7 @@ import Shocked from '../imgs/shocked.png';
 
 const Error = ({ error }) => {
   const showStack =
-    !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+    !process?.env.NODE_ENV || process?.env.NODE_ENV === 'development';
   return (
     <StyledError showStack={showStack}>
       <img src={Shocked} />
