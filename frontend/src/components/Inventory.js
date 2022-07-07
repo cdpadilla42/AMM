@@ -68,8 +68,8 @@ const Inventory = () => {
   const useLastAvailableEvidenceList =
     currentDialogueObj?.useLastAvailableEvidenceList;
   const nextResponseID =
-    currentDialogueObj.followingDialogueFromEvidence?._id ||
-    currentDialogueObj.responseOptions?.[0]?.followingDialogue?._id;
+    currentDialogueObj?.followingDialogueFromEvidence?._id ||
+    currentDialogueObj?.responseOptions?.[0]?.followingDialogue?._id;
 
   const isMultiSelect = useMemo(() => {
     return multiSelectDialogueIDs[currentDialogueID];
