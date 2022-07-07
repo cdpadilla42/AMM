@@ -122,39 +122,45 @@ const Testimony = (props) => {
     alwaysShowHealthBarConversations[conversationID] ||
     showingHealthBarFromRedux;
 
-  if (!dialogue && !loading) return <Error />;
-
   return (
     <ImageLoader loading={loading} setLoading={setLoading}>
-      <SNotes />
-      <StyledContainer
-        className="container"
-        fallback={fallbackBG}
-        desktop={desktopBG}
-        phone={phoneBG}
-        PatternedBG={PatternedBG}
-      >
-        <div className="desktop_main_background" />
-        <Nav />
-        <div className="game_container">
-          <AnimalsDisplayController />
-          <InventoryButton />
-          <div className="inventory_wrapper">
-            <Inventory />
-          </div>
-          <div className="health_bar_wrapper">
-            <div
-              className={`health_bar_inset${showHealthBar ? '' : ' offscreen'}`}
-            >
-              <HealthBar />
+      {!dialogue && !loading ? (
+        <Error />
+      ) : (
+        <>
+          <SNotes />
+          <StyledContainer
+            className="container"
+            fallback={fallbackBG}
+            desktop={desktopBG}
+            phone={phoneBG}
+            PatternedBG={PatternedBG}
+          >
+            <div className="desktop_main_background" />
+            <Nav />
+            <div className="game_container">
+              <AnimalsDisplayController />
+              <InventoryButton />
+              <div className="inventory_wrapper">
+                <Inventory />
+              </div>
+              <div className="health_bar_wrapper">
+                <div
+                  className={`health_bar_inset${
+                    showHealthBar ? '' : ' offscreen'
+                  }`}
+                >
+                  <HealthBar />
+                </div>
+              </div>
+              <TestimonyImage />
+              <ResponseBox />
+              <ObjectionButton />
+              <TextBox />
             </div>
-          </div>
-          <TestimonyImage />
-          <ResponseBox />
-          <ObjectionButton />
-          <TextBox />
-        </div>
-      </StyledContainer>
+          </StyledContainer>
+        </>
+      )}
     </ImageLoader>
   );
 };
