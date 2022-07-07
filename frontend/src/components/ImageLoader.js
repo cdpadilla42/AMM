@@ -13,21 +13,13 @@ const validAnimalSpriteCollections = {
   Merengue: true,
 };
 
-const ImageLoader = ({
-  children,
-  disableLoading,
-  loading: loadingFromProps,
-  setLoading: setLoadingFromProps,
-}) => {
+const ImageLoader = ({ children, disableLoading, loading, setLoading }) => {
   const [loadingInnerState, setLoadingInnerState] = useState(false);
   const [transitioning, setTransitioning] = useState(true);
   const [sanityDetailsLoaded, setSanityDetailsLoaded] = useState(false);
   const counter = useRef(0);
   const startTime = useRef(new Date());
   const location = useLocation();
-
-  const loading = loadingFromProps ?? loadingInnerState;
-  const setLoading = setLoadingFromProps ?? setLoadingInnerState;
 
   const { loading: dialogueLoading, dialogue: dialogues } = useSelector(
     (state) => state.dialogue

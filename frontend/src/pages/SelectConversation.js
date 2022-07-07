@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -18,6 +19,8 @@ const SelectConversation = () => {
   let conversations = useSelector((state) => state.conversations.conversations);
   // Above does not return a true array, below converts data to an array with the map method available to it
   conversations = [...conversations];
+
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     dispatch(getConversations());
@@ -73,7 +76,7 @@ const SelectConversation = () => {
   }
 
   return (
-    <ImageLoader disableLoading>
+    <ImageLoader disableLoading loading={loading} setLoading={setLoading}>
       <a href="/act-three">Act Three Select</a>
       <button type="button" onClick={handleClearAllSaveData}>
         Clear All Save Data
