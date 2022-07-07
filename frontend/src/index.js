@@ -2,14 +2,28 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import * as Sentry from '@sentry/react';
+import { BrowserTracing } from '@sentry/tracing';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from './store/store';
 import { ToastContainer } from 'react-toastify';
 // import ErrorBoundary from './components/ErrorBoundary';
 import { ErrorBoundary } from 'react-error-boundary';
+import * as serviceWorker from './serviceWorker';
+import store from './store/store';
 import Error from './components/Error';
+
+if (!process?.env.NODE_ENV || process?.env.NODE_ENV === 'development') {
+  Sentry.init({
+    dsn: 'https://5a729b0cfd3d48cfa58d6cc9ee7e29c0@o1309684.ingest.sentry.io/6556067',
+    integrations: [new BrowserTracing()],
+
+    // Set tracesSampleRate to 1.0 to capture 100%
+    // of transactions for performance monitoring.
+    // We recommend adjusting this value in production
+    tracesSampleRate: 1.0,
+  });
+}
 
 ReactDOM.render(
   <React.StrictMode>

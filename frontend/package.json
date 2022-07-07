@@ -10,6 +10,8 @@
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^2.0.1",
     "@sanity/image-url": "^0.140.19",
+    "@sentry/react": "^7.5.1",
+    "@sentry/tracing": "^7.5.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
