@@ -115,22 +115,22 @@ const ResponseBox = () => {
     }
   }
 
-  useEffect(() => {
-    const responseOptions = currentDialogue?.responseOptions;
-    function handleKeydown(e) {
-      if (
-        (e.code === 'ArrowRight' || e.code === 'Enter') &&
-        responseBoxIsOpen &&
-        responseOptions?.[0]?.followingDialogue?._id
-      ) {
-        handleClick(responseOptions[0]?.followingDialogue?._id);
-      }
-    }
+  // useEffect(() => {
+  //   const responseOptions = currentDialogue?.responseOptions;
+  //   function handleKeydown(e) {
+  //     if (
+  //       (e.code === 'ArrowRight' || e.code === 'Enter') &&
+  //       responseBoxIsOpen &&
+  //       responseOptions?.[0]?.followingDialogue?._id
+  //     ) {
+  //       handleClick(responseOptions[0]?.followingDialogue?._id);
+  //     }
+  //   }
 
-    document.addEventListener('keyup', handleKeydown);
+  //   document.addEventListener('keyup', handleKeydown);
 
-    return () => document.removeEventListener('keyup', handleKeydown);
-  });
+  //   return () => document.removeEventListener('keyup', handleKeydown);
+  // });
 
   return (
     <StyledResponseBox className={responseBoxIsOpen ? '' : 'hide'}>
