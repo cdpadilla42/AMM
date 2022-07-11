@@ -27,16 +27,15 @@ const creditsData = [
       <h2>Agent S's Art</h2>
       <h3>Kelly McCraw</h3>
       <a href="https://twitter.com/mccraw_kelly">@mccraw_kelly</a>
-      <br />
     </li>
     <li>
       <h2>Beta Testers</h2>
       <h3>Lorenzo Estrada</h3>
       <a href="https://twitter.com/Lozoescartoons">@Lozoescartoons</a>
-      <br />
+    </li>
+    <li>
       <h3>Kelly McCraw</h3>
       <a href="https://twitter.com/mccraw_kelly">@mccraw_kelly</a>
-      <br />
     </li>
   </ul>,
 ];
@@ -111,6 +110,7 @@ const StyledCredits = styled.section`
 
   h2 {
     margin: 2rem 0 0.5rem 0;
+    text-decoration: underline;
   }
 
   p {
@@ -123,5 +123,20 @@ const StyledCredits = styled.section`
 
   a {
     color: var(--blue);
+  }
+
+  button {
+    width: calc(100% - 2rem);
+    max-width: 200px;
+    font-weight: 600;
+    border-radius: 15px;
+    padding: 1rem;
+    background-color: var(--blue);
+    border: 4px solid #0b72a2;
+    color: var(--cream);
+    &:hover {
+      border: 4px solid #17b5ff;
+    }
+    font-size: 1.5rem;
   }
 `;
