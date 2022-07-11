@@ -329,6 +329,8 @@ export const connectedConversations = {
     '1aad77e1-bbbf-4fad-bf79-fae82ebbdd0e',
   // ACT4 3POST => credits slideshow
   '1aad77e1-bbbf-4fad-bf79-fae82ebbdd0e': 'credits',
+  // EPILOGUE => play screen
+  '56cc2315-f580-4116-bf9d-be350ea15e10': 'play',
 };
 
 export const requiredDialoguesInJulianTrial2 = {

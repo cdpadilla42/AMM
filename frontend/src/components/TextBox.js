@@ -536,7 +536,20 @@ const TextBox = (props) => {
           connectedConversations[conversationID] &&
           currentDialogueID !== 'Come Back Later'
         ) {
-          history.push(`/testimony/${connectedConversations[conversationID]}`);
+          if (connectedConversations[conversationID] === 'credits') {
+            // go to credits
+            history.push(`/credits`);
+            return;
+          } else if (connectedConversations[conversationID] === 'play') {
+            // go to play page
+            history.push(`/play`);
+            return;
+          } else {
+            history.push(
+              `/testimony/${connectedConversations[conversationID]}`
+            );
+            return;
+          }
         } else if (
           currentTestimonyID === gameStartDialogueID ||
           currentAct === 'a' ||
