@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { dreamAddress, initiallyLockedConversations } from '../lib/constants';
 import {
   saveCurrentConversationIdToLocalStorage,
   setLocalStorageToJustBeforeTrial,
 } from '../lib/localStorage';
+import { hasRequiredSNotesForFinalTrial } from '../lib/SNotes';
 import { getConversations } from '../store/conversations';
 
 const ActThreeTestimonySelect = () => {
   const history = useHistory();
   // 34 items needed to go to the trial
   const dispatch = useDispatch();
-  const { userHasFullInventory, conversationsVisited, unlockedConversations } =
-    useSelector((state) => state.inventory);
+  const { conversationsVisited, unlockedConversations, sNotes } = useSelector(
+    (state) => state.inventory
+  );
 
   useEffect(() => {
     dispatch(getConversations());
@@ -28,6 +31,8 @@ const ActThreeTestimonySelect = () => {
   const actThreeConversations = conversations.filter((conversation) => {
     return conversation.act === 'c';
   });
+
+  const userHasRequiredSNotes = hasRequiredSNotesForFinalTrial(sNotes);
 
   const renderCatchphraseButtons = () => {
     return actThreeConversations.map((convo) => {
@@ -48,6 +53,14 @@ const ActThreeTestimonySelect = () => {
       );
     });
   };
+
+  useEffect(() => {
+    if (userHasRequiredSNotes) {
+      toast(
+        `WOW! You just unlocked the trial! You have enough Agent S Notes completed to nail the culprit!`
+      );
+    }
+  }, []);
 
   const handlePreTrialClick = () => {
     setLocalStorageToJustBeforeTrial();
@@ -78,13 +91,19 @@ const ActThreeTestimonySelect = () => {
         <button onClick={() => setShowAll(true)}>Show All</button>
         <div>
           {renderCatchphraseButtons()}
+          <button
+            key="656278f2-8610-4a94-93e8-c75acafce071"
+            data-id="656278f2-8610-4a94-93e8-c75acafce071"
+            onClick={handleButtonClick}
+          >
+            <span>🎒</span>
+          </button>
           <div className="trial_button_placeholder">
-            <span>Talk to Villagers</span>
-            {/* <span className={userHasFullInventory ? 'strike_through' : ''}>
-              Get Evidence
-            </span> */}
+            <span className={userHasRequiredSNotes ? 'strike_through' : ''}>
+              Complete Agent S's Notes
+            </span>
           </div>
-          {userHasFullInventory && (
+          {userHasRequiredSNotes && (
             <button
               key={'trial'}
               className="trial_button"

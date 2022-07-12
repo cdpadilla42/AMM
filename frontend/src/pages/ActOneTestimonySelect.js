@@ -97,6 +97,13 @@ const ActOneTestimonySelect = () => {
         <h1>Pick the catchphrase!</h1>
         <div>
           {renderCatchphraseButtons()}
+          <button
+            key="2fb98be2-edb3-482d-a50c-abff0b02af56"
+            data-id="2fb98be2-edb3-482d-a50c-abff0b02af56"
+            onClick={handleButtonClick}
+          >
+            <span>🎒</span>
+          </button>
           <div className="trial_button_placeholder">
             <span className={userHasTalkedToAllAnimals ? 'strike_through' : ''}>
               Talk to Villagers

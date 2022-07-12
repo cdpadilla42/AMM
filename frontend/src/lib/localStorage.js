@@ -272,6 +272,8 @@ export const updateSNoteInLocalStorageInventory = (sNote, index) => {
   sNotesList[index] = sNote;
 
   localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
+
+  return sNotesList;
 };
 
 export const getLastConversationIDFromLocalStorage = () => {
