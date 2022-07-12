@@ -24,6 +24,7 @@ import Letter from './pages/Letter';
 import PortfolioSelect from './pages/PortfolioSelect';
 import Credits from './pages/Credits';
 import Error from './components/Error';
+import StartPage from './pages/Start';
 
 function App() {
   const location = useLocation();
@@ -95,7 +96,7 @@ function App() {
           <Credits />
         </Route>
         <Route path="/play">
-          <SelectConversation />
+          <StartPage />
         </Route>
         <Route path="/error">
           <Error />
