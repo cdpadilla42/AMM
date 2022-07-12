@@ -63,6 +63,7 @@ import sceneUnlockingHandler from '../lib/sceneUnlockingHandler';
 import { isDeadEndDialogue } from '../lib/util';
 import { useUnlockConversation } from '../hooks/useSaveUtility';
 import { useErrorHandler } from 'react-error-boundary';
+import { hasRequiredSNotesForFinalTrial } from '../lib/SNotes';
 
 const TextBox = (props) => {
   const handleError = useErrorHandler();
@@ -184,7 +185,12 @@ const TextBox = (props) => {
     // redux
     dispatch(updateSNote({ sNote: updatedSNote, index: userSNoteIndex }));
     // update local storage
-    updateSNoteInLocalStorageInventory(updatedSNote, userSNoteIndex);
+    const newSnotesList = updateSNoteInLocalStorageInventory(
+      updatedSNote,
+      userSNoteIndex
+    );
+
+    return newSnotesList;
   };
 
   const handleSNotesEvent = () => {
@@ -309,12 +315,16 @@ const TextBox = (props) => {
             currentDialogueID ?? text
           }:${currentDialoguePosition}`;
           // if there is no totalCount, mark the sNote completed
+          let userHasRequiredSNotes = false;
           if (!count) {
             const updatedSNote = { ...userSNotes[userSNoteIndex] };
             // update the SNote
             updatedSNote.completed = true;
             // update userSNotes
-            updateSNoteByIndex(updatedSNote, userSNoteIndex);
+            const newSnotesList = updateSNoteByIndex(
+              updatedSNote,
+              userSNoteIndex
+            );
             // show message
             if (!hidden) {
               toast(successMessage || `HOORAY! You can check off ${name}!`);
@@ -322,6 +332,9 @@ const TextBox = (props) => {
             // pass to itemEvent handler
             handleSNoteItemEvent(itemEventOptions);
             // if there IS a total count
+
+            userHasRequiredSNotes =
+              hasRequiredSNotesForFinalTrial(newSnotesList);
           } else {
             const updatedSNote = { ...userSNotes[userSNoteIndex] };
             const newCountForNote = updatedSNote.userEventInstances.length + 1;
@@ -351,7 +364,19 @@ const TextBox = (props) => {
                 `Alright! ${newCountForNote} out of ${count} items checked off for ${name}!`
               );
             }
-            updateSNoteByIndex(updatedSNote, userSNoteIndex);
+            const newSnotesList = updateSNoteByIndex(
+              updatedSNote,
+              userSNoteIndex
+            );
+
+            userHasRequiredSNotes =
+              hasRequiredSNotesForFinalTrial(newSnotesList);
+          }
+
+          if (userHasRequiredSNotes) {
+            toast(
+              `WOW! You just unlocked the trial! You have enough Agent S Notes completed to nail the culprit!`
+            );
           }
         }
       }

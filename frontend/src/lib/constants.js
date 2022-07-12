@@ -362,3 +362,23 @@ export const specialSceneHandling = {
     dialogueID: '038a3775-c3f8-412e-b56b-47f973e46453',
   },
 };
+
+export const SNotesNeededToCompleteAct3 = {
+  'Updated Testimonies': '0ca7672b-9f80-46f3-899e-dfda5c582c8a',
+  "Lucky's Memories": '23ea8b5c-3ad0-4e44-bbbf-dfe9e1ba36b9',
+  Footprints: '661da4e4-65fa-40f6-be3f-7563f190c83a',
+  'Distraught Stitches': '5080e051-fc9b-4306-8587-a6cb15672a1d',
+  'Mystery Item': '79b9a2d0-0012-4d04-89dc-b544863d6f5a',
+  "Lucky's Package": 'aac262af-4088-4532-88ed-2e10878c872b',
+  'Print Photos': '8d0500b4-8209-4cfe-b1e9-a2a91c3616d4',
+};
+
+export const exampleCompleteSNotes = [
+  { name: 'Updated Testimonies', completed: true },
+  { name: "Lucky's Memories", completed: true },
+  { name: 'Footprints', completed: true },
+  { name: 'Distraught Stitches', completed: true },
+  { name: 'Mystery Item', completed: true },
+  { name: "Lucky's Package", completed: true },
+  { name: 'Print Photos', completed: true },
+];
