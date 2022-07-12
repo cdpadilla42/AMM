@@ -21,7 +21,7 @@ const ActThreeTestimonySelect = () => {
 
   useEffect(() => {
     dispatch(getConversations());
-    saveCurrentConversationIdToLocalStorage('act-one');
+    saveCurrentConversationIdToLocalStorage('act-three');
   }, []);
   const [showAll, setShowAll] = useState(false);
 
