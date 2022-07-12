@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
+import urlFor from '../lib/imageUrlBuilder';
 
 // https://cdn.sanity.io/images/qvonp967/production/e47c279cf3b65c919672a8a29225048dbc639f2e-1480x1042.jpg
 
@@ -26,7 +27,10 @@ const TestimonyImage = () => {
 
   return (
     <StyledTestimonyImage>
-      <img src={currentImage} alt="Shocking Evidence! Image Name Here!" />
+      <img
+        src={urlFor(currentImage).width(600).height(400).url()}
+        alt="Shocking Evidence! Image Name Here!"
+      />
     </StyledTestimonyImage>
   );
 };
@@ -44,6 +48,8 @@ const StyledTestimonyImage = styled.div`
   padding: 1rem;
   display: inline-block;
   z-index: 100;
+  min-width: 400px;
+  min-height: 200px;
   img {
     max-width: 600px;
     max-height: 400px;
