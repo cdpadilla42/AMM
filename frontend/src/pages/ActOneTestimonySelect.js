@@ -78,6 +78,16 @@ const ActOneTestimonySelect = () => {
     history.push(`/testimony/${conversationID}`);
   };
 
+  const handleTrialClick = (e) => {
+    if (
+      window.confirm(
+        "Are you sure you want to move on to the trial? There's no going back from here!"
+      )
+    ) {
+      handleButtonClick(e);
+    }
+  };
+
   return (
     <StyledActOneTestimonySelect>
       <div className="page_container">
@@ -100,7 +110,7 @@ const ActOneTestimonySelect = () => {
               key={'trial'}
               className="trial_button"
               data-id="d2c9e39a-269d-4e45-9762-43156e860643"
-              onClick={handleButtonClick}
+              onClick={handleTrialClick}
             >
               TRIAL!!!
             </button>

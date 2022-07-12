@@ -53,6 +53,16 @@ const ActThreeTestimonySelect = () => {
     setLocalStorageToJustBeforeTrial();
   };
 
+  const handleTrialClick = (e) => {
+    if (
+      window.confirm(
+        "Are you sure you want to move on to the trial? There's no going back from here!"
+      )
+    ) {
+      handleButtonClick(e);
+    }
+  };
+
   const handleButtonClick = (e) => {
     const conversationID = e.currentTarget.dataset.id;
     history.push(`/testimony/${conversationID}`);
@@ -79,7 +89,7 @@ const ActThreeTestimonySelect = () => {
               key={'trial'}
               className="trial_button"
               data-id="10a0bd5d-70a1-422a-a02e-11e1078f7000"
-              onClick={handleButtonClick}
+              onClick={handleTrialClick}
             >
               TRIAL!!!
             </button>
