@@ -13,7 +13,7 @@ import * as serviceWorker from './serviceWorker';
 import store from './store/store';
 import Error from './components/Error';
 
-if (!process?.env.NODE_ENV || process?.env.NODE_ENV === 'development') {
+if (!process?.env.NODE_ENV || process?.env.NODE_ENV === 'production') {
   Sentry.init({
     dsn: 'https://5a729b0cfd3d48cfa58d6cc9ee7e29c0@o1309684.ingest.sentry.io/6556067',
     integrations: [new BrowserTracing()],
