@@ -29,15 +29,15 @@ const StartDisplay = () => {
       <h1>Animal Crossing:</h1>
       <h2>New Murder!</h2>
       <section>
-        <a href="/letter" className="start_page__button secondary">
-          Read Ñen's Letter
-        </a>
         <button onClick={startNewGame} className="start_page__button">
           New Game
         </button>
         <button onClick={loadFromLastSave} className="start_page__button">
           Load Game
         </button>
+        <a href="/letter" className="start_page__button secondary">
+          Read Ñen's Letter
+        </a>
       </section>
     </StyledStartDisplay>
   );
@@ -46,24 +46,38 @@ const StartDisplay = () => {
 export default StartDisplay;
 
 const StyledStartDisplay = styled.div`
-  color: green;
-  width: 755px;
-  height: 765px;
+  color: white;
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 755px;
+  height: 765px;
+  position: relative;
+  @media all and (max-width: 600px) {
+    width: 100vw;
+    height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+    height: calc(var(--vh, 1vh) * 100);
+  }
 
   section {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   .start_page__button {
     min-width: 300px;
-    flex: 1;
+    /* flex: 1; */
     position: relative;
     text-decoration: none;
     border-radius: 15px;

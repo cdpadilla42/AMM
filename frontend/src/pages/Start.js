@@ -18,20 +18,21 @@ const StartPage = (props) => {
   }, []);
 
   // Extract backgrounds and append sanity params
-  const fallbackBG = backgroundURLs?.image?.asset.url + sanityImageUrlParams;
-  const desktopBG = backgroundURLs?.desktop?.asset.url
-    ? backgroundURLs?.desktop?.asset.url + sanityImageUrlParams
-    : fallbackBG;
-  const phoneBG = backgroundURLs?.phone?.asset.url
-    ? backgroundURLs?.phone?.asset.url
-    : desktopBG;
+
+  // const fallbackBG = backgroundURLs?.image?.asset.url + sanityImageUrlParams;
+  // const desktopBG = backgroundURLs?.desktop?.asset.url
+  //   ? backgroundURLs?.desktop?.asset.url + sanityImageUrlParams
+  //   : fallbackBG;
+  // const phoneBG = backgroundURLs?.phone?.asset.url
+  //   ? backgroundURLs?.phone?.asset.url
+  //   : desktopBG;
 
   return (
     <StyledContainer
       className="container"
-      fallback={fallbackBG}
-      desktop={desktopBG}
-      phone={phoneBG}
+      fallback="https://cdn.sanity.io/images/qvonp967/production/f2713d2b4c3b4e322a230ae4d65cde1cd264df4f-755x765.png?w=755"
+      desktop="https://cdn.sanity.io/images/qvonp967/production/f2713d2b4c3b4e322a230ae4d65cde1cd264df4f-755x765.png?w=755"
+      phone="https://cdn.sanity.io/images/qvonp967/production/f2713d2b4c3b4e322a230ae4d65cde1cd264df4f-755x765.png?w=755"
       PatternedBG={PatternedBG}
     >
       <div className="desktop_main_background" />
