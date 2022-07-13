@@ -5,16 +5,49 @@ import AnimalDisplay from './AnimalDisplay';
 const carouselData = [
   {
     centered: true,
-    emotion: 'Surprise',
+    emotion: 'Pride',
     direction: 'left',
     name: 'Agent S',
   },
+  {
+    centered: true,
+    emotion: 'notebook',
+    direction: 'left',
+    name: 'Agent S',
+  },
+  {
+    centered: true,
+    emotion: 'Smirking',
+    direction: 'left',
+    name: 'Agent S',
+  },
+  // {
+  //   centered: true,
+  //   emotion: 'Thought',
+  //   direction: 'left',
+  //   name: 'Agent S',
+  // },
+  // {
+  //   centered: true,
+  //   emotion: 'Sweat',
+  //   direction: 'left',
+  //   name: 'Agent S',
+  // },
+  // {
+  //   centered: true,
+  //   emotion: 'Surprise',
+  //   direction: 'left',
+  //   name: 'Agent S',
+  // },
 ];
 
 const AnimalCarousel = () => {
   const speaker = 'Agent S';
 
-  const [animalsState, setAnimalsState] = useState(carouselData);
+  // const [animalsState, setAnimalsState] = useState(carouselData);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const animalsState = [carouselData[currentIndex]];
 
   // Handle Sanity Image URL Optimization based on window width
   useEffect(() => {
@@ -25,9 +58,23 @@ const AnimalCarousel = () => {
     }
   }, []);
 
+  const nextImage = () => {
+    setCurrentIndex((currentState) => {
+      if (currentState === carouselData.length - 1) {
+        return 0;
+      }
+      return currentState + 1;
+    });
+  };
+
   // set carousel timer
   useEffect(() => {
     // Do that
+    const intervalID = setInterval(() => {
+      nextImage();
+    }, 4000);
+
+    return () => clearInterval(intervalID);
   }, []);
 
   return (
