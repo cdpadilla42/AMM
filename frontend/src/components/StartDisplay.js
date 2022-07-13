@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { getLastConversationIDFromLocalStorage } from '../lib/localStorage';
+import AnimalCarousel from './AnimalCarousel';
 
 const StartDisplay = () => {
   const history = useHistory();
@@ -25,21 +26,28 @@ const StartDisplay = () => {
   }
 
   return (
-    <StyledStartDisplay>
-      <h1>Animal Crossing:</h1>
-      <h2>New Murder!</h2>
-      <section>
-        <button onClick={startNewGame} className="start_page__button">
-          New Game
-        </button>
-        <button onClick={loadFromLastSave} className="start_page__button">
-          Load Game
-        </button>
-        <a href="/letter" className="start_page__button secondary">
-          Read Ñen's Letter
-        </a>
-      </section>
-    </StyledStartDisplay>
+    <>
+      <StyledStartDisplay>
+        <header>
+          <h1>Animal Crossing:</h1>
+          <h2>New Murder!</h2>
+        </header>
+        <section>
+          <button onClick={startNewGame} className="start_page__button">
+            New Game
+          </button>
+          <button onClick={loadFromLastSave} className="start_page__button">
+            Load Game
+          </button>
+          <a href="/letter" className="start_page__button secondary">
+            Read Ñen's Letter
+          </a>
+        </section>
+        <div className="animal_carousel">
+          <AnimalCarousel />
+        </div>
+      </StyledStartDisplay>
+    </>
   );
 };
 
@@ -57,12 +65,17 @@ const StyledStartDisplay = styled.div`
   margin: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
   width: 755px;
   height: 765px;
-  position: relative;
+  /* position: relative; */
+
+  * {
+    padding: 2rem;
+    text-align: center;
+  }
   @media all and (max-width: 600px) {
     width: 100vw;
     height: 100vh; /* Fallback for browsers that do not support Custom Properties */
@@ -73,6 +86,8 @@ const StyledStartDisplay = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    z-index: 100;
+    align-self: end;
   }
 
   .start_page__button {
@@ -90,7 +105,7 @@ const StyledStartDisplay = styled.div`
     padding: 2rem;
     font-weight: bold;
     font-size: 1.3em;
-    margin-top: 2rem;
+    margin-top: 0rem;
     margin-right: 10px;
     margin-bottom: 10px;
     background-color: var(--cream);
@@ -98,6 +113,12 @@ const StyledStartDisplay = styled.div`
     border: 1px solid var(--cream);
     transition: transform 0.2s ease;
     text-transform: uppercase;
+  }
+
+  @media all and (max-width: 600px) {
+    .start_page__button {
+      height: 40px;
+    }
   }
 
   .start_page__button.secondary {
@@ -110,5 +131,9 @@ const StyledStartDisplay = styled.div`
     background-color: var(--cream);
     transform: translateY(-2px);
     cursor: pointer;
+  }
+
+  .animal_carousel {
+    position: absolute;
   }
 `;
