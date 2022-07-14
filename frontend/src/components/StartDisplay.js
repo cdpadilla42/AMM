@@ -142,4 +142,18 @@ const StyledStartDisplay = styled.div`
       top: inherit;
     }
   }
+
+  .animal_transition_left-exit-active.game_container__animal_image.single,
+  .animal_transition_right-exit-active.game_container__animal_image.single {
+    transition: transform 0.6s ease;
+    left: 50%;
+    transform: translateX(200%);
+  }
+
+  .animal_transition_left-enter.game_container__animal_image.single.left_facing,
+  .animal_transition_right-enter.game_container__animal_image.single.left_facing {
+    transition: transform 0.6s ease;
+    left: 50%;
+    transform: translateX(-200%) rotateY(180deg);
+  }
 `;
