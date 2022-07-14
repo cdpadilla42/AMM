@@ -426,8 +426,8 @@ const randomizeCarouselData = (data) => {
   while (hasValue) {
     hasValue = false;
     Object.keys(animals).forEach((animal) => {
-      res.push(animals[animal].pop());
       if (animals[animal].length) {
+        res.push(animals[animal].pop());
         hasValue = true;
       }
     });
