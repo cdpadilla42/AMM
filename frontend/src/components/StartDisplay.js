@@ -136,4 +136,10 @@ const StyledStartDisplay = styled.div`
   .animal_carousel {
     position: absolute;
   }
+
+  @media all and (min-width: 600px) {
+    .animal_carousel .game_container__animal_image.single {
+      top: inherit;
+    }
+  }
 `;
