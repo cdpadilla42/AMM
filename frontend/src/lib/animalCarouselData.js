@@ -403,6 +403,14 @@ const carouselData = [
   // },
 ];
 
+const shuffle = (unshuffled) => {
+  let shuffled = unshuffled
+    .map((value) => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value);
+  return shuffled;
+};
+
 const randomizeCarouselData = (data) => {
   const animals = {};
   const res = [];
@@ -413,10 +421,17 @@ const randomizeCarouselData = (data) => {
       animals[image.name] = [image];
     }
   });
+  let hasValue = true;
 
-  Object.keys(animals).forEach((animal) => {
-    res.push(animals[animal][0]);
-  });
+  while (hasValue) {
+    hasValue = false;
+    Object.keys(animals).forEach((animal) => {
+      res.push(animals[animal].pop());
+      if (animals[animal].length) {
+        hasValue = true;
+      }
+    });
+  }
 
   return res;
 };
