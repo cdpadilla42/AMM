@@ -1,53 +1,15 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import AnimalDisplay from './AnimalDisplay';
-
-const carouselData = [
-  {
-    centered: true,
-    emotion: 'Pride',
-    direction: 'left',
-    name: 'Agent S',
-  },
-  {
-    centered: true,
-    emotion: 'notebook',
-    direction: 'left',
-    name: 'Agent S',
-  },
-  {
-    centered: true,
-    emotion: 'Smirking',
-    direction: 'left',
-    name: 'Agent S',
-  },
-  // {
-  //   centered: true,
-  //   emotion: 'Thought',
-  //   direction: 'left',
-  //   name: 'Agent S',
-  // },
-  // {
-  //   centered: true,
-  //   emotion: 'Sweat',
-  //   direction: 'left',
-  //   name: 'Agent S',
-  // },
-  // {
-  //   centered: true,
-  //   emotion: 'Surprise',
-  //   direction: 'left',
-  //   name: 'Agent S',
-  // },
-];
+import carouselData from '../lib/animalCarouselData';
 
 const AnimalCarousel = () => {
-  const speaker = 'Agent S';
-
   // const [animalsState, setAnimalsState] = useState(carouselData);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const animalsState = [carouselData[currentIndex]];
+
+  const speaker = animalsState[0].name;
 
   // Handle Sanity Image URL Optimization based on window width
   useEffect(() => {
@@ -84,7 +46,7 @@ const AnimalCarousel = () => {
     >
       {animalsState.map((animalState, i) => (
         <CSSTransition
-          classNames={`animal_transition_left`}
+          classNames={`animal_transition_right`}
           timeout={{ exit: 600, enter: 600 }}
           key={animalState.name}
         >
