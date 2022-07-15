@@ -15,6 +15,7 @@ const itemsInInventory = {
   specialEvents: specialEventsInitialState,
   unlockedConversations: {},
   prereqs: {}, // for inquiry mode
+  gameComplete: false,
 };
 
 /*
@@ -276,6 +277,16 @@ export const updateSNoteInLocalStorageInventory = (sNote, index) => {
   return sNotesList;
 };
 
+export const completeGameInLocalStorage = () => {
+  let storageData = JSON.parse(localStorage.getItem('itemsInInventory'));
+
+  storageData.gameComplete = true;
+
+  localStorage.setItem('itemsInInventory', JSON.stringify(storageData));
+
+  return true;
+};
+
 export const getLastConversationIDFromLocalStorage = () => {
   const res = JSON.parse(
     localStorage.getItem('itemsInInventory')
@@ -380,6 +391,18 @@ export const getSpecialEventsFromLocalStorage = () => {
   const res = JSON.parse(
     localStorage.getItem('itemsInInventory')
   )?.specialEvents;
+  if (!!res) {
+    return res;
+  } else {
+    initializeLocalStorageInventory();
+    return false;
+  }
+};
+
+export const isGameCompleteLocalStorage = () => {
+  const res = JSON.parse(
+    localStorage.getItem('itemsInInventory')
+  )?.gameComplete;
   if (!!res) {
     return res;
   } else {

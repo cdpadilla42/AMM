@@ -1,7 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
+import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import { isGameCompleteLocalStorage } from '../lib/localStorage';
 
 const creditsData = [
   <ul class="credits__list">
@@ -40,7 +42,7 @@ const creditsData = [
   </ul>,
 ];
 
-const Credits = () => {
+const Credits = ({ gameComplete }) => {
   const history = useHistory();
   const [slideIndex, setSlideIndex] = useState(0);
 
@@ -54,7 +56,9 @@ const Credits = () => {
     <>
       <p>Thank you so much fora to playing my game!</p>
       <br />
-      <button onClick={handleClick}>Epilogue</button>
+      {(gameComplete || isGameCompleteLocalStorage()) && (
+        <button onClick={handleClick}>Epilogue</button>
+      )}
     </>
   );
 
@@ -80,7 +84,11 @@ const Credits = () => {
   );
 };
 
-export default Credits;
+const mapStateToProps = (state) => ({
+  gameComplete: state.inventory.gameComplete,
+});
+
+export default connect(mapStateToProps)(Credits);
 
 const StyledCredits = styled.section`
   width: 100vw;

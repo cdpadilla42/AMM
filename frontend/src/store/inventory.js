@@ -34,6 +34,7 @@ const initialState = {
   conversationsVisited: {},
   unlockedConversations: {},
   prereqs: {},
+  gameComplete: false,
 };
 
 // Actions
@@ -116,6 +117,7 @@ export const addToConversationsVisited = createAction(
   'ADD_TO_CONVERSATIONS_VISITED'
 );
 export const unlockConversation = createAction('UNLOCK_CONVERSATION');
+export const completeGame = createAction('COMPLETE_GAME');
 
 // Reducer
 
@@ -189,6 +191,8 @@ function inventoryReducer(state = initialState, action) {
         [payload]: true,
       };
       return { ...state, unlockedConversations: newUnlockedConversations };
+    case completeGame.toString():
+      return { ...state, gameComplete: true };
     default:
       return state;
   }
