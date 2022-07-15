@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Shocked from '../imgs/shocked.png';
 
-const Error = ({ error }) => {
+const Error = ({ error, message }) => {
   const showStack =
     !process?.env.NODE_ENV || process?.env.NODE_ENV === 'production';
   return (
@@ -13,11 +14,13 @@ const Error = ({ error }) => {
         Something went wrong.
         <br />
         Try refreshing and give it another whirl!
+        <br />
+        Or head back to the <a href="/play">start screen</a>.
         {error && (
-          <>
+          <section className="error_stack_container">
             <p className="error_stack">{error?.message}</p>
             <p className="error_stack">{error?.stack}</p>
-          </>
+          </section>
         )}
       </p>
     </StyledError>
@@ -25,6 +28,14 @@ const Error = ({ error }) => {
 };
 
 export default Error;
+
+Error.propTypes = {
+  message: PropTypes.string,
+};
+
+Error.defaultProps = {
+  message: 'Try refreshing and give it another whirl!',
+};
 
 const StyledError = styled.section`
   width: 100vw;
@@ -50,5 +61,10 @@ const StyledError = styled.section`
     display: block;
     text-align: left;
     max-width: 800px;
+  }
+
+  .error_stack_container {
+    max-height: 600px;
+    overflow: scroll;
   }
 `;
