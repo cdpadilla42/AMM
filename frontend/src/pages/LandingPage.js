@@ -1,7 +1,13 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const LandingPage = () => {
+  const history = useHistory();
+  const goToCredits = (e) => {
+    e.preventDefault();
+    history.push('/credits');
+  };
   return (
     <StyledLanding>
       <header class="hero">
@@ -68,18 +74,9 @@ const LandingPage = () => {
               <br />
             </li>
             <li>
-              <h4>Agent S's Art</h4>
-              <span>Kelly McCraw</span>
-              <br />
-              <a href="https://twitter.com/mccraw_kelly">@mccraw_kelly</a>
-              <br />
-            </li>
-            <li>
-              <h4>Beta Testers</h4>
-              <span>Lorenzo Estrada</span>
-              <br />
-              <span>Kelly McCraw</span>
-              <br />
+              <a href="/credits" onClick={goToCredits}>
+                Full Credits
+              </a>
             </li>
           </ul>
         </aside>
