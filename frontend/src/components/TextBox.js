@@ -24,6 +24,7 @@ import {
   removeFromInventory,
   addToInventory,
   addToPrereqs,
+  completeGame,
 } from '../store/inventory';
 import { fullRecovery, showHealthBar } from '../store/health';
 import { addAct2TrialJuliantestimonyDialogue } from '../store/specialEvents';
@@ -39,6 +40,7 @@ import {
   addItemToLocalStorageInventory,
   addPrereqToLocalStorage,
   addSNoteToLocalStorageInventory,
+  completeGameInLocalStorage,
   removeItemToLocalStorageInventory,
   saveNewAct3SceneToLocalStorage,
   updateSNoteInLocalStorageInventory,
@@ -561,8 +563,14 @@ const TextBox = (props) => {
           connectedConversations[conversationID] &&
           currentDialogueID !== 'Come Back Later'
         ) {
+          console.log({
+            conversationID,
+            connectedConversations: connectedConversations[conversationID],
+          });
           if (connectedConversations[conversationID] === 'credits') {
             // go to credits
+            props.completeGame();
+            completeGameInLocalStorage();
             history.push(`/credits`);
             return;
           } else if (connectedConversations[conversationID] === 'play') {
@@ -769,6 +777,7 @@ function mapDispatchToProps(dispatch) {
       endInquiryMode,
       jumpToDialoguePositionAndConversation,
       addAct2TrialJuliantestimonyDialogue,
+      completeGame,
     },
     dispatch
   );
