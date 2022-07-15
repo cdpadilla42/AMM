@@ -221,7 +221,7 @@ const ImageLoader = ({ children, disableLoading, loading, setLoading }) => {
             animate={{ transform: 'translateX(0%)' }}
             key={`loader:${location.pathname}`}
           >
-            <p>Loading...</p>
+            <p></p>
           </motion.div>
         )}
       </AnimatePresence>
