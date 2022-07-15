@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import '../styles/testimony.css';
-import AnimalsDisplayController from '../components/AnimalsDisplayController';
 import PatternedBG from '../imgs/patternedbgs/aabg2.jpg';
 import StartDisplay from '../components/StartDisplay';
 
