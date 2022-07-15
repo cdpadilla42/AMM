@@ -798,8 +798,6 @@ export const ItemDetailsDisplay = ({
     }
   };
 
-  console.log(itemObj);
-
   if (!itemObj) return '';
 
   return (

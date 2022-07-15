@@ -151,7 +151,6 @@ const TextBox = (props) => {
     const unlockedDialogue =
       dialoguesThatUnlockConversations[id] ||
       dialoguesThatUnlockConversations[currentDialogueIDState];
-    console.log(dialoguesThatUnlockConversations, id, unlockedDialogue);
     if (unlockedDialogue) {
       unlockConversation(unlockedDialogue);
     }
@@ -529,7 +528,6 @@ const TextBox = (props) => {
       ) {
         handleOpenInventory();
       } else if (isEndOfDialogue && inquiryDialogue) {
-        console.log(currentInquiryDialogue);
         checkForUnlockedDialogue(currentInquiryDialogue);
         if (specialSceneHandling[currentInquiryDialogue]) {
           saveNewAct3SceneToLocalStorage(
@@ -563,10 +561,6 @@ const TextBox = (props) => {
           connectedConversations[conversationID] &&
           currentDialogueID !== 'Come Back Later'
         ) {
-          console.log({
-            conversationID,
-            connectedConversations: connectedConversations[conversationID],
-          });
           if (connectedConversations[conversationID] === 'credits') {
             // go to credits
             props.completeGame();
@@ -600,11 +594,6 @@ const TextBox = (props) => {
             if (isLeaving) {
               history.push('/act-three');
             } else {
-              console.log(
-                'freemode and not leaving???',
-                freeMode,
-                currentAct3SceneObject
-              );
               props.toggleResponseBox();
             }
           } else {
@@ -615,7 +604,6 @@ const TextBox = (props) => {
               // move scene state to next scene
               const currentScene = conversationSceneOrder[currentSceneIndex];
               const nextScene = conversationSceneOrder[currentSceneIndex + 1];
-              console.log('assessing scene moving...', currentScene, nextScene);
               if (
                 nextScene &&
                 !currentScene.haltMovingSceneForwardAtEndOfDialogue &&

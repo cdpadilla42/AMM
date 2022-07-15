@@ -438,6 +438,4 @@ const randomizeCarouselData = (data) => {
 
 const randomizedCarouselData = randomizeCarouselData(carouselData);
 
-console.log(randomizedCarouselData);
-
 export default randomizedCarouselData;

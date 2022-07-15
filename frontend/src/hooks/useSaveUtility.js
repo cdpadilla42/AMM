@@ -24,7 +24,6 @@ export const useSaveSpecialEvent = () => {
 export const useUnlockConversation = () => {
   const dispatch = useDispatch();
   return function unlockConversationInReduxAndLocalStorage(payload) {
-    console.log({ payload });
     dispatch(unlockConversation(payload));
     unlockConversationInLocalStorage(payload);
   };

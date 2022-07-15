@@ -102,7 +102,6 @@ const ResponseBox = () => {
   }
 
   function handleClick(followingDialogueID) {
-    console.log(followingDialogueID);
     if (currentDialogueObj?.isFinalDialogue) {
       dispatch(resetConversationToStart());
       if (currentTestimonyID === gameStartDialogueID) {

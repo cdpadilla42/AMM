@@ -100,7 +100,6 @@ const ImageLoader = ({ children, disableLoading, loading, setLoading }) => {
   }
 
   const imageLoaded = (e) => {
-    // console.log('loaded this asset: ', e.currentTarget, new Date());
     loaded();
   };
 

@@ -13,8 +13,6 @@ export const hasRequiredSNotesForFinalTrial = (SNotes = []) => {
     }
   });
 
-  console.log(requiredSNotes);
-
   for (const key in requiredSNotes) {
     if (!requiredSNotes[key]) {
       return false;

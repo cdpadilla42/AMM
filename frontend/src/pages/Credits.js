@@ -66,7 +66,6 @@ const Credits = ({ gameComplete }) => {
 
   const nextSlide = (e) => {
     if (e.currentTarget !== e.target) {
-      console.log('ok');
       return;
     }
     if (onFinalSlide) return;

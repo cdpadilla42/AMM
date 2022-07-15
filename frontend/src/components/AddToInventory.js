@@ -35,19 +35,6 @@ const AddToInventory = ({
     }
   }, [isOpen]);
 
-  // useEffect(() => {
-  //   const listenForClickOutside = (e) => {
-  //     if (e.target !== containerRef.current) closeDisplay();
-  //     console.log(e);
-  //   };
-
-  //   window.addEventListener('click', listenForClickOutside);
-
-  //   return () => {
-  //     window.removeEventListener('click', listenForClickOutside);
-  //   };
-  // }, [containerRef]);
-
   const isItemMatch = (item, input) => {
     const cleanedInput = input.trim().toLowerCase();
     const cleanedItem = item.toLowerCase();

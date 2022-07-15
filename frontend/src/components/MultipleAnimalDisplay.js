@@ -26,17 +26,6 @@ const MultipleAnimalDisplay = () => {
   const { current: lastEmotionRef } = useRef({});
   const [isInitialPhrase, setIsInitialPhrase] = useState(true);
 
-  // dialogue.animals.forEach((animal) => {
-  //   console.log({
-  //     animal,
-  //     emotion: dialogue.phrase[currentDialoguePosition].emotion.emotion,
-  //   });
-  // });
-
-  // useEffect(() => {
-  //   console.log({ animalsState });
-  // }, [animalsState]);
-
   useEffect(() => {
     if (isInitialPhrase) {
       if (currentDialoguePosition !== 0) setIsInitialPhrase(false);
@@ -220,35 +209,6 @@ const MultipleAnimalDisplay = () => {
           />
         </CSSTransition>
       ))}
-
-      {/* <CSSTransition
-        classNames="animal_transition"
-        key={'left'}
-        timeout={{ exit: 200 }}
-      >
-        <AnimalDisplay
-          emotion={animalsState[0].emotion}
-          speaker={animalsState[0].name}
-          isCurrentSpeaker={animalsState[0].name === speaker}
-          orientation={'left'}
-          direction={animalsState[0].direction || 'right'}
-          key={animalsState[0].name}
-        />
-      </CSSTransition>
-      <CSSTransition
-        classNames="animal_transition"
-        key={'right'}
-        timeout={{ exit: 200 }}
-      >
-        <AnimalDisplay
-          emotion={animalsState[1].emotion}
-          speaker={animalsState[1].name}
-          isCurrentSpeaker={animalsState[1].name === speaker}
-          orientation={'right'}
-          direction={animalsState[1].direction || 'left'}
-          key={animalsState[1].name}
-        />
-      </CSSTransition> */}
     </TransitionGroup>
   );
 };
