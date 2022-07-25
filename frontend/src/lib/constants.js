@@ -342,7 +342,8 @@ export const requiredDialoguesInJulianTrial2 = {
 };
 
 export const requiredDialoguesInStitchesTrial4 = {
-  'd6d23a10-13b2-4712-a2d2-539779df7af1': 'ACT4GAME 1well first 2',
+  'd6d23a10-13b2-4712-a2d2-539779df7af1': 'ACT4GAME 1well first 3 right',
+  blocker: 'blocker',
 };
 
 export const requiredConversationsVisitedBeforeTrial2 = {

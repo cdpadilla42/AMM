@@ -499,6 +499,11 @@ const TextBox = (props) => {
               hasUserPassedAllRequiredDialogues = false;
             }
           });
+
+          console.log(
+            act2TrialJulianTestimonyDialoguesPassed,
+            requiredEvidence
+          );
           if (!hasUserPassedAllRequiredDialogues) {
             // handle diverging paths, either agent S loop
             // If Julian's, go back to Julian loopback. Else, go to
@@ -516,12 +521,16 @@ const TextBox = (props) => {
             history.push(`/testimony/${nextConversationID}`);
           }
         } else {
+          console.log('saving...');
           // Save dialogue if needed as passed
-          if (requiredDialoguesInJulianTrial2[currentDialogueID]) {
+          console.log({ currentDialogueID });
+          const requiredTrialGameScene =
+            requiredDialoguesInJulianTrial2[currentDialogueID] ||
+            requiredDialoguesInStitchesTrial4[currentDialogueID];
+          if (requiredTrialGameScene) {
             // Even though it's set to act2, we'll use this for act 4 as well.
             props.addAct2TrialJuliantestimonyDialogue({
-              [currentDialogueID]:
-                requiredDialoguesInJulianTrial2[currentDialogueID],
+              [currentDialogueID]: requiredTrialGameScene,
             });
           }
           // switch back to prev dialogue and position
