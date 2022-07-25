@@ -52,6 +52,7 @@ import {
   gameStartDialogueID,
   lastActTwoDialogueID,
   requiredDialoguesInJulianTrial2,
+  requiredDialoguesInStitchesTrial4,
   specialSceneHandling,
   trialTestimonyConversationIDs,
 } from '../lib/constants';
@@ -483,20 +484,31 @@ const TextBox = (props) => {
         } else if (
           // Act 2 Julian
           currentDialogueID === '966777cd-6fe8-4306-94b6-6cbdff81039e' ||
+          // Act4 Game Time!
+          currentDialogueID === '9469c498-90ef-4a9a-bc33-15c68c34e48f' ||
           currentDialogueID === null
         ) {
           // check if the objects match keys
-          let hasUserPassedAllRequiredDialoguesTrial2 = true;
-          Object.keys(requiredDialoguesInJulianTrial2).forEach((dialogue) => {
+          let hasUserPassedAllRequiredDialogues = true;
+          const requiredEvidence =
+            currentDialogueID === '966777cd-6fe8-4306-94b6-6cbdff81039e'
+              ? requiredDialoguesInJulianTrial2
+              : requiredDialoguesInStitchesTrial4;
+          Object.keys(requiredEvidence).forEach((dialogue) => {
             if (!act2TrialJulianTestimonyDialoguesPassed[dialogue]) {
-              hasUserPassedAllRequiredDialoguesTrial2 = false;
+              hasUserPassedAllRequiredDialogues = false;
             }
           });
-          if (!hasUserPassedAllRequiredDialoguesTrial2) {
+          if (!hasUserPassedAllRequiredDialogues) {
             // handle diverging paths, either agent S loop
+            // If Julian's, go back to Julian loopback. Else, go to
+            const loopback =
+              currentDialogueID === '966777cd-6fe8-4306-94b6-6cbdff81039e'
+                ? '75f01638-63e4-4cc7-8e7d-f39a1f3e9036'
+                : '08331c6f-a19a-4821-898f-9d3169ee4ecc';
             props.jumpToDialoguePositionAndConversation({
               position: 0,
-              dialogueID: '75f01638-63e4-4cc7-8e7d-f39a1f3e9036',
+              dialogueID: loopback,
             });
           } else {
             // Or moving forward
@@ -506,6 +518,7 @@ const TextBox = (props) => {
         } else {
           // Save dialogue if needed as passed
           if (requiredDialoguesInJulianTrial2[currentDialogueID]) {
+            // Even though it's set to act2, we'll use this for act 4 as well.
             props.addAct2TrialJuliantestimonyDialogue({
               [currentDialogueID]:
                 requiredDialoguesInJulianTrial2[currentDialogueID],

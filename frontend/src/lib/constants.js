@@ -247,6 +247,7 @@ export const act3Scenes = {
 
 export const conversationIDConstants = {
   ACT2_TRIAL_2: 'cea264b4-3530-4521-8fc2-f6c0e92b1745',
+  ACT4_TRIAL_GAMETIME: 'e5b470ca-5b8e-4f2e-a6b0-8743cfcb0c59',
 };
 
 export const specialDialoguesObject = {
@@ -305,6 +306,8 @@ export const dialoguesThatUnlockConversations = {
 export const trialTestimonyConversationIDs = {
   [conversationIDConstants.ACT2_TRIAL_2]:
     '966777cd-6fe8-4306-94b6-6cbdff81039e', // ACT2 Julian
+  [conversationIDConstants.ACT4_TRIAL_GAMETIME]:
+    '9469c498-90ef-4a9a-bc33-15c68c34e48f', // ACT2 Julian
 };
 
 // Key is starting conversationID. Value is leading to conversationID
@@ -336,6 +339,10 @@ export const connectedConversations = {
 export const requiredDialoguesInJulianTrial2 = {
   '39448cc8-dfd4-484f-9037-fbaf3c7c8d4d': 'dark and stormy',
   'cae65585-487b-438f-92b3-8e99092f4a55': 'and before he could say anything',
+};
+
+export const requiredDialoguesInStitchesTrial4 = {
+  'd6d23a10-13b2-4712-a2d2-539779df7af1': 'ACT4GAME 1well first 2',
 };
 
 export const requiredConversationsVisitedBeforeTrial2 = {
