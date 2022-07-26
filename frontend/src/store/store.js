@@ -11,6 +11,7 @@ import loadedReducer from './loaded';
 import inquiryReducer from './inquiry';
 import act3ScenesReducer from './act3Scenes';
 import specialEventReducer from './specialEvents';
+import imagesReducer from './images';
 
 const reducer = combineReducers({
   app: appReducer,
@@ -24,6 +25,7 @@ const reducer = combineReducers({
   inquiry: inquiryReducer,
   act3Scenes: act3ScenesReducer,
   specialEvent: specialEventReducer,
+  images: imagesReducer,
 });
 
 const store = configureStore({ reducer });

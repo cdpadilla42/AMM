@@ -25,6 +25,7 @@ import PortfolioSelect from './pages/PortfolioSelect';
 import Credits from './pages/Credits';
 import Error from './components/Error';
 import StartPage from './pages/Start';
+import { getPictures } from './store/images';
 
 function App() {
   const location = useLocation();
@@ -33,6 +34,7 @@ function App() {
   // Get items for inventory, Animal notes & Agent S Notes, and sprites
   useEffect(() => {
     dispatch(getSprites());
+    dispatch(getPictures());
     dispatch(getInventoryItems());
     dispatch(getAnimalNotes());
     dispatch(getMapLocations());

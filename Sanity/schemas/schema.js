@@ -17,6 +17,7 @@ import AnimalImages from './AnimalImages';
 import SNotes from './Snotes';
 import InquiryDialogue from './InquiryDialogue';
 import Prereq from './Prereq';
+import Image from './Image';
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -38,5 +39,6 @@ export default createSchema({
     SNotes,
     InquiryDialogue,
     Prereq,
+    Image,
   ]),
 });

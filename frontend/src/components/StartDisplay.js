@@ -8,6 +8,8 @@ import AnimalCarousel from './AnimalCarousel';
 const StartDisplay = () => {
   const history = useHistory();
 
+  const logoUrl = `https://cdn.sanity.io/images/qvonp967/production/706d902e42bd1975f63aa62f4893e5e8069b4e9b-1219x825.png?w=337&h=469`;
+
   function startNewGame() {
     history.push(`/testimony/729d0b36-6021-4843-8e09-da92c651022f`);
   }
@@ -29,8 +31,7 @@ const StartDisplay = () => {
     <>
       <StyledStartDisplay>
         <header>
-          <h1>Animal Crossing:</h1>
-          <h2>New Murder!</h2>
+          <img src={logoUrl} alt="Animal Crossing: New Murder" />
         </header>
         <section>
           <button onClick={startNewGame} className="start_page__button">
@@ -80,6 +81,10 @@ const StyledStartDisplay = styled.div`
     width: 100vw;
     height: 100vh; /* Fallback for browsers that do not support Custom Properties */
     height: calc(var(--vh, 1vh) * 100);
+  }
+
+  header {
+    z-index: 50;
   }
 
   section {
