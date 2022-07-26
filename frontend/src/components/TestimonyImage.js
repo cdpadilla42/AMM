@@ -28,7 +28,7 @@ const TestimonyImage = () => {
   return (
     <StyledTestimonyImage>
       <img
-        src={urlFor(currentImage).width(600).height(400).url()}
+        src={`${currentImage}?w=600&h=400`}
         alt="Shocking Evidence! Image Name Here!"
       />
     </StyledTestimonyImage>
@@ -50,6 +50,7 @@ const StyledTestimonyImage = styled.div`
   z-index: 100;
   min-width: 400px;
   min-height: 200px;
+  text-align: center;
   img {
     max-width: 600px;
     max-height: 400px;
