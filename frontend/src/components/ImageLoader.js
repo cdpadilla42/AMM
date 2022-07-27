@@ -147,8 +147,8 @@ const ImageLoader = ({ children, disableLoading, loading, setLoading }) => {
       const desktopUrl = backgroundURL?.backgroundURL?.desktop?.asset.url
         ? backgroundURL?.backgroundURL?.desktop?.asset.url + sanityBGUrlParams
         : fallbackUrl;
-      const phoneUrl = backgroundURL?.backgroundURL?.phone?.asset.url
-        ? backgroundURL?.backgroundURL?.phone?.asset.url
+      const phoneUrl = backgroundURL?.backgroundURL?.phone?.asset?.url
+        ? backgroundURL?.backgroundURL?.phone?.asset?.url
         : desktopUrl;
 
       if (vw <= 420) {

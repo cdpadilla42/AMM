@@ -114,8 +114,8 @@ const Testimony = (props) => {
   const desktopBG = backgroundURLs?.desktop?.asset.url
     ? backgroundURLs?.desktop?.asset.url + sanityImageUrlParams
     : fallbackBG;
-  const phoneBG = backgroundURLs?.phone?.asset.url
-    ? backgroundURLs?.phone?.asset.url
+  const phoneBG = backgroundURLs?.phone?.asset?.url
+    ? backgroundURLs?.phone?.asset?.url
     : desktopBG;
 
   const showHealthBar =
