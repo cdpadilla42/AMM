@@ -263,7 +263,7 @@ function dialogueReducer(state = initialState, action) {
     case displayComeBackLaterDialogueAct4.toString():
       return {
         ...state,
-        currentDialogueID: 'Come Back Later',
+        currentDialogueID: 'Come Back Later Act 4',
         prevDialogueID: state.currentDialogueID,
         currentDialoguePosition: 0,
       };
