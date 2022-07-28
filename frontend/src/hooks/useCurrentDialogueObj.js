@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { specialDialoguesObject } from '../lib/constants';
+import { dialogueIDConstants, specialDialoguesObject } from '../lib/constants';
 import { setSceneShifted } from '../store/app';
 import { switchConversation, updateCurrentDialogueID } from '../store/dialogue';
 
@@ -185,6 +185,13 @@ const useCurrentDialogueObj = () => {
         isFinalDialogue: true,
         switchToInquiryMode: true,
       });
+    } else if (currentDialogueID === 'Come Back Later Act 4') {
+      setCurrentDialogueObj(
+        dialogueList.find(
+          (dialogue) =>
+            dialogue._id === dialogueIDConstants.ACT4_FAILED_DIALOGUE
+        )
+      );
     } else {
       setCurrentDialogueObj(
         dialogueList.find((dialogue) => dialogue._id === currentDialogueID)

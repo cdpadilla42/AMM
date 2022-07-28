@@ -476,7 +476,10 @@ const TextBox = (props) => {
         props.switchConversationFromIncorrect(prevDialogueID);
         handleOpenInventory();
       } else if (isEndOfDialogueInTrialTestimony) {
-        if (
+        if (currentDialogueID === dialogueIDConstants.ACT4_FAILED_DIALOGUE) {
+          history.push('/act-three');
+          return;
+        } else if (
           currentDialogueObj.needEvidence ||
           currentDialogueObj.multiBranchEvidence
         ) {
@@ -606,6 +609,7 @@ const TextBox = (props) => {
         ) {
           returnToActOneHub();
         } else if (
+          currentDialogueID === 'Come Back Later Act 4' ||
           currentTestimonyID === lastActTwoDialogueID ||
           currentAct === 'b'
         ) {
