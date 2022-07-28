@@ -250,6 +250,10 @@ export const conversationIDConstants = {
   ACT4_TRIAL_GAMETIME: 'e5b470ca-5b8e-4f2e-a6b0-8743cfcb0c59',
 };
 
+export const dialogueIDConstants = {
+  ACT4_FAILED_DIALOGUE: 'f82b48f2-fbe2-415c-8349-40a7b39cf8b4',
+};
+
 export const specialDialoguesObject = {
   'ELVIS3 BEFORE WARMUP 2 wrong sixth time':
     'bc05a0be-4dc1-439e-9d29-2b729e0644f8',

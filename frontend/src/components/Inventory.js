@@ -27,6 +27,7 @@ import { useParams } from 'react-router-dom';
 import { incrementElvisAct3EvidenceCount } from '../store/specialEvents';
 import { useSaveSpecialEvent } from '../hooks/useSaveUtility';
 import {
+  conversationIDConstants,
   correctResponseToMultiSelect,
   incorrectResponseToMultiSelect,
   multiSelectDialogueIDs,
@@ -176,6 +177,15 @@ const Inventory = () => {
     dispatch(markUserNotPromptedForEvidence());
   };
 
+  const onHealthOut = () => {
+    if (currentDialogueID === conversationIDConstants.ACT4_TRIAL_GAMETIME) {
+    } else {
+      dispatch(displayComeBackLaterDialogue());
+    }
+    dispatch(toggleInventory());
+    dispatch(markUserNotPromptedForEvidence());
+  };
+
   const closeInventory = () => {
     dispatch(toggleInventory());
   };
@@ -282,7 +292,7 @@ const Inventory = () => {
           nextResponseID={nextResponseID}
           isMapOpen={isMapOpen}
           loseHealthOnIncorrect={currentDialogueObj.loseHealthOnIncorrect}
-          onHealthOut={handleComeBackLaterClick}
+          onHealthOut={onHealthOut}
           useLastAvailableEvidenceList={useLastAvailableEvidenceList}
           isShowingPeople={isShowingPeople}
         />
