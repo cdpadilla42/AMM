@@ -48,6 +48,7 @@ import {
 import {
   act3Scenes,
   connectedConversations,
+  dialogueIDConstants,
   dialoguesThatUnlockConversations,
   gameStartDialogueID,
   lastActTwoDialogueID,
