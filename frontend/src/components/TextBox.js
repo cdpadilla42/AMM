@@ -130,6 +130,12 @@ const TextBox = (props) => {
 
   const currentDialogueObj = useCurrentDialogueObj();
 
+  const currentDialogueIDRef = useRef({});
+
+  useEffect(() => {
+    currentDialogueIDRef.current = currentDialogueObj._id;
+  }, [currentDialogueObj]);
+
   const useLastAvailableEvidenceList =
     currentDialogueObj?.useLastAvailableEvidenceList;
 
@@ -476,7 +482,7 @@ const TextBox = (props) => {
       } else if (isEndOfDialogue && currentDialogueObj.name === 'Incorrect') {
         props.switchConversationFromIncorrect(prevDialogueID);
         handleOpenInventory();
-      } else if (isEndOfDialogueInTrialTestimony) {
+      } else if (isEndOfDialogueInTrialTestimony && !responseOptions) {
         if (currentDialogueID === dialogueIDConstants.ACT4_FAILED_DIALOGUE) {
           history.push('/act-three');
           return;
@@ -487,19 +493,23 @@ const TextBox = (props) => {
           handleOpenInventory();
         } else if (
           // Act 2 Julian
-          currentDialogueID === '966777cd-6fe8-4306-94b6-6cbdff81039e' ||
+          currentDialogueIDRef.current ===
+            '966777cd-6fe8-4306-94b6-6cbdff81039e' ||
           // Act4 Game Time!
-          (conversationID === 'e5b470ca-5b8e-4f2e-a6b0-8743cfcb0c59' &&
-            currentDialogueID !== '08331c6f-a19a-4821-898f-9d3169ee4ecc') ||
-          currentDialogueID === null
+          currentDialogueIDRef.current ===
+            '9469c498-90ef-4a9a-bc33-15c68c34e48f'
         ) {
           console.log(currentDialogueID);
           // check if the objects match keys
           let hasUserPassedAllRequiredDialogues = true;
           // Act 2 Julian
-          if (currentDialogueID === '966777cd-6fe8-4306-94b6-6cbdff81039e') {
+          if (
+            currentDialogueIDRef.current ===
+            '966777cd-6fe8-4306-94b6-6cbdff81039e'
+          ) {
             const requiredEvidence =
-              currentDialogueID === '966777cd-6fe8-4306-94b6-6cbdff81039e'
+              currentDialogueIDRef.current ===
+              '966777cd-6fe8-4306-94b6-6cbdff81039e'
                 ? requiredDialoguesInJulianTrial2
                 : requiredDialoguesInStitchesTrial4;
             Object.keys(requiredEvidence).forEach((dialogue) => {
@@ -521,7 +531,8 @@ const TextBox = (props) => {
             // handle diverging paths, either agent S loop
             // If Julian's, go back to Julian loopback. Else, go to
             const loopback =
-              currentDialogueID === '966777cd-6fe8-4306-94b6-6cbdff81039e'
+              currentDialogueIDRef.current ===
+              '966777cd-6fe8-4306-94b6-6cbdff81039e'
                 ? '75f01638-63e4-4cc7-8e7d-f39a1f3e9036'
                 : '08331c6f-a19a-4821-898f-9d3169ee4ecc';
             props.jumpToDialoguePositionAndConversation({
@@ -535,15 +546,15 @@ const TextBox = (props) => {
           }
         } else {
           console.log('saving...');
+          const dialogueID = currentDialogueID || currentDialogueIDRef.current;
           // Save dialogue if needed as passed
-          console.log({ currentDialogueID });
           const requiredTrialGameScene =
-            requiredDialoguesInJulianTrial2[currentDialogueID] ||
-            requiredDialoguesInStitchesTrial4[currentDialogueID];
+            requiredDialoguesInJulianTrial2[dialogueID] ||
+            requiredDialoguesInStitchesTrial4[dialogueID];
           if (requiredTrialGameScene) {
             // Even though it's set to act2, we'll use this for act 4 as well.
             props.addAct2TrialJuliantestimonyDialogue({
-              [currentDialogueID]: requiredTrialGameScene,
+              [dialogueID]: requiredTrialGameScene,
             });
           }
           // switch back to prev dialogue and position
