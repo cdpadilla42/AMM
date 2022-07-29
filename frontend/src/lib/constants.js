@@ -311,7 +311,7 @@ export const trialTestimonyConversationIDs = {
   [conversationIDConstants.ACT2_TRIAL_2]:
     '966777cd-6fe8-4306-94b6-6cbdff81039e', // ACT2 Julian
   [conversationIDConstants.ACT4_TRIAL_GAMETIME]:
-    '9469c498-90ef-4a9a-bc33-15c68c34e48f', // ACT2 Julian
+    '9469c498-90ef-4a9a-bc33-15c68c34e48f', // ACT4 GAME TIME
 };
 
 // Key is starting conversationID. Value is leading to conversationID

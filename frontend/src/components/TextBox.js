@@ -64,7 +64,7 @@ import {
   endInquiryMode,
 } from '../store/app';
 import sceneUnlockingHandler from '../lib/sceneUnlockingHandler';
-import { isDeadEndDialogue } from '../lib/util';
+import { canPassAct4GameTime, isDeadEndDialogue } from '../lib/util';
 import { useUnlockConversation } from '../hooks/useSaveUtility';
 import { useErrorHandler } from 'react-error-boundary';
 import { hasRequiredSNotesForFinalTrial } from '../lib/SNotes';
@@ -489,25 +489,34 @@ const TextBox = (props) => {
           // Act 2 Julian
           currentDialogueID === '966777cd-6fe8-4306-94b6-6cbdff81039e' ||
           // Act4 Game Time!
-          currentDialogueID === '9469c498-90ef-4a9a-bc33-15c68c34e48f' ||
+          (conversationID === 'e5b470ca-5b8e-4f2e-a6b0-8743cfcb0c59' &&
+            currentDialogueID !== '08331c6f-a19a-4821-898f-9d3169ee4ecc') ||
           currentDialogueID === null
         ) {
+          console.log(currentDialogueID);
           // check if the objects match keys
           let hasUserPassedAllRequiredDialogues = true;
-          const requiredEvidence =
-            currentDialogueID === '966777cd-6fe8-4306-94b6-6cbdff81039e'
-              ? requiredDialoguesInJulianTrial2
-              : requiredDialoguesInStitchesTrial4;
-          Object.keys(requiredEvidence).forEach((dialogue) => {
-            if (!act2TrialJulianTestimonyDialoguesPassed[dialogue]) {
-              hasUserPassedAllRequiredDialogues = false;
-            }
-          });
-
-          console.log(
-            act2TrialJulianTestimonyDialoguesPassed,
-            requiredEvidence
-          );
+          // Act 2 Julian
+          if (currentDialogueID === '966777cd-6fe8-4306-94b6-6cbdff81039e') {
+            const requiredEvidence =
+              currentDialogueID === '966777cd-6fe8-4306-94b6-6cbdff81039e'
+                ? requiredDialoguesInJulianTrial2
+                : requiredDialoguesInStitchesTrial4;
+            Object.keys(requiredEvidence).forEach((dialogue) => {
+              if (!act2TrialJulianTestimonyDialoguesPassed[dialogue]) {
+                hasUserPassedAllRequiredDialogues = false;
+              }
+            });
+            // Act4 Game Time!
+          } else if (
+            conversationID === 'e5b470ca-5b8e-4f2e-a6b0-8743cfcb0c59'
+          ) {
+            console.log('checking');
+            hasUserPassedAllRequiredDialogues = canPassAct4GameTime(
+              act2TrialJulianTestimonyDialoguesPassed
+            );
+          }
+          console.log(act2TrialJulianTestimonyDialoguesPassed);
           if (!hasUserPassedAllRequiredDialogues) {
             // handle diverging paths, either agent S loop
             // If Julian's, go back to Julian loopback. Else, go to
@@ -539,7 +548,11 @@ const TextBox = (props) => {
           }
           // switch back to prev dialogue and position
           let returningDialoguePosition = storedDialoguePosition + 1;
-          if (currentDialogueID === '75f01638-63e4-4cc7-8e7d-f39a1f3e9036') {
+          // If loopback dialogue
+          if (
+            currentDialogueID === '75f01638-63e4-4cc7-8e7d-f39a1f3e9036' ||
+            currentDialogueID === '08331c6f-a19a-4821-898f-9d3169ee4ecc'
+          ) {
             returningDialoguePosition = 0;
           }
           props.jumpToDialoguePositionAndConversation({
