@@ -19,7 +19,10 @@ const StartDisplay = () => {
     if (!lastConversationID) {
       toast('No save data available.');
     } else {
-      if (lastConversationID === 'act-one' || 'act-three') {
+      if (
+        lastConversationID === 'act-one' ||
+        lastConversationID === 'act-three'
+      ) {
         history.push(`/${lastConversationID}`);
       } else {
         history.push(`/testimony/${lastConversationID}`);
