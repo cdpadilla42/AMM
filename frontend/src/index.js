@@ -15,7 +15,7 @@ import Error from './components/Error';
 
 if (!process?.env.NODE_ENV || process?.env.NODE_ENV === 'production') {
   Sentry.init({
-    dsn: 'https://5a729b0cfd3d48cfa58d6cc9ee7e29c0@o1309684.ingest.sentry.io/6556067',
+    dsn: 'https://8b557b2aca04487cbf0b75807c738fda@o1345720.ingest.sentry.io/6622694',
     integrations: [new BrowserTracing()],
 
     // Set tracesSampleRate to 1.0 to capture 100%
