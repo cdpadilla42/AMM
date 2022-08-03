@@ -133,7 +133,9 @@ const TextBox = (props) => {
   const currentDialogueIDRef = useRef({});
 
   useEffect(() => {
-    currentDialogueIDRef.current = currentDialogueObj._id;
+    if (currentDialogueObj?._id) {
+      currentDialogueIDRef.current = currentDialogueObj?._id;
+    }
   }, [currentDialogueObj]);
 
   const useLastAvailableEvidenceList =
