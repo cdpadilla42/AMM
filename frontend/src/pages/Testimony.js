@@ -110,9 +110,9 @@ const Testimony = (props) => {
   }, []);
 
   // Extract backgrounds and append sanity params
-  const fallbackBG = backgroundURLs?.image?.asset.url + sanityImageUrlParams;
-  const desktopBG = backgroundURLs?.desktop?.asset.url
-    ? backgroundURLs?.desktop?.asset.url + sanityImageUrlParams
+  const fallbackBG = backgroundURLs?.image?.asset?.url + sanityImageUrlParams;
+  const desktopBG = backgroundURLs?.desktop?.asset?.url
+    ? backgroundURLs?.desktop?.asset?.url + sanityImageUrlParams
     : fallbackBG;
   const phoneBG = backgroundURLs?.phone?.asset?.url
     ? backgroundURLs?.phone?.asset?.url
