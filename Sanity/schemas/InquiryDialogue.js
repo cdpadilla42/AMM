@@ -93,6 +93,10 @@ export default {
               title: 'Image',
               name: 'imageFieldset',
             },
+            {
+              title: 'Prereq Event',
+              name: 'prereqEvent',
+            },
           ],
           fields: [
             {
@@ -293,6 +297,22 @@ export default {
               description: 'Reference to the item.',
               fieldset: 'itemEvent',
               hidden: ({ parent }) => !parent.itemEventTriggered,
+            },
+            {
+              title: 'Prereq Event',
+              name: 'prereqEventTriggered',
+              type: 'boolean',
+              description: 'On if this dialogue triggers a prereq event',
+              fieldset: 'prereqEvent',
+            },
+            {
+              title: 'Prereq Event Reference',
+              name: 'prereqEventRef',
+              type: 'reference',
+              to: [{ type: 'prereq' }],
+              description: 'Reference to the prereq.',
+              fieldset: 'prereqEvent',
+              hidden: ({ parent }) => !parent.prereqEventTriggered,
             },
             {
               title: 'Show Image',

@@ -118,7 +118,7 @@ export const getInquiryDialogues = createAsyncThunk(
   				emotion->{emotion}, speaker->{name, color}, text, isGrey, prereq->{name},
 					link, sNotesEventRef->{name, count, successMessage, hidden, achievement, itemEventTriggered, itemEventType, itemEventRef->{name, _id}}, sNotesEventTriggered, sNotesEventType, 
           changePosition, leftAnimal->{name}, rightAnimal->{name}, leftOrientation, rightOrientation, leftAnimalCentered, centeredOrientation, leftEmotion->{emotion}, rightEmotion->{emotion},
-          showImage,
+          showImage, prereqEventTriggered, prereqEventRef->{name},
           "imageUrl": image.asset->url
 				},
       }`
