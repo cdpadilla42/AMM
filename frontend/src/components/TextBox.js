@@ -487,7 +487,7 @@ const TextBox = (props) => {
         props.switchConversationFromIncorrect(prevDialogueID);
         handleOpenInventory();
       } else if (isEndOfDialogueInTrialTestimony && !responseOptions) {
-        if (currentDialogueID === dialogueIDConstants.ACT4_FAILED_DIALOGUE) {
+        if (currentDialogueID === 'Come Back Later Act 4') {
           history.push('/act-three');
           return;
         } else if (
@@ -613,7 +613,8 @@ const TextBox = (props) => {
         if (
           isEndOfDialogue &&
           connectedConversations[conversationID] &&
-          currentDialogueID !== 'Come Back Later'
+          (currentDialogueID !== 'Come Back Later' ||
+            currentDialogueID !== 'Come Back Later Act 4')
         ) {
           if (connectedConversations[conversationID] === 'credits') {
             // go to credits

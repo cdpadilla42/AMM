@@ -13,6 +13,7 @@ import {
   saveAsLastEvidenceList,
   saveAsLastEvidencePrompt,
   resetDialoguePosition,
+  displayComeBackLaterDialogueAct4,
 } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import urlFor from '../lib/imageUrlBuilder';
@@ -36,6 +37,7 @@ import {
 const Inventory = () => {
   const dispatch = useDispatch();
   const isFreeMode = useIsFreeMode();
+  const { id: conversationID } = useParams();
 
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState('');
@@ -178,7 +180,8 @@ const Inventory = () => {
   };
 
   const onHealthOut = () => {
-    if (currentDialogueID === conversationIDConstants.ACT4_TRIAL_GAMETIME) {
+    if (conversationID === conversationIDConstants.ACT4_TRIAL_GAMETIME) {
+      dispatch(displayComeBackLaterDialogueAct4());
     } else {
       dispatch(displayComeBackLaterDialogue());
     }
@@ -692,6 +695,7 @@ export const ItemDetailsDisplay = ({
       } else {
         dispatch(displayInvalidEvidenceDialogue());
         if (loseHealthOnIncorrect) {
+          console.log(health);
           if (health === 1) {
             onHealthOut();
             dispatch(hideHealthBar());
