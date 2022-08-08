@@ -371,9 +371,11 @@ const TextBox = (props) => {
               // pass to itemEvent handler
               handleSNoteItemEvent(itemEventOptions);
             } else {
-              toast(
-                `Alright! ${newCountForNote} out of ${count} items checked off for ${name}!`
-              );
+              if (!hidden) {
+                toast(
+                  `Alright! ${newCountForNote} out of ${count} items checked off for ${name}!`
+                );
+              }
             }
             const newSnotesList = updateSNoteByIndex(
               updatedSNote,
@@ -643,6 +645,7 @@ const TextBox = (props) => {
           history.push('/act-three');
         } else if (currentAct === 'c') {
           // if current scene state is free mode
+          console.log(freeMode, currentAct3SceneObject);
           if (currentAct3SceneObject?.name === 'Freemode' || freeMode) {
             if (isLeaving) {
               history.push('/act-three');
