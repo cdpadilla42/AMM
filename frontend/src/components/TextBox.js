@@ -478,7 +478,7 @@ const TextBox = (props) => {
       const isEndOfDialogueInTrialTestimony =
         isEndOfDialogue && trialTestimonyReturningDialogueID;
       // if there is trailing dialogue...
-      if (!isEndOfDialogue && phrases[currentDialoguePosition].link) {
+      if (!isEndOfDialogue && phrases[currentDialoguePosition]?.link) {
         // add on to the end of the current text and change emotions
         setFromLink(true);
         setTrailedText(prevText + highlightedTextString + ' ');
