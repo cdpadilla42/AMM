@@ -76,7 +76,7 @@ const SelectConversation = () => {
   }
 
   function methodDoesNotExist() {
-    foo();
+    history.nonexistantFunction;
   }
 
   return (
