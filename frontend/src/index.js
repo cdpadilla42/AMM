@@ -32,6 +32,7 @@ ReactDOM.render(
       <Router>
         <ErrorBoundary FallbackComponent={Error}>
           <App />
+          <button onClick={methodDoesNotExist}>Break the world</button>;
         </ErrorBoundary>
       </Router>
     </Provider>
