@@ -75,6 +75,10 @@ const SelectConversation = () => {
     history.push(`/testimony/729d0b36-6021-4843-8e09-da92c651022f`);
   }
 
+  function methodDoesNotExist() {
+    foo();
+  }
+
   return (
     <ImageLoader disableLoading loading={loading} setLoading={setLoading}>
       <a href="/act-three">Act Three Select</a>
@@ -99,6 +103,7 @@ const SelectConversation = () => {
       <button type="button" onClick={startNewGame}>
         Start new Game 🍃
       </button>
+      <button onClick={methodDoesNotExist}>Break the world</button>;
       <h1>
         UGLY SELECT SCREEN{' '}
         <span role="img" aria-label="image">
