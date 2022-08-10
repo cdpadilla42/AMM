@@ -12,17 +12,29 @@ const creditsData = [
     <li>
       <h2>Art/Story</h2>
       <h3>Jenn Padilla</h3>
-      <a href="https://twitter.com/jennpadillart">@jennpadillart</a>
+      <a
+        href="https://twitter.com/jennpadillart"
+        rel="noopener"
+        target="_blank"
+      >
+        @jennpadillart
+      </a>
       <br />
-      <a href="https://www.jennpadilla.com/">jennpadilla.com</a>
+      <a href="https://www.jennpadilla.com/" rel="noopener" target="_blank">
+        jennpadilla.com
+      </a>
       <br />
     </li>
     <li>
       <h2>Software/Development</h2>
       <h3>Chris Padilla</h3>
-      <a href="https://twitter.com/letsgokris">@letsgokris</a>
+      <a href="https://twitter.com/letsgokris" rel="noopener" target="_blank">
+        @letsgokris
+      </a>
       <br />
-      <a href="https://chrisdpadilla.com">chrisdpadilla.com</a>
+      <a href="https://chrisdpadilla.com" rel="noopener" target="_blank">
+        chrisdpadilla.com
+      </a>
       <br />
     </li>
   </ul>,
@@ -30,16 +42,26 @@ const creditsData = [
     <li>
       <h2>Agent S's Art</h2>
       <h3>Kelly McCraw</h3>
-      <a href="https://twitter.com/mccraw_kelly">@mccraw_kelly</a>
+      <a href="https://twitter.com/mccraw_kelly" rel="noopener" target="_blank">
+        @mccraw_kelly
+      </a>
     </li>
     <li>
       <h2>Beta Testers</h2>
       <h3>Lorenzo Estrada</h3>
-      <a href="https://twitter.com/Lozoescartoons">@Lozoescartoons</a>
+      <a
+        href="https://twitter.com/Lozoescartoons"
+        rel="noopener"
+        target="_blank"
+      >
+        @Lozoescartoons
+      </a>
     </li>
     <li>
       <h3>Kelly McCraw</h3>
-      <a href="https://twitter.com/mccraw_kelly">@mccraw_kelly</a>
+      <a href="https://twitter.com/mccraw_kelly" rel="noopener" target="_blank">
+        @mccraw_kelly
+      </a>
     </li>
   </ul>,
 ];
@@ -79,7 +101,7 @@ const Credits = ({ gameComplete }) => {
   const onFinalSlide = !(slideIndex < creditsData.length);
 
   const nextSlide = (e) => {
-    if (e.currentTarget !== e.target) {
+    if (e.target.tagName === 'A') {
       return;
     }
     if (onFinalSlide) return;
