@@ -588,6 +588,7 @@ const TextBox = (props) => {
             conversationID,
             specialSceneHandling[currentInquiryDialogue]
           );
+          console.log('special scene handling');
           props.updateScenes({
             conversationID,
             upcomingScene: specialSceneHandling[currentInquiryDialogue],
@@ -661,6 +662,7 @@ const TextBox = (props) => {
               // move scene state to next scene
               const currentScene = conversationSceneOrder[currentSceneIndex];
               const nextScene = conversationSceneOrder[currentSceneIndex + 1];
+              console.log(currentScene, nextScene, currentSceneIndex);
               if (
                 nextScene &&
                 !currentScene.haltMovingSceneForwardAtEndOfDialogue &&
@@ -668,6 +670,7 @@ const TextBox = (props) => {
                 currentScene?.name !== 'Freemode'
               ) {
                 saveNewAct3SceneToLocalStorage(conversationID, nextScene);
+                console.log('Normal leaving procedure');
                 props.updateScenes({
                   conversationID,
                   upcomingScene: nextScene,
@@ -679,8 +682,8 @@ const TextBox = (props) => {
               );
               if (sceneUnlockingHandlerObj) {
                 const { updateReduxSceneObj } = sceneUnlockingHandlerObj;
-                if (updateReduxSceneObj)
-                  props.updateScenes(updateReduxSceneObj);
+                if (updateReduxSceneObj) console.log('scene unlocking handler');
+                props.updateScenes(updateReduxSceneObj);
               }
 
               // Unlock dialogue
@@ -700,6 +703,7 @@ const TextBox = (props) => {
         const nextScene = conversationSceneOrder[currentSceneIndex + 1];
         if (nextScene && !currentScene.haltMovingSceneForwardAtEndOfDialogue) {
           saveNewAct3SceneToLocalStorage(conversationID, nextScene);
+          console.log('End of dialogue for inquiry mode');
           props.updateScenes({
             conversationID,
             upcomingScene: nextScene,

@@ -29,7 +29,10 @@ const ActThreeTestimonySelect = () => {
   // Above does not return a true array, below converts data to an array with the map method available to it
   conversations = [...conversations];
   const actThreeConversations = conversations.filter((conversation) => {
-    return conversation.act === 'c';
+    return (
+      conversation.act === 'c' &&
+      conversation._id !== '656278f2-8610-4a94-93e8-c75acafce071'
+    );
   });
 
   const userHasRequiredSNotes = hasRequiredSNotesForFinalTrial(sNotes);

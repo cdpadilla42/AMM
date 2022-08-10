@@ -1,3 +1,5 @@
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useState } from 'react';
 import { connect } from 'react-redux';
@@ -51,13 +53,25 @@ const Credits = ({ gameComplete }) => {
   const handleClick = () => {
     history.push('/testimony/56cc2315-f580-4116-bf9d-be350ea15e10');
   };
+  const handleHomeClick = () => {
+    history.push('/landing');
+  };
 
   const finalSlide = (
     <>
-      <p>Thank you so much fora to playing my game!</p>
-      <br />
-      {(gameComplete || isGameCompleteLocalStorage()) && (
-        <button onClick={handleClick}>Epilogue</button>
+      {gameComplete || isGameCompleteLocalStorage() ? (
+        <>
+          <p>Thank you so much fora to playing my game!</p>
+          <br />
+          <button onClick={handleClick}>Epilogue</button>
+          <br />
+          <img
+            src="https://cdn.sanity.io/images/qvonp967/production/77a09537bcf41d912e1db3ddc0d8f033436b0f2e-1245x720.png"
+            alt="Thank you postcard!"
+          />
+        </>
+      ) : (
+        <button onClick={handleHomeClick}>Back to home page!</button>
       )}
     </>
   );
@@ -77,8 +91,10 @@ const Credits = ({ gameComplete }) => {
 
   return (
     <StyledCredits onClick={nextSlide}>
-      {creditsData}
-      {finalSlide}
+      {currentSlide}{' '}
+      <div className="next_arrow" onClick={nextSlide}>
+        <FontAwesomeIcon icon={faCaretDown} color="#ffb500" size="2x" />
+      </div>
     </StyledCredits>
   );
 };
@@ -145,5 +161,17 @@ const StyledCredits = styled.section`
       border: 4px solid #17b5ff;
     }
     font-size: 1.5rem;
+  }
+
+  .next_arrow {
+    box-sizing: border-box;
+    left: calc(50% - 25px);
+    animation: bounce 0.6s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    padding: 0 1rem;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;

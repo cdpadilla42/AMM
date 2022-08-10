@@ -48,7 +48,7 @@ import {
   dialoguesThatUnlockConversations,
 } from '../lib/constants';
 import ObjectionButton from '../components/ObjectionButton';
-import { endInquiryDialogue } from '../store/app';
+import { endFreeMode, endInquiryDialogue } from '../store/app';
 import Error from '../components/Error';
 
 const Testimony = (props) => {
@@ -64,12 +64,15 @@ const Testimony = (props) => {
     (state) => state.health.showingHealthBar
   );
   const { currentDialogueName } = useSelector((state) => state.dialogue);
+  const playersAct3Scenes = useSelector((state) => state.act3Scenes);
   const currentAct = useSelector(
     (state) => state.conversations?.conversation?.[0]?.act
   );
   const [loading, setLoading] = useState(true);
 
   const conversationID = props.match.params?.id;
+
+  const currentAct3SceneObject = playersAct3Scenes[conversationID];
 
   useEffect(() => {
     // Act Three Returning Conversation check
@@ -93,8 +96,15 @@ const Testimony = (props) => {
       dispatch(resetDialogue());
       dispatch(resetBackground());
       dispatch(endInquiryDialogue());
+      dispatch(endFreeMode());
     };
   }, []);
+
+  // useEffect(() => {
+  //   if (currentAct3SceneObject?.name !== 'Freemode') {
+  //     dispatch(endFreeMode());
+  //   }
+  // }, [currentAct3SceneObject]);
 
   useEffect(() => {
     // Listen for changes in dialogue if trial and save to local storage

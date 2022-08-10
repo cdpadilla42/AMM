@@ -67,6 +67,7 @@ export const act3Scenes = {
       {
         name: 'Freemode',
         dialogueID: '14372109-7123-474b-af7b-c642d61f5f1a',
+        haltMovingSceneForwardAtEndOfDialogue: true,
       },
     ],
   },
@@ -76,6 +77,7 @@ export const act3Scenes = {
       {
         name: 'Freemode',
         dialogueID: '903a056e-0838-4034-b5bd-099144ab773e',
+        haltMovingSceneForwardAtEndOfDialogue: true,
       },
     ],
   },
@@ -98,6 +100,7 @@ export const act3Scenes = {
       {
         name: 'Freemode',
         dialogueID: '152c62ca-3401-4ff0-a80a-e32cefb4a5c9',
+        haltMovingSceneForwardAtEndOfDialogue: true,
       },
     ],
   },
@@ -111,6 +114,7 @@ export const act3Scenes = {
       {
         name: 'Freemode',
         dialogueID: '76508ca2-2cdd-4d7e-a334-f6ba21f8646e',
+        haltMovingSceneForwardAtEndOfDialogue: true,
       },
     ],
   },
@@ -120,6 +124,7 @@ export const act3Scenes = {
       {
         name: 'Start',
         dialogueID: 'b557814b-e4b2-4356-942a-7be806457ec8',
+        haltMovingSceneForwardAtEndOfDialogue: true,
       },
     ],
   },
@@ -133,6 +138,7 @@ export const act3Scenes = {
       {
         name: 'Freemode',
         dialogueID: '71c1dd0d-cbd2-47d6-972d-0775d6c15e44',
+        haltMovingSceneForwardAtEndOfDialogue: true,
       },
     ],
   },
@@ -154,6 +160,7 @@ export const act3Scenes = {
       {
         name: 'Freemode',
         dialogueID: 'e3bd7c19-386a-4c47-8b51-8f586b978ab4',
+        haltMovingSceneForwardAtEndOfDialogue: true,
       },
     ],
   },
@@ -171,10 +178,12 @@ export const act3Scenes = {
       {
         name: 'Before Cake',
         dialogueID: '027da17b-68aa-4ff9-80b6-f7e55ded9f1b',
+        // haltMovingSceneForwardAtEndOfDialogue: true,
       },
       {
         name: 'Freemode',
         dialogueID: '07c0f587-36df-4481-a992-173c6f0389d0',
+        haltMovingSceneForwardAtEndOfDialogue: true,
       },
     ],
   },
@@ -188,6 +197,7 @@ export const act3Scenes = {
       {
         name: 'Freemode',
         dialogueID: '25766a9f-440f-4464-9f79-bfb49ad684fc',
+        haltMovingSceneForwardAtEndOfDialogue: true,
       },
     ],
   },
@@ -201,6 +211,7 @@ export const act3Scenes = {
       {
         name: 'Freemode',
         dialogueID: 'c3d6e35a-1838-4986-829a-ab57926e3c8f',
+        haltMovingSceneForwardAtEndOfDialogue: true,
       },
     ],
   },
@@ -223,6 +234,7 @@ export const act3Scenes = {
       {
         name: 'Freemode',
         dialogueID: '42917e6c-f37d-46c9-895f-d1320f214ace',
+        haltMovingSceneForwardAtEndOfDialogue: true,
       },
     ],
   },
@@ -240,6 +252,7 @@ export const act3Scenes = {
       {
         name: 'Freemode',
         dialogueID: '9dbae51b-6d40-4796-83ef-8a9ec1315d29',
+        haltMovingSceneForwardAtEndOfDialogue: true,
       },
     ],
   },
