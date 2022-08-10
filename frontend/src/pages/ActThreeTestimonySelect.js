@@ -63,7 +63,7 @@ const ActThreeTestimonySelect = () => {
         `WOW! You just unlocked the trial! You have enough Agent S Notes completed to nail the culprit!`
       );
     }
-  }, []);
+  }, [userHasRequiredSNotes]);
 
   const handlePreTrialClick = () => {
     setLocalStorageToJustBeforeTrial();
