@@ -123,7 +123,7 @@ const TextBox = (props) => {
       );
     }
     return 0;
-  }, [conversationSceneOrder]);
+  }, [conversationSceneOrder, currentAct3SceneObject]);
   const onTypingDone = () => {
     setDoneTyping(true);
   };
