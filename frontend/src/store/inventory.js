@@ -154,7 +154,9 @@ function inventoryReducer(state = initialState, action) {
     case removeFromInventory.toString():
       const newItemsList = [...state.userItems];
       const indexToRemove = newItemsList.indexOf(payload);
-      newItemsList.splice(indexToRemove, 1);
+      if (indexToRemove !== -1) {
+        newItemsList.splice(indexToRemove, 1);
+      }
       return { ...state, userItems: newItemsList };
     case addToSNotesList.toString():
       const newSNotes = [...state.userSNotes, payload];
