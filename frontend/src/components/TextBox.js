@@ -128,6 +128,8 @@ const TextBox = (props) => {
     setDoneTyping(true);
   };
 
+  const [stopClicks, setStopClicks] = useState(false);
+
   const currentDialogueObj = useCurrentDialogueObj();
 
   const currentDialogueIDRef = useRef({});
@@ -137,6 +139,10 @@ const TextBox = (props) => {
       currentDialogueIDRef.current = currentDialogueObj?._id;
     }
   }, [currentDialogueObj]);
+
+  useEffect(() => {
+    return () => setStopClicks(false);
+  }, []);
 
   const useLastAvailableEvidenceList =
     currentDialogueObj?.useLastAvailableEvidenceList;
@@ -151,6 +157,7 @@ const TextBox = (props) => {
     } else {
       history.push('/act-one');
     }
+    setStopClicks(true);
   };
 
   useEffect(() => {
@@ -456,6 +463,7 @@ const TextBox = (props) => {
   };
 
   const handleNextClick = (e) => {
+    if (stopClicks) return;
     try {
       if (e) {
         e.stopPropagation();
@@ -489,6 +497,7 @@ const TextBox = (props) => {
       } else if (isEndOfDialogueInTrialTestimony && !responseOptions) {
         if (currentDialogueID === 'Come Back Later Act 4') {
           history.push('/act-three');
+          setStopClicks(true);
           return;
         } else if (
           currentDialogueObj.needEvidence ||
@@ -547,6 +556,7 @@ const TextBox = (props) => {
             // Or moving forward
             const nextConversationID = connectedConversations[conversationID];
             history.push(`/testimony/${nextConversationID}`);
+            setStopClicks(true);
           }
         } else {
           console.log('saving...');
@@ -595,6 +605,7 @@ const TextBox = (props) => {
           });
           props.endInquiryDialogue();
           history.push('/act-three');
+          setStopClicks(true);
         } else {
           props.toggleResponseBox();
           props.jumpToDialoguePositionAndConversation({
@@ -622,15 +633,18 @@ const TextBox = (props) => {
             props.completeGame();
             completeGameInLocalStorage();
             history.push(`/credits`);
+            setStopClicks(true);
             return;
           } else if (connectedConversations[conversationID] === 'play') {
             // go to play page
             history.push(`/play`);
+            setStopClicks(true);
             return;
           } else {
             history.push(
               `/testimony/${connectedConversations[conversationID]}`
             );
+            setStopClicks(true);
             return;
           }
         } else if (
@@ -645,12 +659,14 @@ const TextBox = (props) => {
           currentAct === 'b'
         ) {
           history.push('/act-three');
+          setStopClicks(true);
         } else if (currentAct === 'c') {
           // if current scene state is free mode
           console.log(freeMode, currentAct3SceneObject);
           if (currentAct3SceneObject?.name === 'Freemode' || freeMode) {
             if (isLeaving) {
               history.push('/act-three');
+              setStopClicks(true);
             } else {
               props.toggleResponseBox();
             }
@@ -691,6 +707,7 @@ const TextBox = (props) => {
             }
           }
           history.push('/act-three');
+          setStopClicks(true);
         } else {
           returnToActOneHub();
         }
