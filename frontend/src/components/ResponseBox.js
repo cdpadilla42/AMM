@@ -46,6 +46,9 @@ const ResponseBox = () => {
 
   const responseOptions = currentDialogue?.responseOptions;
 
+  const isDialogueIDInCurrentDialogueList = (id) =>
+    dialogue.find((dialogue) => dialogue._id === id);
+
   function renderResponseOptions() {
     if (
       !responseOptions &&
@@ -59,7 +62,12 @@ const ResponseBox = () => {
             dispatch(openInventory());
             dispatch(startInquiryMode());
             // If no previous dialogue saved,
-            if (!returnDialogue) {
+            if (
+              !returnDialogue ||
+              !isDialogueIDInCurrentDialogueList(
+                returnDialogue.currentDialogueID
+              )
+            ) {
               dispatch(
                 storeReturnDialogue({
                   currentDialogueID,
