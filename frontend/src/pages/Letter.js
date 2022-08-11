@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 const Letter = () => {
+  useEffect(() => {
+    document.body.style = 'background: #f5f4d7;';
+    return () => (document.body.style = '');
+  }, []);
   return (
     <StyledLetter>
       <section className="letter_container">
@@ -47,7 +51,7 @@ export default Letter;
 const StyledLetter = styled.div`
   background-color: #f5f4d7;
   color: #231e1e;
-  height: 100vh;
+  height: 100%;
 
   .letter_container {
     max-width: 1200px;
@@ -56,7 +60,8 @@ const StyledLetter = styled.div`
     padding-bottom: 3rem;
     max-width: 960px;
     font-style: italic;
-    font-family: Optima sans-serif;
+    font-weight: 700;
+    font-family: 'Averia Libre', sans-serif;
     font-size: 2rem;
     text-align: left;
   }
