@@ -64,6 +64,21 @@ const creditsData = [
       </a>
     </li>
   </ul>,
+  <ul>
+    <li>
+      <h2>Patterns</h2>
+      Matt Macpherson
+      <br />
+      Nintendo
+      <br />
+    </li>
+    <li>
+      <h2>Animal Crossing</h2>
+      Animal Crossing: New Horizons is published by Nintendo®
+      <br />
+      All characters and rights belong to them.
+    </li>
+  </ul>,
 ];
 
 const Credits = ({ gameComplete }) => {
