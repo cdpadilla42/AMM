@@ -138,7 +138,6 @@ const Testimony = (props) => {
         <Error />
       ) : (
         <>
-          <SNotes />
           <StyledContainer
             className="container"
             fallback={fallbackBG}
@@ -167,6 +166,7 @@ const Testimony = (props) => {
               <ResponseBox />
               <ObjectionButton />
               <TextBox />
+              <SNotes />
             </div>
           </StyledContainer>
         </>
