@@ -62,7 +62,7 @@ const StyledLetter = styled.div`
     font-style: italic;
     font-weight: 700;
     font-family: 'Averia Libre', sans-serif;
-    font-size: 2rem;
+    font-size: 1.8rem;
     text-align: left;
   }
 `;
