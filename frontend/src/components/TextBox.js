@@ -592,8 +592,15 @@ const TextBox = (props) => {
       ) {
         handleOpenInventory();
       } else if (isEndOfDialogue && inquiryDialogue) {
-        checkForUnlockedDialogue(currentInquiryDialogue);
-        if (specialSceneHandling[currentInquiryDialogue]) {
+        const isNoPrereqTurnAroundDialogue =
+          currentDialogueObj.name && currentDialogueObj?.name === 'Prereq';
+        if (!isNoPrereqTurnAroundDialogue) {
+          checkForUnlockedDialogue(currentInquiryDialogue);
+        }
+        if (
+          specialSceneHandling[currentInquiryDialogue] &&
+          !isNoPrereqTurnAroundDialogue
+        ) {
           saveNewAct3SceneToLocalStorage(
             conversationID,
             specialSceneHandling[currentInquiryDialogue]
