@@ -114,9 +114,8 @@ const ResponseBox = () => {
       dispatch(resetConversationToStart());
       if (currentTestimonyID === gameStartDialogueID) {
         history.push('/act-one');
-      } else {
-        history.push('/');
       }
+      throw new Error('Routing issue!!!', currentDialogueObj);
     } else {
       dispatch(switchConversation(followingDialogueID));
     }
