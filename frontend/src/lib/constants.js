@@ -359,8 +359,11 @@ export const requiredDialoguesInJulianTrial2 = {
 };
 
 export const requiredDialoguesInStitchesTrial4 = {
-  'd6d23a10-13b2-4712-a2d2-539779df7af1': 'ACT4GAME 1well first 3 right',
-  blocker: 'blocker',
+  '2bb52d92-fe06-44f2-9ef4-bd9f24e3718c': 'ACT4GAME 1well first 3 right',
+  'd6c414b2-7f61-4985-9c8a-b47346834980': 'ACT4GAME 1well first 3 wrong',
+  '66ce0907-8480-4a34-8b46-b223646d04d4': 'iWentOut4sm2nd',
+  '432e7f61-ec42-4d42-b454-7c76fe61201f': 'iWentOut4dump2nd',
+  '3784dfde-3000-4e5e-9efa-b9115def5725': 'thatWasTheOnly',
 };
 
 export const requiredConversationsVisitedBeforeTrial2 = {
