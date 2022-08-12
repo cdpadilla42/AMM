@@ -60,7 +60,7 @@ const useCurrentDialogueObj = () => {
                       hex: '#1e28e1',
                     },
                   },
-                  text: 'Oh! We should ask about that later....',
+                  text: 'My super-hero-detective-gut is kicking in, and it’s saying we should wait to present this item to this person until later.',
                 },
               ],
               name: 'Prereq',
