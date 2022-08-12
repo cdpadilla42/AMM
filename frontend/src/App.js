@@ -74,9 +74,6 @@ function App() {
   return (
     <AnimatePresence exitBeforeEnter>
       <Switch location={location} key={location.pathname}>
-        <Route path="/playground">
-          <Playground />
-        </Route>
         <Route
           path="/testimony/:id"
           render={(props) => <Testimony match={props.match} />}
@@ -86,9 +83,6 @@ function App() {
         </Route>
         <Route path="/act-three">
           <ActThreeTestimonySelect />
-        </Route>
-        <Route path="/landing">
-          <LandingPage />
         </Route>
         <Route path="/letter">
           <Letter />
@@ -105,8 +99,11 @@ function App() {
         <Route path="/error">
           <Error />
         </Route>
-        <Route path="/">
+        <Route path="/uss">
           <SelectConversation />
+        </Route>
+        <Route path="/">
+          <LandingPage />
         </Route>
       </Switch>
     </AnimatePresence>
