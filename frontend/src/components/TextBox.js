@@ -611,7 +611,14 @@ const TextBox = (props) => {
             upcomingScene: specialSceneHandling[currentInquiryDialogue],
           });
           props.endInquiryDialogue();
-          history.push('/act-three');
+          if (
+            specialSceneHandling[currentInquiryDialogue].name ===
+            'LuckyNeedsSpace'
+          ) {
+            history.push('/testimony/aabe65bf-af66-44ad-a921-aa5cc6790a7a');
+          } else {
+            history.push('/act-three');
+          }
           setStopClicks(true);
         } else {
           props.toggleResponseBox();
