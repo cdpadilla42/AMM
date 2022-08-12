@@ -67,7 +67,17 @@ const creditsData = [
   <ul>
     <li>
       <h2>Patterns</h2>
-      Matt Macpherson
+      <a href="https://neroh.uk/" rel="noopener" target="_blank">
+        Matt Macpherson
+      </a>
+      <br />
+      <a
+        href="https://www.etsy.com/shop/mochicreative?ref=simple-shop-header-name&listing_id=853068410"
+        rel="noopener"
+        target="_blank"
+      >
+        Aliyah (mochicreative)
+      </a>
       <br />
       Nintendo
       <br />
