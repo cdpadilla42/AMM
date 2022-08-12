@@ -88,6 +88,8 @@ const StyledStartDisplay = styled.div`
 
   header {
     z-index: 50;
+    padding: 0;
+    padding-bottom: 2rem;
   }
 
   section {
