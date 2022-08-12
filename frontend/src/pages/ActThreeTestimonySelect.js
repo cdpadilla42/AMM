@@ -15,9 +15,8 @@ const ActThreeTestimonySelect = () => {
   const history = useHistory();
   // 34 items needed to go to the trial
   const dispatch = useDispatch();
-  const { conversationsVisited, unlockedConversations, sNotes } = useSelector(
-    (state) => state.inventory
-  );
+  const { conversationsVisited, unlockedConversations, sNotes, userSNotes } =
+    useSelector((state) => state.inventory);
 
   useEffect(() => {
     dispatch(getConversations());
@@ -35,7 +34,7 @@ const ActThreeTestimonySelect = () => {
     );
   });
 
-  const userHasRequiredSNotes = hasRequiredSNotesForFinalTrial(sNotes);
+  const userHasRequiredSNotes = hasRequiredSNotesForFinalTrial(userSNotes);
 
   const renderCatchphraseButtons = () => {
     return actThreeConversations.map((convo) => {
