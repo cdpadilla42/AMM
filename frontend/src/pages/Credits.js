@@ -98,14 +98,13 @@ const Credits = ({ gameComplete }) => {
     <>
       {gameComplete || isGameCompleteLocalStorage() ? (
         <>
-          <p>Thank you so much fora to playing my game!</p>
-          <br />
-          <button onClick={handleClick}>Epilogue</button>
-          <br />
           <img
             src="https://cdn.sanity.io/images/qvonp967/production/77a09537bcf41d912e1db3ddc0d8f033436b0f2e-1245x720.png"
             alt="Thank you postcard!"
           />
+          <h2>Congratulations!!!</h2>
+          <br />
+          <button onClick={handleClick}>Epilogue</button>
         </>
       ) : (
         <button onClick={handleHomeClick}>Back to home page!</button>
@@ -129,9 +128,11 @@ const Credits = ({ gameComplete }) => {
   return (
     <StyledCredits onClick={nextSlide}>
       {currentSlide}{' '}
-      <div className="next_arrow" onClick={nextSlide}>
-        <FontAwesomeIcon icon={faCaretDown} color="#ffb500" size="2x" />
-      </div>
+      {!onFinalSlide && (
+        <div className="next_arrow" onClick={nextSlide}>
+          <FontAwesomeIcon icon={faCaretDown} color="#ffb500" size="2x" />
+        </div>
+      )}
     </StyledCredits>
   );
 };
@@ -210,5 +211,11 @@ const StyledCredits = styled.section`
     &:hover {
       cursor: pointer;
     }
+  }
+
+  img {
+    max-width: 80%;
+    box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
+    transform: rotate(-3deg);
   }
 `;
