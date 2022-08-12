@@ -32,7 +32,7 @@ import styled from 'styled-components';
 import '../styles/testimony.css';
 import AnimalsDisplayController from '../components/AnimalsDisplayController';
 import ImageLoader from '../components/ImageLoader';
-import PatternedBG from '../imgs/patternedbgs/aabg2.jpg';
+import PatternedBG from '../imgs/patternedbgs/desktopbgpattern.jpg';
 import SNotes from '../components/SNotes';
 import { closeSNotes } from '../store/notepad';
 import TestimonyImage from '../components/TestimonyImage';
@@ -180,6 +180,7 @@ const StyledContainer = styled.div`
   background: linear-gradient(90deg, rgba(188,255,200,1) 35%, rgba(0,212,255,1) 100%); */
   background-image: url(${PatternedBG});
   background-repeat: repeat;
+  background-size: 2000px;
 
   /* background-repeat: no-repeat;
   background-size: 755px 765px; */

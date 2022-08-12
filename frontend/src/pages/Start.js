@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import '../styles/testimony.css';
-import PatternedBG from '../imgs/patternedbgs/aabg2.jpg';
+import PatternedBG from '../imgs/patternedbgs/desktopbgpattern.jpg';
 import StartDisplay from '../components/StartDisplay';
 
 const StartPage = (props) => {
@@ -45,6 +45,7 @@ const StartPage = (props) => {
 const StyledContainer = styled.div`
   background-image: url(${PatternedBG});
   background-repeat: repeat;
+  background-size: 2000px;
 
   .desktop_main_background {
     width: 755px;

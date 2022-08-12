@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 import { sprites } from '../lib/sprites';
-import PatternedBG from '../imgs/patternedbgs/aabg2.jpg';
+import PatternedBG from '../imgs/patternedbgs/desktopbgpattern.jpg';
 
 // TODO Add animals as Jenn does
 const validAnimalSpriteCollections = {
