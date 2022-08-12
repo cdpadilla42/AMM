@@ -97,7 +97,6 @@ const StyledSNotes = styled.div`
     position: absolute;
     background-color: rgba(0, 0, 0, 0.1);
     transition: background-color 0.8s ease;
-    z-index: 200;
     overflow-x: hidden;
     position: absolute;
     top: 50%;
@@ -107,7 +106,7 @@ const StyledSNotes = styled.div`
     height: 765px;
     background-color: rgba(0, 0, 0, 0.1);
     transition: background-color 0.8s ease;
-    z-index: 100;
+    z-index: 200;
     background-color: rgba(0, 0, 0, 0);
     pointer-events: none;
 
