@@ -44,7 +44,7 @@ const StartDisplay = () => {
             Load Game
           </button>
           <a href="/letter" className="start_page__button secondary">
-            Read Ñen's Letter
+            Read Ñenn's Letter
           </a>
         </section>
         <div className="animal_carousel">
