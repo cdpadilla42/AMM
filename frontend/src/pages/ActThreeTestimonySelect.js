@@ -90,7 +90,7 @@ const ActThreeTestimonySelect = () => {
           Reset to Pre Trial Inventory
         </button> */}
         <h1>Pick a villager!</h1>
-        <button onClick={() => setShowAll(true)}>Show All</button>
+        {/* <button onClick={() => setShowAll(true)}>Show All</button> */}
         <div>
           {renderCatchphraseButtons()}
           <button
