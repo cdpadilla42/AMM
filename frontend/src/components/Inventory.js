@@ -695,7 +695,6 @@ export const ItemDetailsDisplay = ({
       } else {
         dispatch(displayInvalidEvidenceDialogue());
         if (loseHealthOnIncorrect) {
-          console.log(health);
           if (health === 1) {
             onHealthOut();
             dispatch(hideHealthBar());

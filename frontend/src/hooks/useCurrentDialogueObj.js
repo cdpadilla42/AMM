@@ -193,7 +193,6 @@ const useCurrentDialogueObj = () => {
         )
       );
     } else {
-      console.log(currentDialogueID);
       setCurrentDialogueObj(
         dialogueList.find((dialogue) => dialogue._id === currentDialogueID)
       );

@@ -512,7 +512,6 @@ const TextBox = (props) => {
           currentDialogueIDRef.current ===
             '9469c498-90ef-4a9a-bc33-15c68c34e48f'
         ) {
-          console.log(currentDialogueID);
           // check if the objects match keys
           let hasUserPassedAllRequiredDialogues = true;
           // Act 2 Julian
@@ -534,12 +533,10 @@ const TextBox = (props) => {
           } else if (
             conversationID === 'e5b470ca-5b8e-4f2e-a6b0-8743cfcb0c59'
           ) {
-            console.log('checking');
             hasUserPassedAllRequiredDialogues = canPassAct4GameTime(
               act2TrialJulianTestimonyDialoguesPassed
             );
           }
-          console.log(act2TrialJulianTestimonyDialoguesPassed);
           if (!hasUserPassedAllRequiredDialogues) {
             // handle diverging paths, either agent S loop
             // If Julian's, go back to Julian loopback. Else, go to
@@ -559,7 +556,6 @@ const TextBox = (props) => {
             setStopClicks(true);
           }
         } else {
-          console.log('saving...');
           const dialogueID = currentDialogueID || currentDialogueIDRef.current;
           // Save dialogue if needed as passed
           const requiredTrialGameScene =
@@ -605,7 +601,6 @@ const TextBox = (props) => {
             conversationID,
             specialSceneHandling[currentInquiryDialogue]
           );
-          console.log('special scene handling');
           props.updateScenes({
             conversationID,
             upcomingScene: specialSceneHandling[currentInquiryDialogue],
@@ -676,7 +671,6 @@ const TextBox = (props) => {
           setStopClicks(true);
         } else if (currentAct === 'c') {
           // if current scene state is free mode
-          console.log(freeMode, currentAct3SceneObject);
           if (currentAct3SceneObject?.name === 'Freemode' || freeMode) {
             if (isLeaving) {
               history.push('/act-three');
@@ -692,7 +686,6 @@ const TextBox = (props) => {
               // move scene state to next scene
               const currentScene = conversationSceneOrder[currentSceneIndex];
               const nextScene = conversationSceneOrder[currentSceneIndex + 1];
-              console.log(currentScene, nextScene, currentSceneIndex);
               if (
                 nextScene &&
                 !currentScene.haltMovingSceneForwardAtEndOfDialogue &&
@@ -700,7 +693,6 @@ const TextBox = (props) => {
                 currentScene?.name !== 'Freemode'
               ) {
                 saveNewAct3SceneToLocalStorage(conversationID, nextScene);
-                console.log('Normal leaving procedure');
                 props.updateScenes({
                   conversationID,
                   upcomingScene: nextScene,
@@ -712,7 +704,6 @@ const TextBox = (props) => {
               );
               if (sceneUnlockingHandlerObj) {
                 const { updateReduxSceneObj } = sceneUnlockingHandlerObj;
-                if (updateReduxSceneObj) console.log('scene unlocking handler');
                 props.updateScenes(updateReduxSceneObj);
               }
 
@@ -734,7 +725,6 @@ const TextBox = (props) => {
         const nextScene = conversationSceneOrder[currentSceneIndex + 1];
         if (nextScene && !currentScene.haltMovingSceneForwardAtEndOfDialogue) {
           saveNewAct3SceneToLocalStorage(conversationID, nextScene);
-          console.log('End of dialogue for inquiry mode');
           props.updateScenes({
             conversationID,
             upcomingScene: nextScene,
