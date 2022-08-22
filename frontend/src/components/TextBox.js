@@ -245,9 +245,9 @@ const TextBox = (props) => {
         addPrereqToLocalStorage(currentPhrase.prereqEventRef?.name);
         // add to redux
         dispatch(addToPrereqs(currentPhrase.prereqEventRef.name));
-        toast(
-          `🎉  Great! ${currentPhrase.prereqEventRef.name.toUpperCase()} was added to Prereqs.`
-        );
+        // toast(
+        //   `🎉  Great! ${currentPhrase.prereqEventRef.name.toUpperCase()} was added to Prereqs.`
+        // );
       }
       // Item handling
       if (
