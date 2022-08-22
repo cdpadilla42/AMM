@@ -446,11 +446,11 @@ const TextBox = (props) => {
       }
     }
 
-    const handleKeyDownButChill = throttle(handleKeydown, 100);
+    // const handleKeyDownButChill = throttle(handleKeydown, 100);
 
-    document.addEventListener('keydown', handleKeyDownButChill);
+    document.addEventListener('keyup', handleKeydown);
 
-    return () => document.removeEventListener('keydown', handleKeyDownButChill);
+    return () => document.removeEventListener('keyup', handleKeydown);
   });
 
   const handleOpenInventory = () => {
