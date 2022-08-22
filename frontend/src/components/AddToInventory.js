@@ -54,7 +54,7 @@ const AddToInventory = ({
     );
     if (
       !!matchedInGameItem &&
-      (!matchedInGameItem.restrictUserAddingToInventory || true)
+      !matchedInGameItem.restrictUserAddingToInventory
     ) {
       if (userItems.includes(matchedInGameItem.name)) {
         showMessage({
