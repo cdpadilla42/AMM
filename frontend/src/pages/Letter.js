@@ -29,9 +29,9 @@ const Letter = () => {
         <p>
           To get here, you’ll need a Nintendo Switch, a copy of Animal Crossing:
           New Horizons, and a Nintendo Online Subscription. If you lay on a bed
-          in your in-game home, you’ll be able to travel to my dream island, "
-          <u>New Leaf</u>," through my address. I’ll be waiting near my house in
-          the center of the island with more information.
+          in your in-game home, you’ll be able to travel to my dream island,
+          "New Leaf," through my address. I’ll be waiting near my house in the
+          center of the island with more information.
         </p>
 
         <p>
