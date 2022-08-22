@@ -16,12 +16,12 @@ const Error = ({ error, message }) => {
         Try refreshing and give it another whirl!
         <br />
         Or head back to the <a href="/play">start screen</a>.
-        {error && (
+        {/* {error && (
           <section className="error_stack_container">
             <p className="error_stack">{error?.message}</p>
             <p className="error_stack">{error?.stack}</p>
           </section>
-        )}
+        )} */}
       </p>
     </StyledError>
   );
