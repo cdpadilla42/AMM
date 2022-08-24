@@ -1,10 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getSNotes,
-  initializeUserInventoryFromLocalStorage,
-} from '../store/inventory';
 import { closeSNotes, toggleSNotes } from '../store/notepad';
 import { useParams } from 'react-router';
 
@@ -12,14 +8,10 @@ const SNotes = () => {
   const { userSNotes, sNotes } = useSelector((state) => state.inventory);
   const { showSNotes } = useSelector((state) => state.notepad);
   const [sNotesToRender, setSNotesToRender] = useState([]);
+  const currentAct = useSelector(
+    (state) => state.conversations?.conversation?.[0]?.act
+  );
   const dispatch = useDispatch();
-
-  // // TODO Remove when integrating
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(initializeUserInventoryFromLocalStorage());
-  //   dispatch(getSNotes());
-  // }, []);
 
   const sNotesLoaded = userSNotes && userSNotes.length;
   const sNotesDictLoaded = sNotes && sNotes.length;
@@ -40,9 +32,13 @@ const SNotes = () => {
     }
   }, [sNotesLoaded, sNotesDictLoaded, userSNotes]);
 
-  // If the intro dialogue, don't show
+  // If the intro dialogue, or act I/II don't show
   const params = useParams();
-  if (params.id === '729d0b36-6021-4843-8e09-da92c651022f') {
+  if (
+    params.id === '729d0b36-6021-4843-8e09-da92c651022f' ||
+    currentAct === 'a' ||
+    currentAct === 'b'
+  ) {
     return null;
   }
 
@@ -182,7 +178,5 @@ const StyledSNotes = styled.div`
 
   .note {
     margin: 1rem 0;
-    /* font-family: sans-serif; */
-    /* font- */
   }
 `;
