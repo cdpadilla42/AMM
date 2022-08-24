@@ -416,3 +416,7 @@ export const initializeLocalStorageInventory = () => {
     localStorage.setItem('itemsInInventory', JSON.stringify(itemsInInventory));
   }
 };
+
+export const resetSaveDataInLocalStorage = () => {
+  localStorage.setItem('itemsInInventory', JSON.stringify(itemsInInventory));
+};

@@ -10,20 +10,8 @@ import {
 } from '../lib/localStorage';
 
 const initialState = {
-  items: [
-    {
-      name: 'Statue',
-      img: 'url.jpg',
-      description: 'Little bust of the thinking guy. 🤔',
-    },
-  ],
-  notes: [
-    {
-      name: 'Katt',
-      img: 'url.jpg',
-      description: 'QT',
-    },
-  ],
+  items: [],
+  notes: [],
   mapLocations: [],
   sNotes: [],
   userSNotes: [],
@@ -118,6 +106,7 @@ export const addToConversationsVisited = createAction(
 );
 export const unlockConversation = createAction('UNLOCK_CONVERSATION');
 export const completeGame = createAction('COMPLETE_GAME');
+export const resetSaveData = createAction('RESET_SAVE_DATA');
 
 // Reducer
 
@@ -195,6 +184,8 @@ function inventoryReducer(state = initialState, action) {
       return { ...state, unlockedConversations: newUnlockedConversations };
     case completeGame.toString():
       return { ...state, gameComplete: true };
+    case resetSaveData.toString():
+      return { ...initialState };
     default:
       return state;
   }

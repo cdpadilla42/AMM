@@ -1,16 +1,32 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
-import { getLastConversationIDFromLocalStorage } from '../lib/localStorage';
+import {
+  getLastConversationIDFromLocalStorage,
+  resetSaveDataInLocalStorage,
+} from '../lib/localStorage';
+import { resetSaveData } from '../store/inventory';
 import AnimalCarousel from './AnimalCarousel';
 
 const StartDisplay = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const logoUrl = `https://cdn.sanity.io/images/qvonp967/production/706d902e42bd1975f63aa62f4893e5e8069b4e9b-1219x825.png?w=337&h=469`;
 
   function startNewGame() {
+    const lastConversationID = getLastConversationIDFromLocalStorage();
+    let startNewGame = true;
+    if (lastConversationID) {
+      startNewGame = window.confirm(
+        'We found save data! Are you sure you want to wipe it and start a new game?'
+      );
+    }
+    if (!startNewGame) return;
+    resetSaveDataInLocalStorage();
+    dispatch(resetSaveData());
     history.push(`/testimony/729d0b36-6021-4843-8e09-da92c651022f`);
   }
 
