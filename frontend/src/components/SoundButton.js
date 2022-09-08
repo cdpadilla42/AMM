@@ -111,6 +111,7 @@ const SoundButton = () => {
         '2fb98be2-edb3-482d-a50c-abff0b02af56',
         '656278f2-8610-4a94-93e8-c75acafce071',
         'aabe65bf-af66-44ad-a921-aa5cc6790a7a',
+        'b3e19861-c61c-43ec-b48d-51ae7eacbd14',
       ],
       howl: null,
     },
