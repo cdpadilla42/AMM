@@ -465,6 +465,8 @@ const StyledInventory = styled.div`
     height: calc(100% - 80px - 35px);
     width: 100%;
     overflow-y: auto;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
     padding: 1rem;
     background: none;
     @media all and (max-width: 800px) {
