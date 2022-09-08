@@ -279,7 +279,7 @@ nav a {
 }
 @media all and (max-width: 390px) {
   .text_box__main {
-    height: 140px;
+    height: 160px;
   }
 }
 .text_box__main.grey {
