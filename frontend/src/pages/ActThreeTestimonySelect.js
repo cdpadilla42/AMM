@@ -48,6 +48,11 @@ const ActThreeTestimonySelect = () => {
       ) {
         return '';
       }
+
+      // Hide Crime Scene
+      if (convo._id === '1bb0bef9-dee9-415f-beaa-8570240b8d27') {
+        return '';
+      }
       return (
         <button key={convo._id} data-id={convo._id} onClick={handleButtonClick}>
           <span>{name}</span>
