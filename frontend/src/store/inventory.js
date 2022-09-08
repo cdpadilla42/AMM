@@ -139,7 +139,12 @@ function inventoryReducer(state = initialState, action) {
       };
     case addToInventory.toString():
       const newItems = [...state.userItems, payload];
-      return { ...state, userItems: newItems };
+      const itemAlreadyInInventory = newItemsList.indexOf(payload) !== -1;
+      if (itemAlreadyInInventory) {
+        return { ...state };
+      } else {
+        return { ...state, userItems: newItems };
+      }
     case removeFromInventory.toString():
       const newItemsList = [...state.userItems];
       const indexToRemove = newItemsList.indexOf(payload);
