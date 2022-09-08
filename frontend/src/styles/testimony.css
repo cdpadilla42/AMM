@@ -277,6 +277,11 @@ nav a {
     height: 120px;
   }
 }
+@media all and (max-width: 390px) {
+  .text_box__main {
+    height: 140px;
+  }
+}
 .text_box__main.grey {
   color: #c3c3c3;
 }
