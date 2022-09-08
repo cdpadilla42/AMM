@@ -140,12 +140,24 @@ const StyledSNotes = styled.div`
     top: 24px;
     max-height: 560px;
     font-size: 1.5rem;
+
     @media all and (max-height: 720px) {
       height: 80vh; /* Fallback for browsers that do not support Custom Properties */
       height: calc(var(--vh, 1vh) * 80);
     }
     overflow-y: auto;
     font-family: 'Gaegu', cursive;
+
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      width: 7px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+    }
   }
 
   .notepad_sheet {
