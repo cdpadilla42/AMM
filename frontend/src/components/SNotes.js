@@ -146,6 +146,8 @@ const StyledSNotes = styled.div`
       height: calc(var(--vh, 1vh) * 80);
     }
     overflow-y: auto;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
     font-family: 'Gaegu', cursive;
 
     &::-webkit-scrollbar {
