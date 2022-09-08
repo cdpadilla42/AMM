@@ -50,6 +50,7 @@ import {
 import ObjectionButton from '../components/ObjectionButton';
 import { endFreeMode, endInquiryDialogue } from '../store/app';
 import Error from '../components/Error';
+import SoundButton from '../components/SoundButton';
 
 const Testimony = (props) => {
   const dispatch = useDispatch();
@@ -167,6 +168,7 @@ const Testimony = (props) => {
               <ObjectionButton />
               <TextBox />
               <SNotes />
+              <SoundButton />
             </div>
           </StyledContainer>
         </>
