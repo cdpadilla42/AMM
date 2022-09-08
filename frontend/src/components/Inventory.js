@@ -349,10 +349,18 @@ const Inventory = () => {
     >
       <StyledInventory>
         <div className="inventory_header">
-          <button onClick={showItems}>Items</button>
-          <button onClick={showPeopole}>Animals</button>
-          <button onClick={showMap}>Map</button>
-          <button onClick={toggleShowingAddItem}>Add to inventory</button>
+          <button onClick={showItems} disabled={isDetailsOpen}>
+            Items
+          </button>
+          <button onClick={showPeopole} disabled={isDetailsOpen}>
+            Animals
+          </button>
+          <button onClick={showMap} disabled={isDetailsOpen}>
+            Map
+          </button>
+          <button onClick={toggleShowingAddItem} disabled={isDetailsOpen}>
+            Add to inventory
+          </button>
           {userPromptedForEvidence && !isFreeMode ? (
             !isTrial && (
               <button
@@ -562,6 +570,12 @@ const StyledInventory = styled.div`
       cursor: pointer;
       transform: translateY(-2px);
     }
+  }
+
+  button:disabled:hover {
+    transform: translateY(0);
+    color: var(--brown-black);
+    cursor: default;
   }
 
   .come_back_button {
