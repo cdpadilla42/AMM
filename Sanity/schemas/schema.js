@@ -6,6 +6,7 @@ import schemaTypes from 'all:part:@sanity/base/schema-type';
 
 // Importing schemas
 import Animal from './Animal';
+import Assets from './Assets';
 import Conversation from './Conversation';
 import Dialogue from './Dialogue';
 import Emotions from './Emotions';
@@ -31,6 +32,7 @@ export default createSchema({
     Dialogue,
     Emotions,
     Animal,
+    Assets,
     AnimalImages,
     Item,
     MapLocation,
