@@ -156,6 +156,8 @@ export const removeItemToLocalStorageInventory = (item) => {
 
   const index = initialInventory.indexOf(item);
 
+  if (index === -1) return;
+
   const newInventory = [...initialInventory];
 
   newInventory.splice(index, 1);
