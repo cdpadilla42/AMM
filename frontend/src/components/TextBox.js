@@ -320,6 +320,7 @@ const TextBox = (props) => {
             toast(`Added ${name} to Agent S's Notes! 📓`);
           }
           // If this is a completion event and the user has the note and it has not been completed
+          // TODO Check here, if it's an achievement, surpasse the user snote part
         } else if (
           sNotesEventType === 'Complete' &&
           userSNote &&
