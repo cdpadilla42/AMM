@@ -7,7 +7,7 @@ const HealthBar = () => {
   const dispatch = useDispatch();
   const { current: health } = useSelector((state) => state.health);
   const [errorClass, setErroClass] = useState('');
-  const healthRef = useRef({ current: 5 });
+  const healthRef = useRef({ current: 7 });
 
   useEffect(() => {
     if (health === 0) {
@@ -43,7 +43,7 @@ const HealthBar = () => {
     }, 2000);
   };
 
-  const precentage = (health / 5) * 100;
+  const precentage = (health / 7) * 100;
   const calcWidth = `${Math.floor(precentage)}%`;
 
   return (

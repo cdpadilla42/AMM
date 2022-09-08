@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 
-const initialHealth = 5;
+const initialHealth = 7;
 
 const initialState = {
   current: initialHealth,
