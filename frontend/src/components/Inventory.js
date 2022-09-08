@@ -815,10 +815,12 @@ export const ItemDetailsDisplay = ({
 
   const renderDescription = () => {
     let renderingAct = act;
-    if (act === 'b' && !isShowingPeople) {
+    const isActOneBagCheck =
+      params.id === '2fb98be2-edb3-482d-a50c-abff0b02af56';
+    if ((act === 'b' && !isShowingPeople) || isActOneBagCheck) {
       renderingAct = 'a';
     }
-    if (!act) {
+    if (!renderingAct) {
       return <p>{itemObj.description}</p>;
     } else {
       const description = itemObj[`description${renderingAct.toUpperCase()}`];
