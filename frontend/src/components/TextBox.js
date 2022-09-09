@@ -92,6 +92,7 @@ const TextBox = (props) => {
     items,
     notes: animals,
     userSNotes,
+    userItems,
   } = useSelector((state) => state.inventory);
   const { showSNotes } = useSelector((state) => state.notepad);
   const { conversation } = useSelector((state) => state.conversations);
@@ -218,13 +219,20 @@ const TextBox = (props) => {
 
       if (itemEventTriggered && itemEventType && itemEventRef?.name) {
         if (itemEventType === 'Add') {
-          // save to local storage
-          addItemToLocalStorageInventory(itemEventRef.name);
-          // add to redux
-          dispatch(addToInventory(itemEventRef.name));
-          toast(
-            `🔎  Great! ${itemEventRef.name.toUpperCase()} was added to the evidence file.`
-          );
+          console.log(userItems);
+          if (userItems.includes(itemEventRef.name)) {
+            toast(
+              `Oh hey! ${itemEventRef.name.toUpperCase()} is already in the file.`
+            );
+          } else {
+            // save to local storage
+            addItemToLocalStorageInventory(itemEventRef.name);
+            // add to redux
+            dispatch(addToInventory(itemEventRef.name));
+            toast(
+              `🔎  Great! ${itemEventRef.name.toUpperCase()} was added to the evidence file.`
+            );
+          }
         } else if (itemEventType === 'Remove') {
           // save to local storage
           removeItemToLocalStorageInventory(itemEventRef.name);
@@ -260,12 +268,16 @@ const TextBox = (props) => {
           itemEventRef: { name },
         } = currentPhrase;
         if (itemEventType === 'Add') {
-          addItemToLocalStorageInventory(name);
-          // add to redux
-          dispatch(addToInventory(name));
-          toast(
-            `🔎  Great! ${name.toUpperCase()} was added to the evidence file.`
-          );
+          if (userItems.includes(name)) {
+            toast(`Oh hey! ${name.toUpperCase()} is already in the file.`);
+          } else {
+            addItemToLocalStorageInventory(name);
+            // add to redux
+            dispatch(addToInventory(name));
+            toast(
+              `🔎  Great! ${name.toUpperCase()} was added to the evidence file.`
+            );
+          }
         } else {
           // REMOVE ITEM
           removeItemToLocalStorageInventory(name);
