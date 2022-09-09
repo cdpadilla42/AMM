@@ -373,7 +373,7 @@ const TextBox = (props) => {
               updatedSNote.userEventInstances = [];
             }
 
-            const newCountForNote = updateSNote.userEventInstances.length;
+            const newCountForNote = updatedSNote.userEventInstances.length;
             // if the sNote doesn't have this phrase ID stored in sNote.userEventInstances
             if (
               updatedSNote.userEventInstances.find(
