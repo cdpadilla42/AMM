@@ -7,6 +7,8 @@ const initialState = {
   sceneShifted: false,
   isPortfolio: false,
   hasError: false,
+  playedAudio: false,
+  soundPlaying: false,
 };
 
 export const startFreeMode = createAction('START_FREE_MODE');
@@ -18,6 +20,8 @@ export const endInquiryDialogue = createAction('END_INQUIRY_DIALOGUE');
 export const setSceneShifted = createAction('SET_SCENE_SHIFTED');
 export const setIsPortfolio = createAction('SET_IS_PORTFOLIO');
 export const setHasError = createAction('SET_HAS_ERROR');
+export const setPlayedAudio = createAction('SET_PLAYED_AUDIO');
+export const setSoundPlaying = createAction('SET_SOUND_PLAYING');
 
 // Reducer
 
@@ -68,6 +72,16 @@ function appReducer(state = initialState, action) {
       return {
         ...state,
         hasError: payload,
+      };
+    case setPlayedAudio.toString():
+      return {
+        ...state,
+        playedAudio: payload,
+      };
+    case setSoundPlaying.toString():
+      return {
+        ...state,
+        soundPlaying: payload,
       };
     default:
       return state;

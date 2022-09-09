@@ -28,6 +28,7 @@ import Credits from './pages/Credits';
 import Error from './components/Error';
 import StartPage from './pages/Start';
 import { getPictures } from './store/images';
+import SoundController from './components/SoundController';
 
 function App() {
   const location = useLocation();
@@ -72,41 +73,44 @@ function App() {
   }, []);
 
   return (
-    <AnimatePresence exitBeforeEnter>
-      <Switch location={location} key={location.pathname}>
-        <Route
-          path="/testimony/:id"
-          render={(props) => <Testimony match={props.match} />}
-        ></Route>
-        <Route path="/act-one">
-          <ActOneTestimonySelect />
-        </Route>
-        <Route path="/act-three">
-          <ActThreeTestimonySelect />
-        </Route>
-        <Route path="/letter">
-          <Letter />
-        </Route>
-        <Route path="/portfolio">
-          <PortfolioSelect />
-        </Route>
-        <Route path="/credits">
-          <Credits />
-        </Route>
-        <Route path="/play">
-          <StartPage />
-        </Route>
-        <Route path="/error">
-          <Error />
-        </Route>
-        <Route path="/uss">
-          <SelectConversation />
-        </Route>
-        <Route path="/">
-          <LandingPage />
-        </Route>
-      </Switch>
-    </AnimatePresence>
+    <>
+      <SoundController />
+      <AnimatePresence exitBeforeEnter>
+        <Switch location={location} key={location.pathname}>
+          <Route
+            path="/testimony/:id"
+            render={(props) => <Testimony match={props.match} />}
+          ></Route>
+          <Route path="/act-one">
+            <ActOneTestimonySelect />
+          </Route>
+          <Route path="/act-three">
+            <ActThreeTestimonySelect />
+          </Route>
+          <Route path="/letter">
+            <Letter />
+          </Route>
+          <Route path="/portfolio">
+            <PortfolioSelect />
+          </Route>
+          <Route path="/credits">
+            <Credits />
+          </Route>
+          <Route path="/play">
+            <StartPage />
+          </Route>
+          <Route path="/error">
+            <Error />
+          </Route>
+          <Route path="/uss">
+            <SelectConversation />
+          </Route>
+          <Route path="/">
+            <LandingPage />
+          </Route>
+        </Switch>
+      </AnimatePresence>
+    </>
   );
 }
 
