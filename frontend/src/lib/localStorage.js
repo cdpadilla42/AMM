@@ -136,11 +136,11 @@ export const addItemToLocalStorageInventory = (item) => {
     storageData = itemsInInventory;
   }
 
+  const initialInventory = storageData?.items ?? [];
+
   const itemAlreadyInInventory = initialInventory.indexOf(item) !== -1;
 
   if (itemAlreadyInInventory) return;
-
-  const initialInventory = storageData?.items ?? [];
 
   const newInventory = [...initialInventory, item];
 
