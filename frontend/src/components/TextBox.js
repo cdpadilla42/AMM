@@ -369,11 +369,10 @@ const TextBox = (props) => {
           } else {
             const updatedSNote = { ...userSNotes[userSNoteIndex] };
 
-            // if (!updatedSNote.userEventInstances) {
-            //   updatedSNote.userEventInstances = [];
-            // }
+            if (!updatedSNote.userEventInstances) {
+              updatedSNote.userEventInstances = [];
+            }
 
-            const newCountForNote = updatedSNote.userEventInstances.length;
             // if the sNote doesn't have this phrase ID stored in sNote.userEventInstances
             if (
               updatedSNote.userEventInstances.find(
@@ -385,6 +384,8 @@ const TextBox = (props) => {
             const newUserEventInstances = [...updatedSNote.userEventInstances];
             newUserEventInstances.push(sNoteDialoguePositionID);
             updatedSNote.userEventInstances = newUserEventInstances;
+
+            const newCountForNote = updatedSNote.userEventInstances.length;
             // Update userSNotes
 
             // show message
