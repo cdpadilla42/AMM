@@ -108,7 +108,7 @@ const AddToInventory = ({
     } else {
       // Show error to user
       showMessage({
-        type: 'error',
+        type: 'input-error',
         text: "Hmmm, that doesn't seem like a piece of evidence. Did you spell it correctly?",
       });
     }
@@ -198,7 +198,7 @@ const StyledAddToInventory = styled.form`
     color: green;
   }
 
-  .addtoinventory_message_display.error {
+  .addtoinventory_message_display.input-error {
     color: red;
   }
 
