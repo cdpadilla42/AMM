@@ -25,3 +25,22 @@ export const canPassAct4GameTime = (branchesVisited) => {
 
   return res;
 };
+
+export const recordInteraction = (type) => {
+  const data = { type };
+
+  fetch('https://acnm-api.vercel.app/api/record', {
+    method: 'POST', // or 'PUT'
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+};

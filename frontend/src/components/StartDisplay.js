@@ -7,6 +7,7 @@ import {
   getLastConversationIDFromLocalStorage,
   resetSaveDataInLocalStorage,
 } from '../lib/localStorage';
+import { recordInteraction } from '../lib/util';
 import { resetSaveData } from '../store/inventory';
 import AnimalCarousel from './AnimalCarousel';
 
@@ -17,6 +18,8 @@ const StartDisplay = () => {
   const logoUrl = `https://cdn.sanity.io/images/qvonp967/production/706d902e42bd1975f63aa62f4893e5e8069b4e9b-1219x825.png?w=337&h=469`;
 
   function startNewGame() {
+    recordInteraction('play');
+
     const lastConversationID = getLastConversationIDFromLocalStorage();
     let startNewGame = true;
     if (lastConversationID) {
