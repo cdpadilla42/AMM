@@ -692,9 +692,6 @@ const TextBox = (props) => {
           currentTestimonyID === lastActTwoDialogueID ||
           currentAct === 'b'
         ) {
-          if (currentDialogueID === lastActTwoDialogueID) {
-            recordInteraction('start act 3');
-          }
           history.push('/act-three');
           setStopClicks(true);
         } else if (currentAct === 'c') {
@@ -738,6 +735,9 @@ const TextBox = (props) => {
               // Unlock dialogue
               checkForUnlockedDialogue();
             }
+          }
+          if (currentDialogueID === lastActTwoDialogueID) {
+            recordInteraction('start act 3');
           }
           history.push('/act-three');
           setStopClicks(true);
