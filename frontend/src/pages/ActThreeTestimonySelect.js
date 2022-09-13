@@ -9,6 +9,7 @@ import {
   setLocalStorageToJustBeforeTrial,
 } from '../lib/localStorage';
 import { hasRequiredSNotesForFinalTrial } from '../lib/SNotes';
+import { recordInteraction } from '../lib/util';
 import { getConversations } from '../store/conversations';
 
 const ActThreeTestimonySelect = () => {
@@ -79,6 +80,7 @@ const ActThreeTestimonySelect = () => {
         "Are you sure you want to move on to the trial? There's no going back from here!"
       )
     ) {
+      recordInteraction('start act three trial');
       handleButtonClick(e);
     }
   };

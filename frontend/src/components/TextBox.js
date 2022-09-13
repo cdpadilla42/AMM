@@ -48,6 +48,7 @@ import {
 import {
   act3Scenes,
   connectedConversations,
+  conversationIDConstants,
   dialogueIDConstants,
   dialoguesThatUnlockConversations,
   gameStartDialogueID,
@@ -64,7 +65,11 @@ import {
   endInquiryMode,
 } from '../store/app';
 import sceneUnlockingHandler from '../lib/sceneUnlockingHandler';
-import { canPassAct4GameTime, isDeadEndDialogue } from '../lib/util';
+import {
+  canPassAct4GameTime,
+  isDeadEndDialogue,
+  recordInteraction,
+} from '../lib/util';
 import { useUnlockConversation } from '../hooks/useSaveUtility';
 import { useErrorHandler } from 'react-error-boundary';
 import { hasRequiredSNotesForFinalTrial } from '../lib/SNotes';
@@ -669,6 +674,11 @@ const TextBox = (props) => {
             setStopClicks(true);
             return;
           } else {
+            if (
+              conversationID === conversationIDConstants.ACT4_TRIAL_GAMETIME
+            ) {
+              recordInteraction('complete');
+            }
             history.push(
               `/testimony/${connectedConversations[conversationID]}`
             );
@@ -686,6 +696,9 @@ const TextBox = (props) => {
           currentTestimonyID === lastActTwoDialogueID ||
           currentAct === 'b'
         ) {
+          if (currentTestimonyID === lastActTwoDialogueID) {
+            recordInteraction('start act 3');
+          }
           history.push('/act-three');
           setStopClicks(true);
         } else if (currentAct === 'c') {
