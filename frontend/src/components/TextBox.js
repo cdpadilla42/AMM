@@ -736,7 +736,9 @@ const TextBox = (props) => {
               checkForUnlockedDialogue();
             }
           }
-          if (currentDialogueID === lastActTwoDialogueID) {
+          if (
+            currentDialogueID === dialogueIDConstants.LAST_CRIMESCENE_DIALOGUE
+          ) {
             recordInteraction('start act 3');
           }
           history.push('/act-three');

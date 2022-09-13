@@ -265,6 +265,7 @@ export const conversationIDConstants = {
 
 export const dialogueIDConstants = {
   ACT4_FAILED_DIALOGUE: 'f82b48f2-fbe2-415c-8349-40a7b39cf8b4',
+  LAST_CRIMESCENE_DIALOGUE: 'f09eead4-1928-4267-a6ce-f6ac72441e79',
 };
 
 export const specialDialoguesObject = {
