@@ -696,7 +696,7 @@ const TextBox = (props) => {
           currentTestimonyID === lastActTwoDialogueID ||
           currentAct === 'b'
         ) {
-          if (currentTestimonyID === lastActTwoDialogueID) {
+          if (currentDialogueID === lastActTwoDialogueID) {
             recordInteraction('start act 3');
           }
           history.push('/act-three');
