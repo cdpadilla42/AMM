@@ -35,9 +35,7 @@ const ActThreeTestimonySelect = () => {
     );
   });
 
-  const userHasRequiredSNotes =
-    true || hasRequiredSNotesForFinalTrial(userSNotes);
-  // const userHasRequiredSNotes = hasRequiredSNotesForFinalTrial(userSNotes);
+  const userHasRequiredSNotes = hasRequiredSNotesForFinalTrial(userSNotes);
 
   const renderCatchphraseButtons = () => {
     return actThreeConversations.map((convo) => {
