@@ -665,6 +665,7 @@ const TextBox = (props) => {
             // go to credits
             props.completeGame();
             completeGameInLocalStorage();
+            recordInteraction('complete');
             history.push(`/credits`);
             setStopClicks(true);
             return;
@@ -674,11 +675,6 @@ const TextBox = (props) => {
             setStopClicks(true);
             return;
           } else {
-            if (
-              conversationID === conversationIDConstants.ACT4_TRIAL_GAMETIME
-            ) {
-              recordInteraction('complete');
-            }
             history.push(
               `/testimony/${connectedConversations[conversationID]}`
             );
