@@ -26,8 +26,6 @@ const AddToInventory = ({
   const containerRef = useRef(null);
   const inputRef = useRef(null);
 
-  console.log(fullItemsList);
-
   useEffect(() => {
     if (isOpen) {
       // focus on input el.
@@ -36,6 +34,7 @@ const AddToInventory = ({
   }, [isOpen]);
 
   const isItemMatch = (item, input) => {
+    if (item.includes('*')) return false;
     const cleanedInput = input.trim().toLowerCase();
     const cleanedItem = item.toLowerCase();
     const cleanedItemWords = cleanedItem.split(' ');
@@ -50,8 +49,11 @@ const AddToInventory = ({
     e.preventDefault();
     const matchedInGameItem = fullItemsList.find(
       // (item) => item?.name.toLowerCase() === inputs.item.trim().toLowerCase()
-      (item) => isItemMatch(item?.name, inputs.item)
+      (item) =>
+        isItemMatch(item?.name, inputs.item) &&
+        !item.restrictUserAddingToInventory
     );
+    console.log(matchedInGameItem, inputs.name);
     if (
       !!matchedInGameItem &&
       !matchedInGameItem.restrictUserAddingToInventory

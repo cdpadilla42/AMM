@@ -1938,7 +1938,7 @@ const fullItemsList = [
     ],
     imageUrl:
       'https://cdn.sanity.io/images/qvonp967/production/71658bfe6f1df91fabce1e4afab019452634e74d-128x128.png',
-    name: 'Floor Sign ',
+    name: 'Floor Sign',
   },
   {
     descriptionA: [
