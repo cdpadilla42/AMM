@@ -33,6 +33,7 @@ import {
   incorrectResponseToMultiSelect,
   multiSelectDialogueIDs,
 } from '../lib/constants';
+import fullItemsList from '../lib/fullItemsList';
 
 const Inventory = () => {
   const dispatch = useDispatch();
@@ -49,7 +50,8 @@ const Inventory = () => {
   const { isMapOpen, currentDialogueID } = useSelector(
     (state) => state.dialogue
   );
-  const fullItemsInventory = useSelector((store) => store.inventory.items);
+  // const fullItemsInventory = useSelector((store) => store.inventory.items);
+  const fullItemsInventory = fullItemsList;
   const { inventoryScreen } = useSelector((store) => store.dialogue);
   const { userItems, userPromptedForEvidence, mapLocations } = useSelector(
     (store) => store.inventory
