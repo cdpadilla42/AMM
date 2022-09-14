@@ -9,7 +9,7 @@ import {
   saveFullInventoryToLocalSotrage,
 } from '../lib/localStorage';
 import { addToInventory, markUserHasFullInventory } from '../store/inventory';
-import isEqual from 'lodash.isequal';
+import fullItemsList from '../lib/fullItemsList';
 
 const AddToInventory = ({
   closeDisplay,
@@ -18,15 +18,15 @@ const AddToInventory = ({
   showErrorAnimation,
 }) => {
   const { inputs, handleChange, resetForm, clearForm } = useForm({ item: '' });
-  const {
-    items: fullItemsList,
-    userItems,
-    userHasFullInventory,
-  } = useSelector((state) => state.inventory);
+  const { userItems, userHasFullInventory } = useSelector(
+    (state) => state.inventory
+  );
   const dispatch = useDispatch();
   const [message, setMessage] = useState(null);
   const containerRef = useRef(null);
   const inputRef = useRef(null);
+
+  console.log(fullItemsList);
 
   useEffect(() => {
     if (isOpen) {
