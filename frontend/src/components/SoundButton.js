@@ -93,14 +93,15 @@ const StyledSoundButton = styled.div`
     border: none;
     font-size: 3rem;
     position: absolute;
-    bottom: 10px;
-    left: 10px;
+    top: 20px;
+    left: 100px;
     pointer-events: auto;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 30px;
+    transform: rotate(-10deg);
 
     &[data-isPlaying='true'] .open_inventory_button {
       color: var(--yellow);
