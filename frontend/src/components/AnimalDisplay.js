@@ -64,6 +64,8 @@ const AnimalDisplay = ({
       : `${spriteUrl}?w=405&h=446`
   );
 
+  if (!spriteUrl) return <div></div>;
+
   return <img src={optimizedSpriteUrl} alt="" className={className} />;
   // return (
   //   <div className="game_container__animal">
