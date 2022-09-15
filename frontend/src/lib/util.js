@@ -44,3 +44,6 @@ export const recordInteraction = (type) => {
       console.error('Error:', error);
     });
 };
+
+export const wait = (amount = 0) =>
+  new Promise((resolve) => setTimeout(resolve, amount));

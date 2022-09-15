@@ -1,15 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
-import backpack from '../imgs/Bag_NH_Inv_Icon.png';
 import { useParams } from 'react-router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faVolumeUp, faVolumeOff } from '@fortawesome/free-solid-svg-icons';
 import { Howl, Howler } from 'howler';
-import { useState } from 'react';
 import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { setPlayedAudio, setSoundPlaying } from '../store/app';
+import { wait } from '../lib/util';
 
 const SoundController = ({ children }) => {
   const params = useParams();
@@ -139,7 +135,9 @@ const SoundController = ({ children }) => {
   }, [pathname]);
 
   const currentTrackObj = useMemo(() => {
-    console.log();
+    if (currentPage === 'act-one') {
+      return sounds.current.find((soundObj) => soundObj.playOnMainPage);
+    }
     return sounds.current.find((soundObj) =>
       soundObj.conversationIDs.includes(currentPage)
     );
@@ -147,31 +145,46 @@ const SoundController = ({ children }) => {
 
   useEffect(() => {
     if (currentTrackObj) {
-      const howler = initiateSound(currentTrackObj.src);
+      let howler;
+
+      if (currentTrackObj.howl) {
+        howler = currentTrackObj.howl;
+      } else {
+        howler = initiateSound(currentTrackObj.src);
+      }
+
+      if (soundPlaying) {
+        fadeOutCurrentTrack(howlerRef.current);
+      }
+
       currentTrackObj.howl = howler;
       howlerRef.current = currentTrackObj.howl;
       if (soundPlaying) {
-        howlerRef.current.play();
+        currentTrackObj.howl.play();
+        currentTrackObj.howl.fade(0, 1, 1000);
       }
     }
 
     return () => {
       if (howlerRef.current && howlerRef.current.stop) {
-        howlerRef.current.stop();
+        fadeOutCurrentTrack(howlerRef.current);
       }
     };
   }, [currentTrackObj]);
+
+  const fadeOutCurrentTrack = async (howl) => {
+    const waitLength = 1000;
+    if (currentTrackObj?.howl) {
+      howl.fade(1, 0, waitLength);
+      await wait(waitLength);
+      howl.stop();
+    }
+  };
 
   const initiateSound = (src) => {
     const sound = new Howl({
       src,
       loop: true,
-      onplay: () => {
-        // dispatch(setSoundPlaying(true));
-      },
-      onpause: () => {
-        // dispatch(setSoundPlaying(false));
-      },
     });
 
     return sound;
@@ -181,9 +194,6 @@ const SoundController = ({ children }) => {
     if (!playedAudio) {
       dispatch(setPlayedAudio(true));
     }
-
-    console.log(howlerRef.current);
-    console.log(soundPlaying);
 
     if (howlerRef.current && howlerRef.current.playing) {
       if (soundPlaying && !howlerRef.current.playing()) {
