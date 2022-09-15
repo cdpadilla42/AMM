@@ -271,6 +271,7 @@ nav {
   bottom: calc(50vh - 444px);
   left: 50vw;
   transform: translate(-50%, -50%);
+  user-select: none;
   &__name {
     background-color: grey;
     color: var(--cream);
