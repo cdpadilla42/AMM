@@ -3439,7 +3439,7 @@ const fullItemsList = [
     ],
     imageUrl:
       'https://cdn.sanity.io/images/qvonp967/production/4a2910bfffbbc509a831cb8d72f6c5c344358895-300x300.png',
-    name: 'OrangeCosmos*',
+    name: 'Orange Cosmos*',
     restrictUserAddingToInventory: true,
   },
   {
