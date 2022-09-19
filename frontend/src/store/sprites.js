@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import sanityClient from '../client';
+import { sprites } from '../lib/sprites';
 
-const initialState = {};
+const initialState = { sprites };
 
 export const getSprites = createAsyncThunk(
   'GET_SPRITES',

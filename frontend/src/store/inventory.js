@@ -1,5 +1,6 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import sanityClient from '../client';
+import fullItemsList from '../lib/fullItemsList';
 import {
   getConversationsVisitedFromLocalStorage,
   getPrereqsFromLocalStorage,
@@ -10,7 +11,7 @@ import {
 } from '../lib/localStorage';
 
 const initialState = {
-  items: [],
+  items: fullItemsList,
   notes: [],
   mapLocations: [],
   sNotes: [],
