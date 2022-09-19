@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Letter = () => {
@@ -42,7 +43,7 @@ const Letter = () => {
         <p>Please help :C,</p>
         <figure>- Ñenn</figure>
         <br />
-        <a href="/play">Let's go!</a>
+        <Link to="/play">Let's go!</Link>
       </section>
     </StyledLetter>
   );

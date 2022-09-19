@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import {
@@ -62,9 +62,9 @@ const StartDisplay = () => {
           <button onClick={loadFromLastSave} className="start_page__button">
             Load Game
           </button>
-          <a href="/letter" className="start_page__button secondary">
+          <Link to="/letter" className="start_page__button secondary">
             Read Ñenn's Letter
-          </a>
+          </Link>
         </section>
         <div className="animal_carousel">
           <AnimalCarousel />

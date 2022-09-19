@@ -81,7 +81,7 @@ const SelectConversation = () => {
 
   return (
     <ImageLoader disableLoading loading={loading} setLoading={setLoading}>
-      <a href="/act-three">Act Three Select</a>
+      <Link to="/act-three">Act Three Select</Link>
       <button type="button" onClick={handleClearAllSaveData}>
         Clear All Save Data
       </button>

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Shocked from '../imgs/shocked.png';
+import { Link } from 'react-router-dom';
 
 const Error = ({ error, message }) => {
   const showStack =
@@ -15,7 +16,7 @@ const Error = ({ error, message }) => {
         <br />
         Try refreshing and give it another whirl!
         <br />
-        Or head back to the <a href="/play">start screen</a>.
+        Or head back to the <Link to="/play">start screen</Link>.
         {/* {error && (
           <section className="error_stack_container">
             <p className="error_stack">{error?.message}</p>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const LandingPage = () => {
@@ -8,6 +8,7 @@ const LandingPage = () => {
     e.preventDefault();
     history.push('/credits');
   };
+
   return (
     <StyledLanding>
       <header class="hero">
@@ -17,12 +18,12 @@ const LandingPage = () => {
             <h1>Time for a NEW MURDER!!!</h1>
             <h2>An Animal Crossing Murder Mystery Fan Game</h2>
             <div className="hero__cta_container">
-              <a href="/letter" className="hero__cta_button secondary">
+              <Link to="/letter" className="hero__cta_button secondary">
                 Read Ñenn's Letter
-              </a>
-              <a href="/play" className="hero__cta_button">
+              </Link>
+              <Link to="/play" className="hero__cta_button">
                 Play
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -74,9 +75,7 @@ const LandingPage = () => {
               <br />
             </li>
             <li>
-              <a href="/credits" onClick={goToCredits}>
-                Full Credits
-              </a>
+              <a onClick={goToCredits}>Full Credits</a>
             </li>
           </ul>
         </aside>
