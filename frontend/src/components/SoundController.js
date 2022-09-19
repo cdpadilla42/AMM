@@ -144,7 +144,7 @@ const SoundController = ({ children }) => {
   }, [currentPage]);
 
   useEffect(() => {
-    if (currentTrackObj) {
+    if (currentTrackObj && soundPlaying) {
       let howler;
 
       if (currentTrackObj.howl) {
@@ -170,7 +170,7 @@ const SoundController = ({ children }) => {
         fadeOutCurrentTrack(howlerRef.current);
       }
     };
-  }, [currentTrackObj]);
+  }, [currentTrackObj, soundPlaying]);
 
   const fadeOutCurrentTrack = async (howl) => {
     const waitLength = 1000;
@@ -202,7 +202,7 @@ const SoundController = ({ children }) => {
         howlerRef.current.pause();
       }
     }
-  }, [soundPlaying]);
+  }, [soundPlaying, howlerRef.current]);
 
   return '';
 };
