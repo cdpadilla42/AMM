@@ -426,7 +426,7 @@ const fullItemsList = [
     ],
     imageUrl:
       'https://cdn.sanity.io/images/qvonp967/production/b3aeafe27dc6dcb1b5d55dc3ab534f46859ee223-128x128.png',
-    name: 'Floor Sign* ',
+    name: 'Floor Sign*',
     restrictUserAddingToInventory: true,
   },
   {
