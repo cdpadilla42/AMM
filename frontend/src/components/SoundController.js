@@ -180,8 +180,7 @@ const SoundController = ({ children }) => {
   }, [currentPage]);
 
   useEffect(() => {
-    const asyncEffect = async () => {
-      await wait(2000);
+    setTimeout(() => {
       if (currentTrackObj && soundPlaying) {
         let howler;
 
@@ -202,9 +201,7 @@ const SoundController = ({ children }) => {
           currentTrackObj.howl.fade(0, 1, 1000);
         }
       }
-    };
-
-    asyncEffect();
+    }, 2000);
 
     return () => {
       if (howlerRef.current && howlerRef.current.stop) {
