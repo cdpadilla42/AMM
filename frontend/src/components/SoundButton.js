@@ -87,21 +87,24 @@ const StyledSoundButton = styled.div`
     background-color: var(--blue);
     border-radius: 50%;
     padding: 5px;
-    width: 44px;
-    height: 44px;
+    width: 33px;
+    height: 33px;
     border-radius: 10px;
     border: none;
     font-size: 3rem;
     position: absolute;
-    top: 20px;
+    top: 28px;
     left: 100px;
     pointer-events: auto;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 30px;
+    padding: 26px;
     transform: rotate(-10deg);
+    @media all and (max-width: 420px) {
+      top: 33px;
+    }
 
     &[data-isPlaying='true'] .open_inventory_button {
       color: var(--yellow);
@@ -114,7 +117,7 @@ const StyledSoundButton = styled.div`
 
   .open_inventory_button {
     color: var(--cream);
-    width: 44px;
-    height: 44px;
+    width: 33px;
+    height: 33px;
   }
 `;
