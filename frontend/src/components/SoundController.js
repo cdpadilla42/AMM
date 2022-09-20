@@ -148,7 +148,6 @@ const SoundController = ({ children }) => {
       playOnMainPage: true,
       conversationIDs: [],
       howl: null,
-      noLoop: true,
     },
   ]);
 
