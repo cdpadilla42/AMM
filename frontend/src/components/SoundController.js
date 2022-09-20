@@ -144,26 +144,31 @@ const SoundController = ({ children }) => {
   }, [currentPage]);
 
   useEffect(() => {
-    if (currentTrackObj && soundPlaying) {
-      let howler;
+    const asyncEffect = async () => {
+      await wait(2000);
+      if (currentTrackObj && soundPlaying) {
+        let howler;
 
-      if (currentTrackObj.howl) {
-        howler = currentTrackObj.howl;
-      } else {
-        howler = initiateSound(currentTrackObj.src);
-      }
+        if (currentTrackObj.howl) {
+          howler = currentTrackObj.howl;
+        } else {
+          howler = initiateSound(currentTrackObj.src);
+        }
 
-      if (soundPlaying) {
-        fadeOutCurrentTrack(howlerRef.current);
-      }
+        if (soundPlaying) {
+          fadeOutCurrentTrack(howlerRef.current);
+        }
 
-      currentTrackObj.howl = howler;
-      howlerRef.current = currentTrackObj.howl;
-      if (soundPlaying) {
-        currentTrackObj.howl.play();
-        currentTrackObj.howl.fade(0, 1, 1000);
+        currentTrackObj.howl = howler;
+        howlerRef.current = currentTrackObj.howl;
+        if (soundPlaying) {
+          currentTrackObj.howl.play();
+          currentTrackObj.howl.fade(0, 1, 1000);
+        }
       }
-    }
+    };
+
+    asyncEffect();
 
     return () => {
       if (howlerRef.current && howlerRef.current.stop) {
