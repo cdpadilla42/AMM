@@ -87,6 +87,7 @@ const errorAnimation = keyframes`
 
 const StyledHealthBar = styled.div`
   width: 200px;
+
   &.ahashakeheartache {
     animation-name: ${errorAnimation};
     animation-duration: 0.4s;
