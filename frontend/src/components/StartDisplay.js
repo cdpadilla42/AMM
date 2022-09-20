@@ -10,6 +10,7 @@ import {
 import { recordInteraction } from '../lib/util';
 import { resetSaveData } from '../store/inventory';
 import AnimalCarousel from './AnimalCarousel';
+import SoundButton from './SoundButton';
 
 const StartDisplay = () => {
   const history = useHistory();
@@ -70,6 +71,7 @@ const StartDisplay = () => {
           <AnimalCarousel />
         </div>
       </StyledStartDisplay>
+      <SoundButton />
     </>
   );
 };
