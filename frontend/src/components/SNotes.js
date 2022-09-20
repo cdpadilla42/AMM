@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeSNotes, toggleSNotes } from '../store/notepad';
 import { useParams } from 'react-router';
+import useDataFetch from '../hooks/useDataFetch';
 
 const SNotes = () => {
   const { userSNotes, sNotes } = useSelector((state) => state.inventory);
@@ -12,6 +13,7 @@ const SNotes = () => {
     (state) => state.conversations?.conversation?.[0]?.act
   );
   const dispatch = useDispatch();
+  const dataFetch = useDataFetch();
 
   const sNotesLoaded = userSNotes && userSNotes.length;
   const sNotesDictLoaded = sNotes && sNotes.length;
@@ -56,7 +58,10 @@ const SNotes = () => {
     });
   };
 
-  const toggleNotes = () => dispatch(toggleSNotes());
+  const toggleNotes = () => {
+    dataFetch();
+    dispatch(toggleSNotes());
+  };
 
   const onOutsideClick = (e) => {
     if (e.currentTarget === e.target) dispatch(closeSNotes());

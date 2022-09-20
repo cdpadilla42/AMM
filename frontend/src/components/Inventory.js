@@ -34,8 +34,10 @@ import {
   multiSelectDialogueIDs,
 } from '../lib/constants';
 import fullItemsList from '../lib/fullItemsList';
+import useDataFetch from '../hooks/useDataFetch';
 
 const Inventory = () => {
+  const dataFetch = useDataFetch();
   const dispatch = useDispatch();
   const isFreeMode = useIsFreeMode();
   const { id: conversationID } = useParams();
@@ -132,6 +134,7 @@ const Inventory = () => {
   }
 
   function showPeopole() {
+    dataFetch();
     setIsShowingPeople(true);
     dispatch(closeMap());
     setIsShowingAddItem(false);
@@ -144,6 +147,7 @@ const Inventory = () => {
   }
 
   function showMap() {
+    dataFetch();
     dispatch(openMap());
     setIsShowingPeople(false);
     setIsShowingAddItem(false);
