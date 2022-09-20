@@ -201,7 +201,7 @@ const SoundController = ({ children }) => {
           currentTrackObj.howl.fade(0, 1, 1000);
         }
       }
-    }, 2000);
+    }, 500);
 
     return () => {
       if (howlerRef.current && howlerRef.current.stop) {
