@@ -223,6 +223,7 @@ const SoundController = ({ children }) => {
     const sound = new Howl({
       src,
       loop: !noLoop,
+      html5: true,
     });
 
     return sound;
