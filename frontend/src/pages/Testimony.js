@@ -51,8 +51,10 @@ import ObjectionButton from '../components/ObjectionButton';
 import { endFreeMode, endInquiryDialogue } from '../store/app';
 import Error from '../components/Error';
 import SoundButton from '../components/SoundButton';
+import useDataFetch from '../hooks/useDataFetch';
 
 const Testimony = (props) => {
+  const dataFetch = useDataFetch();
   const dispatch = useDispatch();
   const dialogue = useCurrentDialogueObj();
   const isInventoryOpen = useSelector(
@@ -89,6 +91,8 @@ const Testimony = (props) => {
     if (conversationID) {
       saveCurrentConversationIdToLocalStorage(conversationID);
     }
+
+    dataFetch();
 
     return () => {
       dispatch(clearDialogueData());
