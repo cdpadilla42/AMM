@@ -235,6 +235,8 @@ const Inventory = () => {
           <div className="inventory_noitems_message">
             You don't have any evidence! Try snooping around the New Leaf Island
             on the Switch
+            <br />
+            (Think this is an error? Try a good ol' refresh.)
           </div>
         ) : (
           <div className="inventory_grid">
