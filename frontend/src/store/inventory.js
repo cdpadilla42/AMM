@@ -9,10 +9,11 @@ import {
   getUserItemsFromLocalStorage,
   getUserSNotesFromLocalStorage,
 } from '../lib/localStorage';
+import notesHardCoded from '../lib/animalNotes';
 
 const initialState = {
   items: fullItemsList,
-  notes: [],
+  notes: notesHardCoded,
   mapLocations: [],
   sNotes: [],
   userSNotes: [],
