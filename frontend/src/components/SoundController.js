@@ -179,7 +179,7 @@ const SoundController = ({ children }) => {
   }, [currentPage]);
 
   useEffect(() => {
-    if (currentTrackObj && soundPlaying) {
+    if (currentTrackObj) {
       let howler;
 
       if (currentTrackObj.howl) {
@@ -195,23 +195,18 @@ const SoundController = ({ children }) => {
       currentTrackObj.howl = howler;
       howlerRef.current = currentTrackObj.howl;
       if (soundPlaying) {
-        currentTrackObj.howl.play();
-        currentTrackObj.howl.fade(0, 1, 1000);
+        howler.play();
+        howler.fade(0, 1, 1000);
       }
     }
-
-    return () => {
-      if (howlerRef.current && howlerRef.current.stop) {
-        fadeOutCurrentTrack(howlerRef.current);
-      }
-    };
   }, [currentTrackObj, soundPlaying]);
 
-  const fadeOutCurrentTrack = async (howl) => {
+  // const fadeOutCurrentTrack = async (howl) => {
+  const fadeOutCurrentTrack = (howl) => {
     const waitLength = 1000;
-    if (currentTrackObj?.howl) {
+    if (howl) {
+      // await wait(waitLength);
       howl.fade(1, 0, waitLength);
-      await wait(waitLength);
       howl.stop();
     }
   };
@@ -238,7 +233,7 @@ const SoundController = ({ children }) => {
         howlerRef.current.pause();
       }
     }
-  }, [soundPlaying, howlerRef.current]);
+  }, [soundPlaying]);
 
   return '';
 };
