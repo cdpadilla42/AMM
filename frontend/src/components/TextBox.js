@@ -55,6 +55,7 @@ import {
   lastActTwoDialogueID,
   requiredDialoguesInJulianTrial2,
   requiredDialoguesInStitchesTrial4,
+  SNotesNeededToCompleteAct3,
   specialSceneHandling,
   trialTestimonyConversationIDs,
 } from '../lib/constants';
@@ -352,6 +353,7 @@ const TextBox = (props) => {
           }:${currentDialoguePosition}`;
           // if there is no totalCount, mark the sNote completed
           let userHasRequiredSNotes = false;
+          let isTrialRelatedSnote = true;
           if (!count) {
             const updatedSNote = { ...userSNotes[userSNoteIndex] };
             // update the SNote
@@ -413,11 +415,13 @@ const TextBox = (props) => {
               userSNoteIndex
             );
 
+            isTrialRelatedSnote = Object.keys(SNotesNeededToCompleteAct3).includes(updatedSNote?.name);
             userHasRequiredSNotes =
               hasRequiredSNotesForFinalTrial(newSnotesList);
           }
 
-          if (userHasRequiredSNotes) {
+
+          if (userHasRequiredSNotes && isTrialRelatedSnote) {
             toast(
               `WOW! You just unlocked the trial! You have enough Agent S Notes completed to nail the culprit!`
             );
