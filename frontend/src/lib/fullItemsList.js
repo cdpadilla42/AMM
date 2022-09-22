@@ -903,7 +903,7 @@ const fullItemsList = [
     ],
     imageUrl:
       'https://cdn.sanity.io/images/qvonp967/production/9ded4aa8d22740e5d8631ba11396b79af7541424-128x128.png',
-    name: 'Lucky’s Get Well Card',
+    name: "Lucky’s Get Well Card",
     restrictUserAddingToInventory: true,
   },
   {
