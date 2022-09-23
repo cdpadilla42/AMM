@@ -903,7 +903,7 @@ const fullItemsList = [
     ],
     imageUrl:
       'https://cdn.sanity.io/images/qvonp967/production/9ded4aa8d22740e5d8631ba11396b79af7541424-128x128.png',
-    name: "Lucky’s Get Well Card",
+    name: 'Lucky’s Get Well Card',
     restrictUserAddingToInventory: true,
   },
   {
@@ -2691,6 +2691,11 @@ const fullItemsList = [
     restrictUserAddingToInventory: true,
   },
   {
+    _createdAt: '2021-09-01T21:56:32Z',
+    _id: '89b66e77-c4b6-4b1f-8419-1fe89939a77c',
+    _rev: 'DOxODj7W51H78t2ESvx5wh',
+    _type: 'item',
+    _updatedAt: '2022-09-21T07:52:09Z',
     descriptionA: [
       {
         _key: 'dd1618ea93aa',
@@ -2716,7 +2721,7 @@ const fullItemsList = [
             _key: 'ca441cdc7f21',
             _type: 'span',
             marks: [],
-            text: 'Found in Julain’s Falls, behind Julian’s house.',
+            text: 'Found in Julian’s Falls, behind Julian’s house.',
           },
         ],
         level: 1,
@@ -2750,7 +2755,7 @@ const fullItemsList = [
             _key: 'e5c99ed91b5a',
             _type: 'span',
             marks: [],
-            text: 'Found in Julain’s Falls, behind Julian’s house.',
+            text: 'Found in Julian’s Falls, behind Julian’s house.',
           },
         ],
         level: 1,
@@ -2800,7 +2805,7 @@ const fullItemsList = [
             _key: 'd3c5e78b5d6c',
             _type: 'span',
             marks: [],
-            text: 'Found in Julain’s Falls, behind Julian’s house.',
+            text: 'Found in Julian’s Falls, behind Julian’s house.',
           },
         ],
         level: 1,
@@ -2809,8 +2814,13 @@ const fullItemsList = [
         style: 'normal',
       },
     ],
-    imageUrl:
-      'https://cdn.sanity.io/images/qvonp967/production/197be4879f9ad0a46a35cc1b8cb36e27a0775b51-128x128.png',
+    image: {
+      _type: 'image',
+      asset: {
+        _ref: 'image-197be4879f9ad0a46a35cc1b8cb36e27a0775b51-128x128-png',
+        _type: 'reference',
+      },
+    },
     name: 'Painting Set',
   },
   {
@@ -5425,6 +5435,134 @@ const fullItemsList = [
       'https://cdn.sanity.io/images/qvonp967/production/9ded4aa8d22740e5d8631ba11396b79af7541424-128x128.png',
     name: 'Lucks Get Well Card*',
     restrictUserAddingToInventory: true,
+  },
+  {
+    _createdAt: '2022-09-23T01:25:28Z',
+    _id: '24d6d7ee-4767-4ec5-967c-5128eab26291',
+    _rev: '1V75sVndvm1XRvnxbcQZio',
+    _type: 'item',
+    _updatedAt: '2022-09-23T01:25:28Z',
+    descriptionA: [
+      {
+        _key: '68ef5b5d9764',
+        _type: 'block',
+        children: [
+          {
+            _key: '60d5cdb02b89',
+            _type: 'span',
+            marks: [],
+            text: 'I have no clue how I got this item at this point. I should come back and read the description once I finished the game.',
+          },
+        ],
+        markDefs: [],
+        style: 'normal',
+      },
+    ],
+    descriptionB: [
+      {
+        _key: '5262ac6a68b1',
+        _type: 'block',
+        children: [
+          {
+            _key: 'f228e92137ba',
+            _type: 'span',
+            marks: [],
+            text: 'I have no clue how I got this item at this point. I should come back and read the description once I finished the game.',
+          },
+        ],
+        markDefs: [],
+        style: 'normal',
+      },
+    ],
+    descriptionC: [
+      {
+        _key: 'f8ed04b5e57c',
+        _type: 'block',
+        children: [
+          {
+            _key: '9a06020d56b9',
+            _type: 'span',
+            marks: [],
+            text: 'I have no clue how I got this item at this point. I should come back and read the description once I finished the game.',
+          },
+        ],
+        markDefs: [],
+        style: 'normal',
+      },
+    ],
+    descriptionD: [
+      {
+        _key: 'e76daf29df39',
+        _type: 'block',
+        children: [
+          {
+            _key: 'c7cef2bf7141',
+            _type: 'span',
+            marks: [],
+            text: '"Congratulations for getting all the achievements! There\'s secrets on the island just for you!',
+          },
+        ],
+        markDefs: [],
+        style: 'normal',
+      },
+      {
+        _key: '210b322bf27f',
+        _type: 'block',
+        children: [
+          {
+            _key: '9b1582e0e9a7',
+            _type: 'span',
+            marks: [],
+            text: "Go to the plaza and stand right in front of the jukebox. Press X/open your bag and you'll see a couple of buried items!",
+          },
+        ],
+        level: 1,
+        listItem: 'bullet',
+        markDefs: [],
+        style: 'normal',
+      },
+      {
+        _key: 'b373aebf5ee6',
+        _type: 'block',
+        children: [
+          {
+            _key: 'a723156b5e48',
+            _type: 'span',
+            marks: [],
+            text: 'The same is on the right side with the donation box. ',
+          },
+        ],
+        level: 1,
+        listItem: 'bullet',
+        markDefs: [],
+        style: 'normal',
+      },
+      {
+        _key: '89b6484289b4',
+        _type: 'block',
+        children: [
+          {
+            _key: 'b9f262ffe659',
+            _type: 'span',
+            marks: [],
+            text: 'Thank you so much for helping everyone. "',
+          },
+        ],
+        level: 1,
+        listItem: 'bullet',
+        markDefs: [],
+        style: 'normal',
+      },
+    ],
+    image: {
+      _type: 'image',
+      asset: {
+        _ref: 'image-96d58f213f7f5db5b095afa9dc0c1a353f0173c0-128x128-png',
+        _type: 'reference',
+      },
+    },
+    name: 'A Prize',
+    restrictUserAddingToInventory: false,
   },
 ];
 
