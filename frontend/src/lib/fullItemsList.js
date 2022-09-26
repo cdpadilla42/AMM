@@ -2821,6 +2821,8 @@ const fullItemsList = [
         _type: 'reference',
       },
     },
+    imageUrl:
+      'https://cdn.sanity.io/images/qvonp967/production/197be4879f9ad0a46a35cc1b8cb36e27a0775b51-128x128.png',
     name: 'Painting Set',
   },
   {
@@ -5561,6 +5563,8 @@ const fullItemsList = [
         _type: 'reference',
       },
     },
+    imageUrl:
+      'https://cdn.sanity.io/images/qvonp967/production/96d58f213f7f5db5b095afa9dc0c1a353f0173c0-128x128.png',
     name: 'A Prize',
     restrictUserAddingToInventory: false,
   },
