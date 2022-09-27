@@ -96,12 +96,8 @@ const creditsData = [
     </li>
     <li>
       <h3>taelico</h3>
-      <a
-        href="https://twitter.com/ReiraCallisto"
-        rel="noopener"
-        target="_blank"
-      >
-        @ReiraCallisto
+      <a href="https://twitter.com/taelico_" rel="noopener" target="_blank">
+        @taelico_
       </a>
       <br />
       <a href="https://www.twitch.tv/taelico" rel="noopener" target="_blank">
