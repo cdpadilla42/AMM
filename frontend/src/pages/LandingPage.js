@@ -80,7 +80,9 @@ const LandingPage = () => {
               <br />
             </li>
             <li>
-              <a onClick={goToCredits}>Full Credits</a>
+              <a onClick={goToCredits} href="">
+                Full Credits
+              </a>
             </li>
           </ul>
         </aside>

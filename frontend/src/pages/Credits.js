@@ -64,6 +64,154 @@ const creditsData = [
       </a>
     </li>
   </ul>,
+  <ul class="credits__list">
+    <li>
+      <h2>Beta Testers cont.</h2>
+      <h3>Kelsey Heater</h3>
+      <a
+        href="https://twitter.com/shutupsprinkles"
+        rel="noopener"
+        target="_blank"
+      >
+        @shutupsprinkles
+      </a>
+      <br />
+      <a
+        href="https://www.twitch.tv/shutupsprinkles"
+        rel="noopener"
+        target="_blank"
+      >
+        Sream on Twitch
+      </a>
+    </li>
+    <li>
+      <h3>Rez Fox</h3>
+      <a href="https://twitter.com/Rez_Fox_Live" rel="noopener" target="_blank">
+        @Rez_Fox_Live
+      </a>
+      <br />
+      <a href="https://www.twitch.tv/rez_fox" rel="noopener" target="_blank">
+        Sream on Twitch
+      </a>
+    </li>
+    <li>
+      <h3>taelico</h3>
+      <a
+        href="https://twitter.com/ReiraCallisto"
+        rel="noopener"
+        target="_blank"
+      >
+        @ReiraCallisto
+      </a>
+      <br />
+      <a href="https://www.twitch.tv/taelico" rel="noopener" target="_blank">
+        Sream on Twitch
+      </a>
+    </li>
+    <li>
+      <h3>Tay</h3>
+      <a href="https://twitter.com/taysamey" rel="noopener" target="_blank">
+        @taysamey
+      </a>
+      <br />
+      <a href="https://www.twitch.tv/taysamey" rel="noopener" target="_blank">
+        Sream on Twitch
+      </a>
+    </li>
+    <li>
+      <h3>lavender</h3>
+      <a
+        href="https://twitter.com/honeydewbread "
+        rel="noopener"
+        target="_blank"
+      >
+        @honeydewbread
+      </a>
+      <br />
+      <a
+        href="https://www.twitch.tv/honeydewbread "
+        rel="noopener"
+        target="_blank"
+      >
+        Sream on Twitch
+      </a>
+    </li>
+    <li>
+      <h3>Lindy</h3>
+      <a href="https://twitter.com/gremlindy " rel="noopener" target="_blank">
+        @gremlindy
+      </a>
+      <br />
+      <a href="https://www.twitch.tv/gremlindy " rel="noopener" target="_blank">
+        Sream on Twitch
+      </a>
+    </li>
+    <li>
+      <h3>savingmiller</h3>
+      <a
+        href="https://twitter.com/savingmiller "
+        rel="noopener"
+        target="_blank"
+      >
+        @savingmiller
+      </a>
+      <br />
+      <a
+        href="https://www.twitch.tv/savingmiller "
+        rel="noopener"
+        target="_blank"
+      >
+        Sream on Twitch
+      </a>
+    </li>
+  </ul>,
+  <ul class="credits__list">
+    <li>
+      <h2>Beta Testers cont.</h2>
+      <h3>Neen</h3>
+      <a href="https://twitter.com/neengamer" rel="noopener" target="_blank">
+        @neengamer
+      </a>
+    </li>
+    <li>
+      <h3>Sean</h3>
+      <a href="https://twitter.com/SFinerFACE" rel="noopener" target="_blank">
+        @SFinerFACE
+      </a>
+    </li>
+    <li>
+      <h3>Charlotte Lily v</h3>
+      <a
+        href="https://twitter.com/charlottelilyv"
+        rel="noopener"
+        target="_blank"
+      >
+        @charlottelilyv
+      </a>
+    </li>
+    <li>
+      <h3>David Brink</h3>
+      <a
+        href="https://twitter.com/MyHandsAreBlank"
+        rel="noopener"
+        target="_blank"
+      >
+        @MyHandsAreBlank
+      </a>
+    </li>
+    <li>
+      <h3>Dani</h3>
+      <a href="https://twitter.com/mystic_arium" rel="noopener" target="_blank">
+        @mystic_arium
+      </a>
+    </li>
+    <li>
+      <h3>Omri A. Stier</h3>
+      <a href="https://twitter.com/Oasis_Mii" rel="noopener" target="_blank">
+        @Oasis_Mii
+      </a>
+    </li>
+  </ul>,
   <ul>
     <li>
       <h2>Patterns</h2>
@@ -182,6 +330,10 @@ const StyledCredits = styled.section`
   h2 {
     margin: 2rem 0 0.5rem 0;
     text-decoration: underline;
+  }
+
+  h3 {
+    margin-top: 1rem;
   }
 
   p {
