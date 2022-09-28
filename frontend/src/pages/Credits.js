@@ -81,7 +81,7 @@ const creditsData = [
         rel="noopener"
         target="_blank"
       >
-        Sream on Twitch
+        Stream on Twitch
       </a>
     </li>
     <li>
@@ -91,7 +91,7 @@ const creditsData = [
       </a>
       <br />
       <a href="https://www.twitch.tv/rez_fox" rel="noopener" target="_blank">
-        Sream on Twitch
+        Stream on Twitch
       </a>
     </li>
     <li>
@@ -101,7 +101,7 @@ const creditsData = [
       </a>
       <br />
       <a href="https://www.twitch.tv/taelico" rel="noopener" target="_blank">
-        Sream on Twitch
+        Stream on Twitch
       </a>
     </li>
     <li>
@@ -111,7 +111,7 @@ const creditsData = [
       </a>
       <br />
       <a href="https://www.twitch.tv/taysamey" rel="noopener" target="_blank">
-        Sream on Twitch
+        Stream on Twitch
       </a>
     </li>
     <li>
@@ -129,7 +129,7 @@ const creditsData = [
         rel="noopener"
         target="_blank"
       >
-        Sream on Twitch
+        Stream on Twitch
       </a>
     </li>
     <li>
@@ -139,7 +139,7 @@ const creditsData = [
       </a>
       <br />
       <a href="https://www.twitch.tv/gremlindy " rel="noopener" target="_blank">
-        Sream on Twitch
+        Stream on Twitch
       </a>
     </li>
     <li>
@@ -157,7 +157,7 @@ const creditsData = [
         rel="noopener"
         target="_blank"
       >
-        Sream on Twitch
+        Stream on Twitch
       </a>
     </li>
   </ul>,
