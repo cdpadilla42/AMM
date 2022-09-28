@@ -10,7 +10,7 @@ import { isGameCompleteLocalStorage } from '../lib/localStorage';
 const creditsData = [
   <ul class="credits__list">
     <li>
-      <h2>Art / Story</h2>
+      <h2>Art / Story / Game Design</h2>
       <h3>Jenn Padilla</h3>
       <a
         href="https://twitter.com/jennpadillart"
@@ -26,7 +26,7 @@ const creditsData = [
       <br />
     </li>
     <li>
-      <h2>Music / Software / Development</h2>
+      <h2>Composer / Game & UI Developer</h2>
       <h3>Chris Padilla</h3>
       <a href="https://twitter.com/letsgokris" rel="noopener" target="_blank">
         @letsgokris
