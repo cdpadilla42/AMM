@@ -12,10 +12,10 @@ const LandingPage = () => {
 
   return (
     <StyledLanding>
-      <header class="hero">
-        <div class="container">
-          <div class="animation_prompt" aria-hidden="true"></div>
-          <div class="hero__text_greeting">
+      <header className="hero">
+        <div className="container">
+          <div className="animation_prompt" aria-hidden="true"></div>
+          <div className="hero__text_greeting">
             <h1>
               Animal Crossing:
               <br />
@@ -33,11 +33,11 @@ const LandingPage = () => {
           </div>
         </div>
       </header>
-      <section class="about">
-        <div class="about__description">
-          <h2 class="section_heading">About</h2>
+      <section className="about">
+        <div className="about__description">
+          <h2 className="section_heading">About</h2>
           <hr />
-          <p>
+          <p className="italics">
             Animal Crossing: New Murder is an Ace-Attorney-like murder mystery
             game that pairs with Animal Crossing: New Horizons (ACNH) for
             exploration and storytelling.
@@ -88,7 +88,7 @@ const LandingPage = () => {
             browser. You can use anything, from desktop to mobile. For best
             results, we recommend Google Chrome or Firefox.
           </p>
-          <h2 class="section_heading" rel="noopener" target="_blank">
+          <h2 className="section_heading" rel="noopener" target="_blank">
             How to Start
           </h2>
           <p>
@@ -108,7 +108,7 @@ const LandingPage = () => {
             </a>
             .
           </p>
-          <p>
+          <p style={{ 'font-style': 'normal', 'text-align': 'center' }}>
             <strong>Dream Address: DA-5197-5510-7359</strong>
           </p>
           <p>
@@ -116,10 +116,10 @@ const LandingPage = () => {
             and depictions of cartoon blood.
           </p>
         </div>
-        <aside class="about__credits">
-          <h2 class="section_heading">Credits</h2>
+        <aside className="about__credits">
+          <h2 className="section_heading">Credits</h2>
           <hr />
-          <ul class="credits__list">
+          <ul className="credits__list">
             <li>
               <h4>Art/Story</h4>
               <span>Jenn Padilla</span>
@@ -168,14 +168,14 @@ const LandingPage = () => {
               </a>
             </li>
           </ul>
-          <h2 class="section_heading">Soundtrack</h2>
+          <h2 className="section_heading">Soundtrack</h2>
           <a
             href="https://letsgochris.bandcamp.com/album/ac-new-murder-soundtrack"
             rel="noopener"
             target="_blank"
           >
             <img
-              class="ost_cover"
+              className="ost_cover"
               src="https://padilla-media.s3.amazonaws.com/blog/acnm/acnmcover.jpg"
               alt="AC: New Murder OST Cover Art"
             />
@@ -379,6 +379,14 @@ const StyledLanding = styled.main`
     max-width: 100%;
     justify-content: space-between;
     align-items: center;
+  }
+
+  p {
+    text-indent: 2rem;
+  }
+
+  p.italics {
+    font-style: italic;
   }
 
   @media all and (min-width: 992px) {
