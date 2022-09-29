@@ -168,6 +168,18 @@ const LandingPage = () => {
               </a>
             </li>
           </ul>
+          <h2 class="section_heading">Soundtrack</h2>
+          <a
+            href="https://letsgochris.bandcamp.com/album/ac-new-murder-soundtrack"
+            rel="noopener"
+            target="_blank"
+          >
+            <img
+              class="ost_cover"
+              src="https://padilla-media.s3.amazonaws.com/blog/acnm/acnmcover.jpg"
+              alt="AC: New Murder OST Cover Art"
+            />
+          </a>
         </aside>
       </section>
       <footer>
@@ -444,8 +456,9 @@ const StyledLanding = styled.main`
     color: #4d4762;
   }
   .about__credits img {
-    width: 300px;
-    border-radius: 50%;
+    max-width: 300px;
+    width: 100%;
+    /* border-radius: 50%; */
   }
 
   .about h2,
@@ -723,5 +736,9 @@ const StyledLanding = styled.main`
     footer {
       font-size: 1.2rem;
     }
+  }
+
+  .ost_cover {
+    width: 100%;
   }
 `;
