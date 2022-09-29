@@ -230,7 +230,7 @@ const StyledLanding = styled.main`
 
   @media all and (max-width: 960px) {
     .hero {
-      height: auto;
+      height: 90vh;
     }
   }
 
@@ -296,14 +296,18 @@ const StyledLanding = styled.main`
   }
 
   .hero__cta_container {
-    margin: 1rem 0;
+    /* margin: 1rem 0; */
     display: flex;
-    width: 80%;
+    width: 90%
+    align-items: center;
+    justify-content: center;
+    /* width: 80%; */
   }
 
   @media all and (max-width: 960px) {
     .hero__cta_container {
-      flex-direction: column-reverse;
+      /* flex-direction: column-reverse; */
+      /* width: 40%; */
     }
   }
 
@@ -334,6 +338,7 @@ const StyledLanding = styled.main`
   .hero__cta_button.secondary {
     background-color: var(--brown-black);
     color: var(--cream);
+    font-size: 1rem;
   }
 
   .hero__cta_button:hover {
