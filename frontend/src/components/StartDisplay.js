@@ -122,7 +122,7 @@ const StyledStartDisplay = styled.div`
   }
 
   .start_page__button {
-    min-width: 300px;
+    min-width: 200px;
     /* flex: 1; */
     position: relative;
     text-decoration: none;
