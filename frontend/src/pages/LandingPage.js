@@ -109,6 +109,9 @@ const LandingPage = () => {
             .
           </p>
           <p>
+            <strong>Dream Address: DA-5197-5510-7359</strong>
+          </p>
+          <p>
             Trigger warning for discussions of blood, violence, and self-harm
             and depictions of cartoon blood.
           </p>
