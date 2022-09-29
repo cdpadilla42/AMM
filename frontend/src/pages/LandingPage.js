@@ -38,24 +38,80 @@ const LandingPage = () => {
           <h2 class="section_heading">About</h2>
           <hr />
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-            minus sint consectetur! Rem, soluta delectus suscipit architecto
-            esse iusto in deleniti impedit repudiandae ab, dolor maxime minima,
-            dolorum tempora ducimus.
+            Animal Crossing: New Murder is an Ace-Attorney-like murder mystery
+            game that pairs with Animal Crossing: New Horizons (ACNH) for
+            exploration and storytelling.
           </p>
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam
-            fugit atque consectetur sint incidunt corporis officia sunt dolore!
-            Provident corrupti incidunt atque. In rerum aperiam provident
-            laudantium beatae fugit! Doloremque.
+            Animal Crossing: New Murder is a game that’s all about finding
+            evidence, talking to fun characters, and solving an (attempted)
+            murder mystery! The game is split into two different playstyles that
+            feed into each other. On one side is a dream island within the
+            Switch game, ACNH. You, as the player, open up ACNH and come to the
+            dream island to search for evidence and clues. The other side is a
+            visual-novel web browser game. Through the website, you talk to the
+            villagers and try to get to the bottom of this mystery. Enter the
+            items you find in ACNH to present to characters and in court. But
+            some items you can only find with help from the villagers on the web
+            game. After gathering enough evidence, you’ll put your knowledge to
+            the test in the courtroom to nail the culprit!
           </p>
           <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum ullam
-            fuga quod sit est, aperiam voluptatum iste quas earum dolorem!
-            Consectetur error mollitia quidem rerum deleniti dolor amet optio
-            et.
+            To play this game you need a{' '}
+            <a
+              href="https://www.nintendo.com/switch/"
+              rel="noopener"
+              target="_blank"
+            >
+              Nintendo Switch
+            </a>
+            , a{' '}
+            <a
+              href="https://www.nintendo.com/switch/online-service/"
+              rel="noopener"
+              target="_blank"
+            >
+              Nintendo Online Membership
+            </a>
+            , and a copy of{' '}
+            <a
+              href="https://www.nintendo.com/store/products/animal-crossing-new-horizons-switch/"
+              rel="noopener"
+              target="_blank"
+            >
+              Animal Crossing: New Horizons
+            </a>
+            . You cannot progress in the web game without the ACNH counterpart.
           </p>
-          <p></p>
+          <p>
+            For the web browser game, you need an internet connection and a web
+            browser. You can use anything, from desktop to mobile. For best
+            results, we recommend Google Chrome or Firefox.
+          </p>
+          <h2 class="section_heading" rel="noopener" target="_blank">
+            How to Start
+          </h2>
+          <p>
+            To get to the dream island in ACNH, you have to lie in a bed inside
+            your house. Go to “sleep” and you will see Luna. Tell her you would
+            like to dream and give her the dream address code. Shortly after you
+            will wake up on the dream island tied to this game, “New Leaf.” You
+            have to upgrade your tent to a house to unlock Luna. If you would
+            like to learn more about how dreams work in ACNH, you can read the
+            Nookipedia page{' '}
+            <a
+              href="https://nookipedia.com/wiki/Dream"
+              rel="noopener"
+              target="_blank"
+            >
+              here
+            </a>
+            .
+          </p>
+          <p>
+            Trigger warning for discussions of blood, violence, and self-harm
+            and depictions of cartoon blood.
+          </p>
         </div>
         <aside class="about__credits">
           <h2 class="section_heading">Credits</h2>
@@ -65,18 +121,42 @@ const LandingPage = () => {
               <h4>Art/Story</h4>
               <span>Jenn Padilla</span>
               <br />
-              <a href="https://twitter.com/jennpadillart">@jennpadillart</a>
+              <a
+                href="https://twitter.com/jennpadillart"
+                rel="noopener"
+                target="_blank"
+              >
+                @jennpadillart
+              </a>
               <br />
-              <a href="https://www.jennpadilla.com/">jennpadilla.com</a>
+              <a
+                href="https://www.jennpadilla.com/"
+                rel="noopener"
+                target="_blank"
+              >
+                jennpadilla.com
+              </a>
               <br />
             </li>
             <li>
               <h4>Software/Development</h4>
               <span>Chris Padilla</span>
               <br />
-              <a href="https://twitter.com/letsgokris">@letsgokris</a>
+              <a
+                href="https://twitter.com/letsgokris"
+                rel="noopener"
+                target="_blank"
+              >
+                @letsgokris
+              </a>
               <br />
-              <a href="https://chrisdpadilla.com">chrisdpadilla.com</a>
+              <a
+                href="https://chrisdpadilla.com"
+                rel="noopener"
+                target="_blank"
+              >
+                chrisdpadilla.com
+              </a>
               <br />
             </li>
             <li>
