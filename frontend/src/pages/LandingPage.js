@@ -230,7 +230,7 @@ const StyledLanding = styled.main`
 
   @media all and (max-width: 960px) {
     .hero {
-      height: 90vh;
+      height: auto;
     }
   }
 
