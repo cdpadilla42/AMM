@@ -111,6 +111,18 @@ const LandingPage = () => {
           <p style={{ 'font-style': 'normal', 'text-align': 'center' }}>
             <strong>Dream Address: DA-5197-5510-7359</strong>
           </p>
+          <p style={{ 'font-style': 'normal', 'text-align': 'center' }}>
+            <strong>
+              Questions?{' '}
+              <a
+                href="https://twitter.com/acnewmurder/status/1575602701034876929"
+                rel="noopener"
+                target="_blank"
+              >
+                Read the FAQ
+              </a>
+            </strong>
+          </p>
           <p>
             Trigger warning for discussions of blood, violence, and self-harm
             and depictions of cartoon blood.
@@ -121,7 +133,7 @@ const LandingPage = () => {
           <hr />
           <ul className="credits__list">
             <li>
-              <h4>Art/Story</h4>
+              <h4>Art / Story / Game Design</h4>
               <span>Jenn Padilla</span>
               <br />
               <a
@@ -142,7 +154,7 @@ const LandingPage = () => {
               <br />
             </li>
             <li>
-              <h4>Software/Development</h4>
+              <h4>Composer / Game & UI Developer</h4>
               <span>Chris Padilla</span>
               <br />
               <a
