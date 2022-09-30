@@ -102,9 +102,9 @@ function App() {
           <Route path="/error">
             <Error />
           </Route>
-          <Route path="/uss">
+          {/* <Route path="/uss">
             <SelectConversation />
-          </Route>
+          </Route> */}
           <Route path="/">
             <LandingPage />
           </Route>
