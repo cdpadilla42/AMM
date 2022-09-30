@@ -12,7 +12,7 @@ const initialState = {
       phrase: [
         {
           emotion: 'normal',
-          text: '',
+          text: "Hmm... This conversation didn't load correctly. Try refreshing the page!",
           speaker: '',
         },
       ],
