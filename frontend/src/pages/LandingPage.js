@@ -200,6 +200,16 @@ const LandingPage = () => {
           Animal Crossing: New Horizons is published by Nintendo® All characters
           and rights belong to them.
         </p>
+        <p>
+          {' '}
+          <a
+            href="https://twitter.com/acnewmurder"
+            rel="noopener"
+            target="_blank"
+          >
+            Follow ACNM on Twitter
+          </a>
+        </p>
       </footer>
     </StyledLanding>
   );
@@ -496,7 +506,7 @@ const StyledLanding = styled.main`
     color: #fcf6f3;
   }
 
-  .about a {
+  .about a, footer a {
     color: #ff8f7c;
   }
 
@@ -686,7 +696,7 @@ const StyledLanding = styled.main`
     transition: color 0.4s ease;
   }
 
-  .social_icons a:hover {
+  footer a:hover {
     color: #ffcb75;
   }
 
