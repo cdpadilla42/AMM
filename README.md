@@ -5,6 +5,8 @@
 
 🔍 [Visit the Official Site](https://acnewmurder.com)
 
+🎷 [Listen to the Soundtrack](https://letsgochris.bandcamp.com/album/ac-new-murder-soundtrack)
+
 😄 [Visit My Site Page for the Game](https://chrisdpadilla.com/acnm)
 
 🧑‍💻 Read more about the project on my blog:
