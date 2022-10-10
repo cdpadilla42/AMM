@@ -48,7 +48,7 @@ import {
   dialoguesThatUnlockConversations,
 } from '../lib/constants';
 import ObjectionButton from '../components/ObjectionButton';
-import { endFreeMode, endInquiryDialogue } from '../store/app';
+import { endFreeMode, endInquiryDialogue, endInquiryMode } from '../store/app';
 import Error from '../components/Error';
 import SoundButton from '../components/SoundButton';
 import useDataFetch from '../hooks/useDataFetch';
@@ -101,6 +101,7 @@ const Testimony = (props) => {
       dispatch(resetDialogue());
       dispatch(resetBackground());
       dispatch(endInquiryDialogue());
+      dispatch(endInquiryMode());
       dispatch(endFreeMode());
     };
   }, []);
