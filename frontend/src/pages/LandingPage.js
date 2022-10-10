@@ -10,19 +10,32 @@ const LandingPage = () => {
     history.push('/credits');
   };
 
+  const logoUrl = `https://cdn.sanity.io/images/qvonp967/production/706d902e42bd1975f63aa62f4893e5e8069b4e9b-1219x825.png?w=337&h=469`;
+
   return (
     <StyledLanding>
       <header className="hero">
-        <div className="container">
+        <div className="wrapper-container">
           <div className="animation_prompt" aria-hidden="true"></div>
           <div className="hero__text_greeting">
-            <h1>
-              Animal Crossing:
-              <br />
-              NEW MURDER
-            </h1>
-            <h2>A Murder Mystery Who-Dun-It inspired by Animal Crossing</h2>
-            <div className="hero__cta_container">
+            <img
+              src={logoUrl}
+              alt="Animal Crossing: New Murder"
+              className="logo-hero"
+            />
+            <div className="yt-wrapper">
+              <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/oZ-cQHRULkg"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                className="yt-trailer"
+              ></iframe>
+            </div>
+            <div className="hero__cta_wrapper-container">
               <Link to="/letter" className="hero__cta_button secondary">
                 Read Ñenn's Letter
               </Link>
@@ -246,15 +259,15 @@ const StyledLanding = styled.main`
   }
 
   .hero {
-    width: 100vw;
+    /* width: 100vw; */
     height: auto;
   }
 
-  @media all and (max-width: 960px) {
+  /* @media all and (max-width: 960px) {
     .hero {
       height: 90vh;
     }
-  }
+  } */
 
   .hero {
     background-color: #123a15;
@@ -263,12 +276,12 @@ const StyledLanding = styled.main`
     background-size: repeat;
   }
 
-  .hero .container {
+  .hero .wrapper-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    /* height: 100%; */
   }
 
   .hero__text_greeting {
@@ -279,7 +292,7 @@ const StyledLanding = styled.main`
     /* background-color: #4d4762; */
     text-align: center;
     width: 80vw;
-    height: 60vh;
+    /* height: 60vh; */
     padding: 0 1rem;
     transform: translateY(0);
     opacity: 1;
@@ -317,17 +330,17 @@ const StyledLanding = styled.main`
     font-weight: 700;
   }
 
-  .hero__cta_container {
+  .hero__cta_wrapper-container {
     /* margin: 1rem 0; */
     display: flex;
-    width: 90%
+    width: 90%;
     align-items: center;
     justify-content: center;
     /* width: 80%; */
   }
 
   @media all and (max-width: 960px) {
-    .hero__cta_container {
+    .hero__cta_wrapper-container {
       /* flex-direction: column-reverse; */
       /* width: 40%; */
     }
@@ -370,6 +383,20 @@ const StyledLanding = styled.main`
     cursor: pointer;
   }
 
+  .yt-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    width: 100%;
+  }
+  .yt-trailer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
   body {
     font-family: 'Poppins', sans-serif;
     background-color: #fcf6f3;
@@ -400,7 +427,7 @@ const StyledLanding = styled.main`
     display: none;
   }
 
-  nav .container {
+  nav .wrapper-container {
     display: flex;
     flex-basis: 1100px;
     max-width: 100%;
@@ -417,7 +444,7 @@ const StyledLanding = styled.main`
   }
 
   @media all and (min-width: 992px) {
-    nav .container {
+    nav .wrapper-container {
       max-width: 962px;
     }
   }
@@ -429,6 +456,17 @@ const StyledLanding = styled.main`
   .logo {
     width: 50px;
     margin: 0 1rem;
+  }
+
+  .logo-hero {
+    margin-bottom: 1rem;
+    /* box-shadow: 0px 0px 5px lightblue; */
+  }
+
+  @media all and (max-width: 900px) {
+    .logo-hero {
+      height: 150px;
+    }
   }
 
   .nav__menu_items {
@@ -506,7 +544,8 @@ const StyledLanding = styled.main`
     color: #fcf6f3;
   }
 
-  .about a, footer a {
+  .about a,
+  footer a {
     color: #ff8f7c;
   }
 
