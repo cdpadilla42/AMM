@@ -274,6 +274,7 @@ const StyledLanding = styled.main`
     background-image: url(${LandingHeroBG});
     background-attachment: fixed;
     background-size: repeat;
+    /* max-width: 1000px; */
   }
 
   .hero .wrapper-container {
@@ -388,6 +389,7 @@ const StyledLanding = styled.main`
     padding-bottom: 56.25%; /* 16:9 */
     height: 0;
     width: 100%;
+    max-width: 1000px;
   }
   .yt-trailer {
     position: absolute;
@@ -395,6 +397,7 @@ const StyledLanding = styled.main`
     left: 0;
     width: 100% !important;
     height: 100% !important;
+    /* max-width: 1000px; */
   }
 
   body {
