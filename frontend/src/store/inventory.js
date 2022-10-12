@@ -30,7 +30,6 @@ const initialState = {
 // Actions
 export const getInventoryItems = createAsyncThunk(
   'GET_INVENTORY_ITEMS',
-  // TODO Refactor me to grab all items and animal notes
   async () => {
     const response = await sanityClient.fetch(
       `*[_type == "item"]{
@@ -61,7 +60,7 @@ export const getMapLocations = createAsyncThunk(
       `*[_type == "mapLocation"]{
         name, descriptionA, descriptionC, descriptionD,
         "imageUrl": image.asset->url
-}`
+      }`
     );
     return response;
   }
@@ -110,6 +109,11 @@ export const unlockConversation = createAction('UNLOCK_CONVERSATION');
 export const completeGame = createAction('COMPLETE_GAME');
 export const resetSaveData = createAction('RESET_SAVE_DATA');
 
+export const saveInventoryItemsData = createAction('SAVE_ITEMS_INVENTORY_DATA');
+export const saveMapLocationData = createAction('SAVE_MAP_LOCATION_DATA');
+export const saveAnimalNotesData = createAction('SAVE_ANIMAL_NOTES_DATA');
+export const saveSNotes = createAction('SAVE_SNOTES_DATA');
+
 // Reducer
 
 function inventoryReducer(state = initialState, action) {
@@ -117,11 +121,19 @@ function inventoryReducer(state = initialState, action) {
   switch (type) {
     case 'GET_INVENTORY_ITEMS/fulfilled':
       return { ...state, items: payload };
+    case saveInventoryItemsData.toString():
+      return { ...state, items: payload };
     case 'GET_ANIMAL_NOTES/fulfilled':
+      return { ...state, notes: payload };
+    case saveAnimalNotesData.toString():
       return { ...state, notes: payload };
     case 'GET_MAP_LOCATIONS/fulfilled':
       return { ...state, mapLocations: payload };
+    case saveMapLocationData.toString():
+      return { ...state, mapLocations: payload };
     case 'GET_SNOTES/fulfilled':
+      return { ...state, sNotes: payload };
+    case saveSNotes.toString():
       return { ...state, sNotes: payload };
     case initializeUserInventoryFromLocalStorage.toString():
       const userItems = getUserItemsFromLocalStorage();

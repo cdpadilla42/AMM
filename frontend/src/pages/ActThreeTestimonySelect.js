@@ -10,7 +10,6 @@ import {
 } from '../lib/localStorage';
 import { hasRequiredSNotesForFinalTrial } from '../lib/SNotes';
 import { recordInteraction } from '../lib/util';
-import { getConversations } from '../store/conversations';
 
 const ActThreeTestimonySelect = () => {
   const history = useHistory();
@@ -20,7 +19,6 @@ const ActThreeTestimonySelect = () => {
     useSelector((state) => state.inventory);
 
   useEffect(() => {
-    dispatch(getConversations());
     saveCurrentConversationIdToLocalStorage('act-three');
   }, []);
   const [showAll, setShowAll] = useState(false);

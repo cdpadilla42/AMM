@@ -11,7 +11,6 @@ import {
   clearSNotesFromLocalStorage,
   getLastConversationIDFromLocalStorage,
 } from '../lib/localStorage';
-import { getConversations } from '../store/conversations';
 import { addToSNotesList } from '../store/inventory';
 
 const SelectConversation = () => {
@@ -22,10 +21,6 @@ const SelectConversation = () => {
   conversations = [...conversations];
 
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    dispatch(getConversations());
-  }, []);
 
   function renderConversations() {
     return conversations.map((convo) => (
@@ -81,21 +76,23 @@ const SelectConversation = () => {
   }
 
   function handleTest() {
-    dispatch(addToSNotesList({
-      "name": "Lucky's Get Well Card",
-      "completed": false,
-      "totalCount": 8,
-      "userEventInstances": [
-        "c3d6e35a-1838-4986-829a-ab576e3c8f:45",
-        "76508ca2-2cdd-4d7e-a334-f6ba8646e:3",
-        "5a208552-f524-46c7-aefc-8eaabc9c8:8",
-        "e3bd7c19-386a-4c47-8b51-8f586bab4:8",
-        "17e6226f-2d73-4a0b-ad6f-fcf0c3954:7",
-        "de4053e3-a6e2-437e-95ef-6e429e8cb:10",
-        "71c1dd0d-cbd2-47d6-972d-0775d6ce44:6",
-        "946e74fc-a01e-4114-8ccf-90ff8b1181:7",
-      ]
-    }));
+    dispatch(
+      addToSNotesList({
+        name: "Lucky's Get Well Card",
+        completed: false,
+        totalCount: 8,
+        userEventInstances: [
+          'c3d6e35a-1838-4986-829a-ab576e3c8f:45',
+          '76508ca2-2cdd-4d7e-a334-f6ba8646e:3',
+          '5a208552-f524-46c7-aefc-8eaabc9c8:8',
+          'e3bd7c19-386a-4c47-8b51-8f586bab4:8',
+          '17e6226f-2d73-4a0b-ad6f-fcf0c3954:7',
+          'de4053e3-a6e2-437e-95ef-6e429e8cb:10',
+          '71c1dd0d-cbd2-47d6-972d-0775d6ce44:6',
+          '946e74fc-a01e-4114-8ccf-90ff8b1181:7',
+        ],
+      })
+    );
   }
 
   return (

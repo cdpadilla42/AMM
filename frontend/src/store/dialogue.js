@@ -33,6 +33,7 @@ const initialState = {
 };
 
 // Actions
+export const saveInquiryDialogues = createAction('SAVE_INQUIRY_DIALOGUES');
 export const nextDialogue = createAction('NEXT_DIALOGUE');
 export const prevDialogue = createAction('PREV_DIALOGUE');
 export const resetDialoguePosition = createAction('RESET_DIALOUGE_POSITION');
@@ -53,6 +54,7 @@ export const switchConversation = createAction('SWITCH_CONVERSATION');
 export const resetDialogue = createAction('RESET_DIALOGUE');
 export const setLeaving = createAction('SER_LEAVING');
 export const jumpToDialoguePosition = createAction('JUMP_TO_DIALOGUE_POSITION');
+export const saveDialogueData = createAction('SAVE_DIALOGUE_DATA');
 export const jumpToDialoguePositionAndConversation = createAction(
   'JUMP_TO_DIALOGUE_POSITION_AND_CONVERSATION'
 );
@@ -78,55 +80,55 @@ export const displayComeBackLaterDialogueAct4 = createAction(
   'DISPLAY_COME_BACK_LATER_DIALOGUE_ACT_4'
 );
 
-export const getDialogue = createAsyncThunk(
-  'GET_DIALOGUE',
-  async (conversationID) => {
-    const response = await sanityClient.fetch(
-      `*[_type == "dialogue" && conversation._ref == "${conversationID}"]{
-        name, responseOptions, needEvidence, multiBranchEvidence, useLastAvailableEvidenceList, inventoryPrompt, followingDialogueFromEvidence->{_id}, _id, isFinalDialogue, switchToInquiryMode, requiredEvidence->{name}, loseHealthOnIncorrect,
-				animals[]->{name},
-  			"phrase": phrase[]{
-  				emotion->{emotion}, speaker->{name, color}, text, isGrey,
-					link, sNotesEventRef->{name, count, successMessage, hidden, achievement, itemEventTriggered, itemEventType, itemEventRef->{name, _id}}, sNotesEventTriggered, sNotesEventType, 
-          changePosition, leftAnimal->{name}, rightAnimal->{name}, leftOrientation, rightOrientation, leftAnimalCentered, centeredOrientation, leftEmotion->{emotion}, rightEmotion->{emotion},
-          showImage,
-          itemEventTriggered, itemEventType, itemEventRef->{name}, prereqEventTriggered, prereqEventRef->{name},
-          objectionDialogue->{_id},
-          "imageUrl": image.asset->url
-				},
-				"responseOptions": responseOptions[]{
-          text, 
-					followingDialogue->{_id}
-        },
-				"requiredEvidence": requiredEvidence[]->{name, _type},
-				"evidenceWithPaths": evidenceWithPaths[]{followingDialogueFromEvidence->{_id}, possibleEvidence->{name}},
-      }`
-    );
-    return response;
-  }
-);
+// export const getDialogue = createAsyncThunk(
+//   'GET_DIALOGUE',
+//   async (conversationID) => {
+//     const response = await sanityClient.fetch(
+//       `*[_type == "dialogue" && conversation._ref == "${conversationID}"]{
+//         name, responseOptions, needEvidence, multiBranchEvidence, useLastAvailableEvidenceList, inventoryPrompt, followingDialogueFromEvidence->{_id}, _id, isFinalDialogue, switchToInquiryMode, requiredEvidence->{name}, loseHealthOnIncorrect,
+// 				animals[]->{name},
+//   			"phrase": phrase[]{
+//   				emotion->{emotion}, speaker->{name, color}, text, isGrey,
+// 					link, sNotesEventRef->{name, count, successMessage, hidden, achievement, itemEventTriggered, itemEventType, itemEventRef->{name, _id}}, sNotesEventTriggered, sNotesEventType,
+//           changePosition, leftAnimal->{name}, rightAnimal->{name}, leftOrientation, rightOrientation, leftAnimalCentered, centeredOrientation, leftEmotion->{emotion}, rightEmotion->{emotion},
+//           showImage,
+//           itemEventTriggered, itemEventType, itemEventRef->{name}, prereqEventTriggered, prereqEventRef->{name},
+//           objectionDialogue->{_id},
+//           "imageUrl": image.asset->url
+// 				},
+// 				"responseOptions": responseOptions[]{
+//           text,
+// 					followingDialogue->{_id}
+//         },
+// 				"requiredEvidence": requiredEvidence[]->{name, _type},
+// 				"evidenceWithPaths": evidenceWithPaths[]{followingDialogueFromEvidence->{_id}, possibleEvidence->{name}},
+//       }`
+//     );
+//     return response;
+//   }
+// );
 
-export const getInquiryDialogues = createAsyncThunk(
-  'GET_INQUIRY_DIAOLOGUES',
-  async (conversationID) => {
-    const response = await sanityClient.fetch(
-      `*[_type == "inquiry" && conversation._ref == "${conversationID}"]{
-        name, defaultResponse, 
-        prereqRef->{name},
-        "presentedEvidence": presentedEvidence[]->{name, _type},
-  			"phrase": phrase[]{
-  				emotion->{emotion}, speaker->{name, color}, text, isGrey, prereq->{name},
-					link, sNotesEventRef->{name, count, successMessage, hidden, achievement, itemEventTriggered, itemEventType, itemEventRef->{name, _id}}, sNotesEventTriggered, sNotesEventType, 
-          changePosition, leftAnimal->{name}, rightAnimal->{name}, leftOrientation, rightOrientation, leftAnimalCentered, centeredOrientation, leftEmotion->{emotion}, rightEmotion->{emotion},
-          showImage, prereqEventTriggered, prereqEventRef->{name},
-          itemEventTriggered, itemEventType, itemEventRef->{name, _id},
-          "imageUrl": image.asset->url
-				},
-      }`
-    );
-    return response;
-  }
-);
+// export const getInquiryDialogues = createAsyncThunk(
+//   'GET_INQUIRY_DIAOLOGUES',
+//   async (conversationID) => {
+//     const response = await sanityClient.fetch(
+//       `*[_type == "inquiry" && conversation._ref == "${conversationID}"]{
+//         name, defaultResponse,
+//         prereqRef->{name},
+//         "presentedEvidence": presentedEvidence[]->{name, _type},
+//   			"phrase": phrase[]{
+//   				emotion->{emotion}, speaker->{name, color}, text, isGrey, prereq->{name},
+// 					link, sNotesEventRef->{name, count, successMessage, hidden, achievement, itemEventTriggered, itemEventType, itemEventRef->{name, _id}}, sNotesEventTriggered, sNotesEventType,
+//           changePosition, leftAnimal->{name}, rightAnimal->{name}, leftOrientation, rightOrientation, leftAnimalCentered, centeredOrientation, leftEmotion->{emotion}, rightEmotion->{emotion},
+//           showImage, prereqEventTriggered, prereqEventRef->{name},
+//           itemEventTriggered, itemEventType, itemEventRef->{name, _id},
+//           "imageUrl": image.asset->url
+// 				},
+//       }`
+//     );
+//     return response;
+//   }
+// );
 
 // Reducer
 
@@ -184,7 +186,19 @@ function dialogueReducer(state = initialState, action) {
         dialogue: payload,
         loading: false,
       };
+    case saveDialogueData.toString():
+      return {
+        ...state,
+        dialogue: payload,
+        loading: false,
+      };
     case 'GET_INQUIRY_DIAOLOGUES/fulfilled':
+      return {
+        ...state,
+        inquiry: payload,
+        loading: false,
+      };
+    case saveInquiryDialogues.toString():
       return {
         ...state,
         inquiry: payload,

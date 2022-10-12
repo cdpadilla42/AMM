@@ -12,7 +12,6 @@ import {
   setLocalStorageToJustBeforeTrial,
 } from '../lib/localStorage';
 import { setIsPortfolio } from '../store/app';
-import { getConversations } from '../store/conversations';
 
 const ActOneTestimonySelect = () => {
   const history = useHistory();
@@ -23,7 +22,6 @@ const ActOneTestimonySelect = () => {
   );
 
   useEffect(() => {
-    dispatch(getConversations());
     saveCurrentConversationIdToLocalStorage('act-one');
   }, []);
 

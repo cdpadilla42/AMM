@@ -6,6 +6,7 @@ import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { ToastContainer } from 'react-toastify';
 // import ErrorBoundary from './components/ErrorBoundary';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -25,16 +26,20 @@ if (!process?.env.NODE_ENV || process?.env.NODE_ENV === 'production') {
   });
 }
 
+const queryClient = new QueryClient();
+
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ToastContainer autoClose={10000} />
-      <Router>
-        <ErrorBoundary FallbackComponent={Error}>
-          <App />
-        </ErrorBoundary>
-      </Router>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <ToastContainer autoClose={10000} />
+        <Router>
+          <ErrorBoundary FallbackComponent={Error}>
+            <App />
+          </ErrorBoundary>
+        </Router>
+      </Provider>
+    </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

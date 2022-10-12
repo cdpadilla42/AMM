@@ -30,18 +30,22 @@ import StartPage from './pages/Start';
 import { getPictures } from './store/images';
 import SoundController from './components/SoundController';
 
+import useFetchAppLevelData from './hooks/useFetchAppLevelData';
+
 function App() {
   const location = useLocation();
   const dispatch = useDispatch();
 
+  const fetchAppLevelDataRes = useFetchAppLevelData();
+
   // Get items for inventory, Animal notes & Agent S Notes, and sprites
   useEffect(() => {
-    dispatch(getSprites());
-    dispatch(getPictures());
-    dispatch(getInventoryItems());
-    dispatch(getAnimalNotes());
-    dispatch(getMapLocations());
-    dispatch(getSNotes());
+    // dispatch(getSprites());
+    // dispatch(getPictures());
+    // dispatch(getInventoryItems());
+    // dispatch(getAnimalNotes());
+    // dispatch(getMapLocations());
+    // dispatch(getSNotes());
     dispatch(initializeUserInventoryFromLocalStorage());
     dispatch(initializeUserAct3ScensFromLocalStorage());
   }, []);

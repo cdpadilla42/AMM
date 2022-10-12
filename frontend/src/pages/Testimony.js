@@ -4,8 +4,6 @@ import throttle from 'lodash.throttle';
 import AnimalDisplay from '../components/AnimalDisplay';
 import {
   clearDialogueData,
-  getDialogue,
-  getInquiryDialogues,
   resetDialogue,
   resetDialoguePosition,
   switchConversation,
@@ -17,9 +15,7 @@ import {
   initializeUserInventoryFromLocalStorage,
   getMapLocations,
 } from '../store/inventory';
-import { getSprites } from '../store/sprites';
 import {
-  getBackground,
   getConversationDetails,
   resetBackground,
 } from '../store/conversations';
@@ -52,11 +48,14 @@ import { endFreeMode, endInquiryDialogue, endInquiryMode } from '../store/app';
 import Error from '../components/Error';
 import SoundButton from '../components/SoundButton';
 import useDataFetch from '../hooks/useDataFetch';
+import useFetchTestimonyLevelData from '../hooks/useFetchTestimonyLevelData';
 
 const Testimony = (props) => {
   const dataFetch = useDataFetch();
   const dispatch = useDispatch();
   const dialogue = useCurrentDialogueObj();
+  const conversationID = props.match.params?.id;
+  const testimonyLevelData = useFetchTestimonyLevelData(conversationID);
   const isInventoryOpen = useSelector(
     (state) => state.dialogue.isInventoryOpen
   );
@@ -73,8 +72,6 @@ const Testimony = (props) => {
   );
   const [loading, setLoading] = useState(true);
 
-  const conversationID = props.match.params?.id;
-
   const currentAct3SceneObject = playersAct3Scenes[conversationID];
 
   useEffect(() => {
@@ -82,10 +79,6 @@ const Testimony = (props) => {
 
     // set place to 0
     dispatch(resetDialoguePosition());
-    dispatch(getDialogue(conversationID));
-    dispatch(getInquiryDialogues(conversationID));
-    dispatch(getBackground(conversationID));
-    dispatch(getConversationDetails(conversationID));
 
     // Save current conversationID to local storage
     if (conversationID) {
