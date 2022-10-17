@@ -44,7 +44,7 @@ const MultipleAnimalDisplay = () => {
     // return () => {
     //   setAnimalsState([]);
     // };
-  }, [currentDialoguePosition, emotion, speaker, sceneShifted]);
+  }, [currentDialoguePosition, emotion, speaker, sceneShifted, dialogue]);
 
   useEffect(() => {
     let initialState = animalsState;
