@@ -52,6 +52,7 @@ const StyledPlayerLetterForm = styled.div`
   /* transform: translate(-50%, -50%); */
   border-radius: 5px;
   z-index: 200;
+  box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
 
   @media all and (max-width: 800px) {
     width: 90vw;
