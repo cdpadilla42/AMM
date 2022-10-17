@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import ImageLoader from '../components/ImageLoader';
+import PlayerLetterForm from '../components/PlayerLetterForm';
 import {
   clearAllSaveData,
   clearConversationHistory,
@@ -135,6 +136,7 @@ const SelectConversation = () => {
           🦝🏝
         </span>
       </h1>
+      <PlayerLetterForm />
       <ul>{renderConversations()}</ul>
     </ImageLoader>
   );
