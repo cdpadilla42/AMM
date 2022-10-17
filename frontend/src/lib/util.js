@@ -45,5 +45,24 @@ export const recordInteraction = (type) => {
     });
 };
 
+export const recordMessage = (message) => {
+  const data = { message };
+
+  fetch('https://acnm-api.vercel.app/api/player-letter', {
+    method: 'POST', // or 'PUT'
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+};
+
 export const wait = (amount = 0) =>
   new Promise((resolve) => setTimeout(resolve, amount));

@@ -11,6 +11,7 @@ import {
   clearSNotesFromLocalStorage,
   getLastConversationIDFromLocalStorage,
 } from '../lib/localStorage';
+import { recordMessage } from '../lib/util';
 import { addToSNotesList } from '../store/inventory';
 
 const SelectConversation = () => {
@@ -95,11 +96,16 @@ const SelectConversation = () => {
     );
   }
 
+  const sendTestMessage = () => {
+    const message = window.prompt('write a message');
+    recordMessage(message);
+  };
+
   return (
     <ImageLoader disableLoading loading={loading} setLoading={setLoading}>
       <Link to="/act-three">Act Three Select</Link>
-      <button type="button" onClick={handleTest}>
-        Testing Button
+      <button type="button" onClick={sendTestMessage}>
+        Message Testing Button
       </button>
       <button type="button" onClick={handleClearAllSaveData}>
         Clear All Save Data
