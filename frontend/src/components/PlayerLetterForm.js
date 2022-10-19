@@ -17,10 +17,13 @@ const PlayerLetterForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (message.trim().length === 0) {
+      window.alert("You haven't written anything!");
+      return;
+    }
     recordMessage(message);
     dispatch(setLetterFormOpen(false));
     dispatch(switchConversation(dialogueIDConstants.EPILOGUE_LETTER_SENT));
-    window.alert('message sent');
   };
   return (
     <StyledPlayerLetterForm>
