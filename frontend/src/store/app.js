@@ -9,6 +9,7 @@ const initialState = {
   hasError: false,
   playedAudio: false,
   soundPlaying: false,
+  isLetterFormOpen: false,
 };
 
 export const startFreeMode = createAction('START_FREE_MODE');
@@ -22,6 +23,7 @@ export const setIsPortfolio = createAction('SET_IS_PORTFOLIO');
 export const setHasError = createAction('SET_HAS_ERROR');
 export const setPlayedAudio = createAction('SET_PLAYED_AUDIO');
 export const setSoundPlaying = createAction('SET_SOUND_PLAYING');
+export const setLetterFormOpen = createAction('SET_LETTER_FORM_OPEN');
 
 // Reducer
 
@@ -82,6 +84,11 @@ function appReducer(state = initialState, action) {
       return {
         ...state,
         soundPlaying: payload,
+      };
+    case setLetterFormOpen.toString():
+      return {
+        ...state,
+        isLetterFormOpen: payload,
       };
     default:
       return state;

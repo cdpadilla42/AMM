@@ -10,10 +10,11 @@ import {
 } from '../store/dialogue';
 import useCurrentDialogueObj from '../hooks/useCurrentDialogueObj';
 import { useHistory, useParams } from 'react-router-dom';
-import { gameStartDialogueID } from '../lib/constants';
+import { dialogueIDConstants, gameStartDialogueID } from '../lib/constants';
 import { inquiryModeResponses } from '../lib/inquiryModeResponses';
+import { epilogueLetterPromptResponseOptions } from '../lib/epilogueLetterResponseOptions';
 import { markUserPromptedForEvidence } from '../store/inventory';
-import { startInquiryMode } from '../store/app';
+import { setLetterFormOpen, startInquiryMode } from '../store/app';
 import { useMemo } from 'react';
 import { storeReturnDialogue } from '../store/inquiry';
 
@@ -49,8 +50,28 @@ const ResponseBox = () => {
   const isDialogueIDInCurrentDialogueList = (id) =>
     dialogue.find((dialogue) => dialogue._id === id);
 
+  const renderLetterPromptResponseOptions = () => {
+    return epilogueLetterPromptResponseOptions.map((optionObj) => {
+      const responseOnClick = () => {
+        if (optionObj.switchToEpilogueLetter) {
+          // letter
+          dispatch(setLetterFormOpen(true));
+        } else if (optionObj.skipEpilogueLetter) {
+          dispatch(switchConversation(optionObj.followingDialogueID));
+        }
+      };
+      return (
+        <li key={optionObj.text} onClick={responseOnClick}>
+          <span>{optionObj.text}</span>
+        </li>
+      );
+    });
+  };
+
   function renderResponseOptions() {
-    if (
+    if (currentDialogueObj._id === dialogueIDConstants.EPILOGUE_LETTER_PROMPT) {
+      return renderLetterPromptResponseOptions();
+    } else if (
       !responseOptions &&
       act === 'c' &&
       (currentAct3SceneObject?.scene?.name === 'Freemode' || freeMode)

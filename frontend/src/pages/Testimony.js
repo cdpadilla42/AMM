@@ -49,6 +49,7 @@ import Error from '../components/Error';
 import SoundButton from '../components/SoundButton';
 import useDataFetch from '../hooks/useDataFetch';
 import useFetchTestimonyLevelData from '../hooks/useFetchTestimonyLevelData';
+import PlayerLetterFormController from '../components/PlayerLetterFormController';
 
 const Testimony = (props) => {
   const dataFetch = useDataFetch();
@@ -167,6 +168,7 @@ const Testimony = (props) => {
               <TextBox />
               <SNotes />
               <SoundButton />
+              <PlayerLetterFormController />
             </div>
           </StyledContainer>
         </>

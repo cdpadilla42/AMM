@@ -181,6 +181,7 @@ AddToInventory.defaultProps = {
 
 const StyledAddToInventory = styled.form`
   text-align: center;
+  pointer-events: auto;
 
   .addtoinventory_close {
     position: absolute;

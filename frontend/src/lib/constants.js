@@ -267,6 +267,8 @@ export const dialogueIDConstants = {
   ACT4_FAILED_DIALOGUE: 'f82b48f2-fbe2-415c-8349-40a7b39cf8b4',
   LAST_CRIMESCENE_DIALOGUE: 'f09eead4-1928-4267-a6ce-f6ac72441e79',
   LAST_ACT2_TRIAL_DIALOGUE: 'a55bde30-352d-430f-b86e-85cb2f662c2a',
+  EPILOGUE_LETTER_PROMPT: 'ec70e0da-2d0c-477d-94f7-79795a44a334',
+  EPILOGUE_LETTER_SENT: '11915757-540a-4a86-8191-87234ab8afd1',
 };
 
 export const specialDialoguesObject = {

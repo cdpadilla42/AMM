@@ -850,9 +850,7 @@ export const ItemDetailsDisplay = ({
         </div>
       </div>
       <div className="written_details">
-        {/* <h4>{itemObj.name}</h4> */}
         {renderDescription()}
-        {/* TODO: Hide if not promptedforevidence */}
         {(userPromptedForEvidence || inquiryMode) && (
           <button onClick={presentItem} className="present">
             Present
