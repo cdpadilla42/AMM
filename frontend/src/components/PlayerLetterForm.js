@@ -25,6 +25,11 @@ const PlayerLetterForm = () => {
     dispatch(setLetterFormOpen(false));
     dispatch(switchConversation(dialogueIDConstants.EPILOGUE_LETTER_SENT));
   };
+
+  const handleNevermind = () => {
+    dispatch(setLetterFormOpen(false));
+  };
+
   return (
     <StyledPlayerLetterForm>
       <form onSubmit={handleSubmit}>
@@ -49,7 +54,16 @@ const PlayerLetterForm = () => {
             placeholder="Dear Ñenn ...   Sincerely, Detective"
           />
         </div>
-        <input type="submit" value="Send" />
+        <div className="buttons">
+          <button
+            type="button"
+            className="nevermind-button"
+            onClick={handleNevermind}
+          >
+            Nevermind!
+          </button>
+          <input type="submit" value="Send" />
+        </div>
         <div className="gap"></div>
       </form>
     </StyledPlayerLetterForm>
@@ -159,9 +173,20 @@ const StyledPlayerLetterForm = styled.div`
     @media all and (max-width: 800px) {
       font-size: 1.5rem;
     }
+
+    &input::placeholder {
+      color: #ddd;
+      opacity: 0.8;
+    }
   }
 
-  input[type='submit'] {
+  .buttons {
+    display: flex;
+    align-items: center;
+  }
+
+  input[type='submit'],
+  .nevermind-button {
     display: inline;
     color: var(--cream);
     border: none;
@@ -186,6 +211,11 @@ const StyledPlayerLetterForm = styled.div`
       cursor: pointer;
       transform: translateY(-2px);
     }
+  }
+
+  .nevermind-button {
+    background-color: #ddd;
+    color: #555;
   }
 
   .gap {
