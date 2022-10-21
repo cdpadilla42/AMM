@@ -69,7 +69,9 @@ const ResponseBox = () => {
   };
 
   function renderResponseOptions() {
-    if (currentDialogueObj._id === dialogueIDConstants.EPILOGUE_LETTER_PROMPT) {
+    if (
+      currentDialogueObj?._id === dialogueIDConstants.EPILOGUE_LETTER_PROMPT
+    ) {
       return renderLetterPromptResponseOptions();
     } else if (
       !responseOptions &&
