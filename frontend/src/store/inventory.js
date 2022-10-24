@@ -204,7 +204,13 @@ function inventoryReducer(state = initialState, action) {
     case completeGame.toString():
       return { ...state, gameComplete: true };
     case resetSaveData.toString():
-      return { ...initialState };
+      return {
+        ...initialState,
+        mapLocations: state.mapLocations,
+        sNotes: state.sNotes,
+        items: state.items,
+        notes: state.notes,
+      };
     default:
       return state;
   }
