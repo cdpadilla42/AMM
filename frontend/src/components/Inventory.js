@@ -737,6 +737,7 @@ export const ItemDetailsDisplay = ({
         (item) => item.possibleEvidence.name === itemObj.name
       );
       if (selectedItem === matchedEvidence?.possibleEvidence?.name) {
+        dispatch(markUserNotPromptedForEvidence());
         dispatch(
           switchConversation(
             matchedEvidence?.followingDialogueFromEvidence?._id
