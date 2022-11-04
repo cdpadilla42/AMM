@@ -7,8 +7,11 @@ import { useLocation, useParams } from 'react-router';
 
 const InventoryButton = () => {
   const dispatch = useDispatch();
+  const { inquiryMode } = useSelector((store) => store.app);
   const handleOpenInventoryButtonClick = () => {
-    dispatch(toggleInventory());
+    if (!inquiryMode) {
+      dispatch(toggleInventory());
+    }
   };
 
   // // If the intro dialogue, don't show
