@@ -210,7 +210,7 @@ const Inventory = () => {
       if (matchedItemsCount === multiSelectEvidence.length) {
         dispatch(switchConversation(correctDialogue));
         dispatch(toggleInventory());
-        // dispatch(markUserNotPromptedForEvidence());
+        dispatch(markUserNotPromptedForEvidence());
         dispatch(hideHealthBar());
         setItemsSelected({});
         return;
@@ -343,7 +343,7 @@ const Inventory = () => {
             userPromptedForEvidence ? '' : ' transparent'
           }`}
         >
-          {promptMessage}
+          {userPromptedForEvidence ? promptMessage : ''}
         </div>
       );
     }
