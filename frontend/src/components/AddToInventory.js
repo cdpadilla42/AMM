@@ -47,13 +47,13 @@ const AddToInventory = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (inputs.item.trim().length === 0) return;
     const matchedInGameItem = fullItemsList.find(
       // (item) => item?.name.toLowerCase() === inputs.item.trim().toLowerCase()
       (item) =>
         isItemMatch(item?.name, inputs.item) &&
         !item.restrictUserAddingToInventory
     );
-    console.log(matchedInGameItem, inputs.name);
     if (
       !!matchedInGameItem &&
       !matchedInGameItem.restrictUserAddingToInventory
