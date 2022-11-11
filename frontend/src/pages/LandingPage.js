@@ -205,6 +205,14 @@ const LandingPage = () => {
               alt="AC: New Murder OST Cover Art"
             />
           </a>
+          <h2 className="section_heading">Press Kit</h2>
+          <a
+            href="https://drive.google.com/drive/folders/1--lNZQ0GSzVz9AltqkSmh9tRX4nezCwt"
+            rel="noopener"
+            target="_blank"
+          >
+            Press Kit available here
+          </a>
         </aside>
       </section>
       <footer>
