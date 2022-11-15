@@ -27,6 +27,7 @@ import PortfolioSelect from './pages/PortfolioSelect';
 import Credits from './pages/Credits';
 import Error from './components/Error';
 import StartPage from './pages/Start';
+import Support from './pages/Support';
 import { getPictures } from './store/images';
 import SoundController from './components/SoundController';
 
@@ -108,6 +109,9 @@ function App() {
           </Route>
           <Route path="/uss">
             <SelectConversation />
+          </Route>
+          <Route path="/support">
+            <Support />
           </Route>
           <Route path="/">
             <LandingPage />

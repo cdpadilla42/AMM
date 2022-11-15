@@ -213,6 +213,8 @@ const LandingPage = () => {
           >
             Press Kit available here
           </a>
+          <h2 className="section_heading">Support Us!</h2>
+          <Link to="/support">Support our work!</Link>
         </aside>
       </section>
       <footer>
