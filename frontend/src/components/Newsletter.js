@@ -3,18 +3,29 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { signUpForNewsletter } from '../lib/util';
 
+const defaultMessage = 'Enter your email address:';
+const successMessage = 'Email submitted! Thank you for signing up!';
+
 const Newsletter = () => {
   const [emailValue, setEmailValue] = useState('');
+  const [message, setMessage] = useState(defaultMessage);
+  const [emailSuccess, setEmailSuccess] = useState(false);
 
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (emailValue && isValidEmail(emailValue)) {
-      signUpForNewsletter(emailValue);
-      setEmailValue('');
+      const newsletterRes = await signUpForNewsletter(emailValue);
+      if (newsletterRes) {
+        setEmailValue('');
+        setEmailSuccess(true);
+        setMessage(successMessage);
+      } else {
+        window.alert('Oops! Something went wrong!');
+      }
     } else {
       window.alert('Please provide a valid email');
     }
@@ -23,7 +34,12 @@ const Newsletter = () => {
     <StyledNewsletter onSubmit={handleSubmit}>
       {/* <label htmlFor="email">First name</label>
       <input type="text" name="name" id="name" /> */}
-      <label htmlFor="email">Enter your email address:</label>
+      <label
+        htmlFor="email"
+        style={{ color: emailSuccess ? 'green' : 'inherit' }}
+      >
+        {message}
+      </label>
       <input
         type="email"
         name="email"
@@ -47,6 +63,7 @@ const StyledNewsletter = styled.form`
   padding: 1rem;
   text-align: center;
   align-items: center;
+  margin: 0 auto;
 
   label {
     margin: 1rem 0;
@@ -61,7 +78,8 @@ const StyledNewsletter = styled.form`
     font-size: inherit;
   }
 
-  button {
+  button[type='submit'] {
+    position: relative;
     border-radius: 15px;
     height: 60px;
     display: flex;
@@ -84,7 +102,7 @@ const StyledNewsletter = styled.form`
     color: #34b3a5;
     background-color: var(--cream);
     border: 3px solid #34b3a5;
-    transform: translateY(-2px);
+    /* transform: translateY(-2px); */
     cursor: pointer;
   }
 `;

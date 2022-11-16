@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Newsletter from '../components/Newsletter';
 import LandingHeroBG from '../imgs/patternedbgs/aabg1.jpg';
 
 const LandingPage = () => {
@@ -140,6 +141,10 @@ const LandingPage = () => {
             Trigger warning for discussions of blood, violence, and self-harm
             and depictions of cartoon blood.
           </p>
+          <h2 className="section_heading">Support Us!</h2>
+          <p style={{ 'text-align': 'center' }}>
+            <Link to="/support">Support our work!</Link>
+          </p>
         </div>
         <aside className="about__credits">
           <h2 className="section_heading">Credits</h2>
@@ -205,6 +210,15 @@ const LandingPage = () => {
               alt="AC: New Murder OST Cover Art"
             />
           </a>
+          <h2 className="section_heading">Newsletter!</h2>
+          <span>Sign up for our newsletter, the New Murder Newspaper!</span>
+          <br />
+          <br />
+          <span>
+            We’ll email you about our new projects, game updates, and Julian’s
+            new riddles!{' '}
+          </span>
+          <Newsletter />
           <h2 className="section_heading">Press Kit</h2>
           <a
             href="https://drive.google.com/drive/folders/1--lNZQ0GSzVz9AltqkSmh9tRX4nezCwt"
@@ -213,8 +227,6 @@ const LandingPage = () => {
           >
             Press Kit available here
           </a>
-          <h2 className="section_heading">Support Us!</h2>
-          <Link to="/support">Support our work!</Link>
         </aside>
       </section>
       <footer>

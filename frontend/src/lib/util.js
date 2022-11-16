@@ -69,7 +69,7 @@ export const signUpForNewsletter = (email) => {
 
   if (!email) console.error('No email provided', email);
 
-  fetch('https://acnm-api.vercel.app/api/email', {
+  return fetch('https://acnm-api.vercel.app/api/email', {
     method: 'POST', // or 'PUT'
     headers: {
       'Content-Type': 'application/json',
@@ -79,9 +79,11 @@ export const signUpForNewsletter = (email) => {
     .then((response) => response.json())
     .then((data) => {
       console.log('Success:', data);
+      return true;
     })
     .catch((error) => {
       console.error('Error:', error);
+      return false;
     });
 };
 
