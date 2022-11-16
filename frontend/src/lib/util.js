@@ -64,5 +64,26 @@ export const recordMessage = (message) => {
     });
 };
 
+export const signUpForNewsletter = (email) => {
+  const data = { email };
+
+  if (!email) console.error('No email provided', email);
+
+  fetch('https://acnm-api.vercel.app/api/email', {
+    method: 'POST', // or 'PUT'
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+};
+
 export const wait = (amount = 0) =>
   new Promise((resolve) => setTimeout(resolve, amount));
