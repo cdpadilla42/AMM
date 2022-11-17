@@ -30,6 +30,7 @@ const Newsletter = () => {
       window.alert('Please provide a valid email');
     }
   };
+
   return (
     <StyledNewsletter onSubmit={handleSubmit}>
       {/* <label htmlFor="email">First name</label>
@@ -102,7 +103,6 @@ const StyledNewsletter = styled.form`
     color: #34b3a5;
     background-color: var(--cream);
     border: 3px solid #34b3a5;
-    /* transform: translateY(-2px); */
     cursor: pointer;
   }
 `;

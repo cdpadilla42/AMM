@@ -66,6 +66,9 @@ const StartDisplay = () => {
           <Link to="/letter" className="start_page__button secondary">
             Read Ñenn's Letter
           </Link>
+          <Link to="/" className="start_page__button secondary">
+            Home
+          </Link>
         </section>
         <div className="animal_carousel">
           <AnimalCarousel />
