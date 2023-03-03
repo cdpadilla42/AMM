@@ -76,7 +76,7 @@ const PortfolioSelect = () => {
   };
 
   const handleThankYouClick = (e) => {
-    window.open('https://www.jennpadilla.com/');
+    window.open('https://www.jennpadilla.games/');
   };
 
   const handleButtonClick = (e) => {

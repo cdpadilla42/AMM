@@ -13,8 +13,8 @@ const Letter = () => {
         <h1>Support</h1>
         <h2>Hire Us!</h2>
         <p>
-          <AnchorLink href="https://www.jennpadilla.com/" newWindow>
-            jennpadilla.com
+          <AnchorLink href="https://www.jennpadilla.games" newWindow>
+            jennpadilla.games
           </AnchorLink>{' '}
           for storyboarding, character design, and game design.
         </p>

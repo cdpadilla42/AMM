@@ -20,8 +20,8 @@ const creditsData = [
         @jennpadillart
       </a>
       <br />
-      <a href="https://www.jennpadilla.com/" rel="noopener" target="_blank">
-        jennpadilla.com
+      <a href="https://www.jennpadilla.games" rel="noopener" target="_blank">
+        jennpadilla.games
       </a>
       <br />
     </li>

@@ -141,9 +141,25 @@ const LandingPage = () => {
             Trigger warning for discussions of blood, violence, and self-harm
             and depictions of cartoon blood.
           </p>
-          <h2 className="section_heading">Support Us!</h2>
-          <p style={{ 'text-align': 'center' }}>
+          <h2 className="section_heading">Links!</h2>
+          <p style={{ 'text-align': 'center', 'text-indent': '0' }}>
             <Link to="/support">Support our work!</Link>
+            <br />
+            <a
+              href="https://drive.google.com/drive/folders/1--lNZQ0GSzVz9AltqkSmh9tRX4nezCwt"
+              rel="noopener"
+              target="_blank"
+            >
+              Press Kit available here
+            </a>
+            <br />
+            <a
+              href="https://www.jennpadilla.games/ac-new-murder"
+              rel="noopener"
+              target="_blank"
+            >
+              Take a look behind the scenes!
+            </a>
           </p>
         </div>
         <aside className="about__credits">
@@ -163,11 +179,11 @@ const LandingPage = () => {
               </a>
               <br />
               <a
-                href="https://www.jennpadilla.com/"
+                href="https://www.jennpadilla.games"
                 rel="noopener"
                 target="_blank"
               >
-                jennpadilla.com
+                jennpadilla.games
               </a>
               <br />
             </li>
@@ -219,14 +235,6 @@ const LandingPage = () => {
             new riddles!{' '}
           </span>
           <Newsletter />
-          <h2 className="section_heading">Press Kit</h2>
-          <a
-            href="https://drive.google.com/drive/folders/1--lNZQ0GSzVz9AltqkSmh9tRX4nezCwt"
-            rel="noopener"
-            target="_blank"
-          >
-            Press Kit available here
-          </a>
         </aside>
       </section>
       <footer>
