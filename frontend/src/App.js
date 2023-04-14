@@ -32,6 +32,7 @@ import { getPictures } from './store/images';
 import SoundController from './components/SoundController';
 
 import useFetchAppLevelData from './hooks/useFetchAppLevelData';
+import GamePortfolio from './pages/GamePortfolio';
 
 function App() {
   const location = useLocation();
@@ -85,6 +86,10 @@ function App() {
           <Route
             path="/testimony/:id"
             render={(props) => <Testimony match={props.match} />}
+          ></Route>
+          <Route
+            path="/demo/:id"
+            render={(props) => <GamePortfolio match={props.match} />}
           ></Route>
           <Route path="/act-one">
             <ActOneTestimonySelect />
