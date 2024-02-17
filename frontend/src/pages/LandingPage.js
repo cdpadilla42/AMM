@@ -109,8 +109,7 @@ const LandingPage = () => {
             To get to the dream island in ACNH, you have to lie in a bed inside
             your house. Go to “sleep” and you will see Luna. Tell her you would
             like to dream and give her the dream address code. Shortly after you
-            will wake up on the dream island tied to this game, “New Leaf.” You
-            have to upgrade your tent to a house to unlock Luna. If you would
+            will wake up on the dream island tied to this game, “New Leaf.” You have to have 5 villagers on your island to unlock Luna. If you would
             like to learn more about how dreams work in ACNH, you can read the
             Nookipedia page{' '}
             <a

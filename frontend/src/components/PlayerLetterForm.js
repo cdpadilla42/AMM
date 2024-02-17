@@ -38,8 +38,7 @@ const PlayerLetterForm = () => {
           <h2 className="addtoinventory_title">Send your message!</h2>
           <p>
             You&#39;re letter will be sent directly to the developers. It will
-            be private and anonymous. No personal information is stored and your
-            letter won&#39;t be shared.{' '}
+            be sent anonymously and no personal information is stored.{' '}
           </p>
         </label>
         <br />
