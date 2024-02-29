@@ -178,11 +178,11 @@ const LandingPage = () => {
               </a>
               <br />
               <a
-                href="https://www.jennpadilla.games"
+                href="https://www.jennpadilla.com/"
                 rel="noopener"
                 target="_blank"
               >
-                jennpadilla.games
+                jennpadilla.com
               </a>
               <br />
             </li>
